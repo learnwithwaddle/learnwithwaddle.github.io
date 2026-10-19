@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#E0336F">
+<meta name="theme-color" content="#1E2748">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Waddle">
@@ -541,6 +541,87 @@ body{overflow-x:clip}
 .big-tick.book-tick{background:var(--accent)}
 .book-tick svg{width:62%;height:auto}.book-tick .bk-c{fill:var(--card);stroke:var(--edge);stroke-width:1.6}.book-tick .bk-p{fill:none;stroke:var(--edge);stroke-width:1.4}.book-tick .bk-m{fill:var(--duck);stroke:var(--edge);stroke-width:1.4}
 @media (prefers-reduced-motion:no-preference){.readbtn.nudge{animation:gopulse 2.4s ease-in-out infinite}}
+/* Cream: the shared landing page, matching the Home Screen icon */
+:root[data-palette="night"]{--bg:#1E2748; --dots:#27325A; --card:#FFFFFF; --soft:#2A3560; --ink:#FFFFFF; --muted:#C8D0EE; --edge:#0E1430; --shadow:#0B1028; --hair:#3A4675; --accent:#FFC21A; --on-accent:#1E2748; --duck-line:#1A1530; --bow:#FFC21A; color-scheme:dark}
+:root[data-palette="night"] .hellebore .art{display:none!important}
+:root[data-palette="night"] .land-go:not(:disabled){background:#FFC21A;color:#1E2748;border-color:#0E1430}
+.land-name{color:var(--nm,var(--accent))}
+.childpick{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;max-width:760px}
+.landing{padding-top:64px;box-sizing:border-box}
+.land-main.picking{width:100%;align-self:stretch}
+.childbtn{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 min(164px,calc(50% - 8px));box-sizing:border-box;min-width:0;padding:16px 12px 14px;background:var(--card);color:var(--ink);border:3px solid var(--edge);border-radius:28px;box-shadow:6px 6px 0 var(--shadow);cursor:pointer}
+.childbtn:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--shadow)}
+.child-duck{width:76px;display:block}.child-duck svg{width:100%;height:auto;display:block;overflow:visible}
+.child-name{font:600 32px/36px var(--font-head);color:var(--cc);max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;height:36px;display:block;text-align:center}
+.child-done{display:inline-flex;align-items:center;gap:6px;font:14px var(--font-adult);color:var(--muted);min-height:20px}
+.child-done .tick{width:18px;height:18px;border-radius:50%;background:var(--good);color:var(--on-btn);display:inline-grid;place-items:center;font:700 11px var(--font-head)}
+@media (prefers-reduced-motion:no-preference){.childbtn .child-duck{transform-origin:50% 100%;animation:mamasway 2.2s ease-in-out infinite alternate}.childbtn:nth-child(2) .child-duck{animation-delay:-.7s}.childbtn:nth-child(3) .child-duck{animation-delay:-1.4s}}
+.childbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.childbar .seg button[aria-pressed="true"]{background:var(--cc,var(--accent))}
+.lstage{min-height:170px}
+.lpic{display:flex;flex-direction:column;align-items:center;gap:2px}
+.lemoji{font-size:54px;line-height:1.1}
+.lpic.big .lemoji{font-size:96px}
+.lword{font:600 15px var(--font-head);color:var(--muted)}
+.lpic.big .lword{font-size:20px}
+.bubble{font:600 clamp(34px,7vw,48px)/1.1 var(--font-head);color:var(--ink);background:var(--card);border:3px solid var(--edge);border-radius:28px;padding:18px 28px;box-shadow:5px 5px 0 var(--shadow)}
+.robot{font-size:96px;line-height:1}
+.lstage{flex-direction:column;gap:8px}.sayline{margin:0;font:15px var(--font-adult);color:var(--muted)}.sayline b{font:600 24px var(--font-head);color:var(--ink);letter-spacing:.04em}
+.lopts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(100%,460px)}
+.lopt{background:var(--card);border:3px solid var(--edge);border-radius:22px;padding:10px 4px;cursor:pointer;box-shadow:4px 4px 0 var(--shadow);color:var(--ink)}
+.lopt .lemoji{font-size:44px}
+.lopt.win{background:var(--good);border-color:var(--good)}.lopt.win .lword{color:var(--on-btn)}
+.lopt.nope{opacity:.35}
+.patrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.patpic{font-size:34px;line-height:1.2;min-width:40px;text-align:center}
+.lopt .lemoji.claps{font-size:24px;white-space:nowrap;letter-spacing:-2px;min-height:44px;display:flex;align-items:center}
+.patpic.gap{border:3px dashed var(--hair);border-radius:14px;color:var(--muted);font:600 32px/48px var(--font-head)}
+.mopts.emoji .mopt{font-size:38px;line-height:1.1}
+.lstats{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.lstats li{display:flex;flex-direction:column;gap:2px}
+.lstats li p{margin:0}
+/* Sleeping ducklings and hatching eggs */
+.d-eye-shut{display:none;fill:none;stroke:var(--duck-line);stroke-width:1.5;stroke-linecap:round}
+.ducks.asleep .duck:not(.mama) .d-eye{display:none}
+.ducks.asleep .duck:not(.mama) .d-eye-shut{display:inline}
+.ducks{position:relative}
+.zzz{position:absolute;right:10px;top:-6px;display:flex;gap:2px;font:600 16px var(--font-head);color:var(--muted);pointer-events:none}
+.zzz span:nth-child(2){font-size:20px;transform:translateY(-6px)}.zzz span:nth-child(3){font-size:24px;transform:translateY(-12px)}
+.duck.hatch{position:relative}
+.duck .egg{display:none}
+.egg-shell{fill:#FFFBEF;stroke:var(--duck-line);stroke-width:1.6;stroke-linejoin:round}
+.egg-dot{fill:#E8D7B0}
+@media (prefers-reduced-motion:no-preference){
+  .ducks.asleep .duck:not(.mama){animation:snooze 3.2s ease-in-out infinite;transform-origin:50% 100%}
+  @keyframes snooze{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.94)}}
+  .zzz span{animation:zfloat 2.8s ease-in-out infinite}
+  .zzz span:nth-child(2){animation-delay:.4s}.zzz span:nth-child(3){animation-delay:.8s}
+  @keyframes zfloat{0%,100%{opacity:.35}50%{opacity:1}}
+  .duck.hatch .egg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .duck.hatch>svg:first-child{animation:hatchout 3s ease-out both}
+  .duck.hatch .egg{animation:eggwobble 1.4s ease-in-out both;transform-origin:50% 95%}
+  .duck.hatch .egg-top{animation:eggtop 3s ease-out both;transform-box:fill-box;transform-origin:50% 100%}
+  .duck.hatch .egg-bot{animation:eggbot 3s ease-out both}
+  @keyframes eggwobble{0%,100%{transform:rotate(0)}15%{transform:rotate(-12deg)}30%{transform:rotate(10deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(8deg)}75%{transform:rotate(-4deg)}}
+  @keyframes eggtop{0%,48%{transform:translate(0,0) rotate(0);opacity:1}70%{transform:translate(4px,-16px) rotate(30deg);opacity:1}100%{transform:translate(8px,-22px) rotate(50deg);opacity:0}}
+  @keyframes eggbot{0%,70%{opacity:1}100%{opacity:0}}
+  @keyframes hatchout{0%,48%{transform:scale(.45) translateY(10px);opacity:0}62%{transform:scale(.9) translateY(0);opacity:1}75%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+}
+.namepick{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:560px}
+.namebtn{position:relative;display:flex;align-items:center;justify-content:center;width:140px;height:58px;box-sizing:border-box;padding:0 12px;background:var(--card);border:3px solid var(--edge);border-radius:999px;box-shadow:4px 4px 0 var(--shadow);cursor:pointer;transition:opacity .2s,transform .2s}
+.namebtn .nb-name{font-weight:600;font-family:var(--font-head);color:var(--cc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.namebtn.on{background:var(--cc);transform:translateY(-2px)}
+.namebtn.on .nb-name{color:#FFFFFF}
+.namebtn.off{opacity:.35;box-shadow:2px 2px 0 var(--shadow)}
+.nb-done{position:absolute;top:-8px;right:-6px}
+.nb-done .tick{width:22px;height:22px;border-radius:50%;background:var(--good);color:var(--on-btn);display:inline-grid;place-items:center;font:700 12px var(--font-head);border:2px solid var(--card)}
+.sweep-text span{white-space:pre;display:inline-block}
+@media (prefers-reduced-motion:no-preference){
+  .sweep-text span{animation:letterglow 4s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes letterglow{0%,24%,100%{color:inherit;transform:translateY(0)}8%{color:#FFC21A;transform:translateY(-3px)}16%{color:#FFC21A;transform:translateY(0)}}
+}
+.land-go:disabled{background:transparent;color:var(--muted);border-color:var(--hair);cursor:default;animation:none!important;box-shadow:none}
+@media (max-width:360px){.namebtn{width:calc(50% - 6px)}}
 .choice{position:relative}
 .choice.done{background:var(--soft);box-shadow:4px 4px 0 var(--hair);border-color:var(--hair)}
 .choice.done .cicon{filter:grayscale(1);opacity:.45}
@@ -771,31 +852,61 @@ function freshSounds(){
   const taught={};["s","a","t","p","i","n","m","d"].forEach(g=>taught[g]=true);
   return {taught,auto:{},batch:[],clusters:true,book:{title:"",words:[]},cards:{},gcards:{}};
 }
-function freshState(){return {v:1,setupDone:false,name:"",child:"girl",year:"R",term:"auto",palette:"pink",pace:{reading:"own",maths:"own"},trickyAuto:{},taught:{is:true},cards:{},days:[],log:[],reads:[],readLog:{},currentBook:"",mins:{},updated:0,sounds:freshSounds(),maths:freshMaths()}}
+function freshState(){return {v:1,setupDone:false,name:"",child:"girl",year:"R",term:"auto",palette:"pink",pace:{reading:"own",maths:"own"},trickyAuto:{},taught:{is:true},cards:{},days:[],log:[],reads:[],readLog:{},currentBook:"",mins:{},listen:{stats:{}},hatched:0,updated:0,sounds:freshSounds(),maths:freshMaths()}}
 function migrate(s){
   if(!s.sounds)s.sounds=freshSounds();
   const S=s.sounds;S.taught=S.taught||{};S.auto=S.auto||{};S.batch=S.batch||[];S.cards=S.cards||{};S.gcards=S.gcards||{};
   if(!S.book)S.book={title:"",words:[]};S.book.words=S.book.words||[];
   if(S.clusters===undefined)S.clusters=true;
-  s.year=s.year||"R";s.pace=Object.assign({reading:"own",maths:"own"},s.pace||{});s.trickyAuto=s.trickyAuto||{};s.term=s.term||"auto";s.palette=s.palette||"pink";s.child=s.child==="boy"?"boy":"girl";s.readLog=s.readLog||{};s.mins=s.mins||{};s.currentBook=s.currentBook||"";
+  s.year=s.year||"R";s.pace=Object.assign({reading:"own",maths:"own"},s.pace||{});s.trickyAuto=s.trickyAuto||{};s.term=s.term||"auto";s.palette=s.palette||"pink";s.child=s.child==="boy"?"boy":"girl";s.readLog=s.readLog||{};if(s.hatched===undefined)s.hatched=(s.log||[]).length;s.listen=s.listen||{stats:{}};s.listen.stats=s.listen.stats||{};if(s.maths&&s.maths.stageKey===undefined){const OLD=["R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];s.maths.stageKey=s.maths.stage>=0?OLD[s.maths.stage]||null:null}s.mins=s.mins||{};s.currentBook=s.currentBook||"";
   if(s.setupDone===undefined)s.setupDone=!!((s.name||"").trim()||(s.days&&s.days.length)||(s.log&&s.log.length)||Object.keys(s.cards||{}).length||(s.sounds&&Object.keys(s.sounds.cards||{}).length));s.cards=s.cards||{};s.days=s.days||[];s.log=s.log||[];s.reads=s.reads||[];if(!s.maths)s.maths=freshMaths();s.maths.cards=s.maths.cards||{};if(s.maths.stage==null)s.maths.stage=-1;s.maths.settings=Object.assign(freshMaths().settings,s.maths.settings||{});s.maths.stats=s.maths.stats||{};s.taught=s.taught||{};
   return s;
 }
-let state=freshState();
-try{const s=JSON.parse(localStorage.getItem(LS_KEY)||"null");if(s&&s.v===1)state=migrate(s)}catch(e){}
+/* A family holds one state per child; `state` is always the active child's */
+const newChildId=()=>"k"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+function wrapFamily(st){const id=newChildId();return {v:2,active:id,order:[id],children:{[id]:st},updated:st.updated||0}}
+function loadFamily(o){
+  if(!o||typeof o!=="object")return null;
+  if(o.v===2&&o.children&&typeof o.children==="object"){
+    const order=(Array.isArray(o.order)?o.order:Object.keys(o.children)).filter(k=>o.children[k]&&o.children[k].v===1);
+    if(!order.length)return null;
+    order.forEach(k=>o.children[k]=migrate(o.children[k]));
+    return {v:2,active:o.children[o.active]?o.active:order[0],order,children:Object.fromEntries(order.map(k=>[k,o.children[k]])),updated:o.updated||0,lastBackup:o.lastBackup||null};
+  }
+  if(o.v===1)return wrapFamily(migrate(o));
+  return null;
+}
+let state=freshState(),family=wrapFamily(state);
+try{const f=loadFamily(JSON.parse(localStorage.getItem(LS_KEY)||"null"));if(f){family=f;state=family.children[family.active]}}catch(e){}
 rebuildReal();
-
-let remote=null,saving=false,again=false;
-function save(){
-  state.updated=Date.now();
-  try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){}
+const children=()=>family.order.map(id=>({id,st:family.children[id]}));
+function persist(){
+  family.children[family.active]=state;family.updated=Date.now();
+  try{localStorage.setItem(LS_KEY,JSON.stringify(family))}catch(e){}
   pushRemote();
 }
+function switchChild(id){if(!family.children[id]||id===family.active)return;family.children[family.active]=state;family.active=id;state=family.children[id];session=null;rebuildReal();persist()}
+function addChild(){
+  family.children[family.active]=state;
+  const used=new Set(children().map(k=>k.st.palette)),st=freshState();
+  st.palette=["pink","blue","green"].find(p=>!used.has(p))||"pink";
+  const id=newChildId();family.children[id]=st;family.order.push(id);family.active=id;state=st;
+  session=null;rebuildReal();tab="practise";screen="landing";persist();render();
+}
+function removeChild(id){
+  if(family.order.length<2||!family.children[id])return;
+  delete family.children[id];family.order=family.order.filter(k=>k!==id);
+  if(family.active===id){family.active=family.order[0];state=family.children[family.active]}
+  session=null;rebuildReal();persist();
+}
+
+let remote=null,saving=false,again=false;
+function save(){state.updated=Date.now();persist()}
 async function pushRemote(){
   if(!remote)return;
   if(saving){again=true;return}
   saving=true;
-  try{await remote.set(JSON.parse(JSON.stringify(state)))}catch(e){
+  try{await remote.set(JSON.parse(JSON.stringify(family)))}catch(e){
     if(e&&e.code==="unavailable"){setTimeout(()=>{saving=false;pushRemote()},1500+Math.random()*1000);return}
     remote=null;syncNote("Progress is being saved on this device only.");
   }
@@ -817,13 +928,13 @@ async function connect(){
     const snap=await ref.get();
     remote=ref;
     if(snap.exists){
-      const r=snap.data();
-      if(r&&r.v===1&&(r.updated||0)>(state.updated||0)){
-        state=migrate(JSON.parse(JSON.stringify(r)));rebuildReal();
-        try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){}
+      const rf=loadFamily(JSON.parse(JSON.stringify(snap.data())));
+      if(rf&&(rf.updated||0)>(family.updated||0)){
+        family=rf;state=family.children[family.active];rebuildReal();
+        try{localStorage.setItem(LS_KEY,JSON.stringify(family))}catch(e){}
         if(!session)render();
-      }else if((state.updated||0)>(r.updated||0)){pushRemote()}
-    }else if(state.updated){pushRemote()}
+      }else if((family.updated||0)>((rf&&rf.updated)||0)){pushRemote()}
+    }else if(family.updated){pushRemote()}
     syncNote("Progress is saved to your account, so it follows you across devices.");
   }catch(e){remote=null}
 }
@@ -842,11 +953,13 @@ function schedule(map,key,result){
 }
 const isDue=(map,k)=>!map[k]||map[k].due<=today();
 /* The duckling line: one duckling per finished session, for as long as the daily streak lasts */
+/* Ducklings are kept for good. After a whole day with no practice they fall asleep, and the next practice wakes them. */
 function streak(){
-  const set=new Set(state.log.map(e=>e.d));let d=today();
+  const set=new Set(state.log.map(e=>e.d)),t=today();let d=t;
   if(!set.has(d))d=addDays(d,-1);
   const run=new Set();while(set.has(d)){run.add(d);d=addDays(d,-1)}
-  return {days:run.size,ducks:state.log.filter(e=>run.has(e.d)).length,today:set.has(today())};
+  const ducks=state.hatched||0,todayP=set.has(t),yest=set.has(addDays(t,-1));
+  return {days:run.size,ducks,today:todayP,asleep:ducks>0&&!todayP&&!yest};
 }
 
 /* Tricky-word plan */
@@ -940,10 +1053,11 @@ function trickyCriteria(){
   ];
   return {items,ready:taught.length>0&&items.every(i=>i.met)&&next.length>0&&state.trickyLast!==today(),next};
 }
-const MPLAN_ORDER=["R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];
+const MPLAN_ORDER=["N-autumn","N-spring","N-summer","R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];
+const MPLAN_SCHOOL=MPLAN_ORDER.filter(k=>!k.startsWith("N"));
 function planItemKeys(key){
   const P=PLANS[key],max=P.max,cap10=Math.min(max,10);
-  const R={sub:range(1,cap10),cnt:range(Math.min(3,max),Math.min(max,12)),comp:key==="Y1-spring"?[6,7,8,9,10]:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(max,key.startsWith("R")?5:10)),dbl:range(1,Math.min(5,Math.floor(cap10/2))),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
+  const R={fing:range(1,Math.min(max,5)),sub:range(1,cap10),cnt:range(key.startsWith("N")?2:Math.min(3,max),Math.min(max,12)),comp:key==="Y1-spring"?[6,7,8,9,10]:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(max,key.startsWith("R")?5:10)),dbl:range(1,Math.min(5,Math.floor(cap10/2))),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
   return P.acts.flatMap(a=>R[a]?R[a].map(n=>a+":"+n):[a]);
 }
 function mathsCriteria(){
@@ -960,7 +1074,7 @@ const keyLabel=k=>{const [a,n]=k.split(":");return n?`${ACTS[a].name} ${n}`:ACTS
 /* Runs after every finished session. Returns what moved on, for the celebration screen. */
 function checkPace(){
   const out={sounds:[],tricky:[],maths:null};
-  if(ownPace("reading")){
+  if(ownPace("reading")&&!isNursery()){
     const rc=readingCriteria();
     if(rc.ready){const S=state.sounds;rc.next.forEach(g=>{S.taught[g]=true;S.auto[g]=today()});S.batch=rc.next;S.lastUnlock=today();out.sounds=rc.next}
     const tc=trickyCriteria();
@@ -968,18 +1082,19 @@ function checkPace(){
   }
   if(ownPace("maths")){
     const mc=mathsCriteria();
-    if(mc.ready){MS().stage=MPLAN_ORDER.indexOf(mc.next);MS().lastUnlock=today();MS().settings.planKey=null;syncPlan();out.maths=mc.next}
+    if(mc.ready){MS().stageKey=mc.next;MS().lastUnlock=today();MS().settings.planKey=null;syncPlan();out.maths=mc.next}
   }
   if(out.sounds.length||out.tricky.length||out.maths)rebuildReal();
   return out;
 }
-const stageName=k=>{const [y,t]=k.split("-");return `${y==="Y1"?"Year 1":"Reception"} ${t}`};
+const stageName=k=>{const [y,t]=k.split("-");return `${y==="Y1"?"Year 1":y==="N"?"Nursery":"Reception"} ${t}`};
 function criteriaList(c){
   return el("ul",{class:"crit"},c.items.map(i=>el("li",{class:i.met?"met":""},el("span",{class:"ck","aria-hidden":"true",text:i.met?"✓":""}),el("span",{},i.label,el("span",{class:"note",text:` · ${i.detail}`})))));
 }
 function pacePanel(){
   const p=el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ pace"}));
-  if(ownPace("reading")){
+  if(isNursery())p.append(el("p",{class:"muted",text:"Reading in nursery is listening games, which follow the nursery year. Phonics starts with the Reception setting."}));
+  else if(ownPace("reading")){
     const rc=readingCriteria(),tc=trickyCriteria();
     p.append(el("h3",{text:rc.next.length?`Next sounds: ${rc.next.map(gOf).join(" ")}`:"Every sound is unlocked"}),criteriaList(rc),
       el("h3",{text:tc.next.length?`Next tricky words: ${tc.next.join(", ")}`:"No more tricky words ready to unlock yet"}),criteriaList(tc));
@@ -999,20 +1114,22 @@ const PRON={girl:{"she":"she","She":"She","her":"her","Her":"Her","her-o":"her",
   boy:{"she":"he","She":"He","her":"his","Her":"His","her-o":"him","herself":"himself","daughter":"son"}};
 /* ⟦acc⟧ is the theme colour's name, so maths text matches the coloured dots */
 const accName=()=>({pink:"pink",blue:"blue",green:"green"})[state.palette]||"pink";
-const G=v=>typeof v==="string"&&v.includes("⟦")?v.replace(/⟦([^⟧]+)⟧/g,(m,k)=>k==="acc"?accName():k==="Acc"?accName()[0].toUpperCase()+accName().slice(1):(PRON[state.child]||PRON.girl)[k]??k):v;
-function el(tag,attrs={},...kids){
+const BOOKW=()=>isNursery()?{sb:"book",Sb:"Book",ysb:"a book",Ysb:"A book"}:{sb:"school book",Sb:"School book",ysb:"your school book",Ysb:"Your school book"};
+const G=v=>typeof v==="string"&&v.includes("⟦")?v.replace(/⟦([^⟧]+)⟧/g,(m,k)=>k==="acc"?accName():k==="Acc"?accName()[0].toUpperCase()+accName().slice(1):BOOKW()[k]??(PRON[state.child]||PRON.girl)[k]??k):v;
+function el(tag,attrs={},...nodes){
   const e=document.createElement(tag);
   for(const [k,v] of Object.entries(attrs)){
     if(k==="class")e.className=v;else if(k==="on")for(const [ev,fn] of Object.entries(v))e.addEventListener(ev,fn);
     else if(k==="text")e.textContent=G(v);else if(k==="html")e.innerHTML=G(v);else e.setAttribute(k,G(v));
   }
-  kids.flat().forEach(k=>k!=null&&k!==false&&e.append(G(k)));
+  nodes.flat().forEach(k=>k!=null&&k!==false&&e.append(G(k)));
   return e;
 }
 const readerName=()=>(state.name||"").trim()||"⟦her-o⟧";
 /* ----- School year and term ----- */
 function curTerm(){if(state.term&&state.term!=="auto")return state.term;const m=new Date().getMonth()+1;return m>=9?"autumn":m<=3?"spring":"summer"}
-const yearName=()=>state.year==="Y1"?"Year 1":"Reception";
+const yearName=()=>state.year==="Y1"?"Year 1":state.year==="N"?"Nursery":"Reception";
+const isNursery=()=>state.year==="N";
 const curTermLabel=()=>`${yearName()} ${curTerm()}`;
 const planKey=()=>`${state.year||"R"}-${curTerm()}`;
 /* Changing the year never ticks anything by itself. Ticking everything from Reception is a separate button, with an undo. */
@@ -1037,7 +1154,10 @@ function setTitle(){
 
 let tab="practise",sub="progress",session=null,unlockedUntil=0;
 function render(){
-  document.documentElement.setAttribute("data-palette",state.palette||"pink");
+  const onLanding=tab==="practise"&&!session&&screen==="landing"&&state.setupDone;
+  document.documentElement.setAttribute("data-palette",onLanding?"night":(state.palette||"pink"));
+  /* the phone's top bar follows the page background when Waddle runs from the Home Screen */
+  const tc=document.querySelector('meta[name="theme-color"]');if(tc){const bg=getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();if(bg)tc.setAttribute("content",bg)}
   syncPlan();
   setTitle();
   ["practise","grown"].forEach(t=>document.getElementById("tab-"+t).setAttribute("aria-selected",tab===t));
@@ -1085,7 +1205,10 @@ function grownView(){
     tabs.map(([k,l])=>el("button",{role:"tab","aria-selected":String(sub===k),on:{click:()=>{sub=k;render()}}},l)),
     el("button",{class:"linkbtn lockbtn",on:{click:()=>{unlockedUntil=0;tab="practise";render()}}},"Lock"));
   const body=sub==="progress"?progressView():sub==="reading"?readingView():sub==="log"?logView():sub==="guide"?guideView():sub==="maths"?mathsSettingsView():sub==="settings"?settingsPanel():progressView();
-  return el("div",{class:"stack"},bar,body);
+  const childbar=el("div",{class:"childbar"},
+    el("div",{class:"seg","aria-label":"Child"},children().map(({id,st})=>el("button",{type:"button","aria-pressed":String(id===family.active),style:`--cc:${childCol(st.palette)}`,on:{click:()=>{switchChild(id);render()}}},(st.name||"").trim()||"New child"))),
+    el("button",{class:"linkbtn",type:"button",on:{click:addChild}},"+ Add a child"));
+  return el("div",{class:"stack"},childbar,bar,body);
 }
 const DUCK_SVG=(mama,grown)=>{const c=mama?' m':grown?' gr':'';return '<svg viewBox="0 0 40 36" aria-hidden="true">'+
   '<path class="d-feet" d="M18 32 L14 36 L21 36 Z M27 32 L23 36 L30 36 Z"/>'+
@@ -1094,24 +1217,29 @@ const DUCK_SVG=(mama,grown)=>{const c=mama?' m':grown?' gr':'';return '<svg view
   '<circle class="d-body'+c+'" cx="13" cy="13" r="8"/>'+
   '<path class="d-wing'+c+'" d="M18 22 Q25 16.5 31 23 Q25 29 18 24.5 Z"/>'+
   '<path class="d-beak" d="M6 11.5 Q-0.5 13.5 6 16.5 Z"/>'+
-  '<circle class="d-eye" cx="10.8" cy="10.8" r="1.7"/>'+
+  '<circle class="d-eye" cx="10.8" cy="10.8" r="1.7"/><path class="d-eye-shut" d="M8.6 10.6 Q10.8 12.9 13 10.6"/>'+
   (mama?'<path class="d-bow" d="M15 5.5 L10.5 2 L11 8 Z M15 5.5 L19.5 2 L19 8 Z"/><circle class="d-bow" cx="15" cy="5.5" r="1.6"/>':'')+
   '</svg>'};
 /* Every ten ducklings grow up into one duck, so the line stays one row long and reads as tens and ones */
 const duckWords=n=>{const t=Math.floor(n/10),o=n%10,dw=t?`${t} grown-up duck${t>1?"s":""}`:"",ow=o?`${o} duckling${o>1?"s":""}`:"";return [dw,ow].filter(Boolean).join(" and ")};
-function ducksRow(n,newOne=false){
+const EGG_SVG='<svg class="egg" viewBox="0 0 40 36" aria-hidden="true"><g class="egg-bot"><path class="egg-shell" d="M9 22 L13 19 L17 23 L21 19 L25 23 L29 19 L31 22 C31.5 30 26.5 35 20 35 C13.5 35 8.5 30 9 22 Z"/></g><g class="egg-top"><path class="egg-shell" d="M9 22 L13 19 L17 23 L21 19 L25 23 L29 19 L31 22 C31 12 26 4 20 4 C14 4 9 12 9 22 Z"/><circle class="egg-dot" cx="16" cy="12" r="1.3"/><circle class="egg-dot" cx="24" cy="15" r="1"/></g></svg>';
+function ducksRow(n,newOne=false,asleep=false){
   const tens=Math.floor(n/10),ones=n%10,justGrew=newOne&&n>0&&ones===0;
-  const row=el("div",{class:"ducks",role:"img","aria-label":n?`Mother duck with ${duckWords(n)}`:"Mother duck waiting for her first duckling"});
+  const row=el("div",{class:"ducks"+(asleep?" asleep":""),role:"img","aria-label":n?`Mother duck with ${duckWords(n)}${asleep?", fast asleep":""}`:"Mother duck waiting for her first duckling"});
   row.append(el("span",{class:"duck mama",html:DUCK_SVG(true)}));
-  for(let i=0;i<tens;i++)row.append(el("span",{class:"duck grown"+(justGrew&&i===tens-1?" grow":""),style:"--i:"+i,html:DUCK_SVG(false,true)}));
+  const showT=tens>5?1:tens;
+  for(let i=0;i<showT;i++)row.append(el("span",{class:"duck grown"+(justGrew&&i===showT-1?" grow":""),style:"--i:"+i,html:DUCK_SVG(false,true)}));
+  if(tens>5)row.append(el("span",{class:"more",text:`× ${tens}`}));
   if(tens&&ones)row.append(el("span",{class:"duck-gap","aria-hidden":"true"}));
-  for(let i=0;i<ones;i++)row.append(el("span",{class:"duck"+(newOne&&!justGrew&&i===ones-1?" new":""),style:"--i:"+(tens+i),html:DUCK_SVG(false)}));
+  for(let i=0;i<ones;i++){const hatch=newOne&&!justGrew&&i===ones-1;
+    row.append(el("span",{class:"duck"+(hatch?" hatch":""),style:"--i:"+(showT+i),html:DUCK_SVG(false)+(hatch?EGG_SVG:"")}))}
+  if(asleep)row.append(el("span",{class:"zzz","aria-hidden":"true"},el("span",{text:"z"}),el("span",{text:"z"}),el("span",{text:"z"})));
   return row;
 }
 function streakNote(s){
   if(!s.ducks)return "";
-  if(!s.today)return "Practise today to keep the line going";
-  return s.days===1?"Practised today":`${s.days} days running`;
+  if(s.today)return s.days>1?`${s.days} days running`:"Practised today";
+  return s.asleep?"Fast asleep":"Practise today!";
 }
 function chipFor(item){
   if(item.kind==="g")return el("span",{class:"chip snd",text:gOf(item.v)});
@@ -1140,7 +1268,7 @@ function centreGlyph(span){
 let wake=null;
 async function holdWake(){try{if(navigator.wakeLock&&!wake)wake=await navigator.wakeLock.request("screen")}catch(e){wake=null}}
 function releaseWake(){try{wake&&wake.release()}catch(e){}wake=null}
-function begin(type,queue){session={type,queue,i:0,done:false,results:[],started:Date.now(),last:Date.now(),active:0};holdWake();render()}
+function begin(type,queue){session={type,queue,i:0,done:false,results:[],started:Date.now(),last:Date.now(),active:0,wasAsleep:streak().asleep};holdWake();render()}
 /* Time on task: counted tap to tap, with any single gap capped at 90 seconds so a break isn't counted as practice. Never shown to the child. */
 const GAP_CAP=90000;
 function tickActive(){if(!session||session.done||session.last==null)return;const n=Date.now();session.active+=Math.min(Math.max(0,n-session.last),GAP_CAP);session.last=n}
@@ -1169,7 +1297,7 @@ const ICONS={
 /* What counts as today's practice being done. Reading needs sounds and words, plus tricky words when any are due. */
 const doneToday=type=>state.log.some(e=>e.d===today()&&e.t===type);
 const trickyDone=()=>doneToday("tricky")||!taughtTricky().length||planTricky().queue.length===0;
-const readingDone=()=>doneToday("sounds")&&trickyDone();
+const readingDone=()=>isNursery()?doneToday("listen"):doneToday("sounds")&&trickyDone();
 const mathsDone=()=>doneToday("maths");
 const bookRead=()=>state.reads.includes(today());
 const practiceDone=()=>readingDone()&&mathsDone();
@@ -1197,12 +1325,12 @@ function walkIn(row){
   }));
 }
 function ducksPanel(){
-  const s=streak(),row=ducksRow(s.ducks);
-  if(walkNext&&s.ducks)walkIn(row);
+  const s=streak(),row=ducksRow(s.ducks,false,s.asleep);
+  if(walkNext&&s.ducks&&!s.asleep)walkIn(row);
   return el("section",{class:"panel pond"},
     el("div",{class:"panel-head"},el("h2",{text:(state.name||"").trim()?`${state.name.trim()}'s ducklings`:"Your ducklings"}),el("span",{class:"note streak"},s.today&&s.ducks?el("span",{class:"tick","aria-hidden":"true",text:"✓"}):null,streakNote(s))),
     row,
-    el("p",{class:"muted ducknote",text:s.ducks?`${s.ducks} so far. Each practice hatches one, and ten grow into a duck.`:"Finish a practice to hatch the first duckling. Ten ducklings grow into a duck."}));
+    el("p",{class:"muted ducknote",text:s.asleep?"They fell asleep while you were away. One practice wakes them all up.":s.ducks?`${s.ducks} so far. Each practice hatches one, and ten grow into a duck.`:"Finish a practice to hatch the first duckling. Ten ducklings grow into a duck."}));
 }
 /* The first screen: one big button for her, a small way in for grown-ups */
 /* ================= Reading log: school book titles by date, downloadable as a PDF ================= */
@@ -1217,11 +1345,11 @@ function buildPdf(pages){
   const objs=["",""];const add=o=>{objs.push(o);return objs.length};
   const f1=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
   const f2=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
-  const kids=[];
+  const pageRefs=[];
   pages.forEach(c=>{const cs=add(`<< /Length ${c.length} >>\nstream\n${c}\nendstream`);
-    kids.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${cs} 0 R >>`))});
+    pageRefs.push(add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${cs} 0 R >>`))});
   objs[0]="<< /Type /Catalog /Pages 2 0 R >>";
-  objs[1]=`<< /Type /Pages /Kids [${kids.map(k=>k+" 0 R").join(" ")}] /Count ${kids.length} >>`;
+  objs[1]=`<< /Type /Pages /Kids [${pageRefs.map(k=>k+" 0 R").join(" ")}] /Count ${pageRefs.length} >>`;
   let out="%PDF-1.4\n";const offs=[];
   objs.forEach((o,i)=>{offs.push(out.length);out+=`${i+1} 0 obj\n${o}\nendobj\n`});
   const x=out.length;
@@ -1239,7 +1367,7 @@ function readingLogPdf(){
     pageNo++;let c="0.16 0.12 0.16 rg\n",y;
     if(pageNo===1){
       c+=txt("F2",20,L,770,name?`${name}'s reading log`:"Reading log");
-      c+=txt("F1",11,L,750,`School books read at home. ${rows.length} day${rows.length===1?"":"s"} recorded, printed ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}.`);
+      c+=txt("F1",11,L,750,G(`⟦Sb⟧s read at home. ${rows.length} day${rows.length===1?"":"s"} recorded, printed ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}.`));
       y=712;
     }else y=780;
     c+=`0.94 0.94 0.94 rg ${L} ${y-7} ${R-L} ${H} re f\n0.16 0.12 0.16 rg\n`;
@@ -1250,7 +1378,7 @@ function readingLogPdf(){
       c+=`0.82 0.82 0.82 RG 0.6 w ${L} ${y-7} m ${R} ${y-7} l S\n`;
       y-=H;i++;
     }
-    if(!rows.length)c+=txt("F1",11,L+8,y,"No school book reading recorded yet.");
+    if(!rows.length)c+=txt("F1",11,L+8,y,G("No ⟦sb⟧ reading recorded yet."));
     c+="0.45 0.45 0.45 rg\n"+txt("F1",9,L,36,`Made with Waddle${pageNo>1||i<rows.length?`  ·  page ${pageNo}`:""}`).replace("·","-");
     pages.push(c);
   }while(i<rows.length);
@@ -1284,12 +1412,12 @@ function readingLogPanel(){
     msg.textContent=r==="saved"?"Reading log saved as a PDF.":r==="declined"?"Not saved.":"This browser couldn't save the file.";
   }}},"Download as PDF");
   const table=dates.length?el("table",{class:"rlog"},el("thead",{},el("tr",{},el("th",{text:"Date"}),el("th",{text:"Book"}),el("th",{}))),body)
-      :el("p",{class:"empty",text:"Days ⟦she⟧ ticks ⟦her⟧ school book will appear here."});
+      :el("p",{class:"empty",text:"Days ⟦she⟧ ticks ⟦her⟧ ⟦sb⟧ will appear here."});
   return el("section",{class:"panel span-2"},el("h2",{text:"Reading log"}),
     el("div",{class:"rl-grid"},
       el("div",{class:"stack rl-side"},
         el("div",{class:"field"},el("label",{for:"cur-book",text:"Book ⟦she⟧ is reading now"}),cur,
-          el("p",{class:"note",text:"Each time ⟦she⟧ ticks ⟦her⟧ school book, this title is logged against the day. Change it when a new book comes home."})),
+          el("p",{class:"note",text:isNursery()?"Each time ⟦she⟧ ticks a book, this title is logged against the day. Change it when you read something new.":"Each time ⟦she⟧ ticks ⟦her⟧ school book, this title is logged against the day. Change it when a new book comes home."})),
         el("div",{class:"row rl-add"},el("span",{class:"note",text:"Missed a tick?"}),addDate,addBtn),
         el("div",{class:"row"},pdfBtn),msg),
       el("div",{class:"stack rl-main"},table,
@@ -1298,8 +1426,8 @@ function readingLogPanel(){
 
 /* ================= Backup and restore ================= */
 let restoredNote="";
-const backupName=()=>{const n=(state.name||"").trim().replace(/[^A-Za-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"child";return `waddle-${n}-${today()}.json`};
-const backupText=()=>JSON.stringify({app:"waddle",version:1,saved:new Date().toISOString(),date:today(),state});
+const backupName=()=>{const n=children().map(k=>(k.st.name||"").trim().replace(/[^A-Za-z0-9]+/g,"-").replace(/^-+|-+$/g,"")).filter(Boolean).join("-")||"family";return `waddle-${n}-${today()}.json`};
+const backupText=()=>{family.children[family.active]=state;return JSON.stringify({app:"waddle",version:2,saved:new Date().toISOString(),date:today(),family})};
 /* Offer a file: Claude's download prompt inside claude.ai, a normal browser download everywhere else */
 async function saveFile(filename,data,mime){
   try{
@@ -1316,26 +1444,37 @@ async function saveFile(filename,data,mime){
 }
 async function saveBackup(msg){
   const filename=backupName(),r=await saveFile(filename,backupText(),"application/json");
-  if(r==="saved"){state.lastBackup=today();save();msg.textContent=`Saved ${filename}. Keep it somewhere safe, such as iCloud, Google Drive or an email to yourself.`}
+  if(r==="saved"){family.lastBackup=today();persist();msg.textContent=`Saved ${filename}. Keep it somewhere safe, such as iCloud, Google Drive or an email to yourself.`}
   else msg.textContent=r==="declined"?"Backup not saved.":"This browser couldn't save a file. Use the text option below instead.";
 }
 function parseBackup(text){
   let o;try{o=JSON.parse(String(text).trim())}catch(e){return null}
+  const saved=o&&(o.date||o.saved)?String(o.date||o.saved).slice(0,10):null;
+  if(o&&o.app==="waddle"&&o.family){const f=loadFamily(JSON.parse(JSON.stringify(o.family)));return f?{family:f,saved}:null}
   const st=o&&o.app==="waddle"&&o.state?o.state:o;
   if(!st||st.v!==1||!st.sounds||typeof st.sounds!=="object")return null;
-  return {state:st,saved:o&&(o.date||o.saved)?String(o.date||o.saved).slice(0,10):null};
+  return {state:st,saved};
 }
 function restorePrompt(box,text){
   const b=parseBackup(text);
   if(!b){box.replaceChildren(el("p",{class:"note",text:"That doesn't look like a Waddle backup, so nothing has changed."}));return}
-  const st=b.state,ticked=Object.values((st.sounds&&st.sounds.taught)||{}).filter(Boolean).length,days=(st.days||[]).length;
-  const who=(st.name||"").trim()||"your child";
-  box.replaceChildren(
-    el("p",{text:`Backup of ${who}${b.saved?` from ${niceDate(b.saved)}`:""}, with ${ticked} sound${ticked===1?"":"s"} ticked and ${days} day${days===1?"":"s"} of practice. Replace the progress on this device with it?`}),
+  const desc=st=>{const t=Object.values((st.sounds&&st.sounds.taught)||{}).filter(Boolean).length,d=(st.days||[]).length;return `${(st.name||"").trim()||"a child"} (${t} sound${t===1?"":"s"}, ${d} day${d===1?"":"s"} of practice)`};
+  const when=b.saved?` from ${niceDate(b.saved)}`:"";
+  let msg,apply,who;
+  if(b.family){
+    const ks=b.family.order.map(id=>b.family.children[id]);
+    who=ks.map(k=>(k.name||"").trim()).filter(Boolean).join(" and ")||"your family";
+    msg=`Backup${when} for ${ks.map(desc).join(", ")}. Replace everything on this device with it?`;
+    apply=()=>{family=b.family;state=family.children[family.active];};
+  }else{
+    const st=b.state,cur=(state.name||"").trim();who=(st.name||"").trim()||"your child";
+    msg=`Backup of ${desc(st)}${when}. Replace ${state.setupDone&&cur?cur+"'s":"this child's"} progress on this device with it?`;
+    apply=()=>{state=migrate(JSON.parse(JSON.stringify(st)));state.setupDone=true;family.children[family.active]=state;};
+  }
+  box.replaceChildren(el("p",{text:msg}),
     el("div",{class:"row"},
       el("button",{class:"btn small danger",type:"button",on:{click:()=>{
-        state=migrate(JSON.parse(JSON.stringify(st)));state.setupDone=true;rebuildReal();save();
-        session=null;restoredNote=`Progress restored from the backup of ${who}.`;
+        apply();rebuildReal();persist();session=null;restoredNote=`Progress restored from the backup of ${who}.`;
         if(tab==="practise")screen="landing";render();
       }}},"Replace progress"),
       el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceChildren()}},"Cancel")));
@@ -1358,12 +1497,12 @@ function backupPanel(){
   const copyMsg=el("span",{class:"note","aria-live":"polite"});
   const copyBtn=el("button",{class:"btn ghost small",type:"button",on:{click:()=>{
     const t=backupText();out.value=t;outWrap.hidden=false;out.select();
-    try{navigator.clipboard.writeText(t).then(()=>{copyMsg.textContent="Copied. Paste it into a note or a message to yourself.";state.lastBackup=today();save()},()=>{copyMsg.textContent="Selected. Copy it from the box."})}catch(e){copyMsg.textContent="Selected. Copy it from the box."}
+    try{navigator.clipboard.writeText(t).then(()=>{copyMsg.textContent="Copied. Paste it into a note or a message to yourself.";family.lastBackup=today();persist()},()=>{copyMsg.textContent="Selected. Copy it from the box."})}catch(e){copyMsg.textContent="Selected. Copy it from the box."}
   }}},"Copy as text");
   const pasteIn=el("textarea",{rows:"3",spellcheck:"false",placeholder:"Paste a backup here","aria-label":"Paste a backup"});
   const pasteBtn=el("button",{class:"btn ghost small",type:"button",on:{click:()=>restorePrompt(box,pasteIn.value)}},"Restore from text");
   const inClaude=!!remote;
-  const last=state.lastBackup?`Last backup ${niceDate(state.lastBackup)}.`:"No backup saved yet.";
+  const lb=family.lastBackup||state.lastBackup,last=lb?`Last backup ${niceDate(lb)}.`:"No backup saved yet.";
   return el("section",{class:"panel"},el("h2",{text:"Backup"}),
     el("p",{class:"note",text:(inClaude
       ?"Progress here is saved to your account. A backup lets you move it to the Waddle website or keep a copy. "
@@ -1379,7 +1518,7 @@ function backupPanel(){
 
 /* ================= First visit: a one-page setup for a grown-up ================= */
 const TERM_ORDER=["Reception autumn","Reception spring","Reception summer","Year 1 autumn","Year 1 spring","Year 1 summer"];
-const defaultSet=(year,term)=>({"R-autumn":0,"R-spring":8,"R-summer":12,"Y1-autumn":12,"Y1-spring":14,"Y1-summer":16})[`${year}-${term}`]??0;
+const defaultSet=(year,term)=>year==="N"?-1:({"R-autumn":0,"R-spring":8,"R-summer":12,"Y1-autumn":12,"Y1-spring":14,"Y1-summer":16})[`${year}-${term}`]??0;
 function applySetup(d){
   state.name=d.name.trim();state.child=d.child;state.year=d.year;state.term="auto";state.palette=d.palette;
   const S=state.sounds;S.taught={};S.auto={};S.batch=[];S.clusters=true;
@@ -1395,14 +1534,14 @@ function applySetup(d){
   rebuildReal();save();screen="landing";render();
 }
 function setupView(){
-  const d={name:"",child:"girl",year:"R",palette:state.palette||"pink",set:null};
+  const d={name:"",child:"girl",year:"R",palette:state.palette||"pink",set:null},adding=family.order.length>1;
   const nameIn=el("input",{id:"setup-name",type:"text",maxlength:"24",placeholder:"e.g. Ruby",autocomplete:"off"});
   const segRow=(label,id,opts,key,after)=>{
     const btns=opts.map(([v,t,sw])=>{const b=el("button",{type:"button","aria-pressed":String(d[key]===v)},sw?el("span",{class:"swatch "+v}):null,t);
       b.addEventListener("click",()=>{d[key]=v;btns.forEach((x,i)=>x.setAttribute("aria-pressed",String(opts[i][0]===v)));if(after)after()});return b});
     return el("div",{class:"field"},el("span",{class:"flabel",id,text:label}),el("div",{class:"seg","aria-labelledby":id},btns));
   };
-  const sel=el("select",{id:"setup-set"});
+  const sel=el("select",{id:"setup-set"});let phonField=null;
   const fillSets=()=>{
     const pick=d.set!=null&&(d.year==="Y1"||SETS[d.set]?.stage!=="Y1")?d.set:defaultSet(d.year,curTerm());
     sel.replaceChildren(el("option",{value:"-1",text:"Not started phonics yet"}));
@@ -1413,7 +1552,7 @@ function setupView(){
       const gs=x.gs.slice(0,7).map(gOf).join(" ")+(x.gs.length>7?" …":"");
       group.append(el("option",{value:String(i),text:`${x.name} · ${gs}`}));
     });
-    sel.value=String(pick);
+    sel.value=String(pick);if(phonField)phonField.hidden=d.year==="N";
   };
   sel.addEventListener("change",()=>{d.set=+sel.value});
   fillSets();
@@ -1428,17 +1567,18 @@ function setupView(){
     :null;
   return el("section",{class:"panel stack setup"},
     el("div",{class:"brand"},el("b",{text:"Waddle"}),el("span",{class:"note",text:"Daily reading and maths recap for early years"})),
-    el("h1",{text:"Let's set up Waddle"}),
+    el("h1",{text:adding?"Add a child":"Let's set up Waddle"}),
     el("p",{class:"note",text:"For a grown-up, once. It takes about a minute, and you can change everything later in Grown-ups."}),
     el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's name"}),nameIn),
-    segRow("Boy or girl","su-child",[["girl","Girl"],["boy","Boy"]],"child"),
-    segRow("School year","su-year",[["R","Reception"],["Y1","Year 1"]],"year",fillSets),
-    el("div",{class:"field"},el("label",{for:"setup-set",text:"Latest sounds taught at school"}),sel,
-      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Reading page in Grown-ups."})),
+    segRow("Girl or boy","su-child",[["girl","Girl"],["boy","Boy"]],"child"),
+    segRow("School year","su-year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],"year",fillSets),
+    (phonField=el("div",{class:"field"},el("label",{for:"setup-set",text:"Latest sounds taught at school"}),sel,
+      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Reading page in Grown-ups."})),phonField.hidden=d.year==="N",phonField),
     segRow("Colour","su-pal",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],"palette",()=>document.documentElement.setAttribute("data-palette",d.palette)),
     tip?el("p",{class:"tipbox",text:tip}):null,
     el("button",{class:"btn go",type:"button",on:{click:()=>{d.name=nameIn.value;d.set=+sel.value;applySetup(d)}}},"Start"),
-    el("p",{class:"note"},"Moving from another phone? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
+    adding?el("button",{class:"linkbtn",type:"button",on:{click:()=>{removeChild(family.active);screen="landing";render()}}},"Cancel")
+      :el("p",{class:"note"},"Moving from another phone? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
     box);
 }
 
@@ -1456,7 +1596,7 @@ function bookPanel(){
   const mon=addDays(t,-((now.getDay()+6)%7));
   const week=[0,1,2,3,4,5,6].map(i=>addDays(mon,i));
   const n=week.filter(d=>reads.has(d)).length,readToday=reads.has(t);
-  const row=el("div",{class:"bookweek",role:"img","aria-label":`School book read on ${n} day${n===1?"":"s"} this week`},
+  const row=el("div",{class:"bookweek",role:"img","aria-label":`⟦Sb⟧ read on ${n} day${n===1?"":"s"} this week`},
     week.map(d=>{const [y,m,dd]=d.split("-").map(Number);
       return el("div",{class:"bday"+(reads.has(d)?" on":"")+(d===t?" today":"")+(d>t?" future":"")},
         el("span",{class:"bk",html:BOOK_SVG}),
@@ -1466,22 +1606,42 @@ function bookPanel(){
     :practiceDone()?el("span",{class:"note nudge-note",text:"Time to read it!"})
     :el("span",{class:"note",text:n?`${n} day${n===1?"":"s"} this week`:"Not read yet this week"});
   return el("section",{class:"panel bookpanel-home"},
-    el("div",{class:"panel-head"},el("h2",{text:"School book"}),status),
+    el("div",{class:"panel-head"},el("h2",{text:isNursery()?"Read a book":"School book"}),status),
     row,
     readToday
       ?el("button",{class:"linkbtn undo-read",type:"button",on:{click:toggleRead}},"Undo today's tick")
       :el("button",{class:"btn readbtn"+(practiceDone()?" nudge":""),type:"button",on:{click:toggleRead}},"I've read my book today"));
 }
+const CHILD_COL={pink:["#E0336F","#FF6FA1"],blue:["#2D6CD2","#6FA5FF"],green:["#2B8752","#5CC98A"]};
+const isDark=()=>{const t=document.documentElement.getAttribute("data-theme");return t?t==="dark":!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)};
+const childCol=p=>(CHILD_COL[p]||CHILD_COL.pink)[isDark()?1:0];
+const childLight=p=>(CHILD_COL[p]||CHILD_COL.pink)[1];
+let landingPick=null;
 function landingView(){
-  const name=(state.name||"").trim(),s=streak();
-  return el("section",{class:"landing"},
-    el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Daily reading and maths recap for early years"})),
-    el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'}),
-    el("div",{class:"land-main"},
+  const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Daily reading and maths recap for early years"}));
+  const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
+  const ks=children().filter(k=>k.st.setupDone);
+  if(ks.length>1){
+    /* One screen, two taps: choose a name (the others fade), then Let's practise */
+    const sel=ks.find(k=>k.id===landingPick)||null,c=sel?CHILD_COL[sel.st.palette]?.[0]||CHILD_COL.pink[0]:null,cl=sel?childLight(sel.st.palette):null,selName=sel?((sel.st.name||"").trim()||"Child"):"";
+    return el("section",{class:"landing"},brand,lock,
+      el("div",{class:"land-main picking",style:sel?`--accent:${c};--on-accent:#FFFFFF;--bow:${cl};--nm:${cl}`:""},
+        el("span",{class:"land-duck",html:DUCK_SVG(true)}),
+        sel?el("h1",{class:"land-hello"},"Hello, ",el("span",{class:"land-name",text:selName}),"!"):el("h1",{class:"land-hello sweep-text","aria-label":"Who's practising?"},[..."Who's practising?"].map((ch,i)=>el("span",{"aria-hidden":"true",style:`--d:${(i*0.07).toFixed(2)}s`,text:ch}))),
+        el("div",{class:"namepick",role:"group","aria-label":"Choose who is practising"},ks.map(({id,st})=>{
+          const col=(CHILD_COL[st.palette]||CHILD_COL.pink)[0],n=(st.name||"").trim()||"Child",L=n.length;
+          return el("button",{class:"namebtn"+(sel?(sel.id===id?" on":" off"):""),type:"button","aria-pressed":String(!!sel&&sel.id===id),style:`--cc:${col}`,on:{click:()=>{landingPick=sel&&sel.id===id?null:id;render()}}},
+            el("span",{class:"nb-name",style:`font-size:${L<=6?28:L<=8?24:L<=10?20:L<=13?17:14}px`,text:n}));
+        })),
+        (()=>{const go=el("button",{class:"btn land-go",type:"button",on:{click:()=>{if(!sel)return;switchChild(sel.id);landingPick=null;screen="home";render()}}},"Let's practise");go.disabled=!sel;return go})()));
+  }
+  const name=(state.name||"").trim(),s=streak(),c=(CHILD_COL[state.palette]||CHILD_COL.pink)[0],cl=childLight(state.palette);
+  return el("section",{class:"landing"},brand,lock,
+    el("div",{class:"land-main",style:`--accent:${c};--on-accent:#FFFFFF;--bow:${cl};--nm:${cl}`},
       el("span",{class:"land-duck",html:DUCK_SVG(true)}),
       el("h1",{class:"land-hello"},"Hello",name?", ":null,name?el("span",{class:"land-name",text:name}):null,"!"),
       el("button",{class:"btn land-go",type:"button",on:{click:()=>{screen="home";render()}}},"Let's practise"),
-      s.today&&s.ducks?el("p",{class:"note streak"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),allDone()?"All done for today":practiceDone()?"Practice done. Now read your school book":"Practised today"):null));
+      s.today&&s.ducks?el("p",{class:"note streak"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),allDone()?"All done for today":practiceDone()?"Practice done. Now read ⟦ysb⟧":"Practised today"):null));
 }
 function startView(){
   if(screen==="reading"){
@@ -1504,11 +1664,12 @@ function startView(){
   return el("div",{class:"stack home"},
     el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="landing";render()}}},"‹ Home"),grownLink()),
     allDone()?el("section",{class:"panel alldone"},el("span",{class:"big-tick","aria-hidden":"true",text:"✓"}),
-      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Reading, maths and the school book are finished. Come back tomorrow for more ducklings."})))
+      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Reading, maths and the ⟦sb⟧ are finished. Come back tomorrow for more ducklings."})))
     :practiceDone()?el("section",{class:"panel alldone nextbook"},el("span",{class:"big-tick book-tick","aria-hidden":"true",html:BOOK_SVG}),
-      el("div",{},el("h2",{text:"Now read your school book"}),el("p",{class:"muted",text:"Reading and maths are finished. Tick the school book below once it's read."}))):null,
+      el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:"Reading and maths are finished. Tick the ⟦sb⟧ below once it's read."}))):null,
     el("div",{class:"choices"},
-      choiceTile({icon:"book",title:"Reading",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
+      isNursery()?choiceTile({icon:"book",title:"Reading",note:"Listening and rhyme games · 4 min",onClick:()=>begin("listen",planListen()),done:readingDone()})
+        :choiceTile({icon:"book",title:"Reading",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
       mq.length?choiceTile({icon:"dice",title:"Maths",note:"Quick looks, counting and more · 4 min",onClick:()=>begin("maths",mq),done:mathsDone()})
                :choiceTile({icon:"dice",title:"Maths",note:"Turn on an activity in Grown-ups first",disabled:true})),
     bookPanel(),ducksPanel());
@@ -1521,7 +1682,7 @@ const pct=(a,b)=>b?Math.round(100*a/b):null;
 const sum=(a,k)=>a.reduce((x,e)=>x+(e[k]||0),0);
 function tile(value,label,subText){return el("div",{class:"stat"},el("b",{text:value}),el("span",{text:label}),subText?el("span",{class:"sub",text:subText}):null)}
 const SVGNS="http://www.w3.org/2000/svg";
-function svg(tag,attrs={},...kids){const e=document.createElementNS(SVGNS,tag);for(const [k,v] of Object.entries(attrs))k==="text"?e.textContent=G(v):e.setAttribute(k,G(v));kids.flat().forEach(k=>k&&e.append(k));return e}
+function svg(tag,attrs={},...nodes){const e=document.createElementNS(SVGNS,tag);for(const [k,v] of Object.entries(attrs))k==="text"?e.textContent=G(v):e.setAttribute(k,G(v));nodes.flat().forEach(k=>k&&e.append(k));return e}
 
 function weeklyChart(data){
   const W=560,H=180,L=40,R=8,T=20,B=30,ph=H-T-B,cw=(W-L-R)/data.length,bw=Math.min(40,cw*.56);
@@ -1556,16 +1717,17 @@ function progressView(){
 
   wrap.append(el("div",{class:"summary four span-all"},
     tile(`${pDays}/14`,"Days practised","last two weeks"),
-    tile(`${rDays}/14`,"Days with ⟦her⟧ school book","last two weeks"),
-    tile(sum(thisWeek,"n")?`${pct(sum(thisWeek,"up"),sum(thisWeek,"n"))}%`:"–","Cards on ⟦her⟧ own","this week"),
-    tile(sum(al,"an")?`${sum(al,"au")}/${sum(al,"an")}`:"–","Alien words decoded","on ⟦her⟧ own, recent")));
+    tile(`${rDays}/14`,isNursery()?"Days with a book":"Days with ⟦her⟧ school book","last two weeks"),
+    tile(sum(thisWeek,"n")?`${pct(sum(thisWeek,"up"),sum(thisWeek,"n"))}%`:"–",isNursery()?"Listening games right first time":"Cards on ⟦her⟧ own","this week"),
+    isNursery()?(()=>{const mw=state.log.filter(e=>e.t==="maths"&&e.n&&weekStart(e.d)===weekStart(t));return tile(sum(mw,"n")?`${pct(sum(mw,"up"),sum(mw,"n"))}%`:"–","Maths right first time","this week")})()
+      :tile(sum(al,"an")?`${sum(al,"au")}/${sum(al,"an")}`:"–","Alien words decoded","on ⟦her⟧ own, recent")));
 
   // Weekly chart
   const ws0=weekStart(t),weeks=[];for(let i=7;i>=0;i--)weeks.push(addDays(ws0,-7*i));
   const data=weeks.map(ws=>{const es=scored.filter(e=>weekStart(e.d)===ws),n=sum(es,"n"),up=sum(es,"up");return {ws,n,up,p:pct(up,n)}});
   const chartPanel=el("section",{class:"panel"},
-    el("div",{class:"panel-head"},el("h2",{text:"Reading on ⟦her⟧ own, week by week"})),
-    el("p",{class:"note",text:"Share of sound and word cards ⟦she⟧ managed without help. A dip in the week new sounds arrive is normal and healthy."}));
+    el("div",{class:"panel-head"},el("h2",{text:isNursery()?"Listening games, week by week":"Reading on ⟦her⟧ own, week by week"})),
+    el("p",{class:"note",text:isNursery()?"Share of listening games ⟦she⟧ got right first time. Ups and downs are normal at this age.":"Share of sound and word cards ⟦she⟧ managed without help. A dip in the week new sounds arrive is normal and healthy."}));
   if(data.some(d=>d.p!=null))chartPanel.append(el("div",{style:"overflow-x:auto"},weeklyChart(data)));
   else chartPanel.append(el("p",{class:"empty",text:"This fills in as ⟦she⟧ finishes sessions. Each bar will show one week."}));
   chartPanel.classList.add("span-2");
@@ -1574,7 +1736,7 @@ function progressView(){
   const readToday=reads.has(t);
   const strip=el("div",{class:"strip"});
   last14.forEach(d=>{const [y,m,dd]=d.split("-").map(Number);
-    strip.append(el("div",{class:"sday"+(d===t?" today":""),title:`${niceDate(d)}: ${prac.has(d)?"practised":"no practice"}; ${reads.has(d)?"read ⟦her⟧ school book":"no book reading ticked"}`},
+    strip.append(el("div",{class:"sday"+(d===t?" today":""),title:`${niceDate(d)}: ${prac.has(d)?"practised":"no practice"}; ${reads.has(d)?"read ⟦her⟧ ⟦sb⟧":"no book reading ticked"}`},
       el("span",{class:"mk p"+(prac.has(d)?" on":"")}),el("span",{class:"mk r"+(reads.has(d)?" on":"")}),
       el("span",{class:"dow",text:new Date(y,m-1,dd).toLocaleDateString("en-GB",{weekday:"narrow"})}),
       (()=>{const tm=dayTime(d),mn=Math.round((tm.r+tm.m)/60);return el("span",{class:"smin",title:`${Math.round(tm.r/60)} min reading, ${Math.round(tm.m/60)} min maths`,text:tm.r+tm.m?String(Math.max(1,mn)):""})})()));
@@ -1583,8 +1745,8 @@ function progressView(){
   const wkT=wk.map(dayTime),wkR=wkT.reduce((a,x)=>a+x.r,0),wkM=wkT.reduce((a,x)=>a+x.m,0),wkDays=wkT.filter(x=>x.r+x.m>0).length;
   const mm=sec=>Math.round(sec/60),timeLine=wkR+wkM?`Last 7 days: ${mm(wkR+wkM)} minutes on ${wkDays} day${wkDays===1?"":"s"}, ${mm(wkR)} reading and ${mm(wkM)} maths. About ${Math.max(1,Math.round((wkR+wkM)/60/wkDays))} minutes a day when ⟦she⟧ practises.`:"Practice time will show here once ⟦she⟧ finishes a session.";
   const last14Panel=el("section",{class:"panel"},el("h2",{text:"Last 14 days"}),strip,
-    el("div",{class:"legend"},el("span",{},el("span",{class:"mk p on"}),"Practice"),el("span",{},el("span",{class:"mk r on"}),"School book")),
-    el("p",{class:"note",text:readToday?"School book read today. ⟦She⟧ ticks it on ⟦her⟧ home screen.":"⟦She⟧ ticks the school book on ⟦her⟧ home screen after reading it."}),
+    el("div",{class:"legend"},el("span",{},el("span",{class:"mk p on"}),"Practice"),el("span",{},el("span",{class:"mk r on"}),"⟦Sb⟧")),
+    el("p",{class:"note",text:readToday?"⟦Sb⟧ read today. ⟦She⟧ ticks it on ⟦her⟧ home screen.":"⟦She⟧ ticks the ⟦sb⟧ on ⟦her⟧ home screen after reading it."}),
     el("p",{class:"note",text:"Numbers under each day are minutes practised, counted only while ⟦she⟧ is active."}),
     el("p",{class:"timeline",text:timeLine}),
     el("p",{class:"tipbox",text:"Short, regular sessions work better than long ones. A few minutes most days does more than a long session once a week."}));
@@ -1602,15 +1764,10 @@ function progressView(){
   }else soundsPanel.append(el("p",{class:"empty",text:"Tick the sounds ⟦she⟧ has been taught on the Reading page."}));
   const numbersPanel=mathsProgressPanel(),pace=pacePanel();
 
-  // Worth mentioning to her teacher
+  // Still settling: items that keep needing help, framed calmly, no teacher
   const stuck=(map)=>Object.entries(map).filter(([k,c])=>c.reps>=3&&c.box<=1).map(([k])=>k);
   const flags=[...stuck(S.gcards).filter(g=>S.taught[g]).map(v=>({v,k:"sound"})),...stuck(S.cards).map(v=>({v,k:"word"})),...stuck(state.cards).filter(w=>state.taught[w]).map(v=>({v,k:"tricky word"})),
     ...Object.entries(MS().stats).filter(([k,st])=>st.r.length>=3&&st.r.slice(-3).every(x=>x<1)).map(([k])=>{const [t,v]=k.split(":");return {v:v||"",k:(ACTS[t]?ACTS[t].name:t).toLowerCase()}})];
-  const teacher=el("section",{class:"panel"},el("h2",{text:"Worth a word with ⟦her⟧ teacher"}));
-  if(flags.length)teacher.append(el("p",{class:"note",text:"Still 'Not yet' after three or more tries:"}),
-    el("div",{class:"chips"},flags.map(f=>el("span",{class:"chip",title:f.k},f.v,el("span",{class:"tag",text:f.k})))));
-  else teacher.append(el("p",{class:"muted",text:"Nothing stands out. Anything still marked 'Not yet' after three tries will appear here."}));
-
   // Words
   const decodable=BANK.filter(w=>!S.book.words.includes(w)&&analyse(w).ready).length+S.book.words.filter(w=>analyse(w).ready).length;
   const ownW=Object.values(S.cards).filter(c=>c.box>=4).length;
@@ -1620,20 +1777,25 @@ function progressView(){
     el("div",{class:"minis"},
       el("div",{class:"mini"},el("b",{text:String(decodable)}),el("span",{text:"Words ⟦she⟧ can decode with ⟦her⟧ sounds"})),
       el("div",{class:"mini"},el("b",{text:String(ownW)}),el("span",{text:"Words ⟦she⟧ reads on ⟦her⟧ own"})),
-      el("div",{class:"mini"},el("b",{text:`${tSecure}/${tTaught.length}`}),el("span",{text:"Tricky words on sight"}))),
-    helpWords.length?el("p",{class:"note",text:"Needed help last time. These come back tomorrow:"}):el("p",{class:"note",text:"No words needed help last time."}),
-    helpWords.length?el("div",{class:"chips"},helpWords.map(w=>el("span",{class:"chip",text:w}))):null);
+      el("div",{class:"mini"},el("b",{text:`${tSecure}/${tTaught.length}`}),el("span",{text:"Tricky words on sight"}))));
+  const seen=new Set(flags.map(f=>f.v+"|"+f.k));
+  const settle=[...flags,...helpWords.filter(w=>!seen.has(w+"|word")&&!seen.has(w+"|tricky word")).map(v=>({v,k:state.cards[v]?"tricky word":"word"}))];
+  const teacher=el("section",{class:"panel"},el("h2",{text:"Still settling"}));
+  if(settle.length)teacher.append(
+    el("p",{class:"note",text:"These are taking a few more goes. That's normal, and they'll come up more often until they stick."}),
+    el("div",{class:"chips"},settle.map(f=>el("span",{class:"chip",title:f.k},f.v,el("span",{class:"tag",text:f.k})))));
+  else teacher.append(el("p",{class:"muted",text:"Nothing to note. Anything ⟦she⟧ finds hard for a while will show here."}));
 
   /* Rows by topic: reading results, what she knows and what's next, then the school book */
-  wrap.append(chartPanel,el("div",{class:"dcol"},teacher,wordsPanel),
-    el("div",{class:"dcol span-2"},soundsPanel,numbersPanel),pace,
+  wrap.append(chartPanel,el("div",{class:"dcol"},teacher,isNursery()?null:wordsPanel),
+    el("div",{class:"dcol span-2"},isNursery()?listenPanel():soundsPanel,numbersPanel),pace,
     last14Panel);
   last14Panel.classList.add("span-all","last14wide");
   return wrap;
 }
 
 /* ================= Maths: Mastering Number, Reception to end of Year 1 ================= */
-function freshMaths(){return {settings:{max:5,speed:1500,acts:{},planKey:null},stats:{},cards:{},stage:-1}}
+function freshMaths(){return {settings:{max:5,speed:1500,acts:{},planKey:null},stats:{},cards:{},stage:-1,stageKey:null}}
 const MS=()=>state.maths;
 const mpick=a=>a[Math.floor(Math.random()*a.length)];
 const range=(a,b)=>{const r=[];for(let i=a;i<=b;i++)r.push(i);return r};
@@ -1670,9 +1832,14 @@ const ACTS={
   b10:{name:"Make 10",desc:"A ten frame with some spaces. How many more to make 10?",per:2},
   teen:{name:"Ten and a bit",desc:"Teen numbers as a full ten and some more. 13 is 10 and 3.",per:2},
   line:{name:"Number line",desc:"⟦She⟧ places a number on a line from 0 to 20, using 5, 10 and 15 to help.",per:1},
-  sum:{name:"Number sentences",desc:"Short addition and subtraction sentences within 10, with dots to help.",per:2}
+  sum:{name:"Number sentences",desc:"Short addition and subtraction sentences within 10, with dots to help.",per:2},
+  fing:{name:"Show me fingers",desc:"⟦She⟧ sees an amount and shows it on ⟦her⟧ fingers, ideally all at once rather than one finger at a time.",per:2},
+  pat:{name:"What comes next?",desc:"Patterns. A repeating row of pictures, and ⟦she⟧ picks the one that comes next.",per:2}
 };
 const PLANS={
+  "N-autumn":{max:3,acts:["sub","cnt","cmp","pat"]},
+  "N-spring":{max:4,acts:["sub","cnt","fing","cmp","pat"]},
+  "N-summer":{max:5,acts:["sub","cnt","fing","num","cmp","pat"]},
   "R-autumn":{max:5,acts:["sub","cnt","comp","cmp"]},
   "R-spring":{max:7,acts:["sub","num","miss","comp","dbl","cmp"]},
   "R-summer":{max:10,acts:["sub","cnt","more","oe","num","cmp"]},
@@ -1681,7 +1848,7 @@ const PLANS={
   "Y1-summer":{max:20,acts:["teen","line","story","sum","b10","oe"]}
 };
 function mathsPlanKey(){
-  const school=planKey(),si=MPLAN_ORDER.indexOf(school),st=MS().stage??-1;
+  const school=planKey(),si=MPLAN_ORDER.indexOf(school),st=MS().stageKey?MPLAN_ORDER.indexOf(MS().stageKey):-1;
   return ownPace("maths")&&st>si?MPLAN_ORDER[st]:school;
 }
 function syncPlan(){
@@ -1696,7 +1863,7 @@ function genItem(act){
   const max=mmax(),cap10=lim(10);
   switch(act){
     case "sub":{const n=wpickN(range(1,cap10),"sub"),lay=mpick(layoutsFor(n));return {kind:"msub",n,lay,pts:lay==="scatter"?scatterPts(n,5,3.2,1.2):null}}
-    case "cnt":{const n=wpickN(range(Math.min(3,max),lim(12)),"cnt");return {kind:"mcnt",n,pts:scatterPts(n,6,3.4,n>8?.95:1.2)}}
+    case "cnt":{const n=wpickN(range(MS().settings.planKey.startsWith("N")?2:Math.min(3,max),lim(12)),"cnt");return {kind:"mcnt",n,pts:scatterPts(n,6,3.4,n>8?.95:1.2)}}
     case "comp":{const pool=MS().settings.planKey==="Y1-spring"?[7,9,7,9,6,8,10].filter(x=>x<=cap10):range(2,cap10);const n=wpickN(pool,"comp"),a=rint(1,n-1);
       return {kind:"mcomp",n,a,lay:mpick(n<=6?["line","pairs","frame","dice"]:["line","pairs","frame"])}}
     case "cmp":{const l=rint(1,cap10);let r;do{r=rint(1,cap10)}while(r===l);return {kind:"mcmp",l,r,lp:scatterPts(l,3,3,l>6?.8:1.05),rp:scatterPts(r,3,3,r>6?.8:1.05)}}
@@ -1710,6 +1877,10 @@ function genItem(act){
     case "b10":{const n=wpickN(range(1,9),"b10");return {kind:"mch",act,n,ans:10-n}}
     case "teen":{const n=wpickN(range(11,19),"teen");return {kind:"mch",act,n,ans:n}}
     case "line":{let n;do{n=rint(1,19)}while(n%5===0);return {kind:"mline",act,n}}
+    case "fing":{const n=wpickN(range(1,Math.min(max,5)),"fing");return {kind:"mfing",n}}
+    case "pat":{const sets=[["🔴","🟡","🔵"],["⭐","🌙","☀️"],["🦆","🐸","🐟"],["🍎","🍌","🍐"],["🟩","🟪","🟧"]];const st=shuffle(mpick(sets));
+      const units=MS().settings.planKey==="N-summer"?[[0,1],[0,0,1],[0,1,1],[0,1,2]]:[[0,1],[0,1],[0,0,1]];const u=mpick(units),len=u.length===2?6:u.length===3?6:5;
+      const seq=range(0,len-1).map(i=>st[u[i%u.length]]),ans=st[u[len%u.length]];return {kind:"mch",act,seq,ans,opts:shuffle(st.slice(0,3))}}
     case "sum":{const plus=Math.random()<.6;if(plus){const a=rint(1,7),b=rint(1,10-a);return {kind:"mch",act,a,b,plus,ans:a+b}}
       const a=rint(3,10),b=rint(1,a-1);return {kind:"mch",act,a,b,plus,ans:a-b}}
   }
@@ -1718,7 +1889,8 @@ function planMaths(){
   syncPlan();
   const S=MS().settings,P=PLANS[S.planKey],order=[...P.acts,...Object.keys(ACTS).filter(a=>!P.acts.includes(a))].filter(a=>S.acts[a]);
   const q=[];
-  order.forEach(a=>{for(let i=0;i<ACTS[a].per&&q.length<10;i++)q.push(genItem(a))});
+  const per=a=>S.planKey.startsWith("N")&&a==="sub"?2:ACTS[a].per;
+  order.forEach(a=>{for(let i=0;i<per(a)&&q.length<10;i++)q.push(genItem(a))});
   /* quick looks first as a warm-up, which-has-more last */
   return q.filter(x=>x.kind==="msub").concat(q.filter(x=>x.kind!=="msub"&&x.kind!=="mcmp"),q.filter(x=>x.kind==="mcmp"));
 }
@@ -1766,6 +1938,8 @@ function numberOptions(ans,lo=0,hi=20){
 function choiceSpec(item){
   const S=MS().settings;
   switch(item.act){
+    case "pat":return {kind:"What comes next?",visual:el("div",{class:"patrow"},item.seq.map(x=>el("span",{class:"patpic",text:x})),el("span",{class:"patpic gap",text:"?"})),
+      q:"What comes next?",tip:"Say the pattern aloud together, naming each picture in turn, then ask what comes next.",opts:item.opts,key:"pat",emoji:true};
     case "num":return {kind:"Match the numeral",visual:dotsSVG(item.n,item.lay),q:"Which number shows how many?",tip:"⟦She⟧ looks at the dots, says how many and taps the matching number.",opts:numberOptions(item.ans,1,Math.max(10,S.max)),key:"num:"+item.n};
     case "miss":{const v=el("div",{class:"hide-scene"},duckGroup(item.n-item.k),el("span",{class:"reeds",html:REEDS}));
       return {kind:"Hiding ducklings",visual:v,q:`There are ${item.n} ducklings. How many are hiding in the reeds?`,tip:"⟦She⟧ knows the whole and can see one part, so the hiding part is what's left. Fingers help: hold up the whole, fold down the ones ⟦she⟧ can see.",opts:numberOptions(item.ans,1,item.n),key:"miss:"+item.n}}
@@ -1834,6 +2008,13 @@ function mathsCard(item,flash,advance){
       el("button",{class:"btn ghost small",on:{click:()=>{caption.textContent=`There are ${item.n}.`}}},"Show answer")));
     const go=r=>{mRecord("cnt:"+item.n,r==="up"?1:r==="same"?.5:0);advance(r)};
     grades=[["g-auto","Counted it right",()=>go("up")],["g-sound","With a little help",()=>go("same")],["g-help","Not yet",()=>go("reset")]];
+  }else if(item.kind==="mfing"){
+    stage.append(dotsSVG(item.n,"dice"));
+    caption.textContent="Show me this many fingers.";
+    flash.append(kind("Show me fingers"),stage,caption,
+      el("p",{class:"tip",text:"Ask ⟦her-o⟧ to show the amount on ⟦her⟧ fingers. Best of all is putting them up all at once, without counting one by one. 5 is a whole hand."}));
+    const go=r=>{mRecord("fing:"+item.n,r==="up"?1:r==="same"?.5:0);advance(r)};
+    grades=[["g-auto","All at once",()=>go("up")],["g-sound","Counted them up",()=>go("same")],["g-help","Not yet",()=>go("reset")]];
   }else if(item.kind==="mcomp"){
     stage.append(dotsSVG(item.n,item.lay,{split:item.a}));
     caption.textContent="What can you see?";
@@ -1889,7 +2070,7 @@ function mathsCard(item,flash,advance){
     stage.append(sp.visual);stage.classList.add("wide");
     caption.textContent=sp.q;
     const next=el("button",{class:"btn",hidden:"",on:{click:()=>once(lastR)}},"Next");let lastR="reset";
-    const opts=el("div",{class:"mopts"+(typeof sp.opts[0]==="string"?" words":"")});
+    const opts=el("div",{class:"mopts"+(sp.emoji?" emoji":typeof sp.opts[0]==="string"?" words":"")});
     sp.opts.forEach(o=>{const b=el("button",{class:"mopt",type:"button",text:String(o)});
       b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
         if(o===item.ans){done=true;b.classList.add("win");const sc=tries===1?1:.5;mRecord(sp.key,sc);lastR=tries===1?"up":"same";
@@ -1927,6 +2108,9 @@ function mathsSettingsView(){
         el("details",{class:"tblock"},el("summary",{text:"Other activities"}),...Object.keys(ACTS).filter(a=>!P.acts.includes(a)).map(sw)))));
 }
 const MPLAN_TEXT={
+  "N-autumn":"Numbers to 3. Seeing 1, 2 and 3 at a glance, counting small groups, comparing which has more, and spotting simple patterns.",
+  "N-spring":"Numbers to 4. Quick looks and counting, showing amounts on fingers, comparing groups and continuing patterns.",
+  "N-summer":"Numbers to 5. Counting to 5, showing 5 on one hand, matching amounts to written numerals, comparing and patterns. Ready for Reception.",
   "R-autumn":"Numbers to 5. Subitising (seeing small amounts without counting), the rules of counting (count each thing once, and the last number says how many), numbers inside numbers and comparing groups.",
   "R-spring":"Numbers to 5 and a little beyond. Matching amounts to written numerals, finding a missing part, seeing 6 and 7 as five and a bit, and doubles.",
   "R-summer":"Numbers to 10. Counting bigger groups, one more and one less, and spotting odd and even numbers by their shape.",
@@ -1938,7 +2122,7 @@ function mathsProgressPanel(){
   syncPlan();
   const S=MS().settings,P=PLANS[S.planKey],cap10=Math.min(S.max,10);
   const LABEL={secure:"Confident",going:"Getting there",help:"Not yet last time",none:"Not tried yet"};
-  const KEYS={sub:range(1,cap10),cnt:range(Math.min(3,S.max),Math.min(S.max,12)),comp:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(S.max,10)),dbl:range(1,5),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
+  const KEYS={fing:range(1,Math.min(S.max,5)),sub:range(1,cap10),cnt:range(S.planKey.startsWith("N")?2:Math.min(3,S.max),Math.min(S.max,12)),comp:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(S.max,10)),dbl:range(1,5),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
   const shown=Object.keys(ACTS).filter(a=>P.acts.includes(a)||Object.keys(MS().stats).some(k=>k.split(":")[0]===a));
   const rows=[],lines=[];
   shown.forEach(a=>{
@@ -1953,13 +2137,15 @@ function mathsProgressPanel(){
 
 /* ----- How it works (grown-ups only) ----- */
 const PHASES=[
+  ["Foundations · Nursery","Listening before letters. Tuning into everyday sounds, rhythm and rhyme, clapping the beats in words, hearing the first sound of a word, and oral blending: hearing ‘c – a – t’ and saying ‘cat’. No letters yet."],
   ["Phase 2 · Reception, autumn term","Single letter sounds, starting with s a t p, then ⟦her⟧ first two-letter sounds such as ck, ll and sh. Short words like ‘sat’, ‘pin’ and ‘dog’."],
   ["Phase 3 · Reception, spring term","More two- and three-letter sounds, such as ai, ee, oo, igh and ear, and longer tricky words like ‘was’ and ‘said’."],
   ["Phase 4 · Reception, summer term","No new sounds. Instead, longer words with consonants side by side, such as ‘frog’, ‘jump’ and ‘sandwich’."],
   ["Phase 5 · Year 1","New spellings for sounds ⟦she⟧ knows (‘ay’ in ‘play’, ‘a-e’ in ‘shake’), then other sounds for letters ⟦she⟧ knows (the ‘o’ in ‘go’, the ‘ow’ in ‘snow’). The Phonics Screening Check comes in June, and a last block of spellings follows it."]
 ];
 const FIT=[
-  ["Sound sets","The sets on the Reading page follow the order of ⟦her⟧ home reading books, which follow ⟦her⟧ lessons. Tick a sound only once school has taught it, and the app will never ask ⟦her-o⟧ to read anything that uses a sound ⟦she⟧ hasn't met."],
+  ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters: animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
+  ["Sound sets","The sets on the Reading page follow the order school teaches the sounds. Tick a sound only once school has taught it, and the app will never ask ⟦her-o⟧ to read anything that uses a sound ⟦she⟧ hasn't met."],
   ["Warm-up sounds","Each phonics lesson at school opens by revisiting sounds ⟦she⟧ already knows. The warm-up does the same at home, mixing this week's sounds with earlier ones so none of them fade."],
   ["Words with sound buttons","⟦She⟧ taps each sound, says it and then runs ⟦her⟧ finger along the arrow to blend the sounds into a word. This is the core reading skill phonics builds."],
   ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped, and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
@@ -1998,6 +2184,7 @@ const TERMS=[
 ];
 let guideTopic="reading";
 const MPHASES=[
+  ["Nursery · ages 3 to 4","Numbers to 5. Seeing 1, 2 and 3 at a glance, counting small groups, showing amounts on fingers, comparing, simple repeating patterns and, by the summer, matching numerals."],
   ["Term 1 · Reception, autumn","Numbers to 5. Seeing small amounts without counting, counting carefully, spotting smaller numbers inside bigger ones and comparing groups."],
   ["Term 2 · Reception, spring","Numbers to 5 and beyond. Matching amounts to written numerals, finding a missing part, seeing 6 and 7 as five and a bit, and doubles."],
   ["Term 3 · Reception, summer","Counting bigger groups, one more and one less, putting numbers in order and spotting odd and even numbers by their shape."],
@@ -2006,6 +2193,7 @@ const MPHASES=[
   ["Term 3 · Year 1, summer","Numbers to 20. Teen numbers as ten and a bit, the number line with 5, 10 and 15 as landmarks, even numbers as doubles, and writing number sentences."]
 ];
 const MFIT=[
+  ["Nursery activities","For a nursery child, sessions use numbers to 3, then 4, then 5 through the year. Two activities are just for nursery: ‘Show me fingers’, where ⟦she⟧ puts up the amount ideally all at once, and ‘What comes next?’, a repeating pattern of pictures."],
   ["Quick look","Dots flash up for a moment and ⟦she⟧ says how many. This is subitising, and the short flash stops ⟦her-o⟧ counting one by one. The dots come in the arrangements ⟦she⟧ meets in class, such as dice patterns, lines, pairs, five frames and a bead frame, as well as scattered."],
   ["Count the ducklings","⟦She⟧ touches each duckling once as ⟦she⟧ counts, then says how many there are. Each duckling can only be counted once, which practises matching one number to one thing. Saying the total at the end shows ⟦she⟧ knows the last number tells ⟦her-o⟧ how many."],
   ["Numbers inside numbers","A number is shown in two colours, so 5 might be 3 ⟦acc⟧ and 2 yellow. Talking about the parts builds the idea that every number is made of smaller numbers. This is the start of number bonds and addition."],
@@ -2039,11 +2227,12 @@ const MTERMS=[
 ];
 function mathsGuide(){
   const left=el("section",{class:"panel prose"},
-    el("h2",{text:"How maths works in Reception"}),
+    el("h2",{text:isNursery()?"How maths works in nursery":state.year==="Y1"?"How maths works in Reception and Year 1":"How maths works in Reception"}),
+    isNursery()?el("p",{text:"Nursery maths follows the early years framework for 3 and 4 year olds. The aim is a feel for small numbers: seeing up to 3 at a glance, counting up to 5 with one number for each thing, knowing the last number says how many, showing amounts on fingers, comparing groups and spotting patterns. Mastering Number then starts in Reception."}):null,
     el("p",{text:"Before children can add and subtract, they need a secure feel for what numbers are. ⟦Her⟧ class follows Mastering Number, which spends Reception building that feel slowly and deeply with small numbers, rather than racing on to bigger ones."}),
     el("p",{text:"Each day the class has a short Mastering Number session on top of the main maths lesson. Children look at dot patterns, use their fingers and a bead frame called a rekenrek, and talk about what they see. The emphasis is on seeing numbers and explaining them, not on writing sums."}),
-    el("h2",{text:"How Reception and Year 1 unfold"}),
-    el("ol",{class:"phases"},MPHASES.map(([t,d],i)=>{const here=i===MPLAN_ORDER.indexOf(MS().settings.planKey||planKey());return el("li",{class:here?"here":""},
+    el("h2",{text:"How nursery, Reception and Year 1 unfold"}),
+    el("ol",{class:"phases"},MPHASES.map(([t,d],i)=>{const k=MS().settings.planKey||planKey(),here=i===(k.startsWith("N")?0:MPLAN_SCHOOL.indexOf(k)+1);return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
     el("p",{class:"note",text:"This follows the published Mastering Number overviews for Reception and Year 1. ⟦Her⟧ school's letter adds the rules of counting to the first half term, so the app includes counting from the start."}),
     el("h2",{text:"How this app fits in"}),
@@ -2071,12 +2260,12 @@ function readingGuide(){
     el("h2",{text:"What phonics is"}),
     el("p",{text:"English is written with 26 letters but spoken with about 44 sounds. Phonics teaches children which letters write which sounds, so that when they meet a new word they can work it out for themselves instead of guessing from the pictures or memorising the word's shape."}),
     el("p",{text:"⟦Her⟧ school uses systematic synthetic phonics, taught through a programme called Little Wandle Letters and Sounds Revised, which is on the Department for Education's list of approved phonics programmes. Sounds arrive in a fixed order, a few each week, and each daily lesson revisits old sounds, teaches a new one, practises it and then uses it to read."}),
-    el("h2",{text:"How Reception and Year 1 unfold"}),
-    el("ol",{class:"phases"},PHASES.map(([t,d],i)=>{const here=i===({"R-autumn":0,"R-spring":1,"R-summer":2}[planKey()]??3);return el("li",{class:here?"here":""},
+    el("h2",{text:"How nursery, Reception and Year 1 unfold"}),
+    el("ol",{class:"phases"},PHASES.map(([t,d],i)=>{const here=i===(isNursery()?0:({"R-autumn":1,"R-spring":2,"R-summer":3}[planKey()]??4));return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
     el("h2",{text:"How this app fits in"}),
     el("dl",{class:"fit"},FIT.flatMap(([t,d])=>[el("dt",{text:t}),el("dd",{text:d})])),
-    el("p",{text:"⟦Her⟧ current home books come from Oxford Reading Tree's Floppy's Phonics, which orders a few sounds differently from Little Wandle. That is why ‘net’ and ‘dog’ appeared before ⟦she⟧ had been taught e, o and g. When a book word uses a sound ⟦she⟧ hasn't met, read it to ⟦her-o⟧ and carry on."}),
+    el("p",{text:"Some schools send home books from another scheme, such as Oxford Reading Tree, which orders a few sounds differently from Little Wandle. A book may then use a sound ⟦she⟧ hasn't been taught yet. When that happens, read the word to ⟦her-o⟧ and carry on."}),
     el("h2",{text:"What the app leaves to you and school"}),
     el("p",{text:"It plays no sounds, because computer voices add ‘uh’ to letter sounds and would undo what school teaches. The Little Wandle videos show exactly how each sound is said, and they are worth watching once per set."},
       " ",el("a",{href:"https://www.littlewandle.org.uk/resources/for-parents/",target:"_blank",rel:"noopener",text:"Little Wandle for parents"})),
@@ -2086,7 +2275,8 @@ function readingGuide(){
       el("li",{text:"Little and often. Five minutes a day does more than half an hour at the weekend."}),
       el("li",{text:"Use pure sounds, and call letters by their sounds until school teaches the letter names."}),
       el("li",{text:"If ⟦she⟧ is stuck, tell ⟦her-o⟧ the sound or the word and move on. Praise the effort as much as the answer."}),
-      el("li",{text:"Keep the sharing book for fun. Use voices, talk about the pictures and ask what might happen next."})));
+      el("li",{text:"Keep the sharing book for fun. Use voices, talk about the pictures and ask what might happen next."}),
+      el("li",{text:"Before school, sing nursery rhymes, play I spy with sounds (‘something beginning with sss’) and talk in robot talk: ‘Where's your h – a – t?’"})));
   const ex=el("div",{class:"example"},wordNode([["sh"],["o"],["p"]],{marks:true}));
   const right=el("section",{class:"panel prose"},
     el("h2",{text:"Phonics words"}),
@@ -2117,10 +2307,16 @@ function settingsPanel(){
       el("section",{class:"panel"},el("h2",{text:"Child"}),
       el("div",{class:"childrow"},
         el("div",{class:"field"},el("label",{for:"reader-name",text:"Child's name"}),nameIn),
-        seg("Boy or girl",[["girl","Girl"],["boy","Boy"]],state.child,v=>{state.child=v;save();render()},"lab-child")),
-      el("p",{class:"note",text:"Sets he or she, his or her, throughout the app."})),
+        seg("Girl or boy",[["girl","Girl"],["boy","Boy"]],state.child,v=>{state.child=v;save();render()},"lab-child")),
+      el("p",{class:"note",text:"Sets he or she, his or her, throughout the app."}),
+      family.order.length>1?(()=>{const box=el("div",{class:"confirm"});const who=(state.name||"").trim()||"this child";
+        const ask=el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceChildren(
+          el("span",{class:"note",text:`Remove ${who} and all of ${who}'s progress from this device?`}),
+          el("button",{class:"btn small danger",type:"button",on:{click:()=>{removeChild(family.active);render()}}},"Remove"),
+          el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceChildren(ask)}},"Cancel"))}},`Remove ${who}…`);
+        box.append(ask);return box})():null),
       el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ school year"}),
-        seg("School year",[["R","Reception"],["Y1","Year 1"]],state.year,setYear,"lab-year"),
+        seg("School year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],state.year,setYear,"lab-year"),
         seg("Term",[["auto","From the date"],["autumn","Autumn"],["spring","Spring"],["summer","Summer"]],state.term,v=>{state.term=v;save();render()},"lab-term"),
         el("p",{class:"note",text:`Now set to ${curTermLabel()} term. The year and term choose this term's maths plan, mark where ⟦she⟧ is in the guides and open the right block of tricky words. Change the school year yourself each September.`}),
         state.year==="Y1"?el("div",{class:"field"},
@@ -2163,6 +2359,77 @@ function wordNode(parts,{marks=false,tap=false,onAll=null}={}){
   return wd;
 }
 
+/* ================= Nursery listening games (pre-phonics): sounds, rhyme, beats, first sounds, robot talk ================= */
+const PICS={cat:"🐱",hat:"🎩",bat:"🦇",dog:"🐶",frog:"🐸",bee:"🐝",tree:"🌳",key:"🔑",car:"🚗",star:"⭐",moon:"🌙",spoon:"🥄",boat:"⛵",goat:"🐐",coat:"🧥",
+  cake:"🎂",snake:"🐍",mouse:"🐭",house:"🏠",bear:"🐻",pear:"🍐",bell:"🔔",shell:"🐚",hen:"🐔",pen:"🖊️",ten:"🔟",fox:"🦊",box:"📦",duck:"🦆",truck:"🚚",
+  nose:"👃",rose:"🌹",pie:"🥧",tie:"👔",ring:"💍",king:"🤴",sun:"☀️",sock:"🧦",soap:"🧼",sandwich:"🥪",map:"🗺️",monkey:"🐒",bus:"🚌",bed:"🛏️",banana:"🍌",
+  ball:"⚽",bag:"👜",cow:"🐮",cup:"☕",door:"🚪",dinosaur:"🦕",pig:"🐷",pencil:"✏️",horse:"🐴",tent:"⛺",tiger:"🐯",teddy:"🧸",rabbit:"🐰",rainbow:"🌈",
+  lion:"🦁",leaf:"🍃",lemon:"🍋",fish:"🐟",gift:"🎁",ghost:"👻",web:"🕸️",van:"🚐",sheep:"🐑",owl:"🦉",apple:"🍎",elephant:"🐘",butterfly:"🦋",umbrella:"☂️",crocodile:"🐊"};
+const RHYMES=[["cat","hat","bat"],["dog","frog"],["bee","tree","key"],["car","star"],["moon","spoon"],["boat","goat","coat"],["cake","snake"],["mouse","house"],
+  ["bear","pear"],["bell","shell"],["hen","pen","ten"],["fox","box"],["duck","truck"],["nose","rose"],["pie","tie"],["ring","king"]];
+const FIRSTS={s:["sun","sock","soap","sandwich"],m:["moon","mouse","monkey","map"],b:["bee","bear","bus","boat","bed","banana","ball","bag"],c:["cat","car","cake","cow","coat","cup"],
+  d:["dog","duck","door","dinosaur"],p:["pig","pear","pen","pie","pencil"],h:["hat","hen","house","horse"],t:["tie","ten","tent","tiger","teddy"],r:["rose","ring","rabbit","rainbow"],
+  l:["lion","leaf","lemon"],f:["fish","fox"],g:["goat","gift","ghost"]};
+const ROBOT={cat:"c – a – t",dog:"d – o – g",sun:"s – u – n",pig:"p – i – g",hen:"h – e – n",bus:"b – u – s",bed:"b – e – d",hat:"h – a – t",map:"m – a – p",web:"w – e – b",
+  cup:"c – u – p",van:"v – a – n",fish:"f – i – sh",bee:"b – ee",moon:"m – oo – n",boat:"b – oa – t",car:"c – ar",ten:"t – e – n",pen:"p – e – n",bag:"b – a – g",duck:"d – u – ck",sock:"s – o – ck",pie:"p – ie",cow:"c – ow"};
+const CLAPS={1:["cat","dog","sun","fish","bee","car","duck","house"],2:["rabbit","apple","monkey","pencil","rainbow","teddy","tiger","lemon"],3:["banana","elephant","butterfly","dinosaur","umbrella","crocodile"]};
+const ANIMALS={cow:"Moo",dog:"Woof",cat:"Miaow",duck:"Quack",sheep:"Baa",pig:"Oink",hen:"Cluck",owl:"Twit-twoo",lion:"Roar",frog:"Ribbit",bee:"Buzz",mouse:"Squeak",horse:"Neigh",snake:"Hiss"};
+const LGAMES={
+  anim:{name:"What makes this sound?",desc:"Listening. You make an animal sound and ⟦she⟧ finds the animal."},
+  rhyme:{name:"Rhyme time",desc:"Hearing which words sound the same at the end, like cat and hat."},
+  clap:{name:"Clap the beats",desc:"Clapping the beats (syllables) in a word: ba-na-na has three."},
+  first:{name:"First sounds",desc:"Hearing the sound a word starts with, like sun and sock."},
+  robot:{name:"Robot talk",desc:"Oral blending. You say a word sound by sound, c – a – t, and ⟦she⟧ blends it into cat. This is the step into reading."}
+};
+const LPLAN={"N-autumn":["anim","rhyme","clap"],"N-spring":["anim","rhyme","clap","first"],"N-summer":["rhyme","clap","first","robot"]};
+const LS=()=>state.listen;
+function genListen(g){
+  switch(g){
+    case "anim":{const a=shuffle(Object.keys(ANIMALS));return {kind:"l",g,ans:a[0],opts:shuffle(a.slice(0,3)),say:ANIMALS[a[0]]}}
+    case "rhyme":{const grp=mpick(RHYMES),[t,ans]=shuffle(grp);const pool=RHYMES.filter(x=>x!==grp).flat();return {kind:"l",g,target:t,ans,opts:shuffle([ans,...shuffle(pool).slice(0,2)])}}
+    case "first":{const keys=shuffle(Object.keys(FIRSTS)),k=keys[0],[t,ans]=shuffle(FIRSTS[k]);const pool=keys.slice(1).flatMap(x=>FIRSTS[x]);return {kind:"l",g,target:t,ans,snd:k,opts:shuffle([ans,...shuffle(pool).slice(0,2)])}}
+    case "robot":{const ws=shuffle(Object.keys(ROBOT)),ans=ws[0];return {kind:"l",g,ans,opts:shuffle([ans,ws[1],ws[2]]),say:ROBOT[ans]}}
+    case "clap":{const n=rint(1,3),w=mpick(CLAPS[n]);return {kind:"l",g,target:w,ans:n,opts:[1,2,3]}}
+  }
+}
+function planListen(){
+  const games=LPLAN[planKey()]||LPLAN["N-summer"],q=[];
+  for(let i=0;q.length<8;i++)q.push(genListen(games[i%games.length]));
+  return shuffle(q);
+}
+function lRecord(g,score){const st=LS().stats[g]||{r:[]};st.r=st.r.concat(score).slice(-8);LS().stats[g]=st}
+const picBtn=(w,cls="")=>el("span",{class:"lpic "+cls},el("span",{class:"lemoji",text:PICS[w]||"?"}),el("span",{class:"lword",text:w}));
+function listenCard(item,flash,advance){
+  const G1=LGAMES[item.g],caption=el("p",{class:"mcap"}),stage=el("div",{class:"mstage lstage"});
+  let q,tip;
+  if(item.g==="anim"){stage.append(el("div",{class:"bubble",text:`“${item.say}!”`}));q="Who says that?";tip=`Make the sound yourself, "${item.say.toLowerCase()}", then ask who says it. Have fun with the voices.`}
+  else if(item.g==="rhyme"){stage.append(picBtn(item.target,"big"));q=`Which one rhymes with ${item.target}?`;tip=`Say "${item.target}", then say each picture's name slowly. Which sounds like ${item.target} at the end?`}
+  else if(item.g==="first"){stage.append(picBtn(item.target,"big"));q=`Which one starts like ${item.target}?`;tip=`Stretch the first sound: "${item.snd}${item.snd}${item.snd}… ${item.target}". Then say each picture's name. Which starts the same way?`}
+  else if(item.g==="robot"){stage.append(el("div",{class:"robot",text:"🤖"}),el("p",{class:"sayline"},"Grown-up says: ",el("b",{text:item.say})));q="Which picture did the robot say?";tip=`Say each sound slowly and evenly, like a robot. Then let ${readerName()} push the sounds together and find the picture.`}
+  else {stage.append(picBtn(item.target,"big"));q=`How many beats in ${item.target}?`;tip=`Say "${item.target}" and clap each beat together, then tap how many claps.`}
+  caption.textContent=q;
+  let tries=0,done=false,lastR="reset",moved=false;const once=r=>{if(moved)return;moved=true;advance(r)};
+  const next=el("button",{class:"btn",hidden:"",on:{click:()=>once(lastR)}},"Next");
+  const opts=el("div",{class:"lopts"});
+  item.opts.forEach(o=>{
+    const b=el("button",{class:"lopt",type:"button","aria-label":String(o)},item.g==="clap"?el("span",{class:"lpic"},el("span",{class:"lemoji claps",text:"👏".repeat(o)}),el("span",{class:"lword",text:`${o} clap${o>1?"s":""}`})):picBtn(o));
+    b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
+      if(o===item.ans){done=true;b.classList.add("win");lRecord(item.g,tries===1?1:.5);lastR=tries===1?"up":"same";caption.textContent="Yes!";next.hidden=false;setTimeout(()=>{if(b.isConnected)once(lastR)},1300)}
+      else{b.classList.add("nope");
+        if(tries>=2){done=true;lRecord(item.g,0);lastR="reset";opts.querySelectorAll(".lopt").forEach(x=>{if(x.getAttribute("aria-label")===String(item.ans))x.classList.add("win")});caption.textContent="Here it is. Let's say it together.";next.hidden=false}
+        else caption.textContent="Listen again and have another go."}});
+    opts.append(b)});
+  flash.append(el("span",{class:"kind",text:G1.name}),stage,caption,opts,el("p",{class:"tip",text:tip}));
+  return {grades:[],n:0,side:[next]};
+}
+function listenPanel(){
+  const games=LPLAN[planKey()]||LPLAN["N-summer"],shown=Object.keys(LGAMES).filter(g=>games.includes(g)||LS().stats[g]);
+  return el("section",{class:"panel"},el("h2",{text:"Listening games"}),
+    el("p",{class:"note",text:"Pre-phonics, as in nursery: tuning into sounds, rhyme and beats, then first sounds and robot talk, which lead into reading."}),
+    el("ul",{class:"lstats"},shown.map(g=>{const r=(LS().stats[g]||{r:[]}).r;
+      return el("li",{},el("b",{text:LGAMES[g].name}),el("span",{class:"note",text:r.length?`${r.filter(x=>x===1).length} of the last ${r.length} right first time`:"Not tried yet"}),el("p",{class:"note",text:LGAMES[g].desc}))})));
+}
+
 function cardView(){
   const item=session.queue[session.i];
   const flash=el("div",{class:"flash"});
@@ -2171,10 +2438,12 @@ function cardView(){
     const R=session.results,it=R.filter(x=>x[0].kind!=="a"),al=R.filter(x=>x[0].kind==="a");
     state.log.push({d:today(),t:session.type,n:it.length,up:it.filter(x=>x[1]==="up").length,help:it.filter(x=>x[1]==="reset").length,
       an:al.length,au:al.filter(x=>x[1]==="up").length,s:(tickActive(),bankTime())});
-    state.log=state.log.slice(-500);session.moved=checkPace()}markDay();save();render()};
+    state.log=state.log.slice(-500);state.hatched=(state.hatched||0)+1;session.moved=checkPace()}markDay();save();render()};
 
   let side=null;
-  if(item.kind[0]==="m"&&item.kind!=="m"){
+  if(item.kind==="l"){
+    const lc=listenCard(item,flash,advance);grades=lc.grades;n=lc.n;side=lc.side;
+  }else if(item.kind[0]==="m"&&item.kind!=="m"){
     const mc=mathsCard(item,flash,advance);grades=mc.grades||[];n=mc.n;side=mc.side;
   }else if(item.kind==="t"){
     const wd=wordNode(WORDS[item.v].parts);
@@ -2239,12 +2508,12 @@ function doneView(){
   releaseWake();
   return el("section",{class:"panel done",style:"align-items:center;text-align:center"},
     el("p",{class:"done-title",text:`Well done${name?", "+name:""}!`}),
-    el("p",{class:"muted",text:s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling joined the line. ${good} of ${res.length} on ⟦her⟧ own.`}),
+    el("p",{class:"muted",text:(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),
     el("div",{style:"width:100%"},ducksRow(s.ducks,true)),
     ...movedOn(session.moved),
     look.length?el("p",{text:session.type==="tricky"?"Look for these words in tonight's reading book:":`Find these in ${state.sounds.book.title||"⟦her⟧ reading book"}:`}):null,
     look.length?el("div",{class:"chips",style:"justify-content:center"},look.map(w=>el("span",{class:"chip",text:w}))):null,
-    practiceDone()&&!bookRead()?el("p",{class:"nudge-note big",text:"Reading and maths are done. Now read your school book!"}):null,
+    practiceDone()&&!bookRead()?el("p",{class:"nudge-note big",text:"Reading and maths are done. Now read ⟦ysb⟧!"}):null,
     session.type==="maths"?el("p",{class:"muted",text:"Real-life maths for later today"}):null,
     session.type==="maths"?el("p",{class:"mtip",text:mpick(MATHS_TIPS)}):null,
     el("button",{class:"btn",on:{click:()=>{session=null;screen="home";render()}}},"Done"));

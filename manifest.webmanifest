@@ -3,8 +3,8 @@
   "short_name": "Waddle",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#FFD9E6",
-  "theme_color": "#E0336F",
+  "background_color": "#1E2748",
+  "theme_color": "#1E2748",
   "icons": [
     {
       "src": "icon-192.png",

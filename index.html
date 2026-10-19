@@ -473,7 +473,8 @@ body{overflow-x:clip}
 .childrow{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end}.childrow>.field{flex:1 1 200px}
 .land-brand{position:absolute;top:0;left:0;padding:6px 4px;display:flex;flex-direction:column;gap:5px}
 .land-name-brand{font:600 24px/1 var(--font-head);color:var(--accent);letter-spacing:.01em}
-.land-tag{font:400 14px/1.3 var(--font-adult);color:var(--muted);white-space:nowrap}
+.land-tag{font:400 14px/1.3 var(--font-adult);color:var(--muted)}
+.land-brand{max-width:100%;box-sizing:border-box}
 @media (max-width:420px){.land-tag{font-size:12.5px}}
 .land-main{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
 .land-duck{width:min(190px,46vw);display:block}
@@ -622,6 +623,16 @@ body{overflow-x:clip}
 }
 .land-go:disabled{background:transparent;color:var(--muted);border-color:var(--hair);cursor:default;animation:none!important;box-shadow:none}
 @media (max-width:360px){.namebtn{width:calc(50% - 6px)}}
+.logomark{display:inline-flex;align-items:flex-end;gap:1px;margin-right:7px;vertical-align:-2px}
+.lm-duck{display:inline-block;width:13px;height:12px}.lm-duck.lm-mama{width:21px;height:19px;margin-right:2px}
+.lm-duck svg{width:100%;height:100%;display:block;overflow:visible}
+.brandline{display:flex;align-items:flex-end;font:600 15px/1 var(--font-head);color:var(--accent);margin-bottom:6px}
+.brand-word{display:inline-flex;align-items:flex-end}
+/* The Waddle name in night blue on the light themes, gold on dark ones */
+.brandline .bl-word,.setup .brand .brand-word{color:#1E2748}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brandline .bl-word,:root:not([data-theme="light"]) .setup .brand .brand-word{color:#FFC21A}}
+:root[data-theme="dark"] .brandline .bl-word,:root[data-theme="dark"] .setup .brand .brand-word{color:#FFC21A}
+.brand-word .lm-duck{width:16px;height:14px}.brand-word .lm-duck.lm-mama{width:26px;height:23px}
 .choice{position:relative}
 .choice.done{background:var(--soft);box-shadow:4px 4px 0 var(--hair);border-color:var(--hair)}
 .choice.done .cicon{filter:grayscale(1);opacity:.45}
@@ -652,6 +663,7 @@ body{overflow-x:clip}
 <div class="wrap">
   <div class="top">
   <header>
+    <span class="brandline" id="brandline"></span>
     <span class="eyebrow" id="eyebrow">Reception</span>
     <h1 id="title">Reading and numbers</h1>
   </header>
@@ -1146,7 +1158,11 @@ function undoTickAll(){
   state.sounds.taught=sn.sounds;state.taught=sn.tricky;state.sounds.clusters=sn.clusters;delete state.yearSnap;
   rebuildReal();save();render();
 }
+/* The Waddle mark: a mother duck leading two ducklings */
+const logoMark=()=>el("span",{class:"logomark","aria-hidden":"true"},
+  el("span",{class:"lm-duck lm-mama",html:DUCK_SVG(true)}),el("span",{class:"lm-duck",html:DUCK_SVG(false)}),el("span",{class:"lm-duck",html:DUCK_SVG(false)}));
 function setTitle(){
+  const bl=document.getElementById("brandline");if(bl&&!bl.childNodes.length)bl.append(logoMark(),el("span",{class:"bl-word",text:"Waddle"}));
   const eb=document.getElementById("eyebrow");if(eb)eb.textContent=`${yearName()} · ${curTerm()} term`;
   const n=(state.name||"").trim();
   document.getElementById("title").textContent=n?`${n}'s reading and numbers`:"Reading and numbers";
@@ -1218,7 +1234,6 @@ const DUCK_SVG=(mama,grown)=>{const c=mama?' m':grown?' gr':'';return '<svg view
   '<path class="d-wing'+c+'" d="M18 22 Q25 16.5 31 23 Q25 29 18 24.5 Z"/>'+
   '<path class="d-beak" d="M6 11.5 Q-0.5 13.5 6 16.5 Z"/>'+
   '<circle class="d-eye" cx="10.8" cy="10.8" r="1.7"/><path class="d-eye-shut" d="M8.6 10.6 Q10.8 12.9 13 10.6"/>'+
-  (mama?'<path class="d-bow" d="M15 5.5 L10.5 2 L11 8 Z M15 5.5 L19.5 2 L19 8 Z"/><circle class="d-bow" cx="15" cy="5.5" r="1.6"/>':'')+
   '</svg>'};
 /* Every ten ducklings grow up into one duck, so the line stays one row long and reads as tens and ones */
 const duckWords=n=>{const t=Math.floor(n/10),o=n%10,dw=t?`${t} grown-up duck${t>1?"s":""}`:"",ow=o?`${o} duckling${o>1?"s":""}`:"";return [dw,ow].filter(Boolean).join(" and ")};
@@ -1356,6 +1371,24 @@ function buildPdf(pages){
   out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+offs.map(o=>String(o).padStart(10,"0")+" 00000 n \n").join("")+`trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${x}\n%%EOF\n`;
   const b=new Uint8Array(out.length);for(let i=0;i<out.length;i++)b[i]=out.charCodeAt(i)&255;return b;
 }
+/* The duck family drawn as PDF vector shapes, from the same geometry as DUCK_SVG */
+function pdfDuck(x,y,k,mama){
+  const P=(sx,sy)=>`${(x+sx*k).toFixed(2)} ${(y+(36-sy)*k).toFixed(2)}`;
+  const C=.5523,circ=(cx,cy,rx,ry)=>`${P(cx+rx,cy)} m ${P(cx+rx,cy-ry*C)} ${P(cx+rx*C,cy-ry)} ${P(cx,cy-ry)} c ${P(cx-rx*C,cy-ry)} ${P(cx-rx,cy-ry*C)} ${P(cx-rx,cy)} c ${P(cx-rx,cy+ry*C)} ${P(cx-rx*C,cy+ry)} ${P(cx,cy+ry)} c ${P(cx+rx*C,cy+ry)} ${P(cx+rx,cy+ry*C)} ${P(cx+rx,cy)} c h\n`;
+  const q=(p0,c,p1)=>[[p0[0]+2/3*(c[0]-p0[0]),p0[1]+2/3*(c[1]-p0[1])],[p1[0]+2/3*(c[0]-p1[0]),p1[1]+2/3*(c[1]-p1[1])],p1];
+  const body=mama?"1 0.76 0.1":"1 0.88 0.3",wing=mama?"0.91 0.64 0":"0.97 0.78 0",line="0.16 0.12 0.16";
+  let o=`q ${line} RG ${(1.2*k/1).toFixed(2)} w 1 j\n`;
+  o+=`0.97 0.5 0.12 rg ${P(18,32)} m ${P(14,36)} l ${P(21,36)} l h ${P(27,32)} m ${P(23,36)} l ${P(30,36)} l h B\n`;
+  o+=`${body} rg ${P(35,19)} m ${P(40,14)} l ${P(38.5,24)} l h B\n`;
+  o+=`${body} rg `+circ(23,24,14,10)+"B\n";
+  o+=`${body} rg `+circ(13,13,8,8)+"B\n";
+  const w1=q([18,22],[25,16.5],[31,23]),w2=q([31,23],[25,29],[18,24.5]);
+  o+=`${wing} rg ${P(18,22)} m ${P(...w1[0])} ${P(...w1[1])} ${P(...w1[2])} c ${P(...w2[0])} ${P(...w2[1])} ${P(...w2[2])} c h B\n`;
+  const b1=q([6,11.5],[-0.5,13.5],[6,16.5]);
+  o+=`0.97 0.5 0.12 rg ${P(6,11.5)} m ${P(...b1[0])} ${P(...b1[1])} ${P(...b1[2])} c h B\n`;
+  o+=`${line} rg `+circ(10.8,10.8,1.7,1.7)+"f\n";
+  return o+"Q\n";
+}
 function readingLogPdf(){
   const name=(state.name||"").trim();
   const rows=[...state.reads].sort().map(d=>[longDate(d),(state.readLog[d]||"").trim()||"-"]);
@@ -1366,8 +1399,10 @@ function readingLogPdf(){
   do{
     pageNo++;let c="0.16 0.12 0.16 rg\n",y;
     if(pageNo===1){
-      c+=txt("F2",20,L,770,name?`${name}'s reading log`:"Reading log");
-      c+=txt("F1",11,L,750,G(`⟦Sb⟧s read at home. ${rows.length} day${rows.length===1?"":"s"} recorded, printed ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}.`));
+      c+=pdfDuck(L,766,.62,true)+pdfDuck(L+28,766,.4,false)+pdfDuck(L+46,766,.4,false);
+      c+="0.16 0.12 0.16 rg\n"+txt("F2",20,L+72,770,name?`${name}'s reading log`:"Reading log");
+      c+="0.85 0.6 0.05 rg\n"+txt("F2",10,L+72,788,"Waddle")+"0.16 0.12 0.16 rg\n";
+      c+=txt("F1",11,L,744,G(`⟦Sb⟧s read at home. ${rows.length} day${rows.length===1?"":"s"} recorded, printed ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}.`));
       y=712;
     }else y=780;
     c+=`0.94 0.94 0.94 rg ${L} ${y-7} ${R-L} ${H} re f\n0.16 0.12 0.16 rg\n`;
@@ -1566,7 +1601,7 @@ function setupView(){
     :android?"On Android, tap the ⋮ menu in Chrome, then Add to Home screen, so Waddle opens like an app."
     :null;
   return el("section",{class:"panel stack setup"},
-    el("div",{class:"brand"},el("b",{text:"Waddle"}),el("span",{class:"note",text:"Daily reading and maths recap for early years"})),
+    el("div",{class:"brand"},el("b",{class:"brand-word"},logoMark(),"Waddle"),el("span",{class:"note",text:"Parent-led daily reading and maths practice for early years"})),
     el("h1",{text:adding?"Add a child":"Let's set up Waddle"}),
     el("p",{class:"note",text:"For a grown-up, once. It takes about a minute, and you can change everything later in Grown-ups."}),
     el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's name"}),nameIn),
@@ -1618,7 +1653,7 @@ const childCol=p=>(CHILD_COL[p]||CHILD_COL.pink)[isDark()?1:0];
 const childLight=p=>(CHILD_COL[p]||CHILD_COL.pink)[1];
 let landingPick=null;
 function landingView(){
-  const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Daily reading and maths recap for early years"}));
+  const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and maths practice for early years"}));
   const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
   const ks=children().filter(k=>k.st.setupDone);
   if(ks.length>1){
@@ -2296,7 +2331,7 @@ function settingsPanel(){
   const confirmBox=el("div",{class:"confirm"});
   const resetBtn=el("button",{class:"btn ghost small",on:{click:()=>{
     confirmBox.replaceChildren(el("span",{class:"note",text:"Clear all practice and reading history? Ticked sounds, words and ⟦her⟧ book list stay."}),
-      el("button",{class:"btn small danger",on:{click:()=>{state.cards={};state.days=[];state.log=[];state.reads=[];state.readLog={};state.mins={};state.maths.stats={};state.sounds.cards={};state.sounds.gcards={};save();render()}}},"Clear history"),
+      el("button",{class:"btn small danger",on:{click:()=>{state.cards={};state.days=[];state.log=[];state.reads=[];state.readLog={};state.mins={};state.hatched=0;state.listen={stats:{}};state.maths.stats={};state.maths.cards={};state.sounds.cards={};state.sounds.gcards={};save();render()}}},"Clear history"),
       el("button",{class:"btn ghost small",on:{click:()=>confirmBox.replaceChildren(resetBtn)}},"Cancel"));
   }}},"Reset progress…");
   confirmBox.append(resetBtn);

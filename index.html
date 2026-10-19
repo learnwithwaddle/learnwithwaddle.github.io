@@ -11,6 +11,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>if("serviceWorker" in navigator&&location.protocol==="https:"||location.hostname==="localhost")addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})</script>
 </head>
 <body>
 <title>Waddle</title>
@@ -238,6 +239,8 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .subtabs button[role="tab"]{border:3px solid var(--edge);background:var(--card);color:var(--ink);font:600 15px var(--font-head);padding:6px 14px;border-radius:999px;cursor:pointer}
 .subtabs button[aria-selected="true"]{background:var(--ink);color:var(--card)}
 .lockbtn{margin-left:auto}
+.linkbtn.due::after{content:"";display:inline-block;width:8px;height:8px;margin-left:6px;border-radius:50%;background:var(--accent);vertical-align:middle}
+.panel.remind{border-color:var(--accent)}
 .gate{max-width:460px;width:100%;margin:0 auto;align-items:center;text-align:center}
 .gate-form{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
 .gate-q{font:600 30px var(--font-head)}
@@ -883,7 +886,7 @@ function loadFamily(o){
     const order=(Array.isArray(o.order)?o.order:Object.keys(o.children)).filter(k=>o.children[k]&&o.children[k].v===1);
     if(!order.length)return null;
     order.forEach(k=>o.children[k]=migrate(o.children[k]));
-    return {v:2,active:o.children[o.active]?o.active:order[0],order,children:Object.fromEntries(order.map(k=>[k,o.children[k]])),updated:o.updated||0,lastBackup:o.lastBackup||null};
+    return {v:2,active:o.children[o.active]?o.active:order[0],order,children:Object.fromEntries(order.map(k=>[k,o.children[k]])),updated:o.updated||0,lastBackup:o.lastBackup||null,snoozed:o.snoozed||null};
   }
   if(o.v===1)return wrapFamily(migrate(o));
   return null;
@@ -1224,7 +1227,7 @@ function grownView(){
   const childbar=el("div",{class:"childbar"},
     el("div",{class:"seg","aria-label":"Child"},children().map(({id,st})=>el("button",{type:"button","aria-pressed":String(id===family.active),style:`--cc:${childCol(st.palette)}`,on:{click:()=>{switchChild(id);render()}}},(st.name||"").trim()||"New child"))),
     el("button",{class:"linkbtn",type:"button",on:{click:addChild}},"+ Add a child"));
-  return el("div",{class:"stack"},childbar,bar,body);
+  return el("div",{class:"stack"},childbar,bar,backupDue()?backupReminder():null,body);
 }
 const DUCK_SVG=(mama,grown)=>{const c=mama?' m':grown?' gr':'';return '<svg viewBox="0 0 40 36" aria-hidden="true">'+
   '<path class="d-feet" d="M18 32 L14 36 L21 36 Z M27 32 L23 36 L30 36 Z"/>'+
@@ -1459,6 +1462,57 @@ function readingLogPanel(){
         dates.length>7?el("button",{class:"linkbtn",type:"button",on:{click:()=>{showAllLog=!showAllLog;render()}}},showAllLog?"Show fewer":`Show all ${dates.length} days`):null)));
 }
 
+/* ================= Sound: three soft cues, off with one switch ================= */
+const SND_KEY="waddle-sound";
+const soundOn=()=>{try{return localStorage.getItem(SND_KEY)!=="off"}catch(e){return true}};
+const setSoundOn=v=>{try{localStorage.setItem(SND_KEY,v?"on":"off")}catch(e){}};
+let actx=null;
+function audio(){
+  if(!soundOn())return null;
+  try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
+    actx=actx||new AC();if(actx.state==="suspended")actx.resume();return actx}catch(e){return null}
+}
+function tone(c,t,f,dur,peak,glide){
+  const o=c.createOscillator(),g=c.createGain();
+  o.type="sine";o.frequency.setValueAtTime(f,t);if(glide)o.frequency.exponentialRampToValueAtTime(glide,t+dur);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+.05);
+}
+function tick(c,t,peak){
+  const n=Math.floor(c.sampleRate*.025),buf=c.createBuffer(1,n,c.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+  const src=c.createBufferSource(),hp=c.createBiquadFilter(),g=c.createGain();
+  src.buffer=buf;hp.type="highpass";hp.frequency.value=2200;g.gain.value=peak;
+  src.connect(hp);hp.connect(g);g.connect(c.destination);src.start(t);
+}
+/* Quiet on purpose. Right answer: two soft notes. Session finished: three rising notes. Hatching: two small cracks and a peep. Nothing plays for a wrong answer. */
+const SFX={
+  right(){const c=audio();if(!c)return;const t=c.currentTime+.02;tone(c,t,659.25,.18,.045);tone(c,t+.1,880,.26,.045)},
+  done(){const c=audio();if(!c)return;const t=c.currentTime+.05;[523.25,659.25,783.99].forEach((f,i)=>tone(c,t+i*.13,f,.4,.04))},
+  hatch(){const c=audio();if(!c)return;const t=c.currentTime+1.4;tick(c,t,.05);tick(c,t+.3,.05);tone(c,t+.62,1150,.13,.04,1650);tone(c,t+.8,1250,.15,.035,1750)}
+};
+const reducedMotion=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
+
+/* ================= Backup reminder: a gentle nudge after seven days ================= */
+function backupBase(){
+  const last=family.lastBackup||state.lastBackup;if(last)return last;
+  const ds=children().flatMap(k=>k.st.days||[]).sort();return ds[0]||null;
+}
+function backupDue(){
+  if(remote||family.snoozed===today())return false;
+  const b=backupBase();return !!b&&b<=addDays(today(),-7);
+}
+function backupReminder(){
+  const b=backupBase(),n=Math.round((Date.parse(today())-Date.parse(b))/864e5),last=family.lastBackup||state.lastBackup;
+  const msg=el("p",{class:"note","aria-live":"polite"});
+  const box=el("section",{class:"panel remind"},el("h2",{text:"Time for a backup"}),
+    el("p",{text:(last?`Your last backup was ${n} days ago. `:`You have not saved a backup yet, and Waddle has been in use for ${n} days. `)+"A backup takes a few seconds and keeps progress safe if this phone is lost or reset."}),msg,
+    el("div",{class:"row"},
+      el("button",{class:"btn small",type:"button",on:{click:async()=>{await saveBackup(msg);if(family.lastBackup===today())box.replaceChildren(el("h2",{text:"Backup saved"}),el("p",{class:"note",text:msg.textContent}))}}},"Save a backup"),
+      el("button",{class:"btn ghost small",type:"button",on:{click:()=>{family.snoozed=today();persist();render()}}},"Remind me tomorrow")));
+  return box;
+}
+
 /* ================= Backup and restore ================= */
 let restoredNote="";
 const backupName=()=>{const n=children().map(k=>(k.st.name||"").trim().replace(/[^A-Za-z0-9]+/g,"-").replace(/^-+|-+$/g,"")).filter(Boolean).join("-")||"family";return `waddle-${n}-${today()}.json`};
@@ -1541,7 +1595,7 @@ function backupPanel(){
   return el("section",{class:"panel"},el("h2",{text:"Backup"}),
     el("p",{class:"note",text:(inClaude
       ?"Progress here is saved to your account. A backup lets you move it to the Waddle website or keep a copy. "
-      :"Progress lives in this browser only. Save a backup every few weeks and before changing phone. ")+last}),
+      :"Progress lives in this browser only. Save a backup about once a week, and before changing phone. ")+last}),
     el("div",{class:"row"},
       el("button",{class:"btn small",type:"button",on:{click:()=>saveBackup(msg)}},"Save a backup"),
       el("button",{class:"btn ghost small",type:"button",on:{click:()=>fileIn.click()}},"Restore from backup"),fileIn),
@@ -1617,7 +1671,7 @@ function setupView(){
     box);
 }
 
-const grownLink=()=>el("button",{class:"linkbtn grown-inline",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
+const grownLink=()=>el("button",{class:"linkbtn grown-inline"+(backupDue()?" due":""),type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
 /* School book: the child ticks it on the home screen and sees this week fill up */
 const BOOK_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path class="bk-c" d="M5 3.5h12.5a1.5 1.5 0 0 1 1.5 1.5v15.5H7A2 2 0 0 1 5 18.5Z"/><path class="bk-p" d="M5 18.5A2 2 0 0 1 7 16.5h12"/><path class="bk-m" d="M13 3.5v6l2-1.5 2 1.5v-6"/></svg>';
 function toggleRead(){
@@ -1655,6 +1709,7 @@ let landingPick=null;
 function landingView(){
   const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and maths practice for early years"}));
   const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
+  if(backupDue()){lock.classList.add("due");lock.title="A backup is due"}
   const ks=children().filter(k=>k.st.setupDone);
   if(ks.length>1){
     /* One screen, two taps: choose a name (the others fade), then Let's practise */
@@ -2108,7 +2163,7 @@ function mathsCard(item,flash,advance){
     const opts=el("div",{class:"mopts"+(sp.emoji?" emoji":typeof sp.opts[0]==="string"?" words":"")});
     sp.opts.forEach(o=>{const b=el("button",{class:"mopt",type:"button",text:String(o)});
       b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
-        if(o===item.ans){done=true;b.classList.add("win");const sc=tries===1?1:.5;mRecord(sp.key,sc);lastR=tries===1?"up":"same";
+        if(o===item.ans){done=true;SFX.right();b.classList.add("win");const sc=tries===1?1:.5;mRecord(sp.key,sc);lastR=tries===1?"up":"same";
           caption.textContent="Yes!";next.hidden=false;setTimeout(()=>{if(b.isConnected)once(lastR)},1300)}
         else{b.classList.add("nope");
           if(tries>=2){done=true;mRecord(sp.key,0);lastR="reset";opts.querySelectorAll(".mopt").forEach(x=>{if(x.textContent===String(item.ans))x.classList.add("win")});caption.textContent=`It's ${item.ans}. Let's look at it together.`;next.hidden=false}
@@ -2324,6 +2379,14 @@ function readingGuide(){
   return el("div",{class:"guide"},left,right);
 }
 
+function dataPanel(){
+  const b=(t,rest)=>el("p",{class:"note"},el("b",{text:t}),rest);
+  return el("section",{class:"panel"},el("h2",{text:"Your data"}),
+    ...(remote?[el("p",{class:"note",text:"Progress here is saved to your account. On the Waddle website, progress is saved only on the phone, so use Backup to move it between them."})]
+    :[b("Progress is saved only on this phone."," Nothing about your child leaves it. Safari can clear saved data for a website that hasn't been opened for seven days, and an app added to the home screen is protected from that."),
+      b("Add it to the home screen."," On an iPhone, open the link in Safari, tap Share, then tap Add to Home Screen. Once it has been opened with a signal, it works without one."),
+      b("Each phone keeps its own progress."," If two parents use separate phones, they won't see each other's sessions. Backup moves progress from one phone to another, and it is worth doing now and then in case a phone is lost.")]));
+}
 function settingsPanel(){
   const nameIn=el("input",{id:"reader-name",type:"text",maxlength:"24",placeholder:"e.g. Ruby",autocomplete:"off"});
   nameIn.value=state.name||"";
@@ -2363,8 +2426,11 @@ function settingsPanel(){
         seg("Maths",[["own","⟦Her⟧ own pace"],["school","Follow school"]],state.pace.maths,v=>{state.pace.maths=v;MS().settings.planKey=null;save();render()},"lab-pm"),
         el("p",{class:"note",text:"⟦Her⟧ own pace: the school's sequence is the floor. New sounds, tricky words and maths stages unlock, in the school's order, as soon as ⟦she⟧ is fluent and confident after a gap. Follow school: only what you tick, and the maths plan for ⟦her⟧ term."}))),
     el("div",{class:"cols"},
-      el("section",{class:"panel"},el("h2",{text:"Look"}),
-        seg("Colour theme",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],state.palette,v=>{state.palette=v;save();render()},"lab-pal")),
+      el("section",{class:"panel"},el("h2",{text:"Look and sound"}),
+        seg("Colour theme",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],state.palette,v=>{state.palette=v;save();render()},"lab-pal"),
+        seg("Sound",[[true,"On"],[false,"Off"]],soundOn(),v=>{setSoundOn(v);if(v)SFX.right();render()},"lab-snd"),
+        el("p",{class:"note",text:"A few soft notes for a right answer, a finished practice and a hatching duckling. This setting belongs to this phone."})),
+      dataPanel(),
       backupPanel(),
       el("section",{class:"panel"},el("h2",{text:"Progress"}),el("p",{class:"note",text:"Clearing history keeps ⟦her⟧ ticked sounds, tricky words, book list and settings."}),confirmBox)));
 }
@@ -2449,7 +2515,7 @@ function listenCard(item,flash,advance){
   item.opts.forEach(o=>{
     const b=el("button",{class:"lopt",type:"button","aria-label":String(o)},item.g==="clap"?el("span",{class:"lpic"},el("span",{class:"lemoji claps",text:"👏".repeat(o)}),el("span",{class:"lword",text:`${o} clap${o>1?"s":""}`})):picBtn(o));
     b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
-      if(o===item.ans){done=true;b.classList.add("win");lRecord(item.g,tries===1?1:.5);lastR=tries===1?"up":"same";caption.textContent="Yes!";next.hidden=false;setTimeout(()=>{if(b.isConnected)once(lastR)},1300)}
+      if(o===item.ans){done=true;SFX.right();b.classList.add("win");lRecord(item.g,tries===1?1:.5);lastR=tries===1?"up":"same";caption.textContent="Yes!";next.hidden=false;setTimeout(()=>{if(b.isConnected)once(lastR)},1300)}
       else{b.classList.add("nope");
         if(tries>=2){done=true;lRecord(item.g,0);lastR="reset";opts.querySelectorAll(".lopt").forEach(x=>{if(x.getAttribute("aria-label")===String(item.ans))x.classList.add("win")});caption.textContent="Here it is. Let's say it together.";next.hidden=false}
         else caption.textContent="Listen again and have another go."}});
@@ -2541,6 +2607,7 @@ function doneView(){
   const name=(state.name||"").trim();
   const s=streak();
   releaseWake();
+  if(!session.sfx){session.sfx=true;SFX.done();if(!(s.ducks&&s.ducks%10===0)&&!reducedMotion())SFX.hatch()}
   return el("section",{class:"panel done",style:"align-items:center;text-align:center"},
     el("p",{class:"done-title",text:`Well done${name?", "+name:""}!`}),
     el("p",{class:"muted",text:(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),

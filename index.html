@@ -1980,9 +1980,16 @@ function planMaths(){
   const S=MS().settings,P=PLANS[S.planKey],order=[...P.acts,...Object.keys(ACTS).filter(a=>!P.acts.includes(a))].filter(a=>S.acts[a]);
   const q=[];
   const per=a=>S.planKey.startsWith("N")&&a==="sub"?2:ACTS[a].per;
-  order.forEach(a=>{for(let i=0;i<per(a)&&q.length<10;i++)q.push(genItem(a))});
-  /* quick looks first as a warm-up, which-has-more last */
-  return q.filter(x=>x.kind==="msub").concat(q.filter(x=>x.kind!=="msub"&&x.kind!=="mcmp"),q.filter(x=>x.kind==="mcmp"));
+  /* Never show the same amount twice in one activity: draw again until it differs */
+  const keyOf=(a,x)=>a+":"+(x.kind==="mcmp"?Math.min(x.l,x.r)+"-"+Math.max(x.l,x.r):x.n!=null?x.n:[x.k,x.a,x.b,x.plus,x.up,x.seq&&x.seq.join("")].join(","));
+  const used=new Set();
+  const gen=a=>{let it;for(let t=0;t<25;t++){it=genItem(a);if(!used.has(keyOf(a,it)))break}used.add(keyOf(a,it));return it};
+  order.forEach(a=>{for(let i=0;i<per(a)&&q.length<10;i++)q.push(gen(a))});
+  /* quick looks first as a warm-up, which-has-more last; no two neighbours show the same number */
+  const out=[];
+  [q.filter(x=>x.kind==="msub"),q.filter(x=>x.kind!=="msub"&&x.kind!=="mcmp"),q.filter(x=>x.kind==="mcmp")].forEach(pool=>{
+    while(pool.length){const last=out[out.length-1];let i=pool.findIndex(x=>!last||x.n==null||x.n!==last.n);if(i<0)i=0;out.push(pool.splice(i,1)[0])}});
+  return out;
 }
 
 /* ---------- pictures ---------- */

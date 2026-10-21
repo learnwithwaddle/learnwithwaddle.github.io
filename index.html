@@ -1397,12 +1397,10 @@ function wallView(){
   hat:[["Cap","#2D6CD2"],["Top hat","#2B2230"],["Party hat","#FFD43B"]],
   glasses:[["Round","#3A1730"],["Sunglasses","#2A1B2E"],["Square","#E0336F"]],
   bag:[["Orange","#F2813A"],["Purple","#7C5AD8"],["Teal","#26A69A"]],
-  board:[["Pink","#FF6FA1"],["Teal","#26A69A"],["Yellow","#FFD43B"]],
-  scarf:[["Red","#D6372C"],["Green","#2B8752"],["Purple","#7C5AD8"]],
-  ring:[["Red","#E8506E"],["Blue","#3F8CE0"],["Orange","#F7811E"]]
+  board:[["Pink","#FF6FA1"],["Teal","#26A69A"],["Yellow","#FFD43B"]]
 };
-const CORE=["body","head","legs","wing","beak","tail"],ACC=["bow","bowtie","hat","glasses","bag","board","scarf","ring"],NOGO={bow:["bowtie","hat"],bowtie:["bow","scarf"],hat:["bow"],scarf:["bowtie"]},ALL_SLOTS=CORE.concat(ACC);
-const SLOT_NAME={body:"body",head:"head",legs:"legs",wing:"wing",beak:"beak",tail:"tail",bow:"bow",bowtie:"bow tie",hat:"hat",glasses:"glasses",bag:"bag",board:"skateboard",scarf:"scarf",ring:"swim ring"};
+const CORE=["body","head","legs","wing","beak","tail"],ACC=["bow","bowtie","hat","glasses","bag","board"],NOGO={bow:["bowtie","hat"],bowtie:["bow"],hat:["bow"]},ALL_SLOTS=CORE.concat(ACC);
+const SLOT_NAME={body:"body",head:"head",legs:"legs",wing:"wing",beak:"beak",tail:"tail",bow:"bow",bowtie:"bow tie",hat:"hat",glasses:"glasses",bag:"bag",board:"skateboard"};
 const PLUM="#3A1730";
 function duckSVG(spec={},{ghost=true}={}){
   const has=k=>spec[k]!=null,P=k=>BD[k][spec[k]];
@@ -1428,11 +1426,11 @@ function duckSVG(spec={},{ghost=true}={}){
   if(has("legs")){const c=P("legs")[1];
     [cx-12,cx+8].forEach(x=>{s+=`<line x1="${x}" y1="${cy+ry-5}" x2="${x}" y2="${gy-3}" stroke="${PLUM}" stroke-width="6.6" stroke-linecap="round"/><line x1="${x}" y1="${cy+ry-5}" x2="${x}" y2="${gy-3}" stroke="${c}" stroke-width="3.4" stroke-linecap="round"/>`+
       o("path",`d="M${x-9} ${gy} L${x+4} ${gy} Q${x+3} ${gy-5} ${x-2} ${gy-5} Q${x-8} ${gy-4} ${x-9} ${gy} Z"`,c)})}
-  if(has("board")){const c=P("board")[1];s+=o("rect",`x="22" y="${gy}" width="84" height="5.6" rx="2.8"`,c)+`<circle cx="38" cy="${gy+9}" r="3.6" fill="${PLUM}"/><circle cx="92" cy="${gy+9}" r="3.6" fill="${PLUM}"/>`}
+  if(has("board")){const c=P("board")[1];s+=o("path",`d="M20 ${gy-4.5} Q24 ${gy-.5} 30 ${gy} L92 ${gy} Q98 ${gy-.5} 102 ${gy-4.5} L105.5 ${gy-3.5} Q104 ${gy+6} 94 ${gy+6} L28 ${gy+6} Q18 ${gy+6} 16.5 ${gy-3.5} Z"`,c)+`<circle cx="38" cy="${gy+9.5}" r="3.6" fill="${PLUM}"/><circle cx="84" cy="${gy+9.5}" r="3.6" fill="${PLUM}"/>`}
   if(has("body"))s+=o("ellipse",`cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"`,P("body")[1]);
-  if(has("ring")){const c=P("ring")[1],ry2=ry*.62;s+=`<path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="${PLUM}" stroke-width="10.5" stroke-linecap="round"/><path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="${c}" stroke-width="7.5" stroke-linecap="round"/><path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="#fff" stroke-width="7.5" stroke-dasharray="7 14" stroke-dashoffset="-3"/>`}
+  if(has("bag")){const c=P("bag")[1],dx=rx*.3,px=cx+dx,k=Math.sqrt(1-(dx/rx)**2),ty=cy-ry*k,py=ty-3,ang=Math.atan(ry*dx/(rx*rx*k))*180/Math.PI,d=`M${px-10} ${py+6} C${cx-12} ${cy-10} ${cx-12} ${cy+ry*.6} ${cx+4} ${cy+ry*.62} C${cx+24} ${cy+ry*.62} ${px+9} ${cy+8} ${px+9} ${py+8}`;
+    s+=`<path d="${d}" fill="none" stroke="${PLUM}" stroke-width="5.2" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>`+`<g transform="rotate(${ang.toFixed(1)} ${px} ${py})">`+o("rect",`x="${px-14}" y="${py-8}" width="28" height="16" rx="6.5"`,c)+`<rect x="${px-8}" y="${py-3}" width="16" height="7" rx="2.5" fill="rgba(0,0,0,.2)" stroke="${PLUM}" stroke-width="1"/><path d="M${px-6} ${py-8} Q${px} ${py-13} ${px+6} ${py-8}" fill="none" stroke="${PLUM}" stroke-width="1.6" stroke-linecap="round"/></g>`}
   if(has("wing")){const w=P("wing");s+=o("ellipse",`cx="${cx-1}" cy="${cy+1}" rx="${w[2]}" ry="${w[3]}" transform="rotate(-12 ${cx-1} ${cy+1})"`,w[1],"bd2")}
-  if(has("bag")){const c=P("bag")[1],bx=cx+rx*.3-6;s+=`<path d="M${bx+4} ${cy-ry+3} Q${hx+8} ${cy-ry-8} ${hx+14} ${hy+hr*.5}" fill="none" stroke="${PLUM}" stroke-width="1.6"/>`+o("rect",`x="${bx}" y="${cy-12}" width="17" height="24" rx="6"`,c)+`<rect x="${bx+3}" y="${cy-1}" width="11" height="8" rx="2.5" fill="rgba(0,0,0,.2)" stroke="${PLUM}" stroke-width="1"/>`}
   if(has("head"))s+=o("circle",`cx="${hx}" cy="${hy}" r="${hr}"`,P("head")[1]);
   if(has("beak")){const b=P("beak");s+=o("path",`d="M${hx-hr+3} ${hy+2-b[3]} L${hx-hr-b[2]} ${hy+3} L${hx-hr+3} ${hy+2+b[3]} Z"`,b[1])}
   if(has("head"))s+=`<circle cx="${ex}" cy="${ey}" r="2.3" fill="${PLUM}"/><circle cx="${ex+.8}" cy="${ey-.8}" r=".8" fill="#fff"/>`;
@@ -1448,17 +1446,15 @@ function duckSVG(spec={},{ghost=true}={}){
     s+=o("path",`d="M${bx} ${by} L${bx-8.5} ${by-5.5} L${bx-8} ${by+5.5} Z M${bx} ${by} L${bx+8.5} ${by-5.5} L${bx+8} ${by+5.5} Z"`,c)+o("circle",`cx="${bx}" cy="${by}" r="2.8"`,c)}
   if(has("bowtie")&&has("head")){const c=P("bowtie")[1],tx=hx+hr*.3+2,ty=hy+hr-1;
     s+=o("path",`d="M${tx} ${ty} L${tx-9} ${ty-6} L${tx-9} ${ty+6} Z M${tx} ${ty} L${tx+9} ${ty-6} L${tx+9} ${ty+6} Z"`,c)+o("circle",`cx="${tx}" cy="${ty}" r="3"`,c)}
-  if(has("scarf")&&has("head")){const c=P("scarf")[1],R=hr*.93,pt=a=>[hx+R*Math.cos(a*Math.PI/180),hy+R*Math.sin(a*Math.PI/180)],p0=pt(5),p1=pt(105),pm=pt(40),d=`M${p0[0]} ${p0[1]} A${R} ${R} 0 0 1 ${p1[0]} ${p1[1]}`;
-    s+=o("rect",`x="${pm[0]-3.5}" y="${pm[1]}" width="8" height="15" rx="3.5" transform="rotate(-12 ${pm[0]} ${pm[1]})"`,c)+`<path d="${d}" fill="none" stroke="${PLUM}" stroke-width="9.6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="6.4" stroke-linecap="round"/>`}
   return `<svg class="bduck" viewBox="0 -24 122 128" aria-hidden="true">${s}</svg>`;
 }
 
 const isBuild=()=>state.year==="Y1"||state.year==="Y2";
-function DR(){state.duckYears=state.duckYears||{};return state.duckYears[state.year]=state.duckYears[state.year]||{flock:[],cur:{},pending:0,earned:0}}
+function DR(){state.duckYears=state.duckYears||{};const d=state.duckYears[state.year]=state.duckYears[state.year]||{flock:[],cur:{},pending:0,earned:0};delete d.cur.scarf;delete d.cur.ring;return d}
 const filled=c=>ALL_SLOTS.filter(k=>c[k]!=null).length;
 const taken=(c,k)=>c[k]!=null||Object.keys(c).some(j=>c[j]!=null&&((NOGO[j]||[]).includes(k)||(NOGO[k]||[]).includes(j)));
 const nextSlots=c=>{const n=CORE.filter(k=>c[k]!=null).length;return n<CORE.length?[CORE[n]]:ACC.filter(k=>!taken(c,k))};
-const DUCK_SIZE=12,isComplete=c=>filled(c)>=DUCK_SIZE||(CORE.every(k=>c[k]!=null)&&!nextSlots(c).length);
+const DUCK_SIZE=10,isComplete=c=>filled(c)>=DUCK_SIZE||(CORE.every(k=>c[k]!=null)&&!nextSlots(c).length);
 const capF=s=>s[0].toUpperCase()+s.slice(1);
 let pickCat=null,lastPlaced=null;
 function placePiece(slot,idx){
@@ -1484,7 +1480,7 @@ function placedBlock(){
   return el("div",{class:"placed"},
     fin?el("p",{class:"moved",text:"Your duck is finished"}):null,
     el("div",{class:"bigbuild",html:duckSVG(fin||dr.cur,{ghost:!fin})}),
-    el("p",{class:"muted",text:lp?(fin?"It has joined the flock. The next duck starts with the next practice.":`You added the ${SLOT_NAME[lp.slot]}.`):`${filled(dr.cur)} of 12 pieces.`}));
+    el("p",{class:"muted",text:lp?(fin?"It has joined the flock. The next duck starts with the next practice.":`You added the ${SLOT_NAME[lp.slot]}.`):`${filled(dr.cur)} of ${DUCK_SIZE} pieces.`}));
 }
 function pickScreen(){
   const dr=DR();
@@ -1506,10 +1502,10 @@ function duckBuildPanel(){
   return el("section",{class:"panel pond build"},
     el("div",{class:"panel-head"},el("h2",{text:nm?`${nm}'s duck`:"Your duck"}),dr.flock.length?el("button",{class:"linkbtn flocklink",type:"button",on:{click:()=>{screen="flock";render()}}},`${dr.flock.length} in the flock ›`):el("span",{class:"note streak"},s.today?el("span",{class:"tick","aria-hidden":"true",text:"✓"}):null,s.today?(s.days>1?`${s.days} days running`:"Practised today"):"")),
     el("div",{class:"buildrow"},
-      el("div",{class:"bigbuild sm",role:"img","aria-label":`Duck with ${n} of 12 pieces`,html:duckSVG(dr.cur)}),
+      el("div",{class:"bigbuild sm",role:"img","aria-label":`Duck with ${n} of ${DUCK_SIZE} pieces`,html:duckSVG(dr.cur)}),
       el("div",{class:"buildside"},
         el("span",{class:"pdots","aria-hidden":"true"},range(0,DUCK_SIZE-1).map(i=>el("i",{class:i<n?"on":""}))),
-        el("p",{class:"muted ducknote",text:dr.pending?"A piece is waiting.":`${n} of 12 pieces. Each practice earns one.`}),
+        el("p",{class:"muted ducknote",text:dr.pending?"A piece is waiting.":`${n} of ${DUCK_SIZE} pieces. Each practice earns one.`}),
         dr.pending?el("button",{class:"btn small",type:"button",on:{click:()=>{screen="pick";render()}}},"Choose a piece"):null)));
 }
 
@@ -2865,7 +2861,7 @@ function guideView(){
     el("h2",{text:"Waddle sits beside books"}),
     el("p",{text:"Waddle is for you and your child to do together, a little like a mother duck leading her ducklings. It takes a few minutes a day, you sit beside your child, and you decide whether each answer was right. Children learn most when a grown-up is there to notice, encourage and explain."}),
     el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
-    el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 each one earns a piece for a duck, which your child chooses, starting with the body and head and ending with extras such as a hat or a skateboard. A duck takes about a week, finished ducks join a flock, and the ducks start again each school year."}),
+    el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 each one earns a piece for a duck, which your child chooses, starting with the body and head and ending with extras such as a hat or a skateboard. A duck has ten pieces, so it takes about a week, finished ducks join a flock, and the ducks start again each school year."}),
     el("p",{text:"The I can wall is separate from the rewards. A statement such as ‘I can read the words the, to and no’ appears only once practice has gone well on two different days, so it is something true that you can say aloud. The wall stays when your child moves up a year."}),
     el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}));
   return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());

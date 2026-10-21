@@ -203,7 +203,7 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .cardview{display:flex;flex-direction:column;gap:14px}
 .side{display:flex;flex-direction:column;gap:12px}
 .side .note{text-align:center}
-.done{max-width:720px;width:100%;margin:0 auto}
+.done{max-width:720px;width:100%;margin:0 auto;box-sizing:border-box}
 .gsets{display:grid;grid-template-columns:1fr;gap:0}
 .bwords{display:flex;flex-wrap:wrap;gap:8px}
 .bw{display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 12px 5px;border-radius:14px;border:3px solid var(--good);background:var(--card);min-width:64px}
@@ -607,10 +607,13 @@ body{overflow-x:clip}
   .zzz span:nth-child(2){animation-delay:.4s}.zzz span:nth-child(3){animation-delay:.8s}
   @keyframes zfloat{0%,100%{opacity:.35}50%{opacity:1}}
   .duck.hatch .egg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-  .duck.hatch>svg:first-child{animation:hatchout 3s ease-out both}
-  .duck.hatch .egg{animation:eggwobble 1.4s ease-in-out both;transform-origin:50% 95%}
-  .duck.hatch .egg-top{animation:eggtop 3s ease-out both;transform-box:fill-box;transform-origin:50% 100%}
-  .duck.hatch .egg-bot{animation:eggbot 3s ease-out both}
+  /* The egg rolls in from the right (using the separate translate and rotate properties), settles, wobbles, then cracks */
+  .ducks:has(.hatch){overflow-x:clip}
+  .duck.hatch>svg:first-child{animation:hatchout 3s ease-out 1.3s both}
+  .duck.hatch .egg{animation:eggroll 1.3s cubic-bezier(.15,.6,.3,1) both,eggwobble 1.4s ease-in-out 1.3s both;transform-origin:50% 95%}
+  .duck.hatch .egg-top{animation:eggtop 3s ease-out 1.3s both;transform-box:fill-box;transform-origin:50% 100%}
+  .duck.hatch .egg-bot{animation:eggbot 3s ease-out 1.3s both}
+  @keyframes eggroll{0%{translate:130px 0;rotate:-640deg;opacity:0}10%{opacity:1}100%{translate:0 0;rotate:0deg;opacity:1}}
   @keyframes eggwobble{0%,100%{transform:rotate(0)}15%{transform:rotate(-12deg)}30%{transform:rotate(10deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(8deg)}75%{transform:rotate(-4deg)}}
   @keyframes eggtop{0%,48%{transform:translate(0,0) rotate(0);opacity:1}70%{transform:translate(4px,-16px) rotate(30deg);opacity:1}100%{transform:translate(8px,-22px) rotate(50deg);opacity:0}}
   @keyframes eggbot{0%,70%{opacity:1}100%{opacity:0}}
@@ -1511,7 +1514,7 @@ function tick(c,t,peak){
 const SFX={
   right(){const c=audio();if(!c)return;const t=c.currentTime+.02;tone(c,t,659.25,.18,.045);tone(c,t+.1,880,.26,.045)},
   done(){const c=audio();if(!c)return;const t=c.currentTime+.05;[523.25,659.25,783.99].forEach((f,i)=>tone(c,t+i*.13,f,.4,.04))},
-  hatch(){const c=audio();if(!c)return;const t=c.currentTime+1.4;tick(c,t,.05);tick(c,t+.3,.05);tone(c,t+.62,1150,.13,.04,1650);tone(c,t+.8,1250,.15,.035,1750)}
+  hatch(){const c=audio();if(!c)return;const t=c.currentTime+2.7;tick(c,t,.05);tick(c,t+.3,.05);tone(c,t+.62,1150,.13,.04,1650);tone(c,t+.8,1250,.15,.035,1750)}
 };
 const reducedMotion=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
 

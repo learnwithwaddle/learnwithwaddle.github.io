@@ -551,8 +551,13 @@ body{overflow-x:clip}
 :root[data-palette="night"] .land-go:not(:disabled){background:#FFC21A;color:#1E2748;border-color:#0E1430}
 .land-name{color:var(--nm,var(--accent))}
 .childpick{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;max-width:760px}
-.landing{padding-top:64px;box-sizing:border-box}
+.landing{padding-top:64px;padding-bottom:60px;box-sizing:border-box}
+.land-foot{position:absolute;left:0;right:0;bottom:0;margin:0;padding:0 6px;text-align:center;font:400 11.5px/1.35 var(--font-adult);color:var(--muted)}
+.land-foot b{font-weight:700}
+.land-sit{margin:-8px 0 0;font:400 14px/1.3 var(--font-adult);color:var(--muted)}
+.choice.done[aria-disabled="true"]{opacity:1}
 .land-main.picking{width:100%;align-self:stretch}
+@media (max-height:720px){.land-main.picking{gap:14px}.land-main.picking .land-duck{width:min(130px,36vw)}.land-main.picking .land-sit{margin-top:-2px}}
 .childbtn{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 min(164px,calc(50% - 8px));box-sizing:border-box;min-width:0;padding:16px 12px 14px;background:var(--card);color:var(--ink);border:3px solid var(--edge);border-radius:28px;box-shadow:6px 6px 0 var(--shadow);cursor:pointer}
 .childbtn:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--shadow)}
 .child-duck{width:76px;display:block}.child-duck svg{width:100%;height:auto;display:block;overflow:visible}
@@ -700,18 +705,18 @@ body{overflow-x:clip}
 /* ================= Sounds: Reception follows her book sets, then Little Wandle's Phase 3 and Year 1 Phase 5 ================= */
 /* A sound id is the grapheme, or grapheme:sound for an alternative pronunciation (o:oa as in go). Split digraphs are a-e, i-e and so on. */
 const SETS=[
-  {stage:"R",phase:"Reception autumn · Phase 2",name:"Book 1",gs:["s","a","t","p"]},
-  {stage:"R",name:"Book 2",gs:["i","n","m","d"]},
-  {stage:"R",name:"Book 3",gs:["g","o","c","k"]},
-  {stage:"R",name:"Book 4",gs:["ck","e","u","r"]},
-  {stage:"R",name:"Book 5",gs:["h","b","f","ff"]},
-  {stage:"R",name:"Book 6",gs:["l","ll","le","ss"]},
-  {stage:"R",name:"Next",gs:["j","v","w","x"]},
-  {stage:"R",name:"Next",gs:["y","z","zz","qu"]},
-  {stage:"R",name:"Next",gs:["ch","sh","th","ng","nk"]},
-  {stage:"R",phase:"Reception spring · Phase 3",name:"Set 1",gs:["ai","ee","igh","oa"]},
-  {stage:"R",name:"Set 2",gs:["oo","ar","or","ur"]},
-  {stage:"R",name:"Set 3",gs:["ow","oi","ear","air","er"]},
+  {stage:"R",phase:"Reception autumn · Phase 2",name:"Group 1",gs:["s","a","t","p"]},
+  {stage:"R",name:"Group 2",gs:["i","n","m","d"]},
+  {stage:"R",name:"Group 3",gs:["g","o","c","k"]},
+  {stage:"R",name:"Group 4",gs:["ck","e","u","r"]},
+  {stage:"R",name:"Group 5",gs:["h","b","f","ff"]},
+  {stage:"R",name:"Group 6",gs:["l","ll","le","ss"]},
+  {stage:"R",name:"Group 7",gs:["j","v","w","x"]},
+  {stage:"R",name:"Group 8",gs:["y","z","zz","qu"]},
+  {stage:"R",name:"Group 9",gs:["ch","sh","th","ng","nk"]},
+  {stage:"R",phase:"Reception spring · Phase 3",name:"Group 1",gs:["ai","ee","igh","oa"]},
+  {stage:"R",name:"Group 2",gs:["oo","ar","or","ur"]},
+  {stage:"R",name:"Group 3",gs:["ow","oi","ear","air","er"]},
   {stage:"R",name:"Double letters",gs:["tt","dd","mm","nn","pp","bb","gg","rr"]},
   {stage:"Y1",phase:"Year 1 · Phase 5",name:"Autumn 1",gs:["ay","ou","oy","ea"]},
   {stage:"Y1",name:"Autumn 2",gs:["ir","ie","ue","u:yoo","o:oa","i:igh","a:ai","e:ee","a-e","i-e","o-e","u-e","e-e","ew","ie:ee","aw"]},
@@ -950,7 +955,7 @@ async function connect(){
         if(!session)render();
       }else if((family.updated||0)>((rf&&rf.updated)||0)){pushRemote()}
     }else if(family.updated){pushRemote()}
-    syncNote("Progress is saved to your account, so it follows you across devices.");
+    syncNote("Progress is saved on this device.");
   }catch(e){remote=null}
 }
 
@@ -1129,7 +1134,7 @@ const PRON={girl:{"she":"she","She":"She","her":"her","Her":"Her","her-o":"her",
   boy:{"she":"he","She":"He","her":"his","Her":"His","her-o":"him","herself":"himself","daughter":"son"}};
 /* ⟦acc⟧ is the theme colour's name, so maths text matches the coloured dots */
 const accName=()=>({pink:"pink",blue:"blue",green:"green"})[state.palette]||"pink";
-const BOOKW=()=>isNursery()?{sb:"book",Sb:"Book",ysb:"a book",Ysb:"A book"}:{sb:"school book",Sb:"School book",ysb:"your school book",Ysb:"Your school book"};
+const BOOKW=()=>({sb:"book",Sb:"Book",ysb:"a book together",Ysb:"A book together"});
 const G=v=>typeof v==="string"&&v.includes("⟦")?v.replace(/⟦([^⟧]+)⟧/g,(m,k)=>k==="acc"?accName():k==="Acc"?accName()[0].toUpperCase()+accName().slice(1):BOOKW()[k]??(PRON[state.child]||PRON.girl)[k]??k):v;
 function el(tag,attrs={},...nodes){
   const e=document.createElement(tag);
@@ -1148,7 +1153,18 @@ const isNursery=()=>state.year==="N";
 const curTermLabel=()=>`${yearName()} ${curTerm()}`;
 const planKey=()=>`${state.year||"R"}-${curTerm()}`;
 /* Changing the year never ticks anything by itself. Ticking everything from Reception is a separate button, with an undo. */
-function setYear(y){state.year=y;save();render()}
+let yearPending=null;
+const hasTicks=()=>Object.values(state.sounds.taught).some(Boolean)||Object.values(state.taught||{}).some(Boolean);
+function setYear(y){
+  if(y===state.year){yearPending=null;render();return}
+  if(y==="N"&&hasTicks()){yearPending="N";render();return}
+  yearPending=null;state.year=y;rebuildReal();save();render();
+}
+/* Nursery is listening only, so sounds and tricky words are cleared when a child moves down to it */
+function confirmNursery(){
+  const S=state.sounds;S.taught={};S.auto={};S.batch=[];state.taught={};state.trickyAuto={};state.yearSnap=null;
+  yearPending=null;state.year="N";MS().settings.planKey=null;rebuildReal();save();render();
+}
 function tickAllReception(){
   state.yearSnap={sounds:Object.assign({},state.sounds.taught),tricky:Object.assign({},state.taught),clusters:state.sounds.clusters};
   SETS.filter(x=>x.stage==="R").forEach(x=>x.gs.forEach(g=>state.sounds.taught[g]=true));
@@ -1209,7 +1225,13 @@ function gateView(){
 }
 /* Reading tab: sounds and tricky words behind one switch */
 let readingTopic="sounds";
+function nurseryListenView(){
+  const p=el("section",{class:"panel"},el("h2",{text:"Sounds start in Reception"}),
+    el("p",{text:"In nursery, reading means listening games with no letters. Little Wandle's phonics begins in the first weeks of Reception, so there are no sounds or tricky words to tick yet. When ⟦she⟧ starts Reception, change the school year in Settings and choose where school has got to."}));
+  return el("div",{class:"stack"},p,listenPanel());
+}
 function readingView(){
+  if(isNursery())return nurseryListenView();
   const bar=el("div",{class:"seg topic"},[["sounds","Sounds"],["tricky","Tricky words"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(readingTopic===k),on:{click:()=>{readingTopic=k;render()}}},l)));
   return el("div",{class:"stack"},bar,readingTopic==="tricky"?trickyView():soundsView());
 }
@@ -1218,7 +1240,7 @@ function logView(){
   return el("div",{class:"stack"},p);
 }
 function grownView(){
-  const tabs=[["progress","Progress"],["reading","Reading"],["maths","Maths"],["log","Reading log"],["guide","How it works"],["settings","Settings"]];
+  const tabs=[["progress","Progress"],["reading",isNursery()?"Listening":"Sounds and words"],["maths","Numbers"],["log","Reading log"],["guide","How it works"],["settings","Settings"]];
   if(sub==="sounds"||sub==="tricky"){readingTopic=sub;sub="reading"}
   const bar=el("div",{class:"subtabs",role:"tablist"},
     tabs.map(([k,l])=>el("button",{role:"tab","aria-selected":String(sub===k),on:{click:()=>{sub=k;render()}}},l)),
@@ -1320,12 +1342,12 @@ const mathsDone=()=>doneToday("maths");
 const bookRead=()=>state.reads.includes(today());
 const practiceDone=()=>readingDone()&&mathsDone();
 const allDone=()=>practiceDone()&&bookRead();
-function choiceTile({icon,title,note,onClick,disabled=false,done=false,badge="Done for today",again="Tap to practise again"}){
+function choiceTile({icon,title,note,onClick,disabled=false,done=false,badge="Done for today"}){
   const b=el("button",{class:"choice"+(done?" done":""),type:"button"},
     done?el("span",{class:"done-badge"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),badge):null,
     el("span",{class:"cicon",html:ICONS[icon]}),el("span",{class:"ct",text:title}),
-    done?el("span",{class:"cn",text:again}):note?el("span",{class:"cn",text:note}):null);
-  if(disabled)b.setAttribute("aria-disabled","true");else b.addEventListener("click",onClick);
+    note&&!done?el("span",{class:"cn",text:note}):null);
+  if(disabled||done)b.setAttribute("aria-disabled","true");else b.addEventListener("click",onClick);
   return b;
 }
 const listBits=bits=>bits.filter(Boolean).join(", ").replace(/, ([^,]*)$/," and $1");
@@ -1455,7 +1477,7 @@ function readingLogPanel(){
     el("div",{class:"rl-grid"},
       el("div",{class:"stack rl-side"},
         el("div",{class:"field"},el("label",{for:"cur-book",text:"Book ⟦she⟧ is reading now"}),cur,
-          el("p",{class:"note",text:isNursery()?"Each time ⟦she⟧ ticks a book, this title is logged against the day. Change it when you read something new.":"Each time ⟦she⟧ ticks ⟦her⟧ school book, this title is logged against the day. Change it when a new book comes home."})),
+          el("p",{class:"note",text:"Each time you tick a book, this title is logged against the day. Change it when you read something new."})),
         el("div",{class:"row rl-add"},el("span",{class:"note",text:"Missed a tick?"}),addDate,addBtn),
         el("div",{class:"row"},pdfBtn),msg),
       el("div",{class:"stack rl-main"},table,
@@ -1499,14 +1521,14 @@ function backupBase(){
   const ds=children().flatMap(k=>k.st.days||[]).sort();return ds[0]||null;
 }
 function backupDue(){
-  if(remote||family.snoozed===today())return false;
+  if(family.snoozed===today())return false;
   const b=backupBase();return !!b&&b<=addDays(today(),-7);
 }
 function backupReminder(){
   const b=backupBase(),n=Math.round((Date.parse(today())-Date.parse(b))/864e5),last=family.lastBackup||state.lastBackup;
   const msg=el("p",{class:"note","aria-live":"polite"});
   const box=el("section",{class:"panel remind"},el("h2",{text:"Time for a backup"}),
-    el("p",{text:(last?`Your last backup was ${n} days ago. `:`You have not saved a backup yet, and Waddle has been in use for ${n} days. `)+"A backup takes a few seconds and keeps progress safe if this phone is lost or reset."}),msg,
+    el("p",{text:(last?`Your last backup was ${n} days ago. `:`You have not saved a backup yet, and Waddle has been in use for ${n} days. `)+"A backup takes a few seconds and keeps progress safe if this device is lost or reset."}),msg,
     el("div",{class:"row"},
       el("button",{class:"btn small",type:"button",on:{click:async()=>{await saveBackup(msg);if(family.lastBackup===today())box.replaceChildren(el("h2",{text:"Backup saved"}),el("p",{class:"note",text:msg.textContent}))}}},"Save a backup"),
       el("button",{class:"btn ghost small",type:"button",on:{click:()=>{family.snoozed=today();persist();render()}}},"Remind me tomorrow")));
@@ -1590,12 +1612,9 @@ function backupPanel(){
   }}},"Copy as text");
   const pasteIn=el("textarea",{rows:"3",spellcheck:"false",placeholder:"Paste a backup here","aria-label":"Paste a backup"});
   const pasteBtn=el("button",{class:"btn ghost small",type:"button",on:{click:()=>restorePrompt(box,pasteIn.value)}},"Restore from text");
-  const inClaude=!!remote;
   const lb=family.lastBackup||state.lastBackup,last=lb?`Last backup ${niceDate(lb)}.`:"No backup saved yet.";
   return el("section",{class:"panel"},el("h2",{text:"Backup"}),
-    el("p",{class:"note",text:(inClaude
-      ?"Progress here is saved to your account. A backup lets you move it to the Waddle website or keep a copy. "
-      :"Progress lives in this browser only. Save a backup about once a week, and before changing phone. ")+last}),
+    el("p",{class:"note",text:"Progress lives in this browser only. Save a backup about once a week, and before changing device. "+last}),
     el("div",{class:"row"},
       el("button",{class:"btn small",type:"button",on:{click:()=>saveBackup(msg)}},"Save a backup"),
       el("button",{class:"btn ghost small",type:"button",on:{click:()=>fileIn.click()}},"Restore from backup"),fileIn),
@@ -1608,17 +1627,32 @@ function backupPanel(){
 /* ================= First visit: a one-page setup for a grown-up ================= */
 const TERM_ORDER=["Reception autumn","Reception spring","Reception summer","Year 1 autumn","Year 1 spring","Year 1 summer"];
 const defaultSet=(year,term)=>year==="N"?-1:({"R-autumn":0,"R-spring":8,"R-summer":12,"Y1-autumn":12,"Y1-spring":14,"Y1-summer":16})[`${year}-${term}`]??0;
-function applySetup(d){
-  state.name=d.name.trim();state.child=d.child;state.year=d.year;state.term="auto";state.palette=d.palette;
+/* Ticks every sound up to and including set `set`, plus the tricky words from earlier terms */
+function tickThrough(set){
   const S=state.sounds;S.taught={};S.auto={};S.batch=[];S.clusters=true;
-  if(d.set>=0)SETS.slice(0,d.set+1).forEach(x=>x.gs.forEach(g=>S.taught[g]=true));
+  if(set>=0)SETS.slice(0,set+1).forEach(x=>x.gs.forEach(g=>S.taught[g]=true));
   state.taught={};
   const cur=TERM_ORDER.indexOf(`${yearName()} ${curTerm()}`);
   ORDER.forEach(w=>{const t=WORDS[w].term,i=TERM_ORDER.indexOf(t);if(i>=0&&i<cur&&trickyTermReady(t))state.taught[w]=true});
-  if(!Object.keys(state.taught).length&&d.set>=0){
+  if(!Object.keys(state.taught).length&&set>=0){
     const first=ORDER.find(w=>WORDS[w].term===TERM_ORDER[cur]&&trickyTermReady(WORDS[w].term));
     if(first)state.taught[first]=true;
   }
+}
+function fillSetSelect(sel,year,pick){
+  sel.replaceChildren(el("option",{value:"-1",text:"Not started phonics yet"}));
+  let group=null;
+  SETS.forEach((x,i)=>{
+    if(x.stage==="Y1"&&year!=="Y1")return;
+    if(x.phase||!group){group=el("optgroup",{label:x.phase||""});sel.append(group)}
+    const gs=x.gs.slice(0,7).map(gOf).join(" ")+(x.gs.length>7?" …":"");
+    group.append(el("option",{value:String(i),text:`${x.name} · ${gs}`}));
+  });
+  sel.value=String(pick);
+}
+function applySetup(d){
+  state.name=d.name.trim();state.child=d.child;state.year=d.year;state.term="auto";state.palette=d.palette;
+  tickThrough(d.set);
   state.setupDone=true;MS().settings.planKey=null;
   rebuildReal();save();screen="landing";render();
 }
@@ -1633,15 +1667,7 @@ function setupView(){
   const sel=el("select",{id:"setup-set"});let phonField=null;
   const fillSets=()=>{
     const pick=d.set!=null&&(d.year==="Y1"||SETS[d.set]?.stage!=="Y1")?d.set:defaultSet(d.year,curTerm());
-    sel.replaceChildren(el("option",{value:"-1",text:"Not started phonics yet"}));
-    let group=null;
-    SETS.forEach((x,i)=>{
-      if(x.stage==="Y1"&&d.year!=="Y1")return;
-      if(x.phase||!group){group=el("optgroup",{label:x.phase||""});sel.append(group)}
-      const gs=x.gs.slice(0,7).map(gOf).join(" ")+(x.gs.length>7?" …":"");
-      group.append(el("option",{value:String(i),text:`${x.name} · ${gs}`}));
-    });
-    sel.value=String(pick);if(phonField)phonField.hidden=d.year==="N";
+    fillSetSelect(sel,d.year,pick);if(phonField)phonField.hidden=d.year==="N";
   };
   sel.addEventListener("change",()=>{d.set=+sel.value});
   fillSets();
@@ -1658,6 +1684,7 @@ function setupView(){
     el("div",{class:"brand"},el("b",{class:"brand-word"},logoMark(),"Waddle"),el("span",{class:"note",text:"Parent-led daily reading and maths practice for early years"})),
     el("h1",{text:adding?"Add a child":"Let's set up Waddle"}),
     el("p",{class:"note",text:"For a grown-up, once. It takes about a minute, and you can change everything later in Grown-ups."}),
+    el("p",{class:"note",text:"Waddle is for you and your child to do together, a few minutes a day, followed by a book. It is independent and not affiliated with Little Wandle or the NCETM."}),
     el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's name"}),nameIn),
     segRow("Girl or boy","su-child",[["girl","Girl"],["boy","Boy"]],"child"),
     segRow("School year","su-year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],"year",fillSets),
@@ -1667,7 +1694,7 @@ function setupView(){
     tip?el("p",{class:"tipbox",text:tip}):null,
     el("button",{class:"btn go",type:"button",on:{click:()=>{d.name=nameIn.value;d.set=+sel.value;applySetup(d)}}},"Start"),
     adding?el("button",{class:"linkbtn",type:"button",on:{click:()=>{removeChild(family.active);screen="landing";render()}}},"Cancel")
-      :el("p",{class:"note"},"Moving from another phone? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
+      :el("p",{class:"note"},"Moving from another device? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
     box);
 }
 
@@ -1692,20 +1719,23 @@ function bookPanel(){
         el("span",{text:new Date(y,m-1,dd).toLocaleDateString("en-GB",{weekday:"narrow"})}))}));
   const status=readToday
     ?el("span",{class:"note streak"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),"Read today")
-    :practiceDone()?el("span",{class:"note nudge-note",text:"Time to read it!"})
+    :practiceDone()?el("span",{class:"note nudge-note",text:"Time to read!"})
     :el("span",{class:"note",text:n?`${n} day${n===1?"":"s"} this week`:"Not read yet this week"});
   return el("section",{class:"panel bookpanel-home"},
-    el("div",{class:"panel-head"},el("h2",{text:isNursery()?"Read a book":"School book"}),status),
+    el("div",{class:"panel-head"},el("h2",{text:"Read together"}),status),
     row,
     readToday
       ?el("button",{class:"linkbtn undo-read",type:"button",on:{click:toggleRead}},"Undo today's tick")
-      :el("button",{class:"btn readbtn"+(practiceDone()?" nudge":""),type:"button",on:{click:toggleRead}},"I've read my book today"));
+      :el("button",{class:"btn readbtn"+(practiceDone()?" nudge":""),type:"button",on:{click:toggleRead}},"We've read a book today"));
 }
 const CHILD_COL={pink:["#E0336F","#FF6FA1"],blue:["#2D6CD2","#6FA5FF"],green:["#2B8752","#5CC98A"]};
 const isDark=()=>{const t=document.documentElement.getAttribute("data-theme");return t?t==="dark":!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)};
 const childCol=p=>(CHILD_COL[p]||CHILD_COL.pink)[isDark()?1:0];
 const childLight=p=>(CHILD_COL[p]||CHILD_COL.pink)[1];
 let landingPick=null;
+const landSit=()=>el("p",{class:"land-sit",text:"Grown-ups, please sit with me."});
+const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),"If you find a bug, please let me know. ",
+  "Progress is saved only on this device and is never sent anywhere.");
 function landingView(){
   const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and maths practice for early years"}));
   const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
@@ -1714,7 +1744,7 @@ function landingView(){
   if(ks.length>1){
     /* One screen, two taps: choose a name (the others fade), then Let's practise */
     const sel=ks.find(k=>k.id===landingPick)||null,c=sel?CHILD_COL[sel.st.palette]?.[0]||CHILD_COL.pink[0]:null,cl=sel?childLight(sel.st.palette):null,selName=sel?((sel.st.name||"").trim()||"Child"):"";
-    return el("section",{class:"landing"},brand,lock,
+    return el("section",{class:"landing"},brand,lock,landFoot(),
       el("div",{class:"land-main picking",style:sel?`--accent:${c};--on-accent:#FFFFFF;--bow:${cl};--nm:${cl}`:""},
         el("span",{class:"land-duck",html:DUCK_SVG(true)}),
         sel?el("h1",{class:"land-hello"},"Hello, ",el("span",{class:"land-name",text:selName}),"!"):el("h1",{class:"land-hello sweep-text","aria-label":"Who's practising?"},[..."Who's practising?"].map((ch,i)=>el("span",{"aria-hidden":"true",style:`--d:${(i*0.07).toFixed(2)}s`,text:ch}))),
@@ -1723,14 +1753,15 @@ function landingView(){
           return el("button",{class:"namebtn"+(sel?(sel.id===id?" on":" off"):""),type:"button","aria-pressed":String(!!sel&&sel.id===id),style:`--cc:${col}`,on:{click:()=>{landingPick=sel&&sel.id===id?null:id;render()}}},
             el("span",{class:"nb-name",style:`font-size:${L<=6?28:L<=8?24:L<=10?20:L<=13?17:14}px`,text:n}));
         })),
-        (()=>{const go=el("button",{class:"btn land-go",type:"button",on:{click:()=>{if(!sel)return;switchChild(sel.id);landingPick=null;screen="home";render()}}},"Let's practise");go.disabled=!sel;return go})()));
+        (()=>{const go=el("button",{class:"btn land-go",type:"button",on:{click:()=>{if(!sel)return;switchChild(sel.id);landingPick=null;screen="home";render()}}},"Let's practise");go.disabled=!sel;return go})(),landSit()));
   }
   const name=(state.name||"").trim(),s=streak(),c=(CHILD_COL[state.palette]||CHILD_COL.pink)[0],cl=childLight(state.palette);
-  return el("section",{class:"landing"},brand,lock,
+  return el("section",{class:"landing"},brand,lock,landFoot(),
     el("div",{class:"land-main",style:`--accent:${c};--on-accent:#FFFFFF;--bow:${cl};--nm:${cl}`},
       el("span",{class:"land-duck",html:DUCK_SVG(true)}),
       el("h1",{class:"land-hello"},"Hello",name?", ":null,name?el("span",{class:"land-name",text:name}):null,"!"),
       el("button",{class:"btn land-go",type:"button",on:{click:()=>{screen="home";render()}}},"Let's practise"),
+      landSit(),
       s.today&&s.ducks?el("p",{class:"note streak"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),allDone()?"All done for today":practiceDone()?"Practice done. Now read ⟦ysb⟧":"Practised today"):null));
 }
 function startView(){
@@ -1738,30 +1769,29 @@ function startView(){
     const sp=planSounds(),tp=planTricky(),tt=taughtTricky();
     const ng=sp.queue.filter(q=>q.kind==="g").length,nw=sp.queue.filter(q=>q.kind==="w").length;
     const soundsTile=sp.queue.length
-      ?choiceTile({icon:"sounds",title:"Sounds and words",note:listBits([ng&&`${ng} sounds`,nw&&`${nw} words`])+" · 4 min",onClick:()=>begin("sounds",sp.queue),done:doneToday("sounds")})
-      :choiceTile({icon:"sounds",title:"Sounds and words",note:"Tick ⟦her⟧ sounds in Grown-ups first",disabled:true});
+      ?choiceTile({icon:"sounds",title:"Sounds",note:listBits([ng&&`${ng} sounds`,nw&&`${nw} words`])+" · 4 min",onClick:()=>begin("sounds",sp.queue),done:doneToday("sounds")})
+      :choiceTile({icon:"sounds",title:"Sounds",note:"Tick ⟦her⟧ sounds in Grown-ups first",disabled:true});
     const trickyTile=!tt.length
       ?choiceTile({icon:"tricky",title:"Tricky words",note:"Tick ⟦her⟧ tricky words in Grown-ups first",disabled:true})
       :tp.queue.length
         ?choiceTile({icon:"tricky",title:"Tricky words",note:`${tp.queue.length} word${tp.queue.length>1?"s":""} · 2 min`,onClick:()=>begin("tricky",tp.queue),done:doneToday("tricky")})
-        :choiceTile({icon:"tricky",title:"Tricky words",onClick:()=>begin("tricky",shuffle(tt).slice(0,5).map(v=>({kind:"t",v}))),done:true,
-            badge:doneToday("tricky")?"Done for today":"Nothing due today",again:doneToday("tricky")?"Tap to practise again":"Tap for extra practice"});
+        :choiceTile({icon:"tricky",title:"Tricky words",done:true,badge:doneToday("tricky")?"Done for today":"Nothing due today"});
     return el("div",{class:"stack"},
-      el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:"Reading"}),grownLink()),
+      el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:"Sounds and words"}),grownLink()),
       el("div",{class:"choices"},soundsTile,trickyTile));
   }
   const mq=planMaths();
   return el("div",{class:"stack home"},
     el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="landing";render()}}},"‹ Home"),grownLink()),
     allDone()?el("section",{class:"panel alldone"},el("span",{class:"big-tick","aria-hidden":"true",text:"✓"}),
-      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Reading, maths and the ⟦sb⟧ are finished. Come back tomorrow for more ducklings."})))
+      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Practice and reading together are done. Come back tomorrow for more ducklings."})))
     :practiceDone()?el("section",{class:"panel alldone nextbook"},el("span",{class:"big-tick book-tick","aria-hidden":"true",html:BOOK_SVG}),
-      el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:"Reading and maths are finished. Tick the ⟦sb⟧ below once it's read."}))):null,
+      el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:"Sounds and numbers are finished. Tick the book below once you have read together."}))):null,
     el("div",{class:"choices"},
-      isNursery()?choiceTile({icon:"book",title:"Reading",note:"Listening and rhyme games · 4 min",onClick:()=>begin("listen",planListen()),done:readingDone()})
-        :choiceTile({icon:"book",title:"Reading",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
-      mq.length?choiceTile({icon:"dice",title:"Maths",note:"Quick looks, counting and more · 4 min",onClick:()=>begin("maths",mq),done:mathsDone()})
-               :choiceTile({icon:"dice",title:"Maths",note:"Turn on an activity in Grown-ups first",disabled:true})),
+      isNursery()?choiceTile({icon:"book",title:"Listening",note:"Listening and rhyme games · 4 min",onClick:()=>begin("listen",planListen()),done:readingDone()})
+        :choiceTile({icon:"book",title:"Sounds",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
+      mq.length?choiceTile({icon:"dice",title:"Numbers",note:"Quick looks, counting and more · 4 min",onClick:()=>begin("maths",mq),done:mathsDone()})
+               :choiceTile({icon:"dice",title:"Numbers",note:"Turn on an activity in Grown-ups first",disabled:true})),
     bookPanel(),ducksPanel());
 }
 
@@ -1807,7 +1837,7 @@ function progressView(){
 
   wrap.append(el("div",{class:"summary four span-all"},
     tile(`${pDays}/14`,"Days practised","last two weeks"),
-    tile(`${rDays}/14`,isNursery()?"Days with a book":"Days with ⟦her⟧ school book","last two weeks"),
+    tile(`${rDays}/14`,"Days with a book","last two weeks"),
     tile(sum(thisWeek,"n")?`${pct(sum(thisWeek,"up"),sum(thisWeek,"n"))}%`:"–",isNursery()?"Listening games right first time":"Cards on ⟦her⟧ own","this week"),
     isNursery()?(()=>{const mw=state.log.filter(e=>e.t==="maths"&&e.n&&weekStart(e.d)===weekStart(t));return tile(sum(mw,"n")?`${pct(sum(mw,"up"),sum(mw,"n"))}%`:"–","Maths right first time","this week")})()
       :tile(sum(al,"an")?`${sum(al,"au")}/${sum(al,"an")}`:"–","Alien words decoded","on ⟦her⟧ own, recent")));
@@ -2348,8 +2378,13 @@ function mathsGuide(){
   return el("div",{class:"guide"},left,right);
 }
 function guideView(){
-  const bar=el("div",{class:"seg topic"},[["reading","Reading"],["maths","Maths"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(guideTopic===k),on:{click:()=>{guideTopic=k;render()}}},l)));
-  return el("div",{class:"stack"},bar,guideTopic==="maths"?mathsGuide():readingGuide());
+  const bar=el("div",{class:"seg topic"},[["reading",isNursery()?"Listening":"Sounds and words"],["maths","Numbers"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(guideTopic===k),on:{click:()=>{guideTopic=k;render()}}},l)));
+  const intro=el("section",{class:"panel prose"},
+    el("h2",{text:"Waddle sits beside books"}),
+    el("p",{text:"Waddle is for you and your child to do together, a little like a mother duck leading her ducklings. It takes a few minutes a day, you sit beside your child, and you decide whether each answer was right. Children learn most when a grown-up is there to notice, encourage and explain."}),
+    el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
+    el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}));
+  return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());
 }
 function readingGuide(){
   const left=el("section",{class:"panel prose"});
@@ -2389,10 +2424,9 @@ function readingGuide(){
 function dataPanel(){
   const b=(t,rest)=>el("p",{class:"note"},el("b",{text:t}),rest);
   return el("section",{class:"panel"},el("h2",{text:"Your data"}),
-    ...(remote?[el("p",{class:"note",text:"Progress here is saved to your account. On the Waddle website, progress is saved only on the phone, so use Backup to move it between them."})]
-    :[b("Progress is saved only on this phone."," Nothing about your child leaves it. Safari can clear saved data for a website that hasn't been opened for seven days, and an app added to the home screen is protected from that."),
-      b("Add it to the home screen."," On an iPhone, open the link in Safari, tap Share, then tap Add to Home Screen. Once it has been opened with a signal, it works without one."),
-      b("Each phone keeps its own progress."," If two parents use separate phones, they won't see each other's sessions. Backup moves progress from one phone to another, and it is worth doing now and then in case a phone is lost.")]));
+    ...([b("Progress is saved only on this device."," Nothing about your child leaves it. Safari can clear saved data for a website that hasn't been opened for seven days, and an app added to the home screen is protected from that."),
+      b("Add it to the home screen."," On an iPhone, open the link in Safari, tap Share, then tap Add to Home Screen. On a laptop, bookmark the page. Once it has been opened with a signal, it works without one."),
+      b("Each device keeps its own progress."," If two parents use separate devices, they won't see each other's sessions. Backup moves progress from one device to another, and it is worth doing now and then in case a device is lost.")]));
 }
 function settingsPanel(){
   const nameIn=el("input",{id:"reader-name",type:"text",maxlength:"24",placeholder:"e.g. Ruby",autocomplete:"off"});
@@ -2422,6 +2456,15 @@ function settingsPanel(){
         box.append(ask);return box})():null),
       el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ school year"}),
         seg("School year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],state.year,setYear,"lab-year"),
+        yearPending==="N"?el("div",{class:"confirm"},
+          el("span",{class:"note",text:"Nursery has no sounds or tricky words, so switching clears the ones ticked. If ⟦she⟧ moves up to Reception, you can choose where school has got to."}),
+          el("button",{class:"btn small danger",type:"button",on:{click:confirmNursery}},"Switch to Nursery"),
+          el("button",{class:"btn ghost small",type:"button",on:{click:()=>{yearPending=null;render()}}},"Cancel")):null,
+        (state.year!=="N"&&!hasTicks())?(()=>{
+          const sel=el("select",{id:"year-set"});fillSetSelect(sel,state.year,defaultSet(state.year,curTerm()));
+          return el("div",{class:"field"},el("label",{for:"year-set",text:"Latest sounds taught at school"}),sel,
+            el("p",{class:"note",text:"Nothing is ticked yet. Choose where school has got to and every sound up to there is ticked, along with the tricky words from earlier terms. You can fine-tune both on the Sounds and words tab."}),
+            el("div",{class:"row"},el("button",{class:"btn small",type:"button",on:{click:()=>{tickThrough(+sel.value);rebuildReal();save();render()}}},"Tick these sounds")))})():null,
         seg("Term",[["auto","From the date"],["autumn","Autumn"],["spring","Spring"],["summer","Summer"]],state.term,v=>{state.term=v;save();render()},"lab-term"),
         el("p",{class:"note",text:`Now set to ${curTermLabel()} term. The year and term choose this term's maths plan, mark where ⟦she⟧ is in the guides and open the right block of tricky words. Change the school year yourself each September.`}),
         state.year==="Y1"?el("div",{class:"field"},
@@ -2436,7 +2479,7 @@ function settingsPanel(){
       el("section",{class:"panel"},el("h2",{text:"Look and sound"}),
         seg("Colour theme",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],state.palette,v=>{state.palette=v;save();render()},"lab-pal"),
         seg("Sound",[[true,"On"],[false,"Off"]],soundOn(),v=>{setSoundOn(v);if(v)SFX.right();render()},"lab-snd"),
-        el("p",{class:"note",text:"A few soft notes for a right answer, a finished practice and a hatching duckling. This setting belongs to this phone."})),
+        el("p",{class:"note",text:"A few soft notes for a right answer, a finished practice and a hatching duckling. This setting belongs to this device."})),
       dataPanel(),
       backupPanel(),
       el("section",{class:"panel"},el("h2",{text:"Progress"}),el("p",{class:"note",text:"Clearing history keeps ⟦her⟧ ticked sounds, tricky words, book list and settings."}),confirmBox)));
@@ -2622,7 +2665,7 @@ function doneView(){
     ...movedOn(session.moved),
     look.length?el("p",{text:session.type==="tricky"?"Look for these words in tonight's reading book:":`Find these in ${state.sounds.book.title||"⟦her⟧ reading book"}:`}):null,
     look.length?el("div",{class:"chips",style:"justify-content:center"},look.map(w=>el("span",{class:"chip",text:w}))):null,
-    practiceDone()&&!bookRead()?el("p",{class:"nudge-note big",text:"Reading and maths are done. Now read ⟦ysb⟧!"}):null,
+    !bookRead()?el("p",{class:"nudge-note big",text:practiceDone()?"Sounds and numbers are done. Now read a book together!":"Now read a book together!"}):null,
     session.type==="maths"?el("p",{class:"muted",text:"Real-life maths for later today"}):null,
     session.type==="maths"?el("p",{class:"mtip",text:mpick(MATHS_TIPS)}):null,
     el("button",{class:"btn",on:{click:()=>{session=null;screen="home";render()}}},"Done"));
@@ -2643,7 +2686,8 @@ function soundsView(){
 
   // Sound sets
   const sets=el("section",{class:"panel"},
-    el("p",{class:"muted",text:"Tap a sound once school has taught it. Practice only uses ticked sounds, so nothing runs ahead of the classroom."}));
+    el("p",{class:"muted",text:"Tap a sound once school has taught it. Practice only uses ticked sounds, so nothing runs ahead of the classroom."}),
+    el("p",{class:"note",text:"Phase 1 is the nursery listening games, with no sounds to tick. Phase 4 teaches no new sounds and uses the ones above to read longer words, controlled by the switch at the bottom."}));
   let gsets=null;
   const curPhase={"R-autumn":0,"R-spring":1,"R-summer":1}[planKey()]??2;let pi=-1;
   SETS.forEach((s,si)=>{

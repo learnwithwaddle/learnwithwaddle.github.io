@@ -76,10 +76,47 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .chip{font-family:var(--font-child);font-size:22px;padding:1px 13px;border-radius:12px;background:var(--soft);border:2px solid var(--hair)}
 .chip .tag{font:600 11px var(--font-head);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-left:6px;vertical-align:middle}
 .chip.alien{border-color:var(--alien);color:var(--alien)}
+.unit{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:2px dashed var(--hair)}
+.unit .switch{font-size:15px}
+.unit .ulabel b{font:600 15px var(--font-head)}
+.unit .uwords .chip{font-size:18px;padding:0 9px}
+.chip mark{background:var(--hl);color:var(--hl-ink);border-radius:5px;padding:0 1px}
+.chip.prickly{border-style:dashed;border-color:var(--accent)}
+.chip.homo{font:600 15px var(--font-head);border-style:dotted}
 .chip.snd{background:var(--hl);color:var(--hl-ink);border-color:transparent}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
 /* Ducklings */
+/* Build a duck */
+.bduck{width:100%;height:auto;display:block;overflow:visible}
+.bd{stroke:#3A1730;stroke-width:1.6;stroke-linejoin:round}
+.bd2{stroke:#3A1730;stroke-width:1.2;stroke-linejoin:round}
+.bduck .gh{fill:none;stroke:var(--muted);stroke-opacity:.55;stroke-width:1.6;stroke-dasharray:3 3}
+.bigbuild{width:min(200px,60%);margin:0 auto}
+.bigbuild.sm{width:100px;margin:0;flex:none}
+.home .build{gap:4px}.home .buildside .btn{padding:8px 16px}.home .buildside{gap:5px}
+.buildrow{display:flex;align-items:center;gap:12px}
+.buildside{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.pdots{display:flex;gap:3px;flex-wrap:nowrap}
+.pdots i{width:11px;height:11px;border-radius:50%;border:2px solid var(--hair);box-sizing:border-box;flex:none}
+.pdots i.on{background:var(--duck);border-color:var(--duck-line)}
+.flocklink{font-size:15px;padding:2px 0;color:var(--muted)}
+.pick{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.pick-q{font:600 20px var(--font-head);margin:0}
+.pick-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.pick-opt{background:var(--card);border:3px solid var(--edge);border-radius:20px;padding:6px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:600 15px var(--font-head);color:var(--ink)}
+.pick-opt:hover,.pick-opt:focus-visible{background:var(--soft)}
+.pick-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.placed{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.flock{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.fduck{background:var(--soft);border-radius:18px;padding:6px}
+.newcans{display:flex;flex-direction:column;gap:2px;align-items:center}
+.can-line{font:600 18px var(--font-head);margin:2px 0}
+.wall-inline+.grown-inline{margin-left:0}
+.cans{display:flex;flex-direction:column;gap:8px}
+.can{display:flex;gap:10px;align-items:flex-start}
+.can-tick{width:22px;height:22px;flex:none;border-radius:50%;background:var(--good);color:var(--on-btn);display:inline-grid;place-items:center;font:700 13px var(--font-head);margin-top:2px}
+.can-text{font:600 17px var(--font-head)}
 .pond{display:flex;flex-direction:column;gap:10px}
 .ducks{display:flex;flex-wrap:wrap;align-items:flex-end;gap:2px 0;padding:6px 4px 8px;border-bottom:4px dotted var(--hair)}
 .duck{width:38px;height:34px;flex:none}
@@ -134,6 +171,15 @@ button.g{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .word:not(.marks) .mark{visibility:hidden}
 .g.lit{background:var(--hl);color:var(--hl-ink)}
 .g.lit .dot,.g.lit .bar{background:var(--accent)}
+.spbody{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.spword{display:flex;justify-content:center;align-items:flex-end;flex-wrap:nowrap;max-width:100%;box-sizing:border-box;font-family:var(--font-child);line-height:1.15;color:var(--ink);background:var(--soft);border:3px solid var(--hair);border-radius:.28em;padding:.1em .28em .12em;min-height:1.5em}
+.spword .hl{background:var(--hl);color:var(--hl-ink);border-radius:.12em;padding:0 .03em}
+.spword.covered{gap:.1em;align-items:flex-end}
+.sp-blank{display:inline-block;width:.46em;height:.07em;background:var(--ink);opacity:.5;margin:0 .02em .22em}
+.spsent{font:500 20px/1.45 var(--font-child);text-align:center;max-width:30ch;margin:0}
+.spsent b{background:var(--hl);color:var(--hl-ink);padding:0 .3em;border-radius:8px;font-weight:700}
+.spsent .gap{display:inline-block;min-width:3.2em;border-bottom:3px solid var(--ink);vertical-align:baseline;margin:0 .15em}
+.flash[data-stage="look"]~.side .grades,.flash[data-stage="cover"]~.side .grades,.flash[data-stage="look"]~.side>.note,.flash[data-stage="cover"]~.side>.note{display:none}
 .sweep{width:min(78%,500px);height:9px;border-radius:5px;background:var(--hair);position:relative}
 .sweep.on{background:var(--accent)}
 .sweep::after{content:"";position:absolute;right:-10px;top:50%;transform:translateY(-50%);border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:14px solid var(--hair)}
@@ -246,7 +292,7 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .lockbtn{margin-left:auto}
 .linkbtn.due::after{content:"";display:inline-block;width:8px;height:8px;margin-left:6px;border-radius:50%;background:var(--accent);vertical-align:middle}
 .panel.remind{border-color:var(--accent)}
-.gate{max-width:460px;width:100%;margin:0 auto;align-items:center;text-align:center}
+.gate{box-sizing:border-box;max-width:460px;width:100%;margin:0 auto;align-items:center;text-align:center}
 .gate-form{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
 .gate-q{font:600 30px var(--font-head)}
 .gate-form input{font:600 26px var(--font-head);width:3.2em;text-align:center;padding:6px;border-radius:14px;border:3px solid var(--edge);background:var(--soft);color:var(--ink)}
@@ -375,6 +421,8 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .mex .m-dots{max-height:120px}
 /* Practise choices */
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.choices.three>.choice:nth-child(3){grid-column:1/-1}
+.choices.three>.choice:nth-child(3) .cicon{width:min(120px,50%)}
 .choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px 16px 26px;background:var(--card);color:var(--ink);border:3px solid var(--edge);border-radius:32px;box-shadow:7px 7px 0 var(--shadow);cursor:pointer;text-align:center;font-family:var(--font-head);transition:transform .08s,box-shadow .08s;min-width:0}
 .choice:active{transform:translate(4px,4px);box-shadow:3px 3px 0 var(--shadow)}
 .choice[aria-disabled="true"]{cursor:default;opacity:.6}
@@ -392,6 +440,8 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .i-tile{fill:var(--soft);stroke:var(--hair);stroke-width:3}
 .i-hl{fill:var(--hl)}
 .i-letters{font:400 46px var(--font-child);fill:var(--ink)}
+.i-letters.sm{font-size:40px}
+.i-underline{fill:none;stroke:var(--hair);stroke-width:4;stroke-linecap:round}
 @media (max-width:420px){.choices{gap:14px}.choice{padding:22px 10px 18px;border-radius:26px}.cn{font-size:12px}}
 .mark .arc{width:.42em;height:9px;border:4px solid var(--accent);border-top:0;border-radius:0 0 12px 12px;box-sizing:border-box}
 .gt.ex{display:inline-flex;flex-direction:column;align-items:center;line-height:1.05;padding:4px 10px 3px}
@@ -417,6 +467,7 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .mopts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .mopt{min-width:86px;min-height:86px;padding:8px 18px;font:600 44px/1 var(--font-head);color:var(--ink);background:var(--card);border:3px solid var(--edge);border-radius:24px;box-shadow:4px 4px 0 var(--shadow);cursor:pointer;transition:transform .08s,box-shadow .08s}
 .mopts.words .mopt{font-size:30px;min-width:140px}
+.mopts.two{gap:10px}.mopts.two .mopt{font-size:40px;min-width:80px;padding:8px 12px}
 .mopt:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--shadow)}
 .mopt.win{background:var(--good);border-color:var(--good);color:var(--on-btn)}
 .mopt.nope{opacity:.35;cursor:default}
@@ -431,6 +482,8 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .m-reed{fill:none;stroke:#4E8F5E;stroke-width:5;stroke-linecap:round}
 .m-bulrush{fill:#8A5A3C;stroke:var(--duck-line);stroke-width:1.5}
 .mirror{display:flex;align-items:center;gap:18px;justify-content:center}
+.nearv{display:flex;flex-direction:column;align-items:center;gap:10px}
+.nearv .m-dots{max-height:64px}
 .mirror .m-dots{max-height:140px}
 .mline{width:4px;align-self:stretch;background:var(--hair);border-radius:2px}
 .story{display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -868,8 +921,110 @@ const LATER_TRICKY=[
 ];
 LATER_TRICKY.forEach(([term,hl,note,str])=>GROUPS.push({term,hl,title:term,note,
   words:str.split("|").map(e=>{const [w,ps]=e.split("=");return [w,ps.split(".").map(p=>{const [g,l]=p.split("~");return l?[g,l]:[g]})]})}));
+/* Year 2 tricky words: the national curriculum's common exception words that Year 1 has not already covered */
+const Y2_TRICKY=[
+  ["Year 2 autumn","o","o says oa","In these words o makes oa as in boat, and the letters after it have to be sounded out as well.","old=o~says oa.l.d|cold=c.o~says oa.l.d|gold=g.o~says oa.l.d|hold=h.o~says oa.l.d|told=t.o~says oa.l.d|both=b.o~says oa.th|most=m.o~says oa.s.t|only=o~says oa.n.l.y~says ee"],
+  ["Year 2 autumn","i","i says igh","In these words i makes igh as in night. Children is the odd one out, with the short i.","find=f.i~says igh.n.d|kind=k.i~says igh.n.d|mind=m.i~says igh.n.d|behind=b.e.h.i~says igh.n.d|child=ch.i~says igh.l.d|wild=w.i~says igh.l.d|children=ch.i~says i.l.d.r.e.n|climb=c.l.i~says igh.m.b~silent"],
+  ["Year 2 spring","a","a says ar","In these words a makes ar as in car. This depends on your accent, and some schools teach them as regular words.","after=a~says ar.f.t.er|fast=f.a~says ar.s.t|last=l.a~says ar.s.t|past=p.a~says ar.s.t|father=f.a~says ar.th.er|class=c.l.a~says ar.ss|grass=g.r.a~says ar.ss|pass=p.a~says ar.ss|plant=p.l.a~says ar.n.t|path=p.a~says ar.th|bath=b.a~says ar.th"],
+  ["Year 2 spring","ea","ea says ai","ea usually says ee or e. In these words it says ai.","break=b.r.ea~says ai.k|steak=s.t.ea~says ai.k|great=g.r.ea~says ai.t"],
+  ["Year 2 summer","oor","oor says or","oor makes the or sound in door and floor. Poor depends on your accent.","door=d.oor~says or|floor=f.l.oor~says or|poor=p.oor~says or"],
+  ["Year 2 summer","!","Odd ones out","Each of these has its own odd bit.","every=e.v.e~says uh.r.y~says ee|half=h.a~says ar.l~silent.f|money=m.o~says u.n.ey~says ee|clothes=c.l.o~says oa.th.e~silent.s~says z|sugar=s~says sh.u.g.ar~says uh|Christmas=Ch.r.i.s.t~silent.m.a.s"]
+];
+Y2_TRICKY.forEach(([term,hl,title,note,str])=>GROUPS.push({term,hl,title,note,
+  words:str.split("|").map(e=>{const [w,ps]=e.split("=");return [w,ps.split(".").map(p=>{const [g,l]=p.split("~");return l?[g,l]:[g]})]})}));
 const WORDS={},ORDER=[];
 GROUPS.forEach((g,gi)=>g.words.forEach(([w,parts])=>{WORDS[w]={w,parts,group:gi,term:g.term};ORDER.push(w)}));
+
+/* ================= Year 2 spelling: follows the Little Wandle Spelling units ================= */
+/* Words are written with [ ] round the letters a unit is about. A prickly spelling or a homophone also carries a sentence, with ___ where the word goes. */
+const PRICKLY={
+  one:["[o]ne","I have ___ sister."],once:["[o]nce","We went there ___."],two:["t[wo]","I have ___ hands."],again:["ag[ai]n","Let's try ___."],
+  any:["[a]ny","Do you have ___ pets?"],many:["m[a]ny","There are ___ stars."],who:["[wh]o","___ is at the door?"],whole:["[wh]ole","I ate the ___ cake."],
+  eye:["[eye]","She has a sore ___."],people:["p[eo]ple","The ___ clapped."],journey:["j[our]ney","It was a long ___."],friend:["fr[ie]nd","She is my ___."],
+  move:["m[o]ve","Please ___ your chair."],improve:["impr[o]ve","I want to ___ my writing."],says:["s[ay]s","She ___ hello."],said:["s[ai]d","He ___ thank you."],
+  busy:["b[u]sy","Dad is ___ today."],pretty:["pr[e]tty","What a ___ dress."],parents:["par[e]nts","My ___ read to me."],because:["bec[au]se","I smiled ___ I was happy."],
+  beautiful:["b[eau]tiful","What a ___ day!"],laugh:["l[augh]","The joke made us ___."],sure:["[s]ure","I am ___ it is right."],sugar:["[s]ugar","Do you take ___ in tea?"],
+  shoe:["sh[oe]","I lost a ___."],Mr:["M[r]","Mister Brown is our teacher. Write it as ___ Brown."],Mrs:["M[rs]","Missus Green is my neighbour. Write it as ___ Green."],Ms:["M[s]","Miss Khan is my aunt. Write it as ___ Khan."],
+  thought:["th[ough]t","I ___ it was Tuesday."],through:["thr[ough]","We walked ___ the park."],their:["th[eir]","They took ___ coats."],prove:["pr[o]ve","Can you ___ it?"]
+};
+/* id, half term, week, the question the unit answers, the I can statement, words, prickly spellings, homophone sets */
+const SPELL_RAW=[
+ ["p5-1","Autumn 1 · Phase 5 review","Week 1","Which spellings can make the sounds ai, ee, igh and oa?","I can spell the sounds ai, ee, igh and oa in different ways",
+  "m[a]k[e] r[ai]n pl[ay] [eigh]t gr[ea]t happ[y] s[ea] s[ee] f[ie]ld n[igh]t t[i]m[e] sn[ow] h[o]m[e] b[oa]t","people eye whole",""],
+ ["p5-2","Autumn 1 · Phase 5 review","Week 2","Which spellings can make the sounds oo, air, ur and ow?","I can spell the sounds oo, air, ur and ow in different ways",
+  "m[oo]n gr[ew] bl[ue] fr[ui]t h[air] sh[are] b[ear] h[er] t[ur]n b[ir]d f[ir]st l[ear]n cl[ou]d c[ow]","through improve move prove shoe two who beautiful their parents",""],
+ ["p5-3","Autumn 1 · Phase 5 review","Week 3","Which spellings can make the sounds or, ch and sh?","I can spell the sounds or, ch and sh in different ways",
+  "f[or]k s[aw] [au]tumn sn[ore] fl[oor] w[al]k c[augh]t vi[si]on u[su]al ma[tch] pic[ture] pa[ti]ent [ch]ef spe[ci]al","thought sure",""],
+ ["p5-4","Autumn 1 · Phase 5 review","Week 4","Which spellings can make the sounds j, s and the short sounds u, e, i, o and oo?","I can spell j, s and the short vowel sounds in different ways",
+  "[j]ump [g]iant bri[dge] pa[ss] [c]ity mou[se] whi[st]le [sc]ent y[ou]ng h[ea]d g[y]m wh[a]t c[o]m[e] c[oul]d","once again any many friend busy pretty because laugh",""],
+ ["p5-5","Autumn 1 · Phase 5 review","Week 5","How can ie, y, ea and a make more than one sound?","I can spell ie, y, ea and a when they make different sounds",
+  "ch[ie]f sh[ie]ld l[ie] funn[y] fl[y] m[y]th m[ea]t br[ea]d br[ea]k p[a]per w[a]ter c[a]t","",""],
+ ["b-1","Autumn 2 · Bridge to spelling","Week 1","What do I need to know to think about spelling?","I can listen for every sound in a word to help me spell it",
+  "splash scratch string thrill shrink stamp branch crunch blanket jumper trumpet yellow","",""],
+ ["b-2","Autumn 2 · Bridge to spelling","Week 2","Why do I double letters at the end of words, and in words ending -er?","I can spell words with ff, ll, ss and zz, and doubled letters before er",
+  "cli[ff] stu[ff] be[ll] mi[ss] dre[ss] bu[zz] fi[zz] la[dd]er le[tt]er di[nn]er su[pp]er ha[mm]er ru[bb]er","",""],
+ ["b-3","Autumn 2 · Bridge to spelling","Week 3","Why do some words end in k or ck, and in ch or tch?","I can tell when to use ck, k, tch and ch at the end of a word",
+  "ba[ck] ne[ck] clo[ck] boo[k] wee[k] par[k] mil[k] ca[tch] swi[tch] ki[tch]en mu[ch] whi[ch] tea[ch] lun[ch]","",""],
+ ["b-4","Autumn 2 · Bridge to spelling","Week 4","When do I add -s or -es, and when do I double the last letter before -ing?","I can tell when to add s or es, and when to double the last letter",
+  "dog[s] book[s] box[es] glass[es] wish[es] church[es] bus[es] watch[es] run[n]ing hop[p]ing sit[t]ing shop[p]ing swim[m]ing clap[p]ing","",""],
+ ["b-5","Autumn 2 · Bridge to spelling","Week 5","Why do I swap y for i before -ed, and drop the e before -ing?","I can tell when to swap y for i and when to drop the e",
+  "cr[ied] tr[ied] carr[ied] cop[ied] hurr[ied] worr[ied] tak[ing] mak[ing] rid[ing] hid[ing] writ[ing] giv[ing]","",""],
+ ["u1","Spring 1 · Unit 1","Weeks 1 and 2","Why do some words have kn and gn for the sound n, and wr for the sound r?","I can spell words with kn, gn and wr",
+  "[kn]ee [kn]ot [kn]ife [kn]ow [kn]it [kn]ock [gn]at [gn]aw [gn]ome [wr]ite [wr]ap [wr]ong [wr]ist [wr]ote","one once",
+  "[knight|The ___ rode a big horse.][night|The stars come out at ___.]"],
+ ["u2","Spring 1 · Unit 2","Weeks 3 and 4","Why do I drop the e when I add -ed, -ing, -er, -est and -y?","I can tell when to drop the e before a suffix",
+  "hop[ed] smil[ed] liv[ed] hop[ing] us[ing] bak[ing] nic[er] bak[er] nic[est] brav[est] shin[y] smok[y] nois[y]","two again",
+  "[one|I have ___ sister.][won|Our team ___ the game.]"],
+ ["u3","Spring 1 · Unit 3","Week 5","Why do some words end ge or dge, and why can the sound j be spelled j or g?","I can spell words with ge, dge and j",
+  "ba[dge] e[dge] fu[dge] he[dge] ca[ge] hu[ge] pa[ge] cha[nge] lar[ge] [g]iraffe [g]entle [j]elly","any many",
+  "[where|___ is my coat?][wear|I will ___ my boots.]"],
+ ["u4","Spring 2 · Unit 4","Weeks 1 and 2","How do w and qu change the sounds that a, ar and or make?","I can spell words where w changes the sound that a, ar and or make",
+  "w[a]nt w[a]sp w[a]tch sw[a]n w[a]sh squ[a]sh w[ar] w[ar]m w[ar]n qu[ar]ter w[or]d w[or]k w[or]m w[or]ld","who whole",
+  "[our|This is ___ house.][hour|It takes an ___ to get there.]"],
+ ["u5","Spring 2 · Unit 5","Week 3","Why do I swap y for i when I add -es?","I can tell why baby becomes babies",
+  "bab[ies] fam[ilies] part[ies] stor[ies] pupp[ies] pon[ies] carr[ies] cop[ies] fl[ies] cr[ies] tr[ies] hurr[ies]","eye people",
+  "[quite|It is ___ cold today.][quiet|Please be ___ in the library.]"],
+ ["u6","Spring 2 · Unit 6","Week 4","Why do some words have the spelling ey for the sound ee?","I can spell words that end in ey",
+  "k[ey] donk[ey] monk[ey] vall[ey] chimn[ey] troll[ey] turk[ey] jock[ey] mon[ey] hon[ey]","journey friend",
+  "[see|I can ___ a bird.][sea|The ___ is very blue.]"],
+ ["u7","Spring 2 · Unit 7","Week 5","Why do some words end -le, -el, -al or -il?","I can spell words that end in le, el, al and il",
+  "tab[le] app[le] litt[le] bott[le] puzz[le] cam[el] tunn[el] tow[el] squirr[el] met[al] ped[al] anim[al] penc[il] foss[il]","move improve",
+  "[to|We went ___ the park.][too|It is ___ hot.][two|I have ___ cats.]"],
+ ["u8","Summer 1 · Unit 8","Week 1","Why does c make the sound s in some words?","I can tell when c says s",
+  "[c]ycle [c]ircle [c]ircus [c]inema [c]ell [c]entre [c]ereal i[c]e mi[c]e fa[c]e ra[c]e pla[c]e dan[c]e fen[c]e","says said",
+  "[here|Come ___, please.][hear|I can ___ a bell.]"],
+ ["u9","Summer 1 · Unit 9","Week 2","How can I spell the sound zh?","I can spell the sound zh in words like television",
+  "televi[si]on deci[si]on divi[si]on conclu[si]on trea[su]re mea[su]re plea[su]re lei[su]re","busy pretty",
+  "[be|I want to ___ a vet.][bee|A ___ landed on the flower.]"],
+ ["u10","Summer 1 · Unit 10","Weeks 3 and 4","What happens when I add -ment, -ness, -ful, -less and -ly to a word?","I can add ment, ness, ful, less and ly to a word",
+  "enjoy[ment] state[ment] sad[ness] kind[ness] dark[ness] care[ful] help[ful] thank[ful] care[less] hope[less] sad[ly] quick[ly] slow[ly] gent[ly]","parents because",
+  "[bear|The ___ ate the honey.][bare|Her feet were ___.]"],
+ ["u11","Summer 1 · Unit 11","Week 5","How can I show missing letters in a word?","I can use an apostrophe to show missing letters",
+  "can[']t didn[']t don[']t isn[']t wasn[']t couldn[']t I[']m I[']ll it[']s let[']s we[']ve they[']re she[']s","beautiful laugh",
+  "[there|Put it over ___.][their|The children took ___ coats.][they're|___ going to the park.]"],
+ ["u12","Summer 2 · Unit 12","Weeks 1 and 2","Why do some longer words have ti for the sound sh?","I can spell words that end in tion",
+  "sta[ti]on mo[ti]on lo[ti]on po[ti]on frac[ti]on ac[ti]on sec[ti]on na[ti]on direc[ti]on addi[ti]on","sure sugar shoe",
+  "[sun|The ___ is bright today.][son|He is her ___.]"],
+ ["u13","Summer 2 · Unit 13","Week 3","How do I use the apostrophe to show who owns something?","I can use an apostrophe to show who owns something",
+  "girl['s] dog['s] cat['s] Tom['s] teacher['s] baby['s] mum['s] boy['s] bird['s]","Mr Mrs Ms",
+  "[whole|I ate the ___ cake.][hole|The rabbit dug a ___.]"],
+ ["u14","Summer 2 · Unit 14","Weeks 4 and 5","When do I swap, drop or double?","I can tell when to swap, drop or double a letter",
+  "dr[ied] happ[ier] happ[iest] funn[ier] wid[er] wid[est] smil[ing] hop[p]ed big[g]er big[g]est run[n]er sad[d]est shop[p]ed","thought through",
+  "[blue|The sky is ___.][blew|The wind ___ my hat off.]"]
+];
+/* Possessive words need the owner in the sentence, so these few carry their own */
+const POSS={"girl's":"The book belongs to the girl. It is the ___ book.","dog's":"The bone belongs to the dog. It is the ___ bone.","cat's":"The tail belongs to the cat. It is the ___ tail.","Tom's":"The coat belongs to Tom. It is ___ coat.","teacher's":"The desk belongs to the teacher. It is the ___ desk.","baby's":"The bottle belongs to the baby. It is the ___ bottle.","mum's":"The bag belongs to my mum. It is my ___ bag.","boy's":"The ball belongs to the boy. It is the ___ ball.","bird's":"The nest belongs to the bird. It is the ___ nest."};
+/* "[a]k[e]" becomes the plain word plus the parts to highlight */
+function hlParse(str){const segs=[];let w="";str.replace(/([^\[\]]+)|\[([^\]]+)\]/g,(m,a,b)=>{if(a){segs.push([a,0]);w+=a}else{segs.push([b,1]);w+=b}return m});return {w,segs}}
+const SPELL=SPELL_RAW.map(([id,half,wk,q,can,words,prickly,homo])=>{
+  const items=[];
+  words.split(" ").forEach(s=>{const p=hlParse(s);items.push({key:"w:"+p.w,kind:"sw",w:p.w,segs:p.segs,sent:POSS[p.w]||null})});
+  prickly.split(" ").filter(Boolean).forEach(w=>{const [b,sent]=PRICKLY[w],p=hlParse(b);items.push({key:"p:"+w,kind:"sw",w,segs:p.segs,sent,prickly:true})});
+  const set=[];(homo.match(/\[([^\]|]+)\|([^\]]+)\]/g)||[]).forEach(m=>{const [,w,s]=m.match(/\[([^\]|]+)\|([^\]]+)\]/);set.push({w,sent:s})});
+  if(set.length)items.push({key:"h:"+set.map(x=>x.w).join("/"),kind:"sh",set});
+  return {id,half,wk,q,can,items};
+});
+const SPELL_ITEM={};SPELL.forEach(u=>u.items.forEach(it=>{SPELL_ITEM[it.key]=it}));
 
 /* ================= Dates ================= */
 const pad=n=>String(n).padStart(2,"0");
@@ -881,17 +1036,19 @@ const niceDate=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,
 /* ================= State and storage ================= */
 const INTERVAL={1:1,2:2,3:4,4:7,5:14};
 const LS_KEY="tricky-words-v1";
+function freshSpell(){return {taught:{},auto:{},cards:{}}}
 function freshSounds(){
   const taught={};["s","a","t","p","i","n","m","d"].forEach(g=>taught[g]=true);
   return {taught,auto:{},batch:[],clusters:true,book:{title:"",words:[]},cards:{},gcards:{}};
 }
-function freshState(){return {v:1,setupDone:false,name:"",child:"girl",year:"R",term:"auto",palette:"pink",pace:{reading:"own",maths:"own"},trickyAuto:{},taught:{is:true},cards:{},days:[],log:[],reads:[],readLog:{},currentBook:"",mins:{},listen:{stats:{}},hatched:0,updated:0,sounds:freshSounds(),maths:freshMaths()}}
+function freshState(){return {v:1,setupDone:false,name:"",child:"girl",year:"R",term:"auto",palette:"pink",pace:{reading:"own",maths:"own"},trickyAuto:{},taught:{is:true},cards:{},days:[],log:[],reads:[],readLog:{},currentBook:"",mins:{},listen:{stats:{}},hatched:0,duckYears:{},updated:0,sounds:freshSounds(),spell:freshSpell(),wall:{},maths:freshMaths()}}
 function migrate(s){
   if(!s.sounds)s.sounds=freshSounds();
+  s.spell=s.spell||freshSpell();s.spell.taught=s.spell.taught||{};s.spell.auto=s.spell.auto||{};s.spell.cards=s.spell.cards||{};s.wall=s.wall||{};
   const S=s.sounds;S.taught=S.taught||{};S.auto=S.auto||{};S.batch=S.batch||[];S.cards=S.cards||{};S.gcards=S.gcards||{};
   if(!S.book)S.book={title:"",words:[]};S.book.words=S.book.words||[];
   if(S.clusters===undefined)S.clusters=true;
-  s.year=s.year||"R";s.pace=Object.assign({reading:"own",maths:"own"},s.pace||{});s.trickyAuto=s.trickyAuto||{};s.term=s.term||"auto";s.palette=s.palette||"pink";s.child=s.child==="boy"?"boy":"girl";s.readLog=s.readLog||{};if(s.hatched===undefined)s.hatched=(s.log||[]).length;s.listen=s.listen||{stats:{}};s.listen.stats=s.listen.stats||{};if(s.maths&&s.maths.stageKey===undefined){const OLD=["R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];s.maths.stageKey=s.maths.stage>=0?OLD[s.maths.stage]||null:null}s.mins=s.mins||{};s.currentBook=s.currentBook||"";
+  s.year=s.year||"R";s.pace=Object.assign({reading:"own",maths:"own"},s.pace||{});s.trickyAuto=s.trickyAuto||{};s.term=s.term||"auto";s.palette=s.palette||"pink";s.child=s.child==="boy"?"boy":"girl";s.readLog=s.readLog||{};if(s.hatched===undefined)s.hatched=(s.log||[]).length;s.listen=s.listen||{stats:{}};s.listen.stats=s.listen.stats||{};if(s.maths&&s.maths.stageKey===undefined){const OLD=["R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];s.maths.stageKey=s.maths.stage>=0?OLD[s.maths.stage]||null:null}s.duckYears=s.duckYears||{};s.mins=s.mins||{};s.currentBook=s.currentBook||"";
   if(s.setupDone===undefined)s.setupDone=!!((s.name||"").trim()||(s.days&&s.days.length)||(s.log&&s.log.length)||Object.keys(s.cards||{}).length||(s.sounds&&Object.keys(s.sounds.cards||{}).length));s.cards=s.cards||{};s.days=s.days||[];s.log=s.log||[];s.reads=s.reads||[];if(!s.maths)s.maths=freshMaths();s.maths.cards=s.maths.cards||{};if(s.maths.stage==null)s.maths.stage=-1;s.maths.settings=Object.assign(freshMaths().settings,s.maths.settings||{});s.maths.stats=s.maths.stats||{};s.taught=s.taught||{};
   return s;
 }
@@ -1043,6 +1200,37 @@ function planSounds(){
   return {queue,bookReady,bankReady};
 }
 
+/* ================= Year 2 spelling plan: new spellings from the newest unit, then older ones that are due ================= */
+const SP=()=>state.spell;
+const uHalf=u=>u.half.split(" · ")[0],uLabel=u=>`${u.half.split(" · ")[1]} · ${u.wk}`;
+const spellTaught=()=>SPELL.filter(u=>SP().taught[u.id]);
+const spellNewestIdx=()=>{let n=-1;SPELL.forEach((u,i)=>{if(SP().taught[u.id])n=i});return n};
+const spellKeys=units=>{const seen=new Set();return units.flatMap(u=>u.items.map(i=>i.key)).filter(k=>seen.has(k)?false:(seen.add(k),true))};
+function planSpelling(){
+  const sp=SP(),t=today(),ni=spellNewestIdx();
+  if(ni<0)return {queue:[]};
+  const newest=SPELL[ni],nk=newest.items.map(i=>i.key),ok=spellKeys(spellTaught().filter(u=>u!==newest)).filter(k=>!nk.includes(k));
+  const dueK=k=>sp.cards[k]&&sp.cards[k].due<=t;
+  const fresh=shuffle(nk.filter(k=>!sp.cards[k])),freshOld=shuffle(ok.filter(k=>!sp.cards[k]));
+  const due=nk.concat(ok).filter(dueK).sort((a,b)=>sp.cards[a].box-sp.cards[b].box);
+  let q=fresh.slice(0,3);
+  q=q.concat(due.filter(k=>!q.includes(k)).slice(0,8-q.length));
+  if(q.length<6)q=q.concat(fresh.filter(k=>!q.includes(k)),freshOld.filter(k=>!q.includes(k))).slice(0,6);
+  if(q.length<6){const rest=shuffle(nk.concat(ok).filter(k=>!q.includes(k)));q=q.concat(rest.slice(0,Math.min(2,6-q.length)))}
+  return {queue:shuffle(q).map(v=>({kind:SPELL_ITEM[v].kind==="sh"?"sh":"sw",v}))};
+}
+function spellCriteria(){
+  const sp=SP(),ni=spellNewestIdx();
+  if(ni<0)return {items:[],ready:false,next:SPELL[0]};
+  const newest=SPELL[ni],nk=newest.items.map(i=>i.key),ok=spellKeys(spellTaught().filter(u=>u!==newest)).filter(k=>!nk.includes(k)),c=sp.cards;
+  const nb=nk.filter(k=>c[k]&&c[k].box>=3).length,oldShare=share(ok,k=>c[k]&&c[k].box>=4),next=SPELL[ni+1]||null;
+  const items=[
+    {met:nb/nk.length>=PACE_SHARE,label:"90% of the newest unit's spellings written correctly after a gap of 2 days or more",detail:`${nb} of ${nk.length}`},
+    {met:oldShare>=PACE_SHARE,label:"90% of earlier spellings still correct after 4 days or more",detail:ok.length?`${Math.round(oldShare*100)}% of ${ok.length}`:"none yet"}
+  ];
+  return {items,ready:items.every(i=>i.met)&&!!next&&sp.lastUnlock!==today(),next};
+}
+
 /* ================= Her own pace: move on when fluent and confident after a gap ================= */
 /* Mastery here means: answered straight away (automatic), on her own, and still that way after a gap.
    New items need a short gap (2+ days, Leitner box 3); everything older needs a longer one (4+ days, box 4), so new work can keep arriving while retention is still proven. */
@@ -1075,7 +1263,7 @@ function readingCriteria(){
 }
 function trickyTermReady(term){
   const t=state.sounds.taught;
-  return {"Reception autumn":true,"Reception spring":!!t["ai"],"Reception summer":!!t["er"]&&state.sounds.clusters,"Year 1 autumn":!!t["ay"],"Year 1 spring":!!t["y:ee"],"Year 1 summer":!!t["eigh"]}[term];
+  return {"Reception autumn":true,"Reception spring":!!t["ai"],"Reception summer":!!t["er"]&&state.sounds.clusters,"Year 1 autumn":!!t["ay"],"Year 1 spring":!!t["y:ee"],"Year 1 summer":!!t["eigh"],"Year 2 autumn":true,"Year 2 spring":true,"Year 2 summer":true}[term];
 }
 function trickyCriteria(){
   const taught=taughtTricky(),c=state.cards;
@@ -1086,11 +1274,11 @@ function trickyCriteria(){
   ];
   return {items,ready:taught.length>0&&items.every(i=>i.met)&&next.length>0&&state.trickyLast!==today(),next};
 }
-const MPLAN_ORDER=["N-autumn","N-spring","N-summer","R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer"];
+const MPLAN_ORDER=["N-autumn","N-spring","N-summer","R-autumn","R-spring","R-summer","Y1-autumn","Y1-spring","Y1-summer","Y2-autumn","Y2-spring","Y2-summer"];
 const MPLAN_SCHOOL=MPLAN_ORDER.filter(k=>!k.startsWith("N"));
 function planItemKeys(key){
   const P=PLANS[key],max=P.max,cap10=Math.min(max,10);
-  const R={fing:range(1,Math.min(max,5)),sub:range(1,cap10),cnt:range(key.startsWith("N")?2:Math.min(3,max),Math.min(max,12)),comp:key==="Y1-spring"?[6,7,8,9,10]:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(max,key.startsWith("R")?5:10)),dbl:range(1,Math.min(5,Math.floor(cap10/2))),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
+  const R={fing:range(1,Math.min(max,5)),sub:range(1,cap10),cnt:range(key.startsWith("N")?2:Math.min(3,max),Math.min(max,12)),comp:key==="Y1-spring"?[6,7,8,9,10]:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(max,key.startsWith("R")?5:10)),dbl:key.startsWith("Y2")?range(3,10):range(1,Math.min(5,Math.floor(cap10/2))),more:range(1,cap10),b10:range(1,9),teen:range(11,19),b20:range(11,19),near:range(3,9),cross:range(6,9),subx:range(12,18),grp:[2,5,10],frac:[2,4]};
   return P.acts.flatMap(a=>R[a]?R[a].map(n=>a+":"+n):[a]);
 }
 function mathsCriteria(){
@@ -1106,7 +1294,8 @@ function mathsCriteria(){
 const keyLabel=k=>{const [a,n]=k.split(":");return n?`${ACTS[a].name} ${n}`:ACTS[a].name};
 /* Runs after every finished session. Returns what moved on, for the celebration screen. */
 function checkPace(){
-  const out={sounds:[],tricky:[],maths:null};
+  const out={sounds:[],tricky:[],maths:null,spell:null};
+  if(ownPace("reading")&&isY2()){const sc=spellCriteria();if(sc.ready){SP().taught[sc.next.id]=true;SP().auto[sc.next.id]=today();SP().lastUnlock=today();out.spell=sc.next}}
   if(ownPace("reading")&&!isNursery()){
     const rc=readingCriteria();
     if(rc.ready){const S=state.sounds;rc.next.forEach(g=>{S.taught[g]=true;S.auto[g]=today()});S.batch=rc.next;S.lastUnlock=today();out.sounds=rc.next}
@@ -1120,7 +1309,7 @@ function checkPace(){
   if(out.sounds.length||out.tricky.length||out.maths)rebuildReal();
   return out;
 }
-const stageName=k=>{const [y,t]=k.split("-");return `${y==="Y1"?"Year 1":y==="N"?"Nursery":"Reception"} ${t}`};
+const stageName=k=>{const [y,t]=k.split("-");return `${y==="Y2"?"Year 2":y==="Y1"?"Year 1":y==="N"?"Nursery":"Reception"} ${t}`};
 function criteriaList(c){
   return el("ul",{class:"crit"},c.items.map(i=>el("li",{class:i.met?"met":""},el("span",{class:"ck","aria-hidden":"true",text:i.met?"✓":""}),el("span",{},i.label,el("span",{class:"note",text:` · ${i.detail}`})))));
 }
@@ -1128,6 +1317,8 @@ function pacePanel(){
   const p=el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ pace"}));
   if(isNursery())p.append(el("p",{class:"muted",text:"Reading in nursery is listening games, which follow the nursery year. Phonics starts with the Reception setting."}));
   else if(ownPace("reading")){
+    if(isY2()){const sc=spellCriteria();p.append(el("h3",{text:sc.next?`Next spelling unit: ${uLabel(sc.next)}`:"Every spelling unit is unlocked"}),
+      sc.items.length?criteriaList(sc):el("p",{class:"muted",text:"Tick the units ⟦she⟧ has been taught on the Spelling tab. The next one unlocks as ⟦she⟧ gets the spellings right after a gap."}))}
     const rc=readingCriteria(),tc=trickyCriteria();
     p.append(el("h3",{text:rc.next.length?`Next sounds: ${rc.next.map(gOf).join(" ")}`:"Every sound is unlocked"}),criteriaList(rc),
       el("h3",{text:tc.next.length?`Next tricky words: ${tc.next.join(", ")}`:"No more tricky words ready to unlock yet"}),criteriaList(tc));
@@ -1138,6 +1329,188 @@ function pacePanel(){
   }else p.append(el("p",{class:"muted",text:"Maths follows ⟦her⟧ school year and term."}));
   p.append(el("p",{class:"note",text:"The school's sequence is the floor, never the ceiling. Change this on the Settings page."}));
   return p;
+}
+
+/* ================= The I can wall: what ⟦she⟧ can do, written for ⟦her-o⟧ to read. A statement appears once its practice has been right on two days. ================= */
+const joinAnd=a=>a.length>1?a.slice(0,-1).join(", ")+" and "+a[a.length-1]:a[0]||"";
+const CAN_NUM={
+  sub:hi=>`I can tell how many dots I see, up to ${hi}, without counting`,cnt:hi=>`I can count groups of things, up to ${hi}`,
+  comp:hi=>`I can split numbers up to ${hi} into two parts`,num:hi=>`I can match amounts to numbers, up to ${hi}`,miss:hi=>`I can work out how many are hiding, up to ${hi}`,
+  dbl:hi=>`I can double numbers up to ${hi}`,more:hi=>`I can say one more and one less, up to ${hi}`,fing:hi=>`I can show numbers on my fingers, up to ${hi}`,
+  b10:()=>"I can make 10 from any number",teen:()=>"I can see a teen number as ten and some more",b20:()=>"I can make 20 from any number from 11 to 19",
+  near:()=>"I can use doubles to add numbers that are one apart",cross:()=>"I can add through 10 by making 10 first",subx:()=>"I can take away through 10",
+  grp:()=>"I can find the total of equal groups of 2, 5 and 10",frac:()=>"I can find half and a quarter of a number"};
+const CAN_SOLO={cmp:"I can tell which group has more",oe:"I can tell if a number is odd or even",story:"I can solve number stories",line:"I can find numbers on a number line",
+  sum:"I can solve addition and subtraction sentences",pat:"I can carry on a pattern",tens:"I can read numbers made of tens and ones",tenmore:"I can find 10 more and 10 less"};
+const CAN_LISTEN={anim:"I can tell which animal makes a sound",rhyme:"I can hear which words rhyme",clap:"I can clap the beats in a word",first:"I can hear the first sound in a word",robot:"I can blend sounds to hear a word"};
+function canStatements(){
+  const out=[],S=state.sounds,box=(m,k,n)=>m&&m[k]&&m[k].box>=n;
+  const stage={R:"Reception",Y1:"Year 1"};
+  SETS.forEach((s,i)=>{
+    const ids=[...new Set(s.gs.map(gOf))];
+    const text=s.name==="Double letters"?"I can read double letters like tt, dd and mm":ids.length<=6?`I can read the sounds ${joinAnd(ids)}`:`I can read the ${stage[s.stage]} ${s.name} sounds`;
+    out.push({id:"s:"+i,area:"Sounds and words",text,met:()=>s.gs.every(g=>box(S.gcards,g,3))});
+  });
+  GROUPS.forEach((g,i)=>{
+    const ws=g.words.map(x=>x[0]);
+    out.push({id:"t:"+i,area:"Sounds and words",text:ws.length<=6?`I can read the words ${joinAnd(ws)}`:`I can read the ${g.term} tricky words`,met:()=>ws.every(w=>box(state.cards,w,3))});
+  });
+  SPELL.forEach(u=>out.push({id:"p:"+u.id,area:"Spelling",text:u.can,met:()=>u.items.every(it=>box(state.spell.cards,it.key,3))}));
+  const seen=new Set();
+  MPLAN_ORDER.forEach(pk=>{const keys=planItemKeys(pk);
+    PLANS[pk].acts.forEach(a=>{
+      if(CAN_SOLO[a]){const id="m:"+a;if(!seen.has(id)){seen.add(id);out.push({id,area:"Numbers",text:CAN_SOLO[a],met:()=>mStatus(a)==="secure"})}return}
+      if(!CAN_NUM[a])return;
+      const ks=keys.filter(k=>k.split(":")[0]===a),hi=Math.max(...ks.map(k=>+k.split(":")[1]));
+      const id="m:"+a+":"+(CAN_NUM[a].length?hi:"");
+      if(seen.has(id))return;seen.add(id);
+      out.push({id,area:"Numbers",text:CAN_NUM[a](hi),met:()=>ks.every(k=>box(MS().cards,k,3))});
+    })});
+  Object.keys(CAN_LISTEN).forEach(g=>out.push({id:"l:"+g,area:"Listening",text:CAN_LISTEN[g],met:()=>{const r=(state.listen.stats[g]||{r:[]}).r;return r.length>=3&&r.slice(-3).every(x=>x===1)}}));
+  return out;
+}
+function updateWall(){const out=[],first=!state.wallInit;state.wallInit=true;canStatements().forEach(c=>{if(!state.wall[c.id]&&c.met()){state.wall[c.id]=today();if(!first)out.push(c)}});return out}
+function wallView(){
+  const n=(state.name||"").trim(),all=canStatements(),got=all.filter(c=>state.wall[c.id]);
+  const order=new Map(all.map((c,i)=>[c.id,i]));
+  const areas=["Sounds and words","Spelling","Numbers","Listening"];
+  const body=areas.map(a=>{
+    const xs=got.filter(c=>c.area===a).sort((x,y)=>state.wall[y.id].localeCompare(state.wall[x.id])||order.get(y.id)-order.get(x.id));
+    return xs.length?el("section",{class:"panel wallarea"},el("h2",{text:a}),el("div",{class:"cans"},xs.map(c=>el("div",{class:"can"},el("span",{class:"can-tick","aria-hidden":"true",text:"✓"}),el("span",{class:"can-text",text:c.text}))))):null;
+  });
+  return el("div",{class:"stack wallpage"},
+    el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),grownLink()),
+    el("section",{class:"panel"},el("h2",{text:n?`${n}'s I can wall`:"My I can wall"}),
+      got.length?el("p",{class:"muted",text:`${got.length} thing${got.length===1?"":"s"} ⟦she⟧ can do so far. New ones appear when practice has gone well on two different days.`}):el("p",{class:"muted",text:"Nothing here yet. Things ⟦she⟧ can do will appear as practice goes well."})),
+    ...body);
+}
+
+/* ================= Build a duck (Year 1 and Year 2): each practice earns one piece, and every duck is kept ================= */const BD={
+  body:[["Sunshine","#FFE14D",34,24],["Snowy","#FFF3D6",40,20],["Toffee","#DDA56A",29,27]],
+  head:[["Round","#FFE14D",16],["Tiny","#FFF3D6",12.5],["Mallard","#3F9B6E",18]],
+  legs:[["Orange","#F7811E",8],["Tall","#E8506E",16],["Pink","#F29BB5",12]],
+  wing:[["Gold","#F2B400",12,7],["Cloud","#FFFFFF",17,10],["Sky","#6FA5FF",14,8]],
+  beak:[["Orange","#F7811E",9,5],["Little","#F5A3B7",6,3.5],["Long","#FFC21A",14,4]],
+  tail:[["Tuft","#F7C600"],["Feather","#2E7D6B"],["Fan","#E8683A"]],
+  bow:[["Pink","#E0336F"],["Lilac","#9B7BE0"],["Red","#D6372C"]],
+  bowtie:[["Blue","#2D6CD2"],["Green","#2B8752"],["Red","#D6372C"]],
+  hat:[["Cap","#2D6CD2"],["Top hat","#2B2230"],["Party hat","#FFD43B"]],
+  glasses:[["Round","#3A1730"],["Sunglasses","#2A1B2E"],["Square","#E0336F"]],
+  bag:[["Orange","#F2813A"],["Purple","#7C5AD8"],["Teal","#26A69A"]],
+  board:[["Pink","#FF6FA1"],["Teal","#26A69A"],["Yellow","#FFD43B"]],
+  scarf:[["Red","#D6372C"],["Green","#2B8752"],["Purple","#7C5AD8"]],
+  ring:[["Red","#E8506E"],["Blue","#3F8CE0"],["Orange","#F7811E"]]
+};
+const CORE=["body","head","legs","wing","beak","tail"],ACC=["bow","bowtie","hat","glasses","bag","board","scarf","ring"],NOGO={bow:["bowtie","hat"],bowtie:["bow","scarf"],hat:["bow"],scarf:["bowtie"]},ALL_SLOTS=CORE.concat(ACC);
+const SLOT_NAME={body:"body",head:"head",legs:"legs",wing:"wing",beak:"beak",tail:"tail",bow:"bow",bowtie:"bow tie",hat:"hat",glasses:"glasses",bag:"bag",board:"skateboard",scarf:"scarf",ring:"swim ring"};
+const PLUM="#3A1730";
+function duckSVG(spec={},{ghost=true}={}){
+  const has=k=>spec[k]!=null,P=k=>BD[k][spec[k]];
+  const body=has("body")?P("body"):BD.body[0],head=has("head")?P("head"):BD.head[0];
+  const cx=66,cy=48,hx=36,hy=26,rx=body[2],ry=body[3],hr=head[2],xr=cx+rx;
+  const legL=has("legs")?P("legs")[2]:8,gy=cy+ry+legL,ex=hx-hr*.36,ey=hy-hr*.18;
+  const complete=CORE.every(has);
+  const o=(tag,a,fill,cls="bd")=>`<${tag} class="${cls}" fill="${fill}" ${a}/>`;
+  let s="";
+  if(ghost&&!complete){
+    const g='class="gh"';
+    if(!has("tail"))s+=`<path ${g} d="M${xr-6} ${cy-8} L${xr+9} ${cy-22} L${xr+5} ${cy+2} Z"/>`;
+    if(!has("legs"))[cx-12,cx+8].forEach(x=>{s+=`<path ${g} d="M${x-9} ${gy} L${x+4} ${gy} Q${x+3} ${gy-5} ${x-2} ${gy-5} Q${x-8} ${gy-4} ${x-9} ${gy} Z"/><line ${g} x1="${x}" y1="${cy+ry-4}" x2="${x}" y2="${gy-4}"/>`});
+    if(!has("body"))s+=`<ellipse ${g} cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`;
+    if(!has("head"))s+=`<circle ${g} cx="${hx}" cy="${hy}" r="${hr}"/>`;
+    if(!has("beak"))s+=`<path ${g} d="M${hx-hr+3} ${hy-3} L${hx-hr-9} ${hy+3} L${hx-hr+3} ${hy+7} Z"/>`;
+    if(!has("wing"))s+=`<ellipse ${g} cx="${cx-1}" cy="${cy+1}" rx="13" ry="8" transform="rotate(-12 ${cx-1} ${cy+1})"/>`;
+  }
+  if(has("tail")){const c=P("tail")[1],t=spec.tail;
+    if(t===0)s+=o("path",`d="M${xr-6} ${cy-8} L${xr+9} ${cy-22} L${xr+5} ${cy+2} Z"`,c);
+    else if(t===1)s+=o("path",`d="M${xr-6} ${cy-2} Q${xr+14} ${cy-4} ${xr+11} ${cy-27} Q${xr-1} ${cy-19} ${xr-6} ${cy-2} Z"`,c)+`<path d="M${xr-3} ${cy-5} Q${xr+5} ${cy-12} ${xr+9} ${cy-23}" fill="none" stroke="${PLUM}" stroke-width="1" stroke-linecap="round"/>`;
+    else s+=`<g transform="translate(${xr-4} ${cy-4})">`+[-52,-24,4].map(a=>o("ellipse",`cx="8" cy="0" rx="9" ry="3.8" transform="rotate(${a})"`,c)).join("")+`</g>`;}
+  if(has("legs")){const c=P("legs")[1];
+    [cx-12,cx+8].forEach(x=>{s+=`<line x1="${x}" y1="${cy+ry-5}" x2="${x}" y2="${gy-3}" stroke="${PLUM}" stroke-width="6.6" stroke-linecap="round"/><line x1="${x}" y1="${cy+ry-5}" x2="${x}" y2="${gy-3}" stroke="${c}" stroke-width="3.4" stroke-linecap="round"/>`+
+      o("path",`d="M${x-9} ${gy} L${x+4} ${gy} Q${x+3} ${gy-5} ${x-2} ${gy-5} Q${x-8} ${gy-4} ${x-9} ${gy} Z"`,c)})}
+  if(has("board")){const c=P("board")[1];s+=o("rect",`x="22" y="${gy}" width="84" height="5.6" rx="2.8"`,c)+`<circle cx="38" cy="${gy+9}" r="3.6" fill="${PLUM}"/><circle cx="92" cy="${gy+9}" r="3.6" fill="${PLUM}"/>`}
+  if(has("body"))s+=o("ellipse",`cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"`,P("body")[1]);
+  if(has("ring")){const c=P("ring")[1],ry2=ry*.62;s+=`<path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="${PLUM}" stroke-width="10.5" stroke-linecap="round"/><path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="${c}" stroke-width="7.5" stroke-linecap="round"/><path d="M${cx-rx*.8} ${cy+ry*.3} A${rx*.8} ${ry2} 0 0 0 ${cx+rx*.8} ${cy+ry*.3}" fill="none" stroke="#fff" stroke-width="7.5" stroke-dasharray="7 14" stroke-dashoffset="-3"/>`}
+  if(has("wing")){const w=P("wing");s+=o("ellipse",`cx="${cx-1}" cy="${cy+1}" rx="${w[2]}" ry="${w[3]}" transform="rotate(-12 ${cx-1} ${cy+1})"`,w[1],"bd2")}
+  if(has("bag")){const c=P("bag")[1],bx=cx+rx*.3-6;s+=`<path d="M${bx+4} ${cy-ry+3} Q${hx+8} ${cy-ry-8} ${hx+14} ${hy+hr*.5}" fill="none" stroke="${PLUM}" stroke-width="1.6"/>`+o("rect",`x="${bx}" y="${cy-12}" width="17" height="24" rx="6"`,c)+`<rect x="${bx+3}" y="${cy-1}" width="11" height="8" rx="2.5" fill="rgba(0,0,0,.2)" stroke="${PLUM}" stroke-width="1"/>`}
+  if(has("head"))s+=o("circle",`cx="${hx}" cy="${hy}" r="${hr}"`,P("head")[1]);
+  if(has("beak")){const b=P("beak");s+=o("path",`d="M${hx-hr+3} ${hy+2-b[3]} L${hx-hr-b[2]} ${hy+3} L${hx-hr+3} ${hy+2+b[3]} Z"`,b[1])}
+  if(has("head"))s+=`<circle cx="${ex}" cy="${ey}" r="2.3" fill="${PLUM}"/><circle cx="${ex+.8}" cy="${ey-.8}" r=".8" fill="#fff"/>`;
+  if(has("glasses")&&has("head")){const c=P("glasses")[1],g=spec.glasses,arm=`<path d="M${ex+5} ${ey-.5} L${hx+hr-1} ${ey-1.6}" fill="none" stroke="${c}" stroke-width="1.7" stroke-linecap="round"/>`;
+    s+=g===0?`<circle cx="${ex}" cy="${ey}" r="5.6" fill="rgba(255,255,255,.45)" stroke="${c}" stroke-width="1.9"/>`+arm
+      :g===1?`<circle cx="${ex}" cy="${ey}" r="5.8" fill="${c}" stroke="${PLUM}" stroke-width="1.2"/><circle cx="${ex-1.6}" cy="${ey-1.8}" r="1.3" fill="rgba(255,255,255,.55)"/>`+arm
+      :`<rect x="${ex-5.8}" y="${ey-4.8}" width="11.6" height="9.6" rx="2.4" fill="rgba(255,255,255,.45)" stroke="${c}" stroke-width="2"/>`+arm}
+  if(has("hat")&&has("head")){const c=P("hat")[1],t=spec.hat,ht=hy-hr;
+    if(t===0)s+=o("path",`d="M${hx-hr*.92} ${hy-hr*.26} A${hr*.96} ${hr*.9} 0 0 1 ${hx+hr*.92} ${hy-hr*.26} Z"`,c)+o("ellipse",`cx="${hx-hr*.95}" cy="${hy-hr*.24}" rx="${hr*.62}" ry="2.7"`,c)+`<circle cx="${hx+hr*.05}" cy="${ht+hr*.1}" r="1.8" fill="${PLUM}"/>`;
+    else if(t===1)s+=o("rect",`x="${hx-hr*.56}" y="${ht-17}" width="${hr*1.12}" height="19" rx="2.5"`,c)+`<rect x="${hx-hr*.56}" y="${ht-4}" width="${hr*1.12}" height="4.6" fill="#E0336F"/>`+o("ellipse",`cx="${hx}" cy="${ht+2}" rx="${hr*.96}" ry="3.2"`,c);
+    else s+=o("path",`d="M${hx-hr*.62} ${ht+3} L${hx+hr*.62} ${ht+3} L${hx-1} ${ht-22} Z"`,c)+`<path d="M${hx-hr*.4} ${ht-3} L${hx+hr*.42} ${ht-3} M${hx-hr*.22} ${ht-11} L${hx+hr*.25} ${ht-11}" stroke="#E0336F" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="${hx-1}" cy="${ht-22}" r="3.2" fill="#E0336F" stroke="${PLUM}" stroke-width="1.2"/>`;}
+  if(has("bow")&&has("head")){const c=P("bow")[1],bx=hx+hr*.68,by=hy-hr*.72;
+    s+=o("path",`d="M${bx} ${by} L${bx-8.5} ${by-5.5} L${bx-8} ${by+5.5} Z M${bx} ${by} L${bx+8.5} ${by-5.5} L${bx+8} ${by+5.5} Z"`,c)+o("circle",`cx="${bx}" cy="${by}" r="2.8"`,c)}
+  if(has("bowtie")&&has("head")){const c=P("bowtie")[1],tx=hx+hr*.3+2,ty=hy+hr-1;
+    s+=o("path",`d="M${tx} ${ty} L${tx-9} ${ty-6} L${tx-9} ${ty+6} Z M${tx} ${ty} L${tx+9} ${ty-6} L${tx+9} ${ty+6} Z"`,c)+o("circle",`cx="${tx}" cy="${ty}" r="3"`,c)}
+  if(has("scarf")&&has("head")){const c=P("scarf")[1],R=hr*.93,pt=a=>[hx+R*Math.cos(a*Math.PI/180),hy+R*Math.sin(a*Math.PI/180)],p0=pt(5),p1=pt(105),pm=pt(40),d=`M${p0[0]} ${p0[1]} A${R} ${R} 0 0 1 ${p1[0]} ${p1[1]}`;
+    s+=o("rect",`x="${pm[0]-3.5}" y="${pm[1]}" width="8" height="15" rx="3.5" transform="rotate(-12 ${pm[0]} ${pm[1]})"`,c)+`<path d="${d}" fill="none" stroke="${PLUM}" stroke-width="9.6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="6.4" stroke-linecap="round"/>`}
+  return `<svg class="bduck" viewBox="0 -24 122 128" aria-hidden="true">${s}</svg>`;
+}
+
+const isBuild=()=>state.year==="Y1"||state.year==="Y2";
+function DR(){state.duckYears=state.duckYears||{};return state.duckYears[state.year]=state.duckYears[state.year]||{flock:[],cur:{},pending:0,earned:0}}
+const filled=c=>ALL_SLOTS.filter(k=>c[k]!=null).length;
+const taken=(c,k)=>c[k]!=null||Object.keys(c).some(j=>c[j]!=null&&((NOGO[j]||[]).includes(k)||(NOGO[k]||[]).includes(j)));
+const nextSlots=c=>{const n=CORE.filter(k=>c[k]!=null).length;return n<CORE.length?[CORE[n]]:ACC.filter(k=>!taken(c,k))};
+const DUCK_SIZE=12,isComplete=c=>filled(c)>=DUCK_SIZE||(CORE.every(k=>c[k]!=null)&&!nextSlots(c).length);
+const capF=s=>s[0].toUpperCase()+s.slice(1);
+let pickCat=null,lastPlaced=null;
+function placePiece(slot,idx){
+  const dr=DR();dr.cur[slot]=idx;dr.pending=Math.max(0,dr.pending-1);
+  const made=isComplete(dr.cur);
+  lastPlaced={slot,idx,finished:made?Object.assign({},dr.cur):null};
+  if(made){dr.flock.push(Object.assign({},dr.cur));dr.cur={}}
+  pickCat=null;save();
+}
+function pickPanel(){
+  const dr=DR(),slots=nextSlots(dr.cur),slot=slots.length===1?slots[0]:pickCat,box=el("div",{class:"pick"});
+  if(!slot){
+    box.append(el("p",{class:"pick-q",text:"Choose something to add"}),
+      el("div",{class:"pick-cats"},slots.map(k=>el("button",{class:"btn ghost small",type:"button",on:{click:()=>{pickCat=k;render()}}},capF(SLOT_NAME[k])))));
+    return box}
+  box.append(el("p",{class:"pick-q",text:CORE.includes(slot)?`Choose a ${SLOT_NAME[slot]} for your duck`:`Choose a ${SLOT_NAME[slot]}`}),
+    el("div",{class:"pick-opts"},BD[slot].map((o,i)=>el("button",{class:"pick-opt",type:"button","aria-label":`${o[0]} ${SLOT_NAME[slot]}`,on:{click:()=>{SFX.pick();placePiece(slot,i);render()}},html:duckSVG(Object.assign({},dr.cur,{[slot]:i}))+`<span>${o[0]}</span>`}))));
+  if(slots.length>1)box.append(el("button",{class:"btn ghost small",type:"button",on:{click:()=>{pickCat=null;render()}}},"‹ Back"));
+  return box;
+}
+function placedBlock(){
+  const dr=DR(),lp=lastPlaced,fin=lp&&lp.finished;
+  return el("div",{class:"placed"},
+    fin?el("p",{class:"moved",text:"Your duck is finished"}):null,
+    el("div",{class:"bigbuild",html:duckSVG(fin||dr.cur,{ghost:!fin})}),
+    el("p",{class:"muted",text:lp?(fin?"It has joined the flock. The next duck starts with the next practice.":`You added the ${SLOT_NAME[lp.slot]}.`):`${filled(dr.cur)} of 12 pieces.`}));
+}
+function pickScreen(){
+  const dr=DR();
+  return el("div",{class:"stack"},
+    el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{lastPlaced=null;pickCat=null;screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:"Your duck"}),grownLink()),
+    el("section",{class:"panel",style:"align-items:center;text-align:center"},dr.pending>0?pickPanel():placedBlock(),
+      dr.pending>0?null:el("button",{class:"btn",on:{click:()=>{lastPlaced=null;screen="home";render()}}},"Done")));
+}
+function flockView(){
+  const dr=DR(),nm=(state.name||"").trim();
+  return el("div",{class:"stack"},
+    el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),grownLink()),
+    el("section",{class:"panel"},el("h2",{text:nm?`${nm}'s flock`:"The flock"}),
+      dr.flock.length?el("div",{class:"flock"},dr.flock.map((sp,i)=>el("div",{class:"fduck","aria-label":`Duck ${i+1}`,html:duckSVG(sp)}))):el("p",{class:"muted",text:"Finished ducks gather here. Each one takes about a week."}),
+      el("p",{class:"muted",text:dr.flock.length?`${dr.flock.length} finished this year. The flock starts again in the next school year.`:"The flock starts again in each school year."})));
+}
+function duckBuildPanel(){
+  const dr=DR(),n=filled(dr.cur),s=streak(),nm=(state.name||"").trim();
+  return el("section",{class:"panel pond build"},
+    el("div",{class:"panel-head"},el("h2",{text:nm?`${nm}'s duck`:"Your duck"}),dr.flock.length?el("button",{class:"linkbtn flocklink",type:"button",on:{click:()=>{screen="flock";render()}}},`${dr.flock.length} in the flock ›`):el("span",{class:"note streak"},s.today?el("span",{class:"tick","aria-hidden":"true",text:"✓"}):null,s.today?(s.days>1?`${s.days} days running`:"Practised today"):"")),
+    el("div",{class:"buildrow"},
+      el("div",{class:"bigbuild sm",role:"img","aria-label":`Duck with ${n} of 12 pieces`,html:duckSVG(dr.cur)}),
+      el("div",{class:"buildside"},
+        el("span",{class:"pdots","aria-hidden":"true"},range(0,DUCK_SIZE-1).map(i=>el("i",{class:i<n?"on":""}))),
+        el("p",{class:"muted ducknote",text:dr.pending?"A piece is waiting.":`${n} of 12 pieces. Each practice earns one.`}),
+        dr.pending?el("button",{class:"btn small",type:"button",on:{click:()=>{screen="pick";render()}}},"Choose a piece"):null)));
 }
 
 /* ================= Rendering ================= */
@@ -1161,8 +1534,9 @@ function el(tag,attrs={},...nodes){
 const readerName=()=>(state.name||"").trim()||"⟦her-o⟧";
 /* ----- School year and term ----- */
 function curTerm(){if(state.term&&state.term!=="auto")return state.term;const m=new Date().getMonth()+1;return m>=9?"autumn":m<=3?"spring":"summer"}
-const yearName=()=>state.year==="Y1"?"Year 1":state.year==="N"?"Nursery":"Reception";
+const yearName=()=>state.year==="Y2"?"Year 2":state.year==="Y1"?"Year 1":state.year==="N"?"Nursery":"Reception";
 const isNursery=()=>state.year==="N";
+const isY2=()=>state.year==="Y2";
 const curTermLabel=()=>`${yearName()} ${curTerm()}`;
 const planKey=()=>`${state.year||"R"}-${curTerm()}`;
 /* Changing the year never ticks anything by itself. Ticking everything from Reception is a separate button, with an undo. */
@@ -1171,11 +1545,11 @@ const hasTicks=()=>Object.values(state.sounds.taught).some(Boolean)||Object.valu
 function setYear(y){
   if(y===state.year){yearPending=null;render();return}
   if(y==="N"&&hasTicks()){yearPending="N";render();return}
-  yearPending=null;state.year=y;rebuildReal();save();render();
+  yearPending=null;state.year=y;readingTopic=y==="Y2"?"spelling":readingTopic==="spelling"?"sounds":readingTopic;rebuildReal();save();render();
 }
 /* Nursery is listening only, so sounds and tricky words are cleared when a child moves down to it */
 function confirmNursery(){
-  const S=state.sounds;S.taught={};S.auto={};S.batch=[];state.taught={};state.trickyAuto={};state.yearSnap=null;
+  const S=state.sounds;S.taught={};S.auto={};S.batch=[];state.taught={};state.trickyAuto={};state.yearSnap=null;state.spell=freshSpell();
   yearPending=null;state.year="N";MS().settings.planKey=null;rebuildReal();save();render();
 }
 function tickAllReception(){
@@ -1245,16 +1619,17 @@ function nurseryListenView(){
 }
 function readingView(){
   if(isNursery())return nurseryListenView();
-  const bar=el("div",{class:"seg topic"},[["sounds","Sounds"],["tricky","Tricky words"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(readingTopic===k),on:{click:()=>{readingTopic=k;render()}}},l)));
-  return el("div",{class:"stack"},bar,readingTopic==="tricky"?trickyView():soundsView());
+  const y2=isY2();if(!y2&&readingTopic==="spelling")readingTopic="sounds";
+  const bar=el("div",{class:"seg topic"},(y2?[["spelling","Spelling"],["tricky","Tricky words"],["sounds","Sounds"]]:[["sounds","Sounds"],["tricky","Tricky words"]]).map(([k,l])=>el("button",{type:"button","aria-pressed":String(readingTopic===k),on:{click:()=>{readingTopic=k;render()}}},l)));
+  return el("div",{class:"stack"},bar,readingTopic==="tricky"?trickyView():readingTopic==="spelling"&&y2?spellingView():soundsView());
 }
 function logView(){
   const p=readingLogPanel();p.classList.remove("span-2");p.classList.add("logpage");
   return el("div",{class:"stack"},p);
 }
 function grownView(){
-  const tabs=[["progress","Progress"],["reading",isNursery()?"Listening":"Sounds and words"],["maths","Numbers"],["log","Reading log"],["guide","How it works"],["settings","Settings"]];
-  if(sub==="sounds"||sub==="tricky"){readingTopic=sub;sub="reading"}
+  const tabs=[["progress","Progress"],["reading",isNursery()?"Listening":isY2()?"Spelling and words":"Sounds and words"],["maths","Numbers"],["log","Reading log"],["guide","How it works"],["settings","Settings"]];
+  if(sub==="sounds"||sub==="tricky"||sub==="spelling"){readingTopic=sub;sub="reading"}
   const bar=el("div",{class:"subtabs",role:"tablist"},
     tabs.map(([k,l])=>el("button",{role:"tab","aria-selected":String(sub===k),on:{click:()=>{sub=k;render()}}},l)),
     el("button",{class:"linkbtn lockbtn",on:{click:()=>{unlockedUntil=0;tab="practise";render()}}},"Lock"));
@@ -1347,12 +1722,13 @@ const ICONS={
   book:'<svg viewBox="0 0 120 92" aria-hidden="true"><path class="i-cover" d="M4 22V84C24 78 44 78 60 88C76 78 96 78 116 84V22"/><path class="i-page" d="M60 20C45 9 22 9 8 15V77C22 71 45 71 60 81Z"/><path class="i-page" d="M60 20C75 9 98 9 112 15V77C98 71 75 71 60 81Z"/><path class="i-line" d="M18 30Q34 25 50 30M18 42Q34 37 50 42M18 54Q34 49 50 54M70 30Q86 25 102 30M70 42Q86 37 102 42M70 54Q86 49 102 54"/></svg>',
   dice:'<svg viewBox="0 0 110 100" aria-hidden="true"><g transform="rotate(-8 55 52)"><rect class="i-dice" x="17" y="14" width="76" height="76" rx="18"/><circle class="i-pip w" cx="37" cy="34" r="7.5"/><circle class="i-pip w" cx="73" cy="34" r="7.5"/><circle class="i-pip w" cx="55" cy="52" r="7.5"/><circle class="i-pip w" cx="37" cy="70" r="7.5"/><circle class="i-pip w" cx="73" cy="70" r="7.5"/></g></svg>',
   sounds:'<svg viewBox="0 0 120 92" aria-hidden="true"><rect class="i-tile" x="6" y="8" width="108" height="76" rx="18"/><text class="i-letters" x="60" y="54" text-anchor="middle">sat</text><circle class="i-pip" cx="34" cy="70" r="4.5"/><circle class="i-pip" cx="60" cy="70" r="4.5"/><circle class="i-pip" cx="84" cy="70" r="4.5"/></svg>',
-  tricky:'<svg viewBox="0 0 120 92" aria-hidden="true"><rect class="i-tile" x="6" y="8" width="108" height="76" rx="18"/><rect class="i-hl" x="60" y="20" width="34" height="56" rx="8"/><text class="i-letters" x="60" y="60" text-anchor="middle">is</text></svg>'
+  tricky:'<svg viewBox="0 0 120 92" aria-hidden="true"><rect class="i-tile" x="6" y="8" width="108" height="76" rx="18"/><rect class="i-hl" x="60" y="20" width="34" height="56" rx="8"/><text class="i-letters" x="60" y="60" text-anchor="middle">is</text></svg>',
+  spell:'<svg viewBox="0 0 120 92" aria-hidden="true"><rect class="i-tile" x="6" y="8" width="108" height="76" rx="18"/><rect class="i-hl" x="20" y="20" width="34" height="46" rx="8"/><text class="i-letters sm" x="60" y="54" text-anchor="middle">knee</text><path class="i-underline" d="M26 72H94"/></svg>'
 };
 /* What counts as today's practice being done. Reading needs sounds and words, plus tricky words when any are due. */
 const doneToday=type=>state.log.some(e=>e.d===today()&&e.t===type);
 const trickyDone=()=>doneToday("tricky")||!taughtTricky().length||planTricky().queue.length===0;
-const readingDone=()=>isNursery()?doneToday("listen"):doneToday("sounds")&&trickyDone();
+const readingDone=()=>isNursery()?doneToday("listen"):isY2()?doneToday("spelling")&&trickyDone():doneToday("sounds")&&trickyDone();
 const mathsDone=()=>doneToday("maths");
 const bookRead=()=>state.reads.includes(today());
 const practiceDone=()=>readingDone()&&mathsDone();
@@ -1526,6 +1902,7 @@ function tick(c,t,peak){
 const SFX={
   right(){const c=audio();if(!c)return;const t=c.currentTime+.02;tone(c,t,659.25,.18,.045);tone(c,t+.1,880,.26,.045)},
   done(){const c=audio();if(!c)return;const t=c.currentTime+.05;[523.25,659.25,783.99].forEach((f,i)=>tone(c,t+i*.13,f,.4,.04))},
+  pick(){const c=audio();if(!c)return;const t=c.currentTime+.02;tone(c,t,700,.14,.04,1000)},
   hatch(){const c=audio();if(!c)return;const t=c.currentTime+2.8;tick(c,t,.05);tick(c,t+.3,.05);tone(c,t+.62,1150,.13,.04,1650);tone(c,t+.8,1250,.15,.035,1750)}
 };
 const reducedMotion=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
@@ -1640,8 +2017,8 @@ function backupPanel(){
 }
 
 /* ================= First visit: a one-page setup for a grown-up ================= */
-const TERM_ORDER=["Reception autumn","Reception spring","Reception summer","Year 1 autumn","Year 1 spring","Year 1 summer"];
-const defaultSet=(year,term)=>year==="N"?-1:({"R-autumn":0,"R-spring":8,"R-summer":12,"Y1-autumn":12,"Y1-spring":14,"Y1-summer":16})[`${year}-${term}`]??0;
+const TERM_ORDER=["Reception autumn","Reception spring","Reception summer","Year 1 autumn","Year 1 spring","Year 1 summer","Year 2 autumn","Year 2 spring","Year 2 summer"];
+const defaultSet=(year,term)=>year==="N"?-1:({"R-autumn":0,"R-spring":8,"R-summer":12,"Y1-autumn":12,"Y1-spring":14,"Y1-summer":16,"Y2-autumn":17,"Y2-spring":17,"Y2-summer":17})[`${year}-${term}`]??0;
 /* Ticks every sound up to and including set `set`, plus the tricky words from earlier terms */
 function tickThrough(set){
   const S=state.sounds;S.taught={};S.auto={};S.batch=[];S.clusters=true;
@@ -1658,7 +2035,7 @@ function fillSetSelect(sel,year,pick){
   sel.replaceChildren(el("option",{value:"-1",text:"Not started phonics yet"}));
   let group=null;
   SETS.forEach((x,i)=>{
-    if(x.stage==="Y1"&&year!=="Y1")return;
+    if(x.stage==="Y1"&&year!=="Y1"&&year!=="Y2")return;
     if(x.phase||!group){group=el("optgroup",{label:x.phase||""});sel.append(group)}
     const gs=x.gs.slice(0,7).map(gOf).join(" ")+(x.gs.length>7?" …":"");
     group.append(el("option",{value:String(i),text:`${x.name} · ${gs}`}));
@@ -1667,24 +2044,25 @@ function fillSetSelect(sel,year,pick){
 }
 function applySetup(d){
   state.name=d.name.trim();state.child=d.child;state.year=d.year;state.term="auto";state.palette=d.palette;
-  tickThrough(d.set);
+  if(d.year==="Y2"){tickThrough(SETS.length-1);spellThrough(d.unit!=null?d.unit:defaultUnit());readingTopic="spelling"}else tickThrough(d.set);
   state.setupDone=true;MS().settings.planKey=null;
   rebuildReal();save();screen="landing";render();
 }
 function setupView(){
-  const d={name:"",child:"girl",year:"R",palette:state.palette||"pink",set:null},adding=family.order.length>1;
+  const d={name:"",child:"girl",year:"R",palette:state.palette||"pink",set:null,unit:null},adding=family.order.length>1;
   const nameIn=el("input",{id:"setup-name",type:"text",maxlength:"24",placeholder:"e.g. Ruby",autocomplete:"off"});
   const segRow=(label,id,opts,key,after)=>{
     const btns=opts.map(([v,t,sw])=>{const b=el("button",{type:"button","aria-pressed":String(d[key]===v)},sw?el("span",{class:"swatch "+v}):null,t);
       b.addEventListener("click",()=>{d[key]=v;btns.forEach((x,i)=>x.setAttribute("aria-pressed",String(opts[i][0]===v)));if(after)after()});return b});
     return el("div",{class:"field"},el("span",{class:"flabel",id,text:label}),el("div",{class:"seg","aria-labelledby":id},btns));
   };
-  const sel=el("select",{id:"setup-set"});let phonField=null;
+  const sel=el("select",{id:"setup-set"}),selU=el("select",{id:"setup-unit"});let phonField=null,spellField=null;
   const fillSets=()=>{
-    const pick=d.set!=null&&(d.year==="Y1"||SETS[d.set]?.stage!=="Y1")?d.set:defaultSet(d.year,curTerm());
-    fillSetSelect(sel,d.year,pick);if(phonField)phonField.hidden=d.year==="N";
+    const pick=d.set!=null&&(d.year==="Y1"||d.year==="Y2"||SETS[d.set]?.stage!=="Y1")?d.set:defaultSet(d.year,curTerm());
+    fillSetSelect(sel,d.year,pick);if(phonField)phonField.hidden=d.year==="N"||d.year==="Y2";
+    fillSpellSelect(selU,d.unit!=null?d.unit:defaultUnit());if(spellField)spellField.hidden=d.year!=="Y2";
   };
-  sel.addEventListener("change",()=>{d.set=+sel.value});
+  sel.addEventListener("change",()=>{d.set=+sel.value});selU.addEventListener("change",()=>{d.unit=+selU.value});
   fillSets();
   const box=el("div",{class:"restorebox"});
   const fileIn=restoreControls(box);
@@ -1696,24 +2074,27 @@ function setupView(){
     :android?"On Android, tap the ⋮ menu in Chrome, then Add to Home screen, so Waddle opens like an app."
     :null;
   return el("section",{class:"panel stack setup"},
-    el("div",{class:"brand"},el("b",{class:"brand-word"},logoMark(),"Waddle"),el("span",{class:"note",text:"Parent-led daily reading and maths practice for early years"})),
+    el("div",{class:"brand"},el("b",{class:"brand-word"},logoMark(),"Waddle"),el("span",{class:"note",text:"Parent-led daily reading and numbers practice, from nursery to Year 2"})),
     el("p",{class:"setup-lead",text:"Waddle is for you and your child to do together, a few minutes a day, followed by a book."}),
     el("h1",{text:adding?"Add a child":"Let's set up Waddle"}),
     el("p",{class:"note",text:"You can change everything later in Grown-ups."}),
     el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's forename"}),nameIn),
     segRow("Girl or boy","su-child",[["girl","Girl"],["boy","Boy"]],"child"),
-    segRow("School year","su-year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],"year",fillSets),
+    segRow("School year","su-year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"],["Y2","Year 2"]],"year",fillSets),
     (phonField=el("div",{class:"field"},el("label",{for:"setup-set",text:"Latest sounds taught at school"}),sel,
-      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Sounds and words tab in Grown-ups."})),phonField.hidden=d.year==="N",phonField),
+      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Sounds and words tab in Grown-ups."})),phonField.hidden=d.year==="N"||d.year==="Y2",phonField),
+    (spellField=el("div",{class:"field"},el("label",{for:"setup-unit",text:"Latest spelling taught at school"}),selU,
+      el("p",{class:"note",text:"Every unit up to and including this one is ticked, and all of the Reception and Year 1 sounds and tricky words too. The school's spelling letter or the Little Wandle Spelling plan will say where they are. You can fine-tune this on the Spelling tab in Grown-ups."})),spellField.hidden=d.year!=="Y2",spellField),
     segRow("Colour","su-pal",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],"palette",()=>document.documentElement.setAttribute("data-palette",d.palette)),
     tip?el("p",{class:"tipbox",text:tip}):null,
     el("p",{class:"note",text:"Your child's details are stored on this device and are never sent anywhere else."}),
-    el("button",{class:"btn go",type:"button",on:{click:()=>{d.name=nameIn.value;d.set=+sel.value;applySetup(d)}}},"Start"),
+    el("button",{class:"btn go",type:"button",on:{click:()=>{d.name=nameIn.value;d.set=+sel.value;d.unit=+selU.value;applySetup(d)}}},"Start"),
     adding?el("button",{class:"linkbtn",type:"button",on:{click:()=>{removeChild(family.active);screen="landing";render()}}},"Cancel")
       :el("p",{class:"note"},"Moving from another device? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
     box);
 }
 
+const wallLink=()=>Object.keys(state.wall||{}).length?el("button",{class:"linkbtn grown-inline wall-inline",type:"button",on:{click:()=>{screen="wall";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>I can'}):null;
 const grownLink=()=>el("button",{class:"linkbtn grown-inline"+(backupDue()?" due":""),type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
 /* School book: the child ticks it on the home screen and sees this week fill up */
 const BOOK_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path class="bk-c" d="M5 3.5h12.5a1.5 1.5 0 0 1 1.5 1.5v15.5H7A2 2 0 0 1 5 18.5Z"/><path class="bk-p" d="M5 18.5A2 2 0 0 1 7 16.5h12"/><path class="bk-m" d="M13 3.5v6l2-1.5 2 1.5v-6"/></svg>';
@@ -1753,7 +2134,7 @@ const landSit=()=>el("p",{class:"land-sit",text:"Grown-ups, please sit with me."
 const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),"If you find a bug, please let me know. ",
   "Progress is saved only on this device and is never sent anywhere.");
 function landingView(){
-  const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and maths practice for early years"}));
+  const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and numbers practice, from nursery to Year 2"}));
   const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
   if(backupDue()){lock.classList.add("due");lock.title="A backup is due"}
   const ks=children().filter(k=>k.st.setupDone);
@@ -1781,34 +2162,47 @@ function landingView(){
       s.today&&s.ducks?el("p",{class:"note streak"},el("span",{class:"tick","aria-hidden":"true",text:"✓"}),allDone()?"All done for today":practiceDone()?"Practice done. Now read ⟦ysb⟧":"Practised today"):null));
 }
 function startView(){
+  if(screen==="wall")return wallView();
+  if(screen==="flock")return flockView();
+  if(screen==="pick")return pickScreen();
   if(screen==="reading"){
     const sp=planSounds(),tp=planTricky(),tt=taughtTricky();
     const ng=sp.queue.filter(q=>q.kind==="g").length,nw=sp.queue.filter(q=>q.kind==="w").length;
+    const y2=isY2(),sTitle=y2?"Sounds review":"Sounds";
     const soundsTile=sp.queue.length
-      ?choiceTile({icon:"sounds",title:"Sounds",note:listBits([ng&&`${ng} sounds`,nw&&`${nw} words`])+" · 4 min",onClick:()=>begin("sounds",sp.queue),done:doneToday("sounds")})
-      :choiceTile({icon:"sounds",title:"Sounds",note:"Tick ⟦her⟧ sounds in Grown-ups first",disabled:true});
+      ?choiceTile({icon:"sounds",title:sTitle,note:listBits([ng&&`${ng} sounds`,nw&&`${nw} words`])+" · 4 min",onClick:()=>begin("sounds",sp.queue),done:doneToday("sounds")})
+      :choiceTile({icon:"sounds",title:sTitle,note:"Tick ⟦her⟧ sounds in Grown-ups first",disabled:true});
     const trickyTile=!tt.length
       ?choiceTile({icon:"tricky",title:"Tricky words",note:"Tick ⟦her⟧ tricky words in Grown-ups first",disabled:true})
       :tp.queue.length
         ?choiceTile({icon:"tricky",title:"Tricky words",note:`${tp.queue.length} word${tp.queue.length>1?"s":""} · 2 min`,onClick:()=>begin("tricky",tp.queue),done:doneToday("tricky")})
         :choiceTile({icon:"tricky",title:"Tricky words",done:true,badge:doneToday("tricky")?"Done for today":"Nothing due today"});
+    let tiles=[soundsTile,trickyTile];
+    if(y2){
+      const spq=planSpelling().queue;
+      const spellTile=spq.length
+        ?choiceTile({icon:"spell",title:"Spelling",note:`${spq.length} spellings · 4 min`,onClick:()=>begin("spelling",spq),done:doneToday("spelling")})
+        :choiceTile({icon:"spell",title:"Spelling",note:"Tick ⟦her⟧ spelling units in Grown-ups first",disabled:true});
+      tiles=[spellTile,trickyTile,soundsTile];
+    }
     return el("div",{class:"stack"},
-      el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:"Sounds and words"}),grownLink()),
-      el("div",{class:"choices"},soundsTile,trickyTile));
+      el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:y2?"Spelling and words":"Sounds and words"}),grownLink()),
+      el("div",{class:"choices"+(tiles.length>2?" three":"")},tiles));
   }
   const mq=planMaths();
   return el("div",{class:"stack home"},
-    el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="landing";render()}}},"‹ Home"),grownLink()),
+    el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="landing";render()}}},"‹ Home"),wallLink(),grownLink()),
     allDone()?el("section",{class:"panel alldone"},el("span",{class:"big-tick","aria-hidden":"true",text:"✓"}),
-      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Practice and reading together are done. Come back tomorrow for more ducklings."})))
+      el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Practice and reading together are done. Come back tomorrow"+(isBuild()?" for another piece of your duck.":" for more ducklings.")+""})))
     :practiceDone()?el("section",{class:"panel alldone nextbook"},el("span",{class:"big-tick book-tick","aria-hidden":"true",html:BOOK_SVG}),
       el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:"Sounds and numbers are finished. Tick the book below once you have read together."}))):null,
     el("div",{class:"choices"},
       isNursery()?choiceTile({icon:"book",title:"Listening",note:"Listening and rhyme games · 4 min",onClick:()=>begin("listen",planListen()),done:readingDone()})
+        :isY2()?choiceTile({icon:"spell",title:"Spelling",note:"Spelling, sounds and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()})
         :choiceTile({icon:"book",title:"Sounds",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
       mq.length?choiceTile({icon:"dice",title:"Numbers",note:"Quick looks, counting and more · 4 min",onClick:()=>begin("maths",mq),done:mathsDone()})
                :choiceTile({icon:"dice",title:"Numbers",note:"Turn on an activity in Grown-ups first",disabled:true})),
-    bookPanel(),ducksPanel());
+    bookPanel(),isBuild()?duckBuildPanel():ducksPanel());
 }
 
 /* ----- Progress dashboard (grown-ups only) ----- */
@@ -1841,6 +2235,24 @@ function weeklyChart(data){
   return c;
 }
 
+function spellProgressPanel(){
+  const sp=SP(),units=spellTaught();
+  const p=el("section",{class:"panel"},el("h2",{text:"Spelling"}));
+  if(!units.length){p.append(el("p",{class:"empty",text:"Tick the units ⟦she⟧ has been taught on the Spelling tab."}));return p}
+  const LABEL={secure:"Spelt right after a gap",going:"Getting there",help:"Not yet last time",none:"Not practised yet"};
+  const st=k=>{const c=sp.cards[k];if(!c)return "none";if(c.last==="reset")return "help";return c.box>=3?"secure":"going"};
+  const cur=SPELL[spellNewestIdx()];
+  [...units].reverse().forEach(u=>{
+    const n=u.items.filter(i=>st(i.key)==="secure").length;
+    const d=el("details",{class:"tblock"},el("summary",{},el("span",{text:uLabel(u)}),el("span",{class:"note",text:` ${n} of ${u.items.length}`})));
+    if(u===cur)d.open=true;
+    d.append(el("div",{class:"gsgrid"},u.items.map(it=>{const s=st(it.key),label=it.kind==="sh"?it.set.map(x=>x.w).join("/"):it.w;
+      return el("span",{class:"gs "+s,title:`${label}: ${LABEL[s]}`},label,s==="secure"?el("span",{class:"ic",text:"✓"}):s==="help"?el("span",{class:"ic",text:"!"}):null)})));
+    p.append(d);
+  });
+  p.append(el("div",{class:"legend"},Object.keys(LABEL).map(k=>el("span",{},el("span",{class:"sw "+k}),LABEL[k]))));
+  return p;
+}
 function progressView(){
   const t=today(),S=state.sounds;
   const last14=[];for(let i=13;i>=0;i--)last14.push(addDays(t,-i));
@@ -1924,7 +2336,7 @@ function progressView(){
 
   /* Rows by topic: reading results, what she knows and what's next, then the school book */
   wrap.append(chartPanel,el("div",{class:"dcol"},teacher,isNursery()?null:wordsPanel),
-    el("div",{class:"dcol span-2"},isNursery()?listenPanel():soundsPanel,numbersPanel),pace,
+    el("div",{class:"dcol span-2"},isNursery()?listenPanel():isY2()?spellProgressPanel():soundsPanel,numbersPanel),pace,
     last14Panel);
   last14Panel.classList.add("span-all","last14wide");
   return wrap;
@@ -1970,7 +2382,15 @@ const ACTS={
   line:{name:"Number line",desc:"⟦She⟧ places a number on a line from 0 to 20, using 5, 10 and 15 to help.",per:1},
   sum:{name:"Number sentences",desc:"Short addition and subtraction sentences within 10, with dots to help.",per:2},
   fing:{name:"Show me fingers",desc:"⟦She⟧ sees an amount and shows it on ⟦her⟧ fingers, ideally all at once rather than one finger at a time.",per:2},
-  pat:{name:"What comes next?",desc:"Patterns. A repeating row of pictures, and ⟦she⟧ picks the one that comes next.",per:2}
+  pat:{name:"What comes next?",desc:"Patterns. A repeating row of pictures, and ⟦she⟧ picks the one that comes next.",per:2},
+  b20:{name:"Make 20",desc:"Two ten frames with some spaces. How many more to make 20?",per:2},
+  near:{name:"Near doubles",desc:"Two numbers one apart, such as 6 and 7. ⟦She⟧ doubles the smaller one and adds 1.",per:2},
+  cross:{name:"Add across ten",desc:"Adding through 10, such as 8 + 5. ⟦She⟧ makes 10 first, then adds the rest.",per:2},
+  subx:{name:"Take away across ten",desc:"Taking away through 10, such as 13 − 5. ⟦She⟧ takes away to 10 first, then takes away the rest.",per:2},
+  tens:{name:"Tens and ones",desc:"Two-digit numbers made of tens and ones. ⟦She⟧ says what number the blocks show.",per:2},
+  tenmore:{name:"Ten more, ten less",desc:"⟦She⟧ finds the number that is 10 more or 10 less. Only the tens digit changes.",per:2},
+  grp:{name:"Groups of 2, 5 and 10",desc:"Equal groups. 4 groups of 5 is 20. ⟦She⟧ counts in steps of 2, 5 or 10.",per:2},
+  frac:{name:"Halves and quarters",desc:"Finding half or a quarter of a small amount, such as half of 8.",per:2}
 };
 const PLANS={
   "N-autumn":{max:3,acts:["sub","cnt","cmp","pat"]},
@@ -1981,7 +2401,10 @@ const PLANS={
   "R-summer":{max:10,acts:["sub","cnt","more","oe","num","cmp"]},
   "Y1-autumn":{max:10,acts:["sub","comp","more","num","cmp"]},
   "Y1-spring":{max:10,acts:["comp","oe","story","b10","sub"]},
-  "Y1-summer":{max:20,acts:["teen","line","story","sum","b10","oe"]}
+  "Y1-summer":{max:20,acts:["teen","line","story","sum","b10","oe"]},
+  "Y2-autumn":{max:20,acts:["b10","b20","dbl","oe","sum"]},
+  "Y2-spring":{max:20,acts:["cross","subx","near","tens","dbl"]},
+  "Y2-summer":{max:20,acts:["grp","frac","tenmore","cross","subx"]}
 };
 function mathsPlanKey(){
   const school=planKey(),si=MPLAN_ORDER.indexOf(school),st=MS().stageKey?MPLAN_ORDER.indexOf(MS().stageKey):-1;
@@ -2005,9 +2428,9 @@ function genItem(act){
     case "cmp":{const l=rint(1,cap10);let r;do{r=rint(1,cap10)}while(r===l);return {kind:"mcmp",l,r,lp:scatterPts(l,3,3,l>6?.8:1.05),rp:scatterPts(r,3,3,r>6?.8:1.05)}}
     case "num":{const n=wpickN(range(1,cap10),"num");return {kind:"mch",act,n,lay:mpick(layoutsFor(n).filter(x=>x!=="scatter")),ans:n}}
     case "miss":{const n=wpickN(range(3,Math.min(max,MS().settings.planKey.startsWith("R")?5:10)),"miss"),k=rint(1,n-1);return {kind:"mch",act,n,k,ans:k}}
-    case "dbl":{const k=wpickN(range(1,Math.min(5,Math.floor(lim(10)/2))),"dbl");return {kind:"mch",act,k,ans:k*2}}
+    case "dbl":{const k=wpickN(mmax()>10?range(3,10):range(1,Math.min(5,Math.floor(lim(10)/2))),"dbl");return {kind:"mch",act,k,ans:k*2}}
     case "more":{const up=Math.random()<.5,n=up?rint(1,cap10-1):rint(2,cap10);return {kind:"mch",act,n,up,ans:up?n+1:n-1}}
-    case "oe":{const n=rint(1,cap10);return {kind:"mch",act,n,ans:n%2?"Odd":"Even"}}
+    case "oe":{const n=rint(1,MS().settings.planKey.startsWith("Y2")?20:cap10);return {kind:"mch",act,n,ans:n%2?"Odd":"Even"}}
     case "story":{const plus=Math.random()<.55;if(plus){const a=rint(1,6),b=rint(1,Math.min(4,10-a));return {kind:"mch",act,a,b,plus,ans:a+b}}
       const a=rint(3,9),b=rint(1,Math.min(4,a-1));return {kind:"mch",act,a,b,plus,ans:a-b}}
     case "b10":{const n=wpickN(range(1,9),"b10");return {kind:"mch",act,n,ans:10-n}}
@@ -2017,6 +2440,14 @@ function genItem(act){
     case "pat":{const sets=[["🔴","🟡","🔵"],["⭐","🌙","☀️"],["🦆","🐸","🐟"],["🍎","🍌","🍐"],["🟩","🟪","🟧"]];const st=shuffle(mpick(sets));
       const units=MS().settings.planKey==="N-summer"?[[0,1],[0,0,1],[0,1,1],[0,1,2]]:[[0,1],[0,1],[0,0,1]];const u=mpick(units),len=u.length===2?6:u.length===3?6:5;
       const seq=range(0,len-1).map(i=>st[u[i%u.length]]),ans=st[u[len%u.length]];return {kind:"mch",act,seq,ans,opts:shuffle(st.slice(0,3))}}
+    case "b20":{const n=wpickN(range(11,19),"b20");return {kind:"mch",act,n,ans:20-n}}
+    case "near":{const k=wpickN(range(3,9),"near");return {kind:"mch",act,k,ans:2*k+1}}
+    case "cross":{const a=wpickN(range(6,9),"cross"),b=rint(11-a,9);return {kind:"mch",act,a,b,ans:a+b}}
+    case "subx":{const t=wpickN(range(12,18),"subx"),b=rint(t-9,9);return {kind:"mch",act,t,b,ans:t-b}}
+    case "tens":{const n=rint(1,9)*10+rint(1,9);return {kind:"mch",act,n,ans:n}}
+    case "tenmore":{const up=Math.random()<.5,n=up?rint(10,89):rint(20,89);return {kind:"mch",act,n,up,ans:up?n+10:n-10}}
+    case "grp":{const t=wpickN([2,5,10],"grp"),c=rint(2,t===2?6:t===5?5:4);return {kind:"mch",act,t,c,ans:t*c}}
+    case "frac":{const q=wpickN([2,4],"frac"),n=q===2?mpick([4,6,8,10,12,14,16,18,20]):mpick([4,8,12,16,20]);return {kind:"mch",act,q,n,ans:n/q}}
     case "sum":{const plus=Math.random()<.6;if(plus){const a=rint(1,7),b=rint(1,10-a);return {kind:"mch",act,a,b,plus,ans:a+b}}
       const a=rint(3,10),b=rint(1,a-1);return {kind:"mch",act,a,b,plus,ans:a-b}}
   }
@@ -2027,7 +2458,7 @@ function planMaths(){
   const q=[];
   const per=a=>S.planKey.startsWith("N")&&a==="sub"?2:ACTS[a].per;
   /* Never show the same amount twice in one activity: draw again until it differs */
-  const keyOf=(a,x)=>a+":"+(x.kind==="mcmp"?Math.min(x.l,x.r)+"-"+Math.max(x.l,x.r):x.n!=null?x.n:[x.k,x.a,x.b,x.plus,x.up,x.seq&&x.seq.join("")].join(","));
+  const keyOf=(a,x)=>a+":"+(x.kind==="mcmp"?Math.min(x.l,x.r)+"-"+Math.max(x.l,x.r):x.n!=null?x.n:[x.k,x.a,x.b,x.t,x.c,x.q,x.plus,x.up,x.seq&&x.seq.join("")].join(","));
   const used=new Set();
   const gen=a=>{let it;for(let t=0;t<25;t++){it=genItem(a);if(!used.has(keyOf(a,it)))break}used.add(keyOf(a,it));return it};
   order.forEach(a=>{for(let i=0;i<per(a)&&q.length<10;i++)q.push(gen(a))});
@@ -2068,6 +2499,22 @@ function tenFrameSVG(n,{full=10}={}){
     if(i<n)g.push(svg("circle",{class:"m-dot",cx:x+(u-4)/2,cy:y+(u-4)/2,r:u*.32}))}
   return svg("svg",{class:"m-dots",viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"ten frames"},g);
 }
+function baseTenSVG(tn,on){
+  const u=12,gap=8,barW=u,W=Math.max(1,tn)*(barW+gap)+gap+3*(u+4)+8,H=10*u+8,g=[];
+  for(let t=0;t<tn;t++)for(let c=0;c<10;c++)g.push(svg("rect",{class:"m-dot",x:4+t*(barW+gap),y:4+c*u,width:barW,height:u-1.5,rx:2}));
+  const ox=4+tn*(barW+gap)+gap;
+  for(let i=0;i<on;i++)g.push(svg("rect",{class:"m-dot b",x:ox+(i%3)*(u+4),y:4+Math.floor(i/3)*(u+4),width:u,height:u,rx:2}));
+  return svg("svg",{class:"m-dots",viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":`${tn} tens and ${on} ones`},g);
+}
+function groupsSVG(c,t){
+  const u=24,r=u*.38,pad=7,gapB=10,w=(t===2?2:5)*u+2*pad,h=(t===10?2:1)*u+2*pad,perRow=Math.max(1,Math.floor(300/(w+gapB))),rows=Math.ceil(c/perRow),g=[];
+  for(let i=0;i<c;i++){const bx=(i%perRow)*(w+gapB)+4,by=Math.floor(i/perRow)*(h+gapB)+4;
+    g.push(svg("rect",{class:"m-cell",x:bx,y:by,width:w,height:h,rx:10}));
+    for(let k=0;k<t;k++){const cols=t===10?5:t;g.push(svg("circle",{class:"m-dot",cx:bx+pad+(k%cols)*u+u/2,cy:by+pad+Math.floor(k/cols)*u+u/2,r}))}}
+  return svg("svg",{class:"m-dots",viewBox:`0 0 ${Math.min(c,perRow)*(w+gapB)+4} ${rows*(h+gapB)+4}`,role:"img","aria-label":`${c} groups of ${t}`},g);
+}
+function stepOptions(ans,t){const set=new Set([ans]);[ans+t,ans-t,ans+2*t].filter(x=>x>0).forEach(x=>{if(set.size<3)set.add(x)});while(set.size<3)set.add(ans+set.size);return shuffle([...set])}
+function tensOptions(n){const tn=Math.floor(n/10),on=n%10,set=new Set([n]);if(tn!==on)set.add(on*10+tn);[n+10,n-10,n+1,n-1].filter(x=>x>9&&x<100&&x!==n).forEach(x=>{if(set.size<3)set.add(x)});return shuffle([...set])}
 const duckSpan=(cls="")=>el("span",{class:"gduck "+cls,html:DUCK_SVG(false)});
 function duckGroup(n,cls=""){return el("div",{class:"dgroup"},range(1,n).map(()=>duckSpan(cls)))}
 const REEDS='<svg viewBox="0 0 120 90" aria-hidden="true"><ellipse class="m-pond" cx="60" cy="78" rx="58" ry="12"/><path class="m-reed" d="M20 80C18 50 24 30 30 12M34 80C34 54 40 38 50 22M48 80C50 50 46 32 42 6M62 80C64 52 70 36 80 18M76 80C76 56 72 40 66 14M90 80C92 58 98 44 106 30M102 80C100 60 96 50 90 36"/><ellipse class="m-bulrush" cx="30" cy="16" rx="4" ry="9" transform="rotate(14 30 16)"/><ellipse class="m-bulrush" cx="80" cy="22" rx="4" ry="9" transform="rotate(20 80 22)"/></svg>';
@@ -2087,7 +2534,7 @@ function choiceSpec(item){
     case "miss":{const v=el("div",{class:"hide-scene"},duckGroup(item.n-item.k),el("span",{class:"reeds",html:REEDS}));
       return {kind:"Hiding ducklings",visual:v,q:`There are ${item.n} ducklings. How many are hiding in the reeds?`,tip:"⟦She⟧ knows the whole and can see one part, so the hiding part is what's left. Fingers help: hold up the whole, fold down the ones ⟦she⟧ can see.",opts:numberOptions(item.ans,1,item.n),key:"miss:"+item.n}}
     case "dbl":{const v=el("div",{class:"mirror"},dotsSVG(item.k,item.k<=6?"dice":"pairs"),el("span",{class:"mline"}),dotsSVG(item.k,item.k<=6?"dice":"pairs"));
-      return {kind:"Doubles",visual:v,q:`Double ${item.k}. How many altogether?`,tip:`Two groups the same size. Double ${item.k} is ${item.k} and ${item.k} more.`,opts:numberOptions(item.ans,1,12),key:"dbl:"+item.k}}
+      return {kind:"Doubles",visual:v,q:`Double ${item.k}. How many altogether?`,tip:`Two groups the same size. Double ${item.k} is ${item.k} and ${item.k} more.`,opts:numberOptions(item.ans,1,Math.max(12,item.ans+2)),key:"dbl:"+item.k}}
     case "more":return {kind:"One more, one less",visual:tenFrameSVG(item.n),q:`What is one ${item.up?"more":"less"} than this?`,tip:`First ⟦she⟧ says how many there are, then imagines one ${item.up?"more counter added":"counter taken away"}.`,opts:numberOptions(item.ans,0,Math.max(10,S.max)),key:"more:"+item.n};
     case "oe":return {kind:"Odd or even?",visual:dotsSVG(item.n,"pairs"),q:"Is this number odd or even?",tip:"Even numbers make pairs with none left over. Odd numbers have one left on its own.",opts:["Odd","Even"],key:"oe"};
     case "story":{const v=el("div",{class:"story"},
@@ -2098,6 +2545,17 @@ function choiceSpec(item){
       return {kind:"Number story",visual:v,q,tip:"Read the story aloud: first, then, now. ⟦She⟧ can use the picture or ⟦her⟧ fingers.",opts:numberOptions(item.ans,0,10),key:"story"}}
     case "b10":return {kind:"Make 10",visual:tenFrameSVG(item.n),q:"How many more to make 10?",tip:`⟦She⟧ counts the empty spaces, or knows that ${item.n} and ${10-item.n} make 10.`,opts:numberOptions(item.ans,0,10),key:"b10:"+item.n};
     case "teen":return {kind:"Ten and a bit",visual:tenFrameSVG(item.n),q:"How many altogether?",tip:`One full ten and ${item.n-10} more. ${item.n} is 10 and ${item.n-10}.`,opts:numberOptions(item.ans,10,20),key:"teen:"+item.n};
+    case "b20":return {kind:"Make 20",visual:tenFrameSVG(item.n),q:"How many more to make 20?",tip:`⟦She⟧ counts the empty spaces, or knows that ${item.n} and ${20-item.n} make 20. Two tens make 20, so look at what is missing from the second frame.`,opts:numberOptions(item.ans,0,10),key:"b20:"+item.n};
+    case "near":{const r1=dotsSVG(item.k,"line"),r2=dotsSVG(item.k+1,"line",{split:item.k});r1.style.width=item.k*36+"px";r2.style.width=(item.k+1)*36+"px";const v=el("div",{class:"nearv"},r1,r2);
+      return {kind:"Near doubles",visual:v,q:`${item.k} + ${item.k+1} = ?`,tip:`The two rows are nearly the same. Double ${item.k} is ${item.k*2}, and one more is ${item.ans}.`,opts:numberOptions(item.ans,2,Math.max(12,item.ans+2)),key:"near:"+item.k}}
+    case "cross":{const v=el("div",{class:"sumv"},el("div",{class:"sumtext",text:`${item.a} + ${item.b} =`}),tenFrameSVG(item.a));
+      return {kind:"Add across ten",visual:v,q:"What goes in the gap?",tip:`Make 10 first. ${item.a} needs ${10-item.a} more to make 10, and that leaves ${item.b-(10-item.a)} to add on.`,opts:numberOptions(item.ans,10,20),key:"cross:"+item.a}}
+    case "subx":{const v=el("div",{class:"sumv"},el("div",{class:"sumtext",text:`${item.t} − ${item.b} =`}),tenFrameSVG(item.t));
+      return {kind:"Take away across ten",visual:v,q:"What goes in the gap?",tip:`Take away to 10 first. ${item.t} take away ${item.t-10} is 10, and ${item.b-(item.t-10)} more to take away from there.`,opts:numberOptions(item.ans,0,10),key:"subx:"+item.t}}
+    case "tens":return {kind:"Tens and ones",visual:baseTenSVG(Math.floor(item.n/10),item.n%10),q:"What number is this?",tip:`Count the tens first, then the ones. ${Math.floor(item.n/10)} tens and ${item.n%10} ones is ${item.n}.`,opts:tensOptions(item.n),key:"tens"};
+    case "tenmore":return {kind:"Ten more, ten less",visual:baseTenSVG(Math.floor(item.n/10),item.n%10),q:`What is 10 ${item.up?"more":"less"} than ${item.n}?`,tip:`Look at the tens. 10 ${item.up?"more means one more ten":"less means one fewer ten"}, and the ones stay the same.`,opts:item.up?shuffle([item.n+10,item.n+1,item.n-10]):shuffle([item.n-10,item.n-1,item.n+10]),key:"tenmore"};
+    case "grp":return {kind:"Equal groups",visual:groupsSVG(item.c,item.t),q:`${item.c} groups of ${item.t}. How many altogether?`,tip:`Count in ${item.t}s together: ${range(1,item.c).map(i=>i*item.t).join(", ")}.`,opts:stepOptions(item.ans,item.t),key:"grp:"+item.t};
+    case "frac":return {kind:"Halves and quarters",visual:dotsSVG(item.n,"pairs"),q:`What is ${item.q===2?"half":"a quarter"} of ${item.n}?`,tip:item.q===2?`Half means 2 equal groups. Share the ${item.n} between 2 and see how many each.`:`A quarter means 4 equal groups. Share the ${item.n} between 4 and see how many each.`,opts:numberOptions(item.ans,1,Math.max(10,item.n/2)),key:"frac:"+item.q};
     case "sum":{const v=el("div",{class:"sumv"},el("div",{class:"sumtext",text:`${item.a} ${item.plus?"+":"−"} ${item.b} =`}),
         item.plus?dotsSVG(item.a+item.b,"line",{split:item.a}):dotsSVG(item.a,"line",{split:item.a-item.b}));
       return {kind:"Number sentence",visual:v,q:"What goes in the gap?",tip:item.plus?`⟦Acc⟧ is ${item.a}, yellow is ${item.b}. Together they make the answer.`:`Start with ${item.a} and take away the yellow ${item.b}.`,opts:numberOptions(item.ans,0,10),key:"sum"}}
@@ -2213,7 +2671,7 @@ function mathsCard(item,flash,advance){
     stage.append(sp.visual);stage.classList.add("wide");
     caption.textContent=sp.q;
     const next=el("button",{class:"btn",hidden:"",on:{click:()=>once(lastR)}},"Next");let lastR="reset";
-    const opts=el("div",{class:"mopts"+(sp.emoji?" emoji":typeof sp.opts[0]==="string"?" words":"")});
+    const opts=el("div",{class:"mopts"+(sp.emoji?" emoji":typeof sp.opts[0]==="string"?" words":sp.opts.some(o=>String(o).length>=2)?" two":"")});
     sp.opts.forEach(o=>{const b=el("button",{class:"mopt",type:"button",text:String(o)});
       b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
         if(o===item.ans){done=true;SFX.right();b.classList.add("win");const sc=tries===1?1:.5;mRecord(sp.key,sc);lastR=tries===1?"up":"same";
@@ -2259,13 +2717,16 @@ const MPLAN_TEXT={
   "R-summer":"Numbers to 10. Counting bigger groups, one more and one less, and spotting odd and even numbers by their shape.",
   "Y1-autumn":"Numbers to 10. Subitising within 5, 6 to 9 as five and a bit, comparing, and one more and one less.",
   "Y1-spring":"Numbers to 10. 7 and 9 in every way they can be split, odd and even, number stories (first, then, now) and making 10.",
-  "Y1-summer":"Numbers to 20. Teen numbers as ten and a bit, the number line to 20, odd and even, number stories and writing number sentences."
+  "Y1-summer":"Numbers to 20. Teen numbers as ten and a bit, the number line to 20, odd and even, number stories and writing number sentences.",
+  "Y2-autumn":"Numbers to 20. Number bonds to 10 and 20, doubles up to double 10, odd and even numbers and number sentences.",
+  "Y2-spring":"Numbers to 20 and tens and ones. Adding and taking away through 10, near doubles such as 6 and 7, and reading two-digit numbers.",
+  "Y2-summer":"Numbers to 100. Equal groups of 2, 5 and 10, halves and quarters, ten more and ten less, and adding and taking away through 10."
 };
 function mathsProgressPanel(){
   syncPlan();
   const S=MS().settings,P=PLANS[S.planKey],cap10=Math.min(S.max,10);
   const LABEL={secure:"Confident",going:"Getting there",help:"Not yet last time",none:"Not tried yet"};
-  const KEYS={fing:range(1,Math.min(S.max,5)),sub:range(1,cap10),cnt:range(S.planKey.startsWith("N")?2:Math.min(3,S.max),Math.min(S.max,12)),comp:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(S.max,10)),dbl:range(1,5),more:range(1,cap10),b10:range(1,9),teen:range(11,19)};
+  const KEYS={fing:range(1,Math.min(S.max,5)),sub:range(1,cap10),cnt:range(S.planKey.startsWith("N")?2:Math.min(3,S.max),Math.min(S.max,12)),comp:range(2,cap10),num:range(1,cap10),miss:range(3,Math.min(S.max,10)),dbl:S.max>10?range(3,10):range(1,5),more:range(1,cap10),b10:range(1,9),teen:range(11,19),b20:range(11,19),near:range(3,9),cross:range(6,9),subx:range(12,18),grp:[2,5,10],frac:[2,4]};
   const shown=Object.keys(ACTS).filter(a=>P.acts.includes(a)||Object.keys(MS().stats).some(k=>k.split(":")[0]===a));
   const rows=[],lines=[];
   shown.forEach(a=>{
@@ -2284,7 +2745,8 @@ const PHASES=[
   ["Phase 2 · Reception, autumn term","Single letter sounds, starting with s a t p, then ⟦her⟧ first two-letter sounds such as ck, ll and sh. Short words like ‘sat’, ‘pin’ and ‘dog’."],
   ["Phase 3 · Reception, spring term","More two- and three-letter sounds, such as ai, ee, oo, igh and ear, and longer tricky words like ‘was’ and ‘said’."],
   ["Phase 4 · Reception, summer term","No new sounds. Instead, longer words with consonants side by side, such as ‘frog’, ‘jump’ and ‘sandwich’."],
-  ["Phase 5 · Year 1","New spellings for sounds ⟦she⟧ knows (‘ay’ in ‘play’, ‘a-e’ in ‘shake’), then other sounds for letters ⟦she⟧ knows (the ‘o’ in ‘go’, the ‘ow’ in ‘snow’). The Phonics Screening Check comes in June, and a last block of spellings follows it."]
+  ["Phase 5 · Year 1","New spellings for sounds ⟦she⟧ knows (‘ay’ in ‘play’, ‘a-e’ in ‘shake’), then other sounds for letters ⟦she⟧ knows (the ‘o’ in ‘go’, the ‘ow’ in ‘snow’). The Phonics Screening Check comes in June, and a last block of spellings follows it."],
+  ["Spelling · Year 2","Autumn 1 reviews Phase 5, with one set of sounds a week. Autumn 2 is a bridge to spelling, which teaches ⟦her-o⟧ to think about spelling, with doubled letters, k and ck, ch and tch, and the endings -s, -es, -ed and -ing. Spring and Summer have 14 units, each asking one question about why a word is spelled the way it is, with a few ‘prickly’ spellings that break the rules and pairs of words that sound the same."]
 ];
 const FIT=[
   ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters: animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
@@ -2292,6 +2754,7 @@ const FIT=[
   ["Warm-up sounds","Each phonics lesson at school opens by revisiting sounds ⟦she⟧ already knows. The warm-up does the same at home, mixing this week's sounds with earlier ones so none of them fade."],
   ["Words with sound buttons","⟦She⟧ taps each sound, says it and then runs ⟦her⟧ finger along the arrow to blend the sounds into a word. This is the core reading skill phonics builds."],
   ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped, and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
+  ["Spelling in Year 2","The Spelling tab follows Little Wandle Spelling unit by unit. Each card uses look, say, cover, write and check. ⟦She⟧ looks at the word, you cover it, and ⟦she⟧ writes it on paper before checking. Pairs of words that sound the same, such as bear and bare, are a choice for ⟦her-o⟧ to make from a sentence. Anything ⟦she⟧ gets right comes back after a few days, and anything ⟦she⟧ finds hard comes back tomorrow."],
   ["Year 1 spellings","In Year 1 the Sounds and words tab lists each new spelling with an example word, because one letter can make more than one sound. A split digraph such as a-e is shown with matching curved buttons under the a and the e."],
   ["Alien words","Made-up words, like the ones in the Year 1 check. ⟦She⟧ can't know them by sight, so reading one shows ⟦she⟧ is decoding rather than remembering."],
   ["Tricky words","The common words school teaches as tricky. The card shows which part breaks the rules ⟦she⟧ knows, so ⟦she⟧ sounds out the rest and learns only the odd bit."],
@@ -2333,7 +2796,10 @@ const MPHASES=[
   ["Term 3 · Reception, summer","Counting bigger groups, one more and one less, putting numbers in order and spotting odd and even numbers by their shape."],
   ["Term 1 · Year 1, autumn","Numbers to 10. Subitising within 5 on the rekenrek, 6 to 9 as five and a bit, comparing numbers and one more and one less."],
   ["Term 2 · Year 1, spring","Numbers to 10. Every way to split 7 and 9, odd and even numbers, and the language of adding and taking away through stories, before any written sums."],
-  ["Term 3 · Year 1, summer","Numbers to 20. Teen numbers as ten and a bit, the number line with 5, 10 and 15 as landmarks, even numbers as doubles, and writing number sentences."]
+  ["Term 3 · Year 1, summer","Numbers to 20. Teen numbers as ten and a bit, the number line with 5, 10 and 15 as landmarks, even numbers as doubles, and writing number sentences."],
+  ["Term 1 · Year 2, autumn","Number bonds to 10 and 20 until they are instant, doubles up to double 10, odd and even numbers and number sentences."],
+  ["Term 2 · Year 2, spring","Adding and taking away through 10 by making 10 first, near doubles such as 6 + 7, and reading two-digit numbers as tens and ones."],
+  ["Term 3 · Year 2, summer","Equal groups that lead to the 2, 5 and 10 times tables, halves and quarters of small amounts, and ten more and ten less."]
 ];
 const MFIT=[
   ["Nursery activities","For a nursery child, sessions use numbers to 3, then 4, then 5 through the year. Two activities are just for nursery: ‘Show me fingers’, where ⟦she⟧ puts up the amount ideally all at once, and ‘What comes next?’, a repeating pattern of pictures."],
@@ -2342,7 +2808,7 @@ const MFIT=[
   ["Numbers inside numbers","A number is shown in two colours, so 5 might be 3 ⟦acc⟧ and 2 yellow. Talking about the parts builds the idea that every number is made of smaller numbers. This is the start of number bonds and addition."],
   ["Which has more?","Two groups of ducklings side by side, and ⟦she⟧ taps the group with more. Small groups ⟦she⟧ can often judge by eye. Bigger ones need counting."],
   ["⟦Her⟧ own pace","Each activity and number is scheduled with the same spacing as the reading cards. When 90% of the current stage is answered right first time after a gap of four days or more, with nothing slipping, the next stage of the Mastering Number sequence unlocks. ⟦Her⟧ school's term is the floor, so ⟦she⟧ never goes backwards."],
-  ["Later activities","From the spring term of Reception, new activities join as the class meets them. These include matching numerals, hiding ducklings (missing parts), doubles, one more and one less, odd and even, number stories, make 10, ten and a bit, the number line and number sentences. The Maths page in Grown-ups shows which are on this term."],
+  ["Later activities","From the spring term of Reception, new activities join as the class meets them. These include matching numerals, hiding ducklings (missing parts), doubles, one more and one less, odd and even, number stories, make 10, ten and a bit, the number line and number sentences. In Year 2 they become make 20, near doubles, adding and taking away through 10, tens and ones, ten more and ten less, equal groups and halves and quarters. The Numbers page in Grown-ups shows which are on this term."],
   ["Real-life maths","Each session ends with an idea for later in the day, such as counting stairs or sharing grapes. Mastering Number puts a lot of weight on everyday maths, and these ideas give ⟦her-o⟧ more practice than any screen can."]
 ];
 const MTERMS=[
@@ -2370,14 +2836,14 @@ const MTERMS=[
 ];
 function mathsGuide(){
   const left=el("section",{class:"panel prose"},
-    el("h2",{text:isNursery()?"How maths works in nursery":state.year==="Y1"?"How maths works in Reception and Year 1":"How maths works in Reception"}),
+    el("h2",{text:isNursery()?"How maths works in nursery":isY2()?"How maths works in Year 2":state.year==="Y1"?"How maths works in Reception and Year 1":"How maths works in Reception"}),
     isNursery()?el("p",{text:"Nursery maths follows the early years framework for 3 and 4 year olds. The aim is a feel for small numbers: seeing up to 3 at a glance, counting up to 5 with one number for each thing, knowing the last number says how many, showing amounts on fingers, comparing groups and spotting patterns. Mastering Number then starts in Reception."}):null,
     el("p",{text:"Before children can add and subtract, they need a secure feel for what numbers are. ⟦Her⟧ class follows Mastering Number, which spends Reception building that feel slowly and deeply with small numbers, rather than racing on to bigger ones."}),
     el("p",{text:"Each day the class has a short Mastering Number session on top of the main maths lesson. Children look at dot patterns, use their fingers and a bead frame called a rekenrek, and talk about what they see. The emphasis is on seeing numbers and explaining them, not on writing sums."}),
-    el("h2",{text:"How nursery, Reception and Year 1 unfold"}),
+    el("h2",{text:"How nursery, Reception, Year 1 and Year 2 unfold"}),
     el("ol",{class:"phases"},MPHASES.map(([t,d],i)=>{const k=MS().settings.planKey||planKey(),here=i===(k.startsWith("N")?0:MPLAN_SCHOOL.indexOf(k)+1);return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
-    el("p",{class:"note",text:"This follows the published Mastering Number overviews for Reception and Year 1. ⟦Her⟧ school's letter adds the rules of counting to the first half term, so the app includes counting from the start."}),
+    el("p",{class:"note",text:"This follows the published Mastering Number overviews for Reception and Year 1. Year 2 follows the Mastering Number focus on number bonds, doubles and bridging 10, and adds tens and ones, equal groups and fractions from the national curriculum. ⟦Her⟧ school's letter adds the rules of counting to the first half term, so the app includes counting from the start."}),
     el("h2",{text:"How this app fits in"}),
     el("dl",{class:"fit"},MFIT.flatMap(([t,d])=>[el("dt",{text:t}),el("dd",{text:d})])),
     el("h2",{text:"Helping at home"}),
@@ -2394,11 +2860,13 @@ function mathsGuide(){
   return el("div",{class:"guide"},left,right);
 }
 function guideView(){
-  const bar=el("div",{class:"seg topic"},[["reading",isNursery()?"Listening":"Sounds and words"],["maths","Numbers"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(guideTopic===k),on:{click:()=>{guideTopic=k;render()}}},l)));
+  const bar=el("div",{class:"seg topic"},[["reading",isNursery()?"Listening":isY2()?"Spelling and words":"Sounds and words"],["maths","Numbers"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(guideTopic===k),on:{click:()=>{guideTopic=k;render()}}},l)));
   const intro=el("section",{class:"panel prose"},
     el("h2",{text:"Waddle sits beside books"}),
     el("p",{text:"Waddle is for you and your child to do together, a little like a mother duck leading her ducklings. It takes a few minutes a day, you sit beside your child, and you decide whether each answer was right. Children learn most when a grown-up is there to notice, encourage and explain."}),
     el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
+    el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 each one earns a piece for a duck, which your child chooses, starting with the body and head and ending with extras such as a hat or a skateboard. A duck takes about a week, finished ducks join a flock, and the ducks start again each school year."}),
+    el("p",{text:"The I can wall is separate from the rewards. A statement such as ‘I can read the words the, to and no’ appears only once practice has gone well on two different days, so it is something true that you can say aloud. The wall stays when your child moves up a year."}),
     el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}));
   return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());
 }
@@ -2408,8 +2876,8 @@ function readingGuide(){
     el("h2",{text:"What phonics is"}),
     el("p",{text:"English is written with 26 letters but spoken with about 44 sounds. Phonics teaches children which letters write which sounds, so that when they meet a new word they can work it out for themselves instead of guessing from the pictures or memorising the word's shape."}),
     el("p",{text:"⟦Her⟧ school uses systematic synthetic phonics, taught through a programme called Little Wandle Letters and Sounds Revised, which is on the Department for Education's list of approved phonics programmes. Sounds arrive in a fixed order, a few each week, and each daily lesson revisits old sounds, teaches a new one, practises it and then uses it to read."}),
-    el("h2",{text:"How nursery, Reception and Year 1 unfold"}),
-    el("ol",{class:"phases"},PHASES.map(([t,d],i)=>{const here=i===(isNursery()?0:({"R-autumn":1,"R-spring":2,"R-summer":3}[planKey()]??4));return el("li",{class:here?"here":""},
+    el("h2",{text:"How nursery, Reception, Year 1 and Year 2 unfold"}),
+    el("ol",{class:"phases"},PHASES.map(([t,d],i)=>{const here=i===(isNursery()?0:isY2()?5:({"R-autumn":1,"R-spring":2,"R-summer":3}[planKey()]??4));return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
     el("h2",{text:"How this app fits in"}),
     el("dl",{class:"fit"},FIT.flatMap(([t,d])=>[el("dt",{text:t}),el("dd",{text:d})])),
@@ -2417,7 +2885,7 @@ function readingGuide(){
     el("h2",{text:"What the app leaves to you and school"}),
     el("p",{text:"It plays no sounds, because computer voices add ‘uh’ to letter sounds and would undo what school teaches. The Little Wandle videos show exactly how each sound is said, and they are worth watching once per set."},
       " ",el("a",{href:"https://www.littlewandle.org.uk/resources/for-parents/",target:"_blank",rel:"noopener",text:"Little Wandle for parents"})),
-    el("p",{text:"It doesn't cover writing or spelling, and it isn't a test. Its records are there to show you where to spend the few minutes you have."}),
+    el("p",{text:"It isn't a test. Its records are there to show you where to spend the few minutes you have. Before Year 2 it doesn't cover writing, and in Year 2 ⟦she⟧ writes each spelling on paper while you check it."}),
     el("h2",{text:"Helping at home"}),
     el("ul",{},
       el("li",{text:"Little and often. Five minutes a day does more than half an hour at the weekend."}),
@@ -2451,7 +2919,7 @@ function settingsPanel(){
   const confirmBox=el("div",{class:"confirm"});
   const resetBtn=el("button",{class:"btn ghost small",on:{click:()=>{
     confirmBox.replaceChildren(el("span",{class:"note",text:"Clear all practice and reading history? Ticked sounds, words and ⟦her⟧ book list stay."}),
-      el("button",{class:"btn small danger",on:{click:()=>{state.cards={};state.days=[];state.log=[];state.reads=[];state.readLog={};state.mins={};state.hatched=0;state.listen={stats:{}};state.maths.stats={};state.maths.cards={};state.sounds.cards={};state.sounds.gcards={};save();render()}}},"Clear history"),
+      el("button",{class:"btn small danger",on:{click:()=>{state.cards={};state.days=[];state.log=[];state.reads=[];state.readLog={};state.mins={};state.hatched=0;state.listen={stats:{}};state.maths.stats={};state.maths.cards={};state.sounds.cards={};state.sounds.gcards={};state.spell.cards={};state.wall={};state.wallInit=false;state.duckYears={};save();render()}}},"Clear history"),
       el("button",{class:"btn ghost small",on:{click:()=>confirmBox.replaceChildren(resetBtn)}},"Cancel"));
   }}},"Reset progress…");
   confirmBox.append(resetBtn);
@@ -2471,12 +2939,17 @@ function settingsPanel(){
           el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceChildren(ask)}},"Cancel"))}},`Remove ${who}…`);
         box.append(ask);return box})():null),
       el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ school year"}),
-        seg("School year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],state.year,setYear,"lab-year"),
+        seg("School year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"],["Y2","Year 2"]],state.year,setYear,"lab-year"),
         yearPending==="N"?el("div",{class:"confirm"},
           el("span",{class:"note",text:"Nursery has no sounds or tricky words, so switching clears the ones ticked. If ⟦she⟧ moves up to Reception, you can choose where school has got to."}),
           el("button",{class:"btn small danger",type:"button",on:{click:confirmNursery}},"Switch to Nursery"),
           el("button",{class:"btn ghost small",type:"button",on:{click:()=>{yearPending=null;render()}}},"Cancel")):null,
-        (state.year!=="N"&&!hasTicks())?(()=>{
+        (state.year==="Y2"&&!spellTaught().length)?(()=>{
+          const sel=el("select",{id:"year-unit"});fillSpellSelect(sel,defaultUnit());
+          return el("div",{class:"field"},el("label",{for:"year-unit",text:"Latest spelling taught at school"}),sel,
+            el("p",{class:"note",text:"Nothing is ticked yet. Choose where school has got to and every unit up to there is ticked. You can fine-tune this on the Spelling tab."}),
+            el("div",{class:"row"},el("button",{class:"btn small",type:"button",on:{click:()=>{spellThrough(+sel.value);if(!hasTicks())tickThrough(SETS.length-1);readingTopic="spelling";save();render()}}},"Tick these units")))})():null,
+        (state.year!=="N"&&state.year!=="Y2"&&!hasTicks())?(()=>{
           const sel=el("select",{id:"year-set"});fillSetSelect(sel,state.year,defaultSet(state.year,curTerm()));
           return el("div",{class:"field"},el("label",{for:"year-set",text:"Latest sounds taught at school"}),sel,
             el("p",{class:"note",text:"Nothing is ticked yet. Choose where school has got to and every sound up to there is ticked, along with the tricky words from earlier terms. You can fine-tune both on the Sounds and words tab."}),
@@ -2597,6 +3070,70 @@ function listenPanel(){
       return el("li",{},el("b",{text:LGAMES[g].name}),el("span",{class:"note",text:r.length?`${r.filter(x=>x===1).length} of the last ${r.length} right first time`:"Not tried yet"}),el("p",{class:"note",text:LGAMES[g].desc}))})));
 }
 
+/* ----- Year 2 spelling cards: look, cover, write, check ----- */
+function spellWordEl(it,covered){
+  const len=it.w.length,fs=Math.max(34,Math.min(88,Math.floor(300/(len*.6))));
+  const box=el("div",{class:"spword"+(covered?" covered":""),style:`font-size:${fs}px`,role:"img","aria-label":covered?`${len} letters, covered`:it.w});
+  if(covered)for(let i=0;i<len;i++)box.append(el("span",{class:"sp-blank","aria-hidden":"true"}));
+  else it.segs.forEach(([t,h])=>box.append(el("span",{class:h?"hl":"",text:t})));
+  return box;
+}
+/* A sentence with ___ for the word: filled and marked when the word is showing, a line when it is hidden */
+function spellSentence(sent,word,show){
+  const [pre,post]=sent.split("___"),p=el("p",{class:"spsent"});
+  p.append(pre,show?el("b",{text:word}):el("span",{class:"gap","aria-label":"blank"}),post||"");
+  return p;
+}
+function spellCard(item,flash,advance){
+  const it=SPELL_ITEM[item.v],unit=SPELL.find(u=>u.items.some(x=>x.key===item.v));
+  let stage="look";
+  const body=el("div",{class:"spbody"}),tip=el("p",{class:"tip"}),side=el("div",{class:"row",style:"justify-content:center"});
+  const T=t=>{tip.textContent=G(t)};
+  const kindEl=el("span",{class:"kind",text:it.prickly?"Prickly spelling":"Spelling"});
+  const paint=()=>{
+    flash.dataset.stage=stage;
+    body.replaceChildren(spellWordEl(it,stage==="cover"));
+    if(it.sent)body.append(spellSentence(it.sent,it.w,stage!=="cover"));
+    side.replaceChildren();
+    if(stage==="look"){
+      T(it.prickly?"A prickly spelling has a bit that does not follow the usual rules. Say the word, look at the highlighted part and say the letters, then cover it."
+        :"Say the word"+(it.sent?"":" and use it in a sentence")+". Look at the highlighted letters and say each letter. Then cover it.");
+      side.append(el("button",{class:"btn",type:"button",on:{click:()=>{stage="cover";paint()}}},"Cover it"));
+    }else if(stage==="cover"){
+      T(`Say the word${it.sent?" and read the sentence":" and use it in a sentence"}. ${readerName()} writes it on paper, or says the letters in order, from memory.`);
+      side.append(el("button",{class:"btn ghost small",type:"button",on:{click:()=>{stage="look";paint()}}},"Look again"),
+        el("button",{class:"btn",type:"button",on:{click:()=>{stage="check";paint()}}},"Check it"));
+    }else{
+      T("Check each letter against what ⟦she⟧ wrote, especially the highlighted ones. Then say how it went.");
+      side.append(el("button",{class:"btn ghost small",type:"button",on:{click:()=>{stage="look";paint()}}},"Look again"));
+    }
+  };
+  flash.append(kindEl,body,tip);paint();
+  const go=r=>{schedule(SP().cards,item.v,r);advance(r)};
+  return {grades:[["g-auto","Spelled it right",()=>go("up")],["g-sound","With a little help",()=>go("same")],["g-help","Not yet",()=>go("reset")]],n:3,side};
+}
+/* Homophones: the same sound, a different spelling and meaning. ⟦She⟧ picks the one that fits the sentence. */
+function homophoneCard(item,flash,advance){
+  const it=SPELL_ITEM[item.v],tgt=mpick(it.set);
+  const caption=el("p",{class:"mcap",text:"Which word fits the sentence?"});
+  const stage=el("div",{class:"mstage wide"},spellSentence(tgt.sent,tgt.w,false));
+  let tries=0,done=false,lastR="reset",moved=false;const once=r=>{if(moved)return;moved=true;advance(r)};
+  const next=el("button",{class:"btn",hidden:"",on:{click:()=>once(lastR)}},"Next");
+  const opts=el("div",{class:"mopts words"});
+  const finish=r=>{done=true;lastR=r;schedule(SP().cards,item.v,r);stage.replaceChildren(spellSentence(tgt.sent,tgt.w,true));next.hidden=false};
+  shuffle(it.set.map(x=>x.w)).forEach(o=>{
+    const b=el("button",{class:"mopt",type:"button",text:o});
+    b.addEventListener("click",()=>{if(done||b.classList.contains("nope"))return;tries++;
+      if(o===tgt.w){SFX.right();b.classList.add("win");finish(tries===1?"up":"same");caption.textContent="Yes!";setTimeout(()=>{if(b.isConnected)once(lastR)},1600)}
+      else{b.classList.add("nope");
+        if(tries>=2){opts.querySelectorAll(".mopt").forEach(x=>{if(x.textContent===tgt.w)x.classList.add("win")});finish("reset");caption.textContent=`It's ${tgt.w}. Let's look at it together.`}
+        else caption.textContent="Read the sentence again."}});
+    opts.append(b)});
+  flash.append(el("span",{class:"kind",text:"Same sound, different spelling"}),stage,caption,opts,
+    el("p",{class:"tip",text:`These words sound the same but are spelled differently. Read the sentence aloud and decide together which one makes sense. The words are ${it.set.map(x=>x.w).join(", ").replace(/, ([^,]*)$/," and $1")}.`}));
+  return {grades:[],n:0,side:[next]};
+}
+
 function cardView(){
   const item=session.queue[session.i];
   const flash=el("div",{class:"flash"});
@@ -2605,13 +3142,15 @@ function cardView(){
     const R=session.results,it=R.filter(x=>x[0].kind!=="a"),al=R.filter(x=>x[0].kind==="a");
     state.log.push({d:today(),t:session.type,n:it.length,up:it.filter(x=>x[1]==="up").length,help:it.filter(x=>x[1]==="reset").length,
       an:al.length,au:al.filter(x=>x[1]==="up").length,s:(tickActive(),bankTime())});
-    state.log=state.log.slice(-500);state.hatched=(state.hatched||0)+1;session.moved=checkPace()}markDay();save();render()};
+    state.log=state.log.slice(-500);if(isBuild()){const dr=DR();dr.pending=(dr.pending||0)+1;dr.earned=(dr.earned||0)+1;lastPlaced=null;pickCat=null}else state.hatched=(state.hatched||0)+1;session.moved=checkPace();session.newCans=updateWall()}markDay();save();render()};
 
   let side=null;
   if(item.kind==="l"){
     const lc=listenCard(item,flash,advance);grades=lc.grades;n=lc.n;side=lc.side;
   }else if(item.kind[0]==="m"&&item.kind!=="m"){
     const mc=mathsCard(item,flash,advance);grades=mc.grades||[];n=mc.n;side=mc.side;
+  }else if(item.kind==="sw"||item.kind==="sh"){
+    const sc=item.kind==="sw"?spellCard(item,flash,advance):homophoneCard(item,flash,advance);grades=sc.grades;n=sc.n;side=sc.side;
   }else if(item.kind==="t"){
     const wd=wordNode(WORDS[item.v].parts);
     let revealed=false;
@@ -2664,20 +3203,22 @@ function movedOn(m){
   if(!m)return [];const out=[];
   if(m.sounds.length)out.push(el("p",{class:"moved",text:"⟦She⟧'s ready for new sounds!"}),el("div",{class:"chips",style:"justify-content:center"},m.sounds.map(g=>el("span",{class:"chip snd",text:gOf(g)}))));
   if(m.tricky.length)out.push(el("p",{class:"moved",text:"New tricky words to learn"}),el("div",{class:"chips",style:"justify-content:center"},m.tricky.map(w=>el("span",{class:"chip",text:w}))));
-  if(m.maths)out.push(el("p",{class:"moved",text:`Maths moves on to ${stageName(m.maths)} work!`}));
+  if(m.spell)out.push(el("p",{class:"moved",text:"A new spelling unit is ready"}),el("p",{class:"note",text:`${m.spell.half.split(" · ")[0]}, ${uLabel(m.spell)}. ${m.spell.q}`}));
+  if(m.maths)out.push(el("p",{class:"moved",text:`Numbers move on to ${stageName(m.maths)} work!`}));
   return out;
 }
 function doneView(){
   const res=session.results,good=res.filter(r=>r[1]==="up").length;
   const look=session.type==="tricky"?[...new Set(session.queue.map(q=>q.v))]:session.queue.filter(q=>q.kind==="w"&&q.book).map(q=>q.v);
   const name=(state.name||"").trim();
-  const s=streak();
+  const s=streak(),bd=isBuild(),nc=session.newCans||[];
   releaseWake();
-  if(!session.sfx){session.sfx=true;SFX.done();if(!(s.ducks&&s.ducks%10===0)&&!reducedMotion())SFX.hatch()}
+  if(!session.sfx){session.sfx=true;SFX.done();if(!bd&&!(s.ducks&&s.ducks%10===0)&&!reducedMotion())SFX.hatch()}
   return el("section",{class:"panel done",style:"align-items:center;text-align:center"},
     el("p",{class:"done-title",text:`Well done${name?", "+name:""}!`}),
-    el("p",{class:"muted",text:(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),
-    el("div",{style:"width:100%"},ducksRow(s.ducks,true)),
+    el("p",{class:"muted",text:bd?`${DR().pending>0?"You earned a piece for your duck. ":""}${good} of ${res.length} on ⟦her⟧ own.`:(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),
+    bd?el("div",{style:"width:100%"},DR().pending>0?pickPanel():placedBlock()):el("div",{style:"width:100%"},ducksRow(s.ducks,true)),
+    nc.length?el("div",{class:"newcans"},el("p",{class:"moved",text:"New on the I can wall"}),...nc.slice(0,3).map(c=>el("p",{class:"can-line",text:c.text})),nc.length>3?el("p",{class:"muted",text:`and ${nc.length-3} more`}):null,el("p",{class:"muted",text:"Say it together."})):null,
     ...movedOn(session.moved),
     look.length?el("p",{text:session.type==="tricky"?"Look for these words in tonight's reading book:":`Find these in ${state.sounds.book.title||"⟦her⟧ reading book"}:`}):null,
     look.length?el("div",{class:"chips",style:"justify-content:center"},look.map(w=>el("span",{class:"chip",text:w}))):null,
@@ -2764,6 +3305,50 @@ function soundsView(){
   });
   if(has)book.append(list,el("p",{class:"note",text:"Words waiting for a sound stay out of practice until you tick that sound. If one comes up while ⟦she⟧ reads the book, read it to ⟦her-o⟧."}));
   right.append(book);
+  return wrap;
+}
+
+/* ----- Spelling tab (Year 2) ----- */
+function spellThrough(i){state.spell=freshSpell();SPELL.slice(0,i+1).forEach(u=>state.spell.taught[u.id]=true)}
+const defaultUnit=()=>({9:-1,10:2,11:5,12:7,1:10,2:12,3:14,4:16,5:18,6:20,7:22,8:23})[new Date().getMonth()+1];
+function fillSpellSelect(sel,pick){
+  sel.replaceChildren(el("option",{value:"-1",text:"Not started spelling yet"}));
+  let half=null,grp=null;
+  SPELL.forEach((u,i)=>{const h=uHalf(u);
+    if(h!==half){half=h;grp=el("optgroup",{label:u.half.includes("Unit")?h:u.half});sel.append(grp)}
+    grp.append(el("option",{value:String(i),text:`${uLabel(u).replace(/^Phase 5 review · /,"").replace(/^Bridge to spelling · /,"")} · ${u.q.length>46?u.q.slice(0,44)+"…":u.q}`}))});
+  sel.value=String(pick);
+}
+function spellingView(){
+  const sp=SP(),wrap=el("div",{class:"stack"}),units=spellTaught(),keys=spellKeys(units);
+  const secure=keys.filter(k=>sp.cards[k]&&sp.cards[k].box>=4).length;
+  wrap.append(el("div",{class:"summary"},
+    el("div",{class:"stat"},el("b",{text:String(units.length)}),el("span",{text:"Units taught"})),
+    el("div",{class:"stat"},el("b",{text:`${secure}/${keys.length}`}),el("span",{text:"Spelt right after a gap"})),
+    el("div",{class:"stat"},el("b",{text:String(keys.filter(k=>sp.cards[k]).length)}),el("span",{text:"Practised so far"}))));
+  const list=el("section",{class:"panel"},
+    el("p",{class:"muted",text:"Tick each unit once school has taught it. Practice only uses ticked units, so nothing runs ahead of the classroom."}),
+    el("p",{class:"note",text:"This follows Little Wandle Spelling. Autumn 1 reviews Phase 5, Autumn 2 is a bridge to spelling, and Spring and Summer have 14 units. Each unit asks one question, adds a few prickly spellings that break the rules, and gives a pair of words that sound the same."}));
+  const halves=[...new Set(SPELL.map(uHalf))];
+  halves.forEach(h=>{
+    const us=SPELL.filter(u=>uHalf(u)===h),n=us.filter(u=>sp.taught[u.id]).length,allOn=n===us.length;
+    const d=el("details",{class:"tblock"},el("summary",{},el("span",{text:us[0].half.includes("Unit")?h:us[0].half}),el("span",{class:"note",text:` ${n} of ${us.length} ticked`})),
+      el("button",{class:"linkbtn",type:"button",on:{click:()=>{us.forEach(u=>sp.taught[u.id]=!allOn);save();render()}}},allOn?"Untick all":"Tick all"));
+    if((n>0&&n<us.length)||us.some(u=>u===SPELL[spellNewestIdx()]))d.open=true;
+    us.forEach(u=>{
+      const cb=el("input",{type:"checkbox",id:"su-"+u.id});cb.checked=!!sp.taught[u.id];
+      cb.addEventListener("change",()=>{sp.taught[u.id]=cb.checked;save();render()});
+      const ks=u.items.map(i=>i.key),ok=ks.filter(k=>sp.cards[k]&&sp.cards[k].box>=4).length;
+      d.append(el("div",{class:"unit"},
+        el("label",{class:"switch",for:"su-"+u.id},cb,el("span",{class:"ulabel"},el("b",{text:uLabel(u)}),sp.auto[u.id]&&sp.taught[u.id]?el("span",{class:"auto",title:"Unlocked by the app when ⟦she⟧ was ready",text:" ★"}):null)),
+        el("p",{class:"note",text:u.q}),
+        el("div",{class:"chips uwords"},u.items.map(it=>it.kind==="sh"?el("span",{class:"chip homo",title:"Words that sound the same",text:it.set.map(x=>x.w).join(" / ")})
+          :el("span",{class:"chip"+(it.prickly?" prickly":""),title:it.prickly?"Prickly spelling":""},it.segs.map(([t,h])=>h?el("mark",{text:t}):t)))),
+        units.includes(u)?el("p",{class:"note",text:`${ok} of ${ks.length} spelt right after a gap`}):null));
+    });
+    list.append(d);
+  });
+  wrap.append(list);
   return wrap;
 }
 

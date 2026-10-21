@@ -554,6 +554,7 @@ body{overflow-x:clip}
 .landing{padding-top:64px;padding-bottom:60px;box-sizing:border-box}
 .land-foot{position:absolute;left:0;right:0;bottom:0;margin:0;padding:0 6px;text-align:center;font:400 11.5px/1.35 var(--font-adult);color:var(--muted)}
 .land-foot b{font-weight:700}
+.setup-lead{margin:0;font:400 15.5px/1.4 var(--font-adult);color:var(--muted)}
 .land-sit{margin:-8px 0 0;font:400 14px/1.3 var(--font-adult);color:var(--muted)}
 .choice.done[aria-disabled="true"]{opacity:1}
 .land-main.picking{width:100%;align-self:stretch}
@@ -1685,16 +1686,17 @@ function setupView(){
     :null;
   return el("section",{class:"panel stack setup"},
     el("div",{class:"brand"},el("b",{class:"brand-word"},logoMark(),"Waddle"),el("span",{class:"note",text:"Parent-led daily reading and maths practice for early years"})),
+    el("p",{class:"setup-lead",text:"Waddle is for you and your child to do together, a few minutes a day, followed by a book."}),
     el("h1",{text:adding?"Add a child":"Let's set up Waddle"}),
-    el("p",{class:"note",text:"For a grown-up, once. It takes about a minute, and you can change everything later in Grown-ups."}),
-    el("p",{class:"note",text:"Waddle is for you and your child to do together, a few minutes a day, followed by a book. It is independent and not affiliated with Little Wandle or the NCETM."}),
-    el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's name"}),nameIn),
+    el("p",{class:"note",text:"You can change everything later in Grown-ups."}),
+    el("div",{class:"field"},el("label",{for:"setup-name",text:"Child's forename"}),nameIn),
     segRow("Girl or boy","su-child",[["girl","Girl"],["boy","Boy"]],"child"),
     segRow("School year","su-year",[["N","Nursery"],["R","Reception"],["Y1","Year 1"]],"year",fillSets),
     (phonField=el("div",{class:"field"},el("label",{for:"setup-set",text:"Latest sounds taught at school"}),sel,
-      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Reading page in Grown-ups."})),phonField.hidden=d.year==="N",phonField),
+      el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Sounds and words tab in Grown-ups."})),phonField.hidden=d.year==="N",phonField),
     segRow("Colour","su-pal",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],"palette",()=>document.documentElement.setAttribute("data-palette",d.palette)),
     tip?el("p",{class:"tipbox",text:tip}):null,
+    el("p",{class:"note",text:"Your child's details are stored on this device and are never sent anywhere else."}),
     el("button",{class:"btn go",type:"button",on:{click:()=>{d.name=nameIn.value;d.set=+sel.value;applySetup(d)}}},"Start"),
     adding?el("button",{class:"linkbtn",type:"button",on:{click:()=>{removeChild(family.active);screen="landing";render()}}},"Cancel")
       :el("p",{class:"note"},"Moving from another device? ",el("button",{class:"linkbtn",type:"button",on:{click:()=>fileIn.click()}},"Restore a backup"),fileIn),
@@ -1884,7 +1886,7 @@ function progressView(){
     soundsPanel.append(el("div",{class:"gsgrid"},taughtG.map(g=>{const st=gStatus(g);
       return el("span",{class:"gs "+st,title:`${gOf(g)}${EX[g]?" as in "+EX[g]:""}: ${LABEL[st]}`},gOf(g),g.includes(":")?el("small",{text:EX[g]}):null,st==="secure"?el("span",{class:"ic",text:"✓"}):st==="help"?el("span",{class:"ic",text:"!"}):null)})));
     soundsPanel.append(el("div",{class:"legend"},Object.keys(LABEL).map(k=>el("span",{},el("span",{class:"sw "+k}),`${LABEL[k]} (${counts[k]})`))));
-  }else soundsPanel.append(el("p",{class:"empty",text:"Tick the sounds ⟦she⟧ has been taught on the Reading page."}));
+  }else soundsPanel.append(el("p",{class:"empty",text:"Tick the sounds ⟦she⟧ has been taught on the Sounds and words tab."}));
   const numbersPanel=mathsProgressPanel(),pace=pacePanel();
 
   // Still settling: items that keep needing help, framed calmly, no teacher
@@ -2275,11 +2277,11 @@ const PHASES=[
 ];
 const FIT=[
   ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters: animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
-  ["Sound sets","The sets on the Reading page follow the order school teaches the sounds. Tick a sound only once school has taught it, and the app will never ask ⟦her-o⟧ to read anything that uses a sound ⟦she⟧ hasn't met."],
+  ["Sound sets","The sets on the Sounds and words tab follow the order school teaches the sounds. Tick a sound only once school has taught it, and the app will never ask ⟦her-o⟧ to read anything that uses a sound ⟦she⟧ hasn't met."],
   ["Warm-up sounds","Each phonics lesson at school opens by revisiting sounds ⟦she⟧ already knows. The warm-up does the same at home, mixing this week's sounds with earlier ones so none of them fade."],
   ["Words with sound buttons","⟦She⟧ taps each sound, says it and then runs ⟦her⟧ finger along the arrow to blend the sounds into a word. This is the core reading skill phonics builds."],
   ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped, and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
-  ["Year 1 spellings","In Year 1 the Reading page lists each new spelling with an example word, because one letter can make more than one sound. A split digraph such as a-e is shown with matching curved buttons under the a and the e."],
+  ["Year 1 spellings","In Year 1 the Sounds and words tab lists each new spelling with an example word, because one letter can make more than one sound. A split digraph such as a-e is shown with matching curved buttons under the a and the e."],
   ["Alien words","Made-up words, like the ones in the Year 1 check. ⟦She⟧ can't know them by sight, so reading one shows ⟦she⟧ is decoding rather than remembering."],
   ["Tricky words","The common words school teaches as tricky. The card shows which part breaks the rules ⟦she⟧ knows, so ⟦she⟧ sounds out the rest and learns only the odd bit."],
   ["Spacing","Anything ⟦she⟧ reads easily comes back after a few days, then a week, then two weeks. Anything ⟦she⟧ finds hard comes back tomorrow. Short practice, aimed where it helps."],
@@ -2448,7 +2450,7 @@ function settingsPanel(){
     el("div",{class:"cols"},
       el("section",{class:"panel"},el("h2",{text:"Child"}),
       el("div",{class:"childrow"},
-        el("div",{class:"field"},el("label",{for:"reader-name",text:"Child's name"}),nameIn),
+        el("div",{class:"field"},el("label",{for:"reader-name",text:"Child's forename"}),nameIn),
         seg("Girl or boy",[["girl","Girl"],["boy","Boy"]],state.child,v=>{state.child=v;save();render()},"lab-child")),
       el("p",{class:"note",text:"Sets he or she, his or her, throughout the app."}),
       family.order.length>1?(()=>{const box=el("div",{class:"confirm"});const who=(state.name||"").trim()||"this child";

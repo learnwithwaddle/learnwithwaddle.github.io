@@ -118,9 +118,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .can-tick{width:22px;height:22px;flex:none;border-radius:50%;background:var(--good);color:var(--on-btn);display:inline-grid;place-items:center;font:700 13px var(--font-head);margin-top:2px}
 .can-text{font:600 17px var(--font-head)}
 .pond{display:flex;flex-direction:column;gap:10px}
-.ducks{display:flex;flex-wrap:wrap;align-items:flex-end;gap:2px 0;padding:6px 4px 8px;border-bottom:4px dotted var(--hair)}
-.duck{width:38px;height:34px;flex:none}
-.duck.mama{width:62px;height:56px;margin-right:4px}
+.ducks{display:flex;flex-wrap:nowrap;align-items:flex-end;gap:2px 0;padding:6px 4px 8px;border-bottom:4px dotted var(--hair)}
+.duck{width:38px;height:34px;flex:0 1 auto;min-width:0}
+.duck.mama{width:62px;height:56px;margin-right:4px;flex:none}
 .duck svg{width:100%;height:100%;display:block;overflow:visible}
 .d-body{fill:var(--duck);stroke:var(--duck-line);stroke-width:1.6;stroke-linejoin:round}
 .d-body.m{fill:var(--mama)}
@@ -575,6 +575,9 @@ body{overflow-x:clip}
 .home .ct{font-size:clamp(22px,3.2vw,28px)}
 .home .panel{padding-top:14px;padding-bottom:14px;gap:8px}
 .home .ducks{padding:2px 4px 4px}
+.home .pond .panel-head{flex-wrap:nowrap}
+.home .pond .panel-head h2{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home .pond .panel-head .note,.home .pond .panel-head .flocklink{flex:none;white-space:nowrap}
 .home .ducknote{font-size:14px;line-height:1.35;margin:0}
 .home .alldone{padding-top:10px;padding-bottom:10px}
 .home .alldone .big-tick{width:40px;height:40px;font-size:22px}
@@ -669,14 +672,14 @@ body{overflow-x:clip}
   /* The egg rolls in from the right (using the separate translate and rotate properties), settles, wobbles, then cracks */
   .ducks:has(.hatch){overflow-x:clip}
   .duck.hatch>svg:first-child{animation:hatchout 3s ease-out 1.4s both}
-  .duck.hatch{--rd:130px;--ra:-590deg}
+  .duck.hatch{--rd:130px;--ra:590deg}
   .duck.hatch .egg{animation:eggroll 1.4s cubic-bezier(.2,.55,.35,1) both;transform-origin:50% 54%}
   .duck.hatch .egg-rock{animation:eggwobble 1.4s ease-in-out 1.4s both;transform-origin:20px 34px}
   .duck.hatch .egg-top{animation:eggtop 3s ease-out 1.4s both;transform-box:fill-box;transform-origin:50% 100%}
   .duck.hatch .egg-bot{animation:eggbot 3s ease-out 1.4s both}
   /* Rolling without slipping: the distance and the turn share one easing, so the egg tumbles end over end along the ground */
   @keyframes eggroll{0%{translate:var(--rd) 0;rotate:var(--ra);opacity:0}8%{opacity:1}100%{translate:0 0;rotate:0deg;opacity:1}}
-  @media (max-width:420px){.duck.hatch{--rd:100px;--ra:-580deg}}
+  @media (max-width:420px){.duck.hatch{--rd:100px;--ra:580deg}}
   @keyframes eggwobble{0%,100%{transform:rotate(0)}15%{transform:rotate(-12deg)}30%{transform:rotate(10deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(8deg)}75%{transform:rotate(-4deg)}}
   @keyframes eggtop{0%,48%{transform:translate(0,0) rotate(0);opacity:1}70%{transform:translate(4px,-16px) rotate(30deg);opacity:1}100%{transform:translate(8px,-22px) rotate(50deg);opacity:0}}
   @keyframes eggbot{0%,70%{opacity:1}100%{opacity:0}}
@@ -961,7 +964,7 @@ const SPELL_RAW=[
   "ch[ie]f sh[ie]ld l[ie] funn[y] fl[y] m[y]th m[ea]t br[ea]d br[ea]k p[a]per w[a]ter c[a]t","",""],
  ["b-1","Autumn 2 · Bridge to spelling","Week 1","What do I need to know to think about spelling?","I can listen for every sound in a word to help me spell it",
   "splash scratch string thrill shrink stamp branch crunch blanket jumper trumpet yellow","",""],
- ["b-2","Autumn 2 · Bridge to spelling","Week 2","Why do I double letters at the end of words, and in words ending -er?","I can spell words with ff, ll, ss and zz, and doubled letters before er",
+ ["b-2","Autumn 2 · Bridge to spelling","Week 2","Why do I double letters at the end of words, and in words ending -er?","I can spell words with ff, ll, ss and zz, plus doubled letters before er",
   "cli[ff] stu[ff] be[ll] mi[ss] dre[ss] bu[zz] fi[zz] la[dd]er le[tt]er di[nn]er su[pp]er ha[mm]er ru[bb]er","",""],
  ["b-3","Autumn 2 · Bridge to spelling","Week 3","Why do some words end in k or ck, and in ch or tch?","I can tell when to use ck, k, tch and ch at the end of a word",
   "ba[ck] ne[ck] clo[ck] boo[k] wee[k] par[k] mil[k] ca[tch] swi[tch] ki[tch]en mu[ch] whi[ch] tea[ch] lun[ch]","",""],
@@ -1255,7 +1258,7 @@ function readingCriteria(){
   const words=Object.entries(S.cards).filter(([w,c])=>c.box>=3&&partsFor(w).some(g=>B.includes(g))).length;
   const next=nextBatch();
   const items=[
-    {met:B.length>0&&nb===B.length,label:"Newest sounds read straight away after a gap of 2 days or more",detail:`${nb} of ${B.length}: ${B.map(gOf).join(" ")}`},
+    {met:B.length>0&&nb===B.length,label:"Newest sounds read straight away after a gap of 2 days or more",detail:`${nb} of ${B.length} (${B.map(gOf).join(" ")})`},
     {met:oldShare>=PACE_SHARE,label:"90% of earlier sounds still fluent after 4 days or more (a slipped sound counts against this)",detail:older.length?`${Math.round(oldShare*100)}% of ${older.length}`:"none yet"},
     {met:words>=3,label:"3 words with the newest sounds read on ⟦her⟧ own after a gap",detail:`${Math.min(words,3)} of 3`}
   ];
@@ -1317,15 +1320,15 @@ function pacePanel(){
   const p=el("section",{class:"panel"},el("h2",{text:"⟦Her⟧ pace"}));
   if(isNursery())p.append(el("p",{class:"muted",text:"Reading in nursery is listening games, which follow the nursery year. Phonics starts with the Reception setting."}));
   else if(ownPace("reading")){
-    if(isY2()){const sc=spellCriteria();p.append(el("h3",{text:sc.next?`Next spelling unit: ${uLabel(sc.next)}`:"Every spelling unit is unlocked"}),
+    if(isY2()){const sc=spellCriteria();p.append(el("h3",{text:sc.next?`Next spelling unit is ${uLabel(sc.next)}`:"Every spelling unit is unlocked"}),
       sc.items.length?criteriaList(sc):el("p",{class:"muted",text:"Tick the units ⟦she⟧ has been taught on the Spelling tab. The next one unlocks as ⟦she⟧ gets the spellings right after a gap."}))}
     const rc=readingCriteria(),tc=trickyCriteria();
-    p.append(el("h3",{text:rc.next.length?`Next sounds: ${rc.next.map(gOf).join(" ")}`:"Every sound is unlocked"}),criteriaList(rc),
-      el("h3",{text:tc.next.length?`Next tricky words: ${tc.next.join(", ")}`:"No more tricky words ready to unlock yet"}),criteriaList(tc));
+    p.append(el("h3",{text:rc.next.length?`Next sounds are ${rc.next.map(gOf).join(" ")}`:"Every sound is unlocked"}),criteriaList(rc),
+      el("h3",{text:tc.next.length?`Next tricky words are ${tc.next.join(", ")}`:"No more tricky words ready to unlock yet"}),criteriaList(tc));
   }else p.append(el("p",{class:"muted",text:"Reading follows the sounds you tick as school teaches them."}));
   if(ownPace("maths")){
     const mc=mathsCriteria();
-    p.append(el("h3",{text:mc.next?`Maths moves on to ${stageName(mc.next)} when:`:"Maths is at the last stage"}),criteriaList(mc));
+    p.append(el("h3",{text:mc.next?`Maths moves on to ${stageName(mc.next)} when all of these are true`:"Maths is at the last stage"}),criteriaList(mc));
   }else p.append(el("p",{class:"muted",text:"Maths follows ⟦her⟧ school year and term."}));
   p.append(el("p",{class:"note",text:"The school's sequence is the floor, never the ceiling. Change this on the Settings page."}));
   return p;
@@ -1500,12 +1503,12 @@ function flockView(){
 function duckBuildPanel(){
   const dr=DR(),n=filled(dr.cur),s=streak(),nm=(state.name||"").trim();
   return el("section",{class:"panel pond build"},
-    el("div",{class:"panel-head"},el("h2",{text:nm?`${nm}'s duck`:"Your duck"}),dr.flock.length?el("button",{class:"linkbtn flocklink",type:"button",on:{click:()=>{screen="flock";render()}}},`${dr.flock.length} in the flock ›`):el("span",{class:"note streak"},s.today?el("span",{class:"tick","aria-hidden":"true",text:"✓"}):null,s.today?(s.days>1?`${s.days} days running`:"Practised today"):"")),
+    el("div",{class:"panel-head"},el("h2",{text:nm?`${nm}'s duck`:"Your duck"}),dr.flock.length?el("button",{class:"linkbtn flocklink",type:"button",on:{click:()=>{screen="flock";render()}}},`${dr.flock.length} in the flock ›`):el("span",{class:"note streak"},s.today?el("span",{class:"tick","aria-hidden":"true",text:"✓"}):null,s.today?(s.days>1?`${s.days} days`:"Practised today"):"")),
     el("div",{class:"buildrow"},
       el("div",{class:"bigbuild sm",role:"img","aria-label":`Duck with ${n} of ${DUCK_SIZE} pieces`,html:duckSVG(dr.cur)}),
       el("div",{class:"buildside"},
         el("span",{class:"pdots","aria-hidden":"true"},range(0,DUCK_SIZE-1).map(i=>el("i",{class:i<n?"on":""}))),
-        el("p",{class:"muted ducknote",text:dr.pending?"A piece is waiting.":`${n} of ${DUCK_SIZE} pieces. Each practice earns one.`}),
+        el("p",{class:"muted ducknote",text:dr.pending?"A piece is waiting.":`${n} of ${DUCK_SIZE} pieces. Reading and numbers each add one a day.`}),
         dr.pending?el("button",{class:"btn small",type:"button",on:{click:()=>{screen="pick";render()}}},"Choose a piece"):null)));
 }
 
@@ -1615,8 +1618,8 @@ function nurseryListenView(){
 }
 function readingView(){
   if(isNursery())return nurseryListenView();
-  const y2=isY2();if(!y2&&readingTopic==="spelling")readingTopic="sounds";
-  const bar=el("div",{class:"seg topic"},(y2?[["spelling","Spelling"],["tricky","Tricky words"],["sounds","Sounds"]]:[["sounds","Sounds"],["tricky","Tricky words"]]).map(([k,l])=>el("button",{type:"button","aria-pressed":String(readingTopic===k),on:{click:()=>{readingTopic=k;render()}}},l)));
+  const y2=isY2();if(!y2&&readingTopic==="spelling")readingTopic="sounds";if(y2&&readingTopic==="sounds")readingTopic="spelling";
+  const bar=el("div",{class:"seg topic"},(y2?[["spelling","Spelling"],["tricky","Tricky words"]]:[["sounds","Sounds"],["tricky","Tricky words"]]).map(([k,l])=>el("button",{type:"button","aria-pressed":String(readingTopic===k),on:{click:()=>{readingTopic=k;render()}}},l)));
   return el("div",{class:"stack"},bar,readingTopic==="tricky"?trickyView():readingTopic==="spelling"&&y2?spellingView():soundsView());
 }
 function logView(){
@@ -1664,7 +1667,7 @@ function ducksRow(n,newOne=false,asleep=false){
 }
 function streakNote(s){
   if(!s.ducks)return "";
-  if(s.today)return s.days>1?`${s.days} days running`:"Practised today";
+  if(s.today)return s.days>1?`${s.days} days`:"Practised today";
   return s.asleep?"Fast asleep":"Practise today!";
 }
 function chipFor(item){
@@ -1726,8 +1729,10 @@ const doneToday=type=>state.log.some(e=>e.d===today()&&e.t===type);
 const trickyDone=()=>doneToday("tricky")||!taughtTricky().length||planTricky().queue.length===0;
 const readingDone=()=>isNursery()?doneToday("listen"):isY2()?doneToday("spelling")&&trickyDone():doneToday("sounds")&&trickyDone();
 const mathsDone=()=>doneToday("maths");
+const readingLeft=()=>{const l=[];if(isY2()){if(!doneToday("spelling"))l.push("spelling")}else if(!doneToday("sounds"))l.push("sounds");if(!trickyDone())l.push("tricky words");return l};
 const bookRead=()=>state.reads.includes(today());
 const practiceDone=()=>readingDone()&&mathsDone();
+const doneWhat=()=>isNursery()?"Listening and numbers":isY2()?"Spelling, tricky words and numbers":"Sounds, tricky words and numbers";
 const allDone=()=>practiceDone()&&bookRead();
 function choiceTile({icon,title,note,onClick,disabled=false,done=false,badge="Done for today"}){
   const b=el("button",{class:"choice"+(done?" done":""),type:"button"},
@@ -2164,7 +2169,7 @@ function startView(){
   if(screen==="reading"){
     const sp=planSounds(),tp=planTricky(),tt=taughtTricky();
     const ng=sp.queue.filter(q=>q.kind==="g").length,nw=sp.queue.filter(q=>q.kind==="w").length;
-    const y2=isY2(),sTitle=y2?"Sounds review":"Sounds";
+    const y2=isY2(),sTitle="Sounds";
     const soundsTile=sp.queue.length
       ?choiceTile({icon:"sounds",title:sTitle,note:listBits([ng&&`${ng} sounds`,nw&&`${nw} words`])+" · 4 min",onClick:()=>begin("sounds",sp.queue),done:doneToday("sounds")})
       :choiceTile({icon:"sounds",title:sTitle,note:"Tick ⟦her⟧ sounds in Grown-ups first",disabled:true});
@@ -2179,7 +2184,7 @@ function startView(){
       const spellTile=spq.length
         ?choiceTile({icon:"spell",title:"Spelling",note:`${spq.length} spellings · 4 min`,onClick:()=>begin("spelling",spq),done:doneToday("spelling")})
         :choiceTile({icon:"spell",title:"Spelling",note:"Tick ⟦her⟧ spelling units in Grown-ups first",disabled:true});
-      tiles=[spellTile,trickyTile,soundsTile];
+      tiles=[spellTile,trickyTile];
     }
     return el("div",{class:"stack"},
       el("div",{class:"row"},el("button",{class:"btn ghost small",on:{click:()=>{screen="home";render()}}},"‹ Back"),el("h2",{class:"screen-title",text:y2?"Spelling and words":"Sounds and words"}),grownLink()),
@@ -2191,10 +2196,10 @@ function startView(){
     allDone()?el("section",{class:"panel alldone"},el("span",{class:"big-tick","aria-hidden":"true",text:"✓"}),
       el("div",{},el("h2",{text:"All done for today!"}),el("p",{class:"muted",text:"Practice and reading together are done. Come back tomorrow"+(isBuild()?" for another piece of your duck.":" for more ducklings.")+""})))
     :practiceDone()?el("section",{class:"panel alldone nextbook"},el("span",{class:"big-tick book-tick","aria-hidden":"true",html:BOOK_SVG}),
-      el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:"Sounds and numbers are finished. Tick the book below once you have read together."}))):null,
+      el("div",{},el("h2",{text:"Now read ⟦ysb⟧"}),el("p",{class:"muted",text:doneWhat()+" are finished. Tick the book below once you have read together."}))):null,
     el("div",{class:"choices"},
       isNursery()?choiceTile({icon:"book",title:"Listening",note:"Listening and rhyme games · 4 min",onClick:()=>begin("listen",planListen()),done:readingDone()})
-        :isY2()?choiceTile({icon:"spell",title:"Spelling",note:"Spelling, sounds and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()})
+        :isY2()?choiceTile({icon:"spell",title:"Spelling",note:"Spelling and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()})
         :choiceTile({icon:"book",title:"Sounds",note:"Sounds, words and tricky words",onClick:()=>{screen="reading";render()},done:readingDone()}),
       mq.length?choiceTile({icon:"dice",title:"Numbers",note:"Quick looks, counting and more · 4 min",onClick:()=>begin("maths",mq),done:mathsDone()})
                :choiceTile({icon:"dice",title:"Numbers",note:"Turn on an activity in Grown-ups first",disabled:true})),
@@ -2218,7 +2223,7 @@ function weeklyChart(data){
   const lastIdx=data.map(d=>d.p!=null).lastIndexOf(true);
   data.forEach((d,i)=>{
     const cx=L+cw*i+cw/2,g=svg("g",{class:"col"});
-    g.append(svg("title",{text:d.p==null?`Week of ${shortDate(d.ws)}: no sessions`:`Week of ${shortDate(d.ws)}: ${d.up} of ${d.n} on ⟦her⟧ own (${d.p}%)`}));
+    g.append(svg("title",{text:d.p==null?`Week of ${shortDate(d.ws)}, no sessions`:`Week of ${shortDate(d.ws)}, ${d.up} of ${d.n} on ⟦her⟧ own (${d.p}%)`}));
     g.append(svg("rect",{class:"hit",x:L+cw*i+2,y:T,width:cw-4,height:ph,rx:6}));
     if(d.p!=null&&d.p>0){
       const h=ph*d.p/100,x=cx-bw/2,top=T+ph-h,r=Math.min(4,h);
@@ -2280,14 +2285,14 @@ function progressView(){
   const readToday=reads.has(t);
   const strip=el("div",{class:"strip"});
   last14.forEach(d=>{const [y,m,dd]=d.split("-").map(Number);
-    strip.append(el("div",{class:"sday"+(d===t?" today":""),title:`${niceDate(d)}: ${prac.has(d)?"practised":"no practice"}; ${reads.has(d)?"read ⟦her⟧ ⟦sb⟧":"no book reading ticked"}`},
+    strip.append(el("div",{class:"sday"+(d===t?" today":""),title:`${niceDate(d)}, ${prac.has(d)?"practised":"no practice"} and ${reads.has(d)?"read ⟦her⟧ ⟦sb⟧":"no book reading ticked"}`},
       el("span",{class:"mk p"+(prac.has(d)?" on":"")}),el("span",{class:"mk r"+(reads.has(d)?" on":"")}),
       el("span",{class:"dow",text:new Date(y,m-1,dd).toLocaleDateString("en-GB",{weekday:"narrow"})}),
       (()=>{const tm=dayTime(d),mn=Math.round((tm.r+tm.m)/60);return el("span",{class:"smin",title:`${Math.round(tm.r/60)} min reading, ${Math.round(tm.m/60)} min maths`,text:tm.r+tm.m?String(Math.max(1,mn)):""})})()));
   });
   const wk=[];for(let i=6;i>=0;i--)wk.push(addDays(t,-i));
   const wkT=wk.map(dayTime),wkR=wkT.reduce((a,x)=>a+x.r,0),wkM=wkT.reduce((a,x)=>a+x.m,0),wkDays=wkT.filter(x=>x.r+x.m>0).length;
-  const mm=sec=>Math.round(sec/60),timeLine=wkR+wkM?`Last 7 days: ${mm(wkR+wkM)} minutes on ${wkDays} day${wkDays===1?"":"s"}, ${mm(wkR)} reading and ${mm(wkM)} maths. About ${Math.max(1,Math.round((wkR+wkM)/60/wkDays))} minutes a day when ⟦she⟧ practises.`:"Practice time will show here once ⟦she⟧ finishes a session.";
+  const mm=sec=>Math.round(sec/60),timeLine=wkR+wkM?`In the last 7 days, ${mm(wkR+wkM)} minutes on ${wkDays} day${wkDays===1?"":"s"}, ${mm(wkR)} reading and ${mm(wkM)} maths. About ${Math.max(1,Math.round((wkR+wkM)/60/wkDays))} minutes a day when ⟦she⟧ practises.`:"Practice time will show here once ⟦she⟧ finishes a session.";
   const last14Panel=el("section",{class:"panel"},el("h2",{text:"Last 14 days"}),strip,
     el("div",{class:"legend"},el("span",{},el("span",{class:"mk p on"}),"Practice"),el("span",{},el("span",{class:"mk r on"}),"⟦Sb⟧")),
     el("p",{class:"note",text:readToday?"⟦Sb⟧ read today. ⟦She⟧ ticks it on ⟦her⟧ home screen.":"⟦She⟧ ticks the ⟦sb⟧ on ⟦her⟧ home screen after reading it."}),
@@ -2528,7 +2533,7 @@ function choiceSpec(item){
       q:"What comes next?",tip:"Say the pattern aloud together, naming each picture in turn, then ask what comes next.",opts:item.opts,key:"pat",emoji:true};
     case "num":return {kind:"Match the numeral",visual:dotsSVG(item.n,item.lay),q:"Which number shows how many?",tip:"⟦She⟧ looks at the dots, says how many and taps the matching number.",opts:numberOptions(item.ans,1,Math.max(10,S.max)),key:"num:"+item.n};
     case "miss":{const v=el("div",{class:"hide-scene"},duckGroup(item.n-item.k),el("span",{class:"reeds",html:REEDS}));
-      return {kind:"Hiding ducklings",visual:v,q:`There are ${item.n} ducklings. How many are hiding in the reeds?`,tip:"⟦She⟧ knows the whole and can see one part, so the hiding part is what's left. Fingers help: hold up the whole, fold down the ones ⟦she⟧ can see.",opts:numberOptions(item.ans,1,item.n),key:"miss:"+item.n}}
+      return {kind:"Hiding ducklings",visual:v,q:`There are ${item.n} ducklings. How many are hiding in the reeds?`,tip:"⟦She⟧ knows the whole and can see one part, so the hiding part is what's left. Fingers help, so hold up the whole and fold down the ones ⟦she⟧ can see.",opts:numberOptions(item.ans,1,item.n),key:"miss:"+item.n}}
     case "dbl":{const v=el("div",{class:"mirror"},dotsSVG(item.k,item.k<=6?"dice":"pairs"),el("span",{class:"mline"}),dotsSVG(item.k,item.k<=6?"dice":"pairs"));
       return {kind:"Doubles",visual:v,q:`Double ${item.k}. How many altogether?`,tip:`Two groups the same size. Double ${item.k} is ${item.k} and ${item.k} more.`,opts:numberOptions(item.ans,1,Math.max(12,item.ans+2)),key:"dbl:"+item.k}}
     case "more":return {kind:"One more, one less",visual:tenFrameSVG(item.n),q:`What is one ${item.up?"more":"less"} than this?`,tip:`First ⟦she⟧ says how many there are, then imagines one ${item.up?"more counter added":"counter taken away"}.`,opts:numberOptions(item.ans,0,Math.max(10,S.max)),key:"more:"+item.n};
@@ -2538,7 +2543,7 @@ function choiceSpec(item){
         el("span",{class:"sarrow",text:"→"}),
         el("div",{class:"spanel"},el("span",{class:"slabel",text:"Then"}),item.plus?el("div",{class:"dgroup"},el("span",{class:"plus",text:"+"}),...range(1,item.b).map(()=>duckSpan())):el("div",{class:"dgroup"},...range(1,item.a).map((x,i)=>duckSpan(i>=item.a-item.b?"gone":"")))));
       const q=item.plus?`First there were ${item.a} ducklings. Then ${item.b} more came. How many are there now?`:`First there were ${item.a} ducklings. Then ${item.b} swam away. How many are there now?`;
-      return {kind:"Number story",visual:v,q,tip:"Read the story aloud: first, then, now. ⟦She⟧ can use the picture or ⟦her⟧ fingers.",opts:numberOptions(item.ans,0,10),key:"story"}}
+      return {kind:"Number story",visual:v,q,tip:"Read the story aloud as first, then, now. ⟦She⟧ can use the picture or ⟦her⟧ fingers.",opts:numberOptions(item.ans,0,10),key:"story"}}
     case "b10":return {kind:"Make 10",visual:tenFrameSVG(item.n),q:"How many more to make 10?",tip:`⟦She⟧ counts the empty spaces, or knows that ${item.n} and ${10-item.n} make 10.`,opts:numberOptions(item.ans,0,10),key:"b10:"+item.n};
     case "teen":return {kind:"Ten and a bit",visual:tenFrameSVG(item.n),q:"How many altogether?",tip:`One full ten and ${item.n-10} more. ${item.n} is 10 and ${item.n-10}.`,opts:numberOptions(item.ans,10,20),key:"teen:"+item.n};
     case "b20":return {kind:"Make 20",visual:tenFrameSVG(item.n),q:"How many more to make 20?",tip:`⟦She⟧ counts the empty spaces, or knows that ${item.n} and ${20-item.n} make 20. Two tens make 20, so look at what is missing from the second frame.`,opts:numberOptions(item.ans,0,10),key:"b20:"+item.n};
@@ -2550,7 +2555,7 @@ function choiceSpec(item){
       return {kind:"Take away across ten",visual:v,q:"What goes in the gap?",tip:`Take away to 10 first. ${item.t} take away ${item.t-10} is 10, and ${item.b-(item.t-10)} more to take away from there.`,opts:numberOptions(item.ans,0,10),key:"subx:"+item.t}}
     case "tens":return {kind:"Tens and ones",visual:baseTenSVG(Math.floor(item.n/10),item.n%10),q:"What number is this?",tip:`Count the tens first, then the ones. ${Math.floor(item.n/10)} tens and ${item.n%10} ones is ${item.n}.`,opts:tensOptions(item.n),key:"tens"};
     case "tenmore":return {kind:"Ten more, ten less",visual:baseTenSVG(Math.floor(item.n/10),item.n%10),q:`What is 10 ${item.up?"more":"less"} than ${item.n}?`,tip:`Look at the tens. 10 ${item.up?"more means one more ten":"less means one fewer ten"}, and the ones stay the same.`,opts:item.up?shuffle([item.n+10,item.n+1,item.n-10]):shuffle([item.n-10,item.n-1,item.n+10]),key:"tenmore"};
-    case "grp":return {kind:"Equal groups",visual:groupsSVG(item.c,item.t),q:`${item.c} groups of ${item.t}. How many altogether?`,tip:`Count in ${item.t}s together: ${range(1,item.c).map(i=>i*item.t).join(", ")}.`,opts:stepOptions(item.ans,item.t),key:"grp:"+item.t};
+    case "grp":return {kind:"Equal groups",visual:groupsSVG(item.c,item.t),q:`${item.c} groups of ${item.t}. How many altogether?`,tip:`Count in ${item.t}s together, saying ${range(1,item.c).map(i=>i*item.t).join(", ")}.`,opts:stepOptions(item.ans,item.t),key:"grp:"+item.t};
     case "frac":return {kind:"Halves and quarters",visual:dotsSVG(item.n,"pairs"),q:`What is ${item.q===2?"half":"a quarter"} of ${item.n}?`,tip:item.q===2?`Half means 2 equal groups. Share the ${item.n} between 2 and see how many each.`:`A quarter means 4 equal groups. Share the ${item.n} between 4 and see how many each.`,opts:numberOptions(item.ans,1,Math.max(10,item.n/2)),key:"frac:"+item.q};
     case "sum":{const v=el("div",{class:"sumv"},el("div",{class:"sumtext",text:`${item.a} ${item.plus?"+":"−"} ${item.b} =`}),
         item.plus?dotsSVG(item.a+item.b,"line",{split:item.a}):dotsSVG(item.a,"line",{split:item.a-item.b}));
@@ -2560,15 +2565,15 @@ function choiceSpec(item){
 
 const MATHS_TIPS=[
   "Count the stairs together as you climb them, one number for each step.",
-  "Lay the table together: one fork for each person.",
+  "Lay the table together and give one fork to each person.",
   "Roll a dice and ask how many dots ⟦she⟧ can see without counting.",
-  "Hide some toys under a cup. Show three, cover one: how many are still showing?",
+  "Hide some toys under a cup. Show three, cover one, then ask how many are still showing.",
   "Share four grapes onto two plates. How many on each? Try another way.",
   "Hold up fingers for a moment and ask how many. Try 5 on one hand and 1 on the other.",
   "Count claps or jumps, not just things you can touch.",
-  "At bathtime, ask which group has more: ducks or boats?",
-  "Tell a story with toys: first, then, now. 'First 4 teddies, then 1 fell asleep…'",
-  "Spot numbers out and about: door numbers, buses, prices. Which is bigger?"
+  "At bathtime, ask whether there are more ducks or more boats.",
+  "Tell a story with toys, using first, then, now. 'First 4 teddies, then 1 fell asleep…'",
+  "Spot numbers out and about, such as door numbers, buses and prices. Which is bigger?"
 ];
 /* Builds the flash content and controls for a maths card */
 function mathsCard(item,flash,advance){
@@ -2585,7 +2590,7 @@ function mathsCard(item,flash,advance){
       setTimeout(()=>{if(!stage.isConnected||revealed)return;stage.replaceChildren(el("div",{class:"mhide",text:"?"}));caption.textContent="How many did you see?"},S.speed)};
     look.addEventListener("click",flashDots);
     flash.append(kind("Quick look"),stage,caption,
-      el("p",{class:"tip",text:item.n>5?"Bigger numbers come in fives. Ask how many and how ⟦she⟧ saw them: '5 and 2 makes 7.'":"The dots appear for a moment, too quickly to count. Ask how many, then how ⟦she⟧ saw them: 'I saw 2 and 2.' Counting one by one is fine, but mark it as counted."}));
+      el("p",{class:"tip",text:item.n>5?"Bigger numbers come in fives. Ask how many and how ⟦she⟧ saw them, for example '5 and 2 makes 7.'":"The dots appear for a moment, too quickly to count. Ask how many, then how ⟦she⟧ saw them, for example 'I saw 2 and 2.' Counting one by one is fine, but mark it as counted."}));
     side.push(el("div",{class:"row",style:"justify-content:center"},
       el("button",{class:"btn ghost small",on:{click:()=>{revealed=false;flashDots()}}},"Show again"),
       el("button",{class:"btn ghost small",on:{click:()=>{revealed=true;stage.replaceChildren(dotsSVG(item.n,item.lay,{pts:item.pts}));caption.textContent=item.n>5?`It was ${item.n}: 5 and ${item.n-5}.`:`It was ${item.n}.`}}},"Show answer")));
@@ -2705,18 +2710,18 @@ function mathsSettingsView(){
         el("details",{class:"tblock"},el("summary",{text:"Other activities"}),...Object.keys(ACTS).filter(a=>!P.acts.includes(a)).map(sw)))));
 }
 const MPLAN_TEXT={
-  "N-autumn":"Numbers to 3. Seeing 1, 2 and 3 at a glance, counting small groups, comparing which has more, and spotting simple patterns.",
+  "N-autumn":"Numbers to 3. Seeing 1, 2 and 3 at a glance, counting small groups, comparing which has more and spotting simple patterns.",
   "N-spring":"Numbers to 4. Quick looks and counting, showing amounts on fingers, comparing groups and continuing patterns.",
   "N-summer":"Numbers to 5. Counting to 5, showing 5 on one hand, matching amounts to written numerals, comparing and patterns. Ready for Reception.",
   "R-autumn":"Numbers to 5. Subitising (seeing small amounts without counting), the rules of counting (count each thing once, and the last number says how many), numbers inside numbers and comparing groups.",
-  "R-spring":"Numbers to 5 and a little beyond. Matching amounts to written numerals, finding a missing part, seeing 6 and 7 as five and a bit, and doubles.",
-  "R-summer":"Numbers to 10. Counting bigger groups, one more and one less, and spotting odd and even numbers by their shape.",
-  "Y1-autumn":"Numbers to 10. Subitising within 5, 6 to 9 as five and a bit, comparing, and one more and one less.",
+  "R-spring":"Numbers to 5 and a little beyond. Matching amounts to written numerals, finding a missing part, doubles and seeing 6 and 7 as five and a bit.",
+  "R-summer":"Numbers to 10. Counting bigger groups and one more and one less. Then spotting odd and even numbers by their shape.",
+  "Y1-autumn":"Numbers to 10. Subitising within 5, 6 to 9 as five and a bit and comparing. Then one more and one less.",
   "Y1-spring":"Numbers to 10. 7 and 9 in every way they can be split, odd and even, number stories (first, then, now) and making 10.",
   "Y1-summer":"Numbers to 20. Teen numbers as ten and a bit, the number line to 20, odd and even, number stories and writing number sentences.",
   "Y2-autumn":"Numbers to 20. Number bonds to 10 and 20, doubles up to double 10, odd and even numbers and number sentences.",
-  "Y2-spring":"Numbers to 20 and tens and ones. Adding and taking away through 10, near doubles such as 6 and 7, and reading two-digit numbers.",
-  "Y2-summer":"Numbers to 100. Equal groups of 2, 5 and 10, halves and quarters, ten more and ten less, and adding and taking away through 10."
+  "Y2-spring":"Numbers to 20 and tens and ones. Adding and taking away through 10 and near doubles such as 6 and 7. Then reading two-digit numbers.",
+  "Y2-summer":"Numbers to 100. Equal groups of 2, 5 and 10, plus halves and quarters. Then ten more and ten less, with adding and taking away through 10 as revision."
 };
 function mathsProgressPanel(){
   syncPlan();
@@ -2729,7 +2734,7 @@ function mathsProgressPanel(){
     if(KEYS[a])rows.push(el("div",{class:"mrow"},el("h3",{text:ACTS[a].name}),
       el("div",{class:"gsgrid"},KEYS[a].map(v=>{const k=a+":"+v,st=mStatus(k);
         return el("span",{class:"gs num "+st,title:`${ACTS[a].name} ${v}: ${LABEL[st]}`},String(v),st==="secure"?el("span",{class:"ic",text:"✓"}):st==="help"?el("span",{class:"ic",text:"!"}):null)}))));
-    else{const r=(MS().stats[a]||{r:[]}).r;lines.push(el("p",{class:"note",text:r.length?`${ACTS[a].name}: ${r.filter(x=>x===1).length} of ⟦her⟧ last ${r.length} right first time.`:`${ACTS[a].name}: not tried yet.`}))}
+    else{const r=(MS().stats[a]||{r:[]}).r;lines.push(el("p",{class:"note",text:r.length?`${ACTS[a].name}, ${r.filter(x=>x===1).length} of ⟦her⟧ last ${r.length} right first time.`:`${ACTS[a].name}, not tried yet.`}))}
   });
   return el("section",{class:"panel"},el("h2",{text:"Numbers"}),...rows,...lines,
     el("div",{class:"legend"},Object.keys(LABEL).map(k=>el("span",{},el("span",{class:"sw "+k}),LABEL[k]))));
@@ -2737,20 +2742,20 @@ function mathsProgressPanel(){
 
 /* ----- How it works (grown-ups only) ----- */
 const PHASES=[
-  ["Foundations · Nursery","Listening before letters. Tuning into everyday sounds, rhythm and rhyme, clapping the beats in words, hearing the first sound of a word, and oral blending: hearing ‘c – a – t’ and saying ‘cat’. No letters yet."],
+  ["Foundations · Nursery","Listening before letters. Tuning into everyday sounds, rhythm and rhyme, clapping the beats in words and hearing the first sound of a word. It ends with oral blending, which means hearing ‘c – a – t’ and saying ‘cat’. No letters yet."],
   ["Phase 2 · Reception, autumn term","Single letter sounds, starting with s a t p, then ⟦her⟧ first two-letter sounds such as ck, ll and sh. Short words like ‘sat’, ‘pin’ and ‘dog’."],
   ["Phase 3 · Reception, spring term","More two- and three-letter sounds, such as ai, ee, oo, igh and ear, and longer tricky words like ‘was’ and ‘said’."],
   ["Phase 4 · Reception, summer term","No new sounds. Instead, longer words with consonants side by side, such as ‘frog’, ‘jump’ and ‘sandwich’."],
   ["Phase 5 · Year 1","New spellings for sounds ⟦she⟧ knows (‘ay’ in ‘play’, ‘a-e’ in ‘shake’), then other sounds for letters ⟦she⟧ knows (the ‘o’ in ‘go’, the ‘ow’ in ‘snow’). The Phonics Screening Check comes in June, and a last block of spellings follows it."],
-  ["Spelling · Year 2","Autumn 1 reviews Phase 5, with one set of sounds a week. Autumn 2 is a bridge to spelling, which teaches ⟦her-o⟧ to think about spelling, with doubled letters, k and ck, ch and tch, and the endings -s, -es, -ed and -ing. Spring and Summer have 14 units, each asking one question about why a word is spelled the way it is, with a few ‘prickly’ spellings that break the rules and pairs of words that sound the same."]
+  ["Spelling · Year 2","Autumn 1 reviews Phase 5, with one set of sounds a week. Autumn 2 is a bridge to spelling, which teaches ⟦her-o⟧ to think about spelling, with doubled letters, k and ck, ch and tch, plus the endings -s, -es, -ed and -ing. Spring and Summer have 14 units, each asking one question about why a word is spelled the way it is, with a few ‘prickly’ spellings that break the rules and pairs of words that sound the same."]
 ];
 const FIT=[
-  ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters: animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
+  ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters, namely animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
   ["Sound sets","The sets on the Sounds and words tab follow the order school teaches the sounds. Tick a sound only once school has taught it, and the app will never ask ⟦her-o⟧ to read anything that uses a sound ⟦she⟧ hasn't met."],
   ["Warm-up sounds","Each phonics lesson at school opens by revisiting sounds ⟦she⟧ already knows. The warm-up does the same at home, mixing this week's sounds with earlier ones so none of them fade."],
   ["Words with sound buttons","⟦She⟧ taps each sound, says it and then runs ⟦her⟧ finger along the arrow to blend the sounds into a word. This is the core reading skill phonics builds."],
-  ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped, and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
-  ["Spelling in Year 2","The Spelling tab follows Little Wandle Spelling unit by unit. Each card uses look, say, cover, write and check. ⟦She⟧ looks at the word, you cover it, and ⟦she⟧ writes it on paper before checking. Pairs of words that sound the same, such as bear and bare, are a choice for ⟦her-o⟧ to make from a sentence. Anything ⟦she⟧ gets right comes back after a few days, and anything ⟦she⟧ finds hard comes back tomorrow."],
+  ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
+  ["Spelling in Year 2","The Spelling tab follows Little Wandle Spelling unit by unit. Each card uses look, say, cover, write and check. ⟦She⟧ looks at the word, you cover it and ⟦she⟧ writes it on paper before checking. Pairs of words that sound the same, such as bear and bare, are a choice for ⟦her-o⟧ to make from a sentence. Anything ⟦she⟧ gets right comes back after a few days, and anything ⟦she⟧ finds hard comes back tomorrow."],
   ["Year 1 spellings","In Year 1 the Sounds and words tab lists each new spelling with an example word, because one letter can make more than one sound. A split digraph such as a-e is shown with matching curved buttons under the a and the e."],
   ["Alien words","Made-up words, like the ones in the Year 1 check. ⟦She⟧ can't know them by sight, so reading one shows ⟦she⟧ is decoding rather than remembering."],
   ["Tricky words","The common words school teaches as tricky. The card shows which part breaks the rules ⟦she⟧ knows, so ⟦she⟧ sounds out the rest and learns only the odd bit."],
@@ -2767,7 +2772,7 @@ const TERMS=[
   ["Vowel and consonant","","The vowels are a, e, i, o and u. Every other letter is a consonant."],
   ["CVC word","sat pin","A consonant, a vowel and a consonant. Most early Phase 2 words follow this pattern."],
   ["Adjacent consonants","stop damp","Two consonants side by side, each keeping its own sound. School teaches these properly in Phase 4. The app calls them two consonants together."],
-  ["Pure sounds","","Saying a sound without adding ‘uh’. Say ‘mmm’, not ‘muh’, and a short ‘t’, not ‘tuh’. Pure sounds are what make blending work, because ‘c-a-t’ blends into ‘cat’ but ‘cuh-a-tuh’ does not."],
+  ["Pure sounds","","Saying a sound without adding ‘uh’. Say ‘mmm’ rather than ‘muh’ and a short ‘t’ rather than ‘tuh’. Pure sounds are what make blending work, because ‘c-a-t’ blends into ‘cat’ but ‘cuh-a-tuh’ does not."],
   ["Blending","","Saying each sound in order and pushing them together to hear the word. This is how ⟦she⟧ reads."],
   ["Segmenting","","The reverse of blending. ⟦She⟧ hears a word and splits it into its sounds so ⟦she⟧ can spell it. This is how ⟦she⟧ will write."],
   ["Decoding","","Reading a written word by working out its sounds and blending them. Spelling is sometimes called encoding."],
@@ -2788,17 +2793,17 @@ let guideTopic="reading";
 const MPHASES=[
   ["Nursery · ages 3 to 4","Numbers to 5. Seeing 1, 2 and 3 at a glance, counting small groups, showing amounts on fingers, comparing, simple repeating patterns and, by the summer, matching numerals."],
   ["Term 1 · Reception, autumn","Numbers to 5. Seeing small amounts without counting, counting carefully, spotting smaller numbers inside bigger ones and comparing groups."],
-  ["Term 2 · Reception, spring","Numbers to 5 and beyond. Matching amounts to written numerals, finding a missing part, seeing 6 and 7 as five and a bit, and doubles."],
+  ["Term 2 · Reception, spring","Numbers to 5 and beyond. Matching amounts to written numerals, finding a missing part, doubles and seeing 6 and 7 as five and a bit."],
   ["Term 3 · Reception, summer","Counting bigger groups, one more and one less, putting numbers in order and spotting odd and even numbers by their shape."],
   ["Term 1 · Year 1, autumn","Numbers to 10. Subitising within 5 on the rekenrek, 6 to 9 as five and a bit, comparing numbers and one more and one less."],
-  ["Term 2 · Year 1, spring","Numbers to 10. Every way to split 7 and 9, odd and even numbers, and the language of adding and taking away through stories, before any written sums."],
-  ["Term 3 · Year 1, summer","Numbers to 20. Teen numbers as ten and a bit, the number line with 5, 10 and 15 as landmarks, even numbers as doubles, and writing number sentences."],
+  ["Term 2 · Year 1, spring","Numbers to 10. Every way to split 7 and 9, plus odd and even numbers. Then the language of adding and taking away through stories, before any written sums."],
+  ["Term 3 · Year 1, summer","Numbers to 20. Teen numbers as ten and a bit, the number line with 5, 10 and 15 as landmarks, even numbers as doubles. Then writing number sentences."],
   ["Term 1 · Year 2, autumn","Number bonds to 10 and 20 until they are instant, doubles up to double 10, odd and even numbers and number sentences."],
-  ["Term 2 · Year 2, spring","Adding and taking away through 10 by making 10 first, near doubles such as 6 + 7, and reading two-digit numbers as tens and ones."],
-  ["Term 3 · Year 2, summer","Equal groups that lead to the 2, 5 and 10 times tables, halves and quarters of small amounts, and ten more and ten less."]
+  ["Term 2 · Year 2, spring","Adding and taking away through 10 by making 10 first and near doubles such as 6 + 7. Then reading two-digit numbers as tens and ones."],
+  ["Term 3 · Year 2, summer","Equal groups that lead to the 2, 5 and 10 times tables, plus halves and quarters of small amounts and ten more and ten less."]
 ];
 const MFIT=[
-  ["Nursery activities","For a nursery child, sessions use numbers to 3, then 4, then 5 through the year. Two activities are just for nursery: ‘Show me fingers’, where ⟦she⟧ puts up the amount ideally all at once, and ‘What comes next?’, a repeating pattern of pictures."],
+  ["Nursery activities","For a nursery child, sessions use numbers to 3, then 4, then 5 through the year. Two activities are just for nursery. In ‘Show me fingers’, ⟦she⟧ puts up the amount, ideally all at once. ‘What comes next?’ is a repeating pattern of pictures."],
   ["Quick look","Dots flash up for a moment and ⟦she⟧ says how many. This is subitising, and the short flash stops ⟦her-o⟧ counting one by one. The dots come in the arrangements ⟦she⟧ meets in class, such as dice patterns, lines, pairs, five frames and a bead frame, as well as scattered."],
   ["Count the ducklings","⟦She⟧ touches each duckling once as ⟦she⟧ counts, then says how many there are. Each duckling can only be counted once, which practises matching one number to one thing. Saying the total at the end shows ⟦she⟧ knows the last number tells ⟦her-o⟧ how many."],
   ["Numbers inside numbers","A number is shown in two colours, so 5 might be 3 ⟦acc⟧ and 2 yellow. Talking about the parts builds the idea that every number is made of smaller numbers. This is the start of number bonds and addition."],
@@ -2813,7 +2818,7 @@ const MTERMS=[
   ["Perceptual subitising","","Seeing a small amount instantly, like the 3 on a dice."],
   ["Conceptual subitising","","Seeing a bigger amount as parts and putting them together. ⟦She⟧ might see 5 on a dice as 4 and 1."],
   ["One-to-one correspondence","","Matching one number name to each object, and counting each object exactly once."],
-  ["Stable order","","Saying the number names in the same order every time: one, two, three, four, five."],
+  ["Stable order","","Saying the number names in the same order every time, as in one, two, three, four, five."],
   ["Cardinality","","Understanding that the last number said when counting tells you how many there are altogether."],
   ["Composition","","The idea that numbers are made of smaller numbers. 5 can be 4 and 1, or 3 and 2."],
   ["Part and whole","","The two smaller numbers are the parts and the total is the whole. '⟦Acc⟧ is a part, yellow is a part and the whole is 5.'"],
@@ -2833,9 +2838,9 @@ const MTERMS=[
 function mathsGuide(){
   const left=el("section",{class:"panel prose"},
     el("h2",{text:isNursery()?"How maths works in nursery":isY2()?"How maths works in Year 2":state.year==="Y1"?"How maths works in Reception and Year 1":"How maths works in Reception"}),
-    isNursery()?el("p",{text:"Nursery maths follows the early years framework for 3 and 4 year olds. The aim is a feel for small numbers: seeing up to 3 at a glance, counting up to 5 with one number for each thing, knowing the last number says how many, showing amounts on fingers, comparing groups and spotting patterns. Mastering Number then starts in Reception."}):null,
+    isNursery()?el("p",{text:"Nursery maths follows the early years framework for 3 and 4 year olds. The aim is a feel for small numbers, from seeing up to 3 at a glance, counting up to 5 with one number for each thing, knowing the last number says how many, showing amounts on fingers, comparing groups and spotting patterns. Mastering Number then starts in Reception."}):null,
     el("p",{text:"Before children can add and subtract, they need a secure feel for what numbers are. ⟦Her⟧ class follows Mastering Number, which spends Reception building that feel slowly and deeply with small numbers, rather than racing on to bigger ones."}),
-    el("p",{text:"Each day the class has a short Mastering Number session on top of the main maths lesson. Children look at dot patterns, use their fingers and a bead frame called a rekenrek, and talk about what they see. The emphasis is on seeing numbers and explaining them, not on writing sums."}),
+    el("p",{text:"Each day the class has a short Mastering Number session on top of the main maths lesson. Children look at dot patterns, use their fingers and a bead frame called a rekenrek and talk about what they see. The emphasis is on seeing numbers and explaining them, not on writing sums."}),
     el("h2",{text:"How nursery, Reception, Year 1 and Year 2 unfold"}),
     el("ol",{class:"phases"},MPHASES.map(([t,d],i)=>{const k=MS().settings.planKey||planKey(),here=i===(k.startsWith("N")?0:MPLAN_SCHOOL.indexOf(k)+1);return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
@@ -2859,9 +2864,9 @@ function guideView(){
   const bar=el("div",{class:"seg topic"},[["reading",isNursery()?"Listening":isY2()?"Spelling and words":"Sounds and words"],["maths","Numbers"]].map(([k,l])=>el("button",{type:"button","aria-pressed":String(guideTopic===k),on:{click:()=>{guideTopic=k;render()}}},l)));
   const intro=el("section",{class:"panel prose"},
     el("h2",{text:"Waddle sits beside books"}),
-    el("p",{text:"Waddle is for you and your child to do together, a little like a mother duck leading her ducklings. It takes a few minutes a day, you sit beside your child, and you decide whether each answer was right. Children learn most when a grown-up is there to notice, encourage and explain."}),
+    el("p",{text:"Waddle is for you and your child to do together, a little like a mother duck leading her ducklings. It takes a few minutes a day, you sit beside your child and you decide whether each answer was right. Children learn most when a grown-up is there to notice, encourage and explain."}),
     el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
-    el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 each one earns a piece for a duck, which your child chooses, starting with the body and head and ending with extras such as a hat or a skateboard. A duck has ten pieces, so it takes about a week, finished ducks join a flock, and the ducks start again each school year."}),
+    el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 finishing the day's reading gives one piece for a duck and finishing numbers gives another, so there are at most two a day. ⟦She⟧ chooses each piece, starting with the body and head and ending with extras such as a hat or a skateboard. A duck has ten pieces, so it takes about five days of practice. Finished ducks join a flock and the ducks start again each school year."}),
     el("p",{text:"The I can wall is separate from the rewards. A statement such as ‘I can read the words the, to and no’ appears only once practice has gone well on two different days, so it is something true that you can say aloud. The wall stays when your child moves up a year."}),
     el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}));
   return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());
@@ -2888,7 +2893,7 @@ function readingGuide(){
       el("li",{text:"Use pure sounds, and call letters by their sounds until school teaches the letter names."}),
       el("li",{text:"If ⟦she⟧ is stuck, tell ⟦her-o⟧ the sound or the word and move on. Praise the effort as much as the answer."}),
       el("li",{text:"Keep the sharing book for fun. Use voices, talk about the pictures and ask what might happen next."}),
-      el("li",{text:"Before school, sing nursery rhymes, play I spy with sounds (‘something beginning with sss’) and talk in robot talk: ‘Where's your h – a – t?’"})));
+      el("li",{text:"Before school, sing nursery rhymes, play I spy with sounds (‘something beginning with sss’) and talk in robot talk, such as ‘Where's your h – a – t?’"})));
   const ex=el("div",{class:"example"},wordNode([["sh"],["o"],["p"]],{marks:true}));
   const right=el("section",{class:"panel prose"},
     el("h2",{text:"Phonics words"}),
@@ -2959,7 +2964,7 @@ function settingsPanel(){
       el("section",{class:"panel"},el("h2",{text:"Pace"}),
         seg("Reading",[["own","⟦Her⟧ own pace"],["school","Follow school"]],state.pace.reading,v=>{state.pace.reading=v;save();render()},"lab-pr"),
         seg("Maths",[["own","⟦Her⟧ own pace"],["school","Follow school"]],state.pace.maths,v=>{state.pace.maths=v;MS().settings.planKey=null;save();render()},"lab-pm"),
-        el("p",{class:"note",text:"⟦Her⟧ own pace: the school's sequence is the floor. New sounds, tricky words and maths stages unlock, in the school's order, as soon as ⟦she⟧ is fluent and confident after a gap. Follow school: only what you tick, and the maths plan for ⟦her⟧ term."}))),
+        el("p",{class:"note",text:"⟦Her⟧ own pace means the school's sequence is the floor. New sounds, tricky words and maths stages unlock, in the school's order, as soon as ⟦she⟧ is fluent and confident after a gap. Follow school means only what you tick, and the maths plan for ⟦her⟧ term."}))),
     el("div",{class:"cols"},
       el("section",{class:"panel"},el("h2",{text:"Look and sound"}),
         seg("Colour theme",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],state.palette,v=>{state.palette=v;save();render()},"lab-pal"),
@@ -3013,7 +3018,7 @@ const ANIMALS={cow:"Moo",dog:"Woof",cat:"Miaow",duck:"Quack",sheep:"Baa",pig:"Oi
 const LGAMES={
   anim:{name:"What makes this sound?",desc:"Listening. You make an animal sound and ⟦she⟧ finds the animal."},
   rhyme:{name:"Rhyme time",desc:"Hearing which words sound the same at the end, like cat and hat."},
-  clap:{name:"Clap the beats",desc:"Clapping the beats (syllables) in a word: ba-na-na has three."},
+  clap:{name:"Clap the beats",desc:"Clapping the beats (syllables) in a word, so ba-na-na has three."},
   first:{name:"First sounds",desc:"Hearing the sound a word starts with, like sun and sock."},
   robot:{name:"Robot talk",desc:"Oral blending. You say a word sound by sound, c – a – t, and ⟦she⟧ blends it into cat. This is the step into reading."}
 };
@@ -3040,7 +3045,7 @@ function listenCard(item,flash,advance){
   let q,tip;
   if(item.g==="anim"){stage.append(el("div",{class:"bubble",text:`“${item.say}!”`}));q="Who says that?";tip=`Make the sound yourself, "${item.say.toLowerCase()}", then ask who says it. Have fun with the voices.`}
   else if(item.g==="rhyme"){stage.append(picBtn(item.target,"big"));q=`Which one rhymes with ${item.target}?`;tip=`Say "${item.target}", then say each picture's name slowly. Which sounds like ${item.target} at the end?`}
-  else if(item.g==="first"){stage.append(picBtn(item.target,"big"));q=`Which one starts like ${item.target}?`;tip=`Stretch the first sound: "${item.snd}${item.snd}${item.snd}… ${item.target}". Then say each picture's name. Which starts the same way?`}
+  else if(item.g==="first"){stage.append(picBtn(item.target,"big"));q=`Which one starts like ${item.target}?`;tip=`Stretch the first sound, as in "${item.snd}${item.snd}${item.snd}… ${item.target}". Then say each picture's name. Which starts the same way?`}
   else if(item.g==="robot"){stage.append(el("div",{class:"robot",text:"🤖"}),el("p",{class:"sayline"},"Grown-up says: ",el("b",{text:item.say})));q="Which picture did the robot say?";tip=`Say each sound slowly and evenly, like a robot. Then let ${readerName()} push the sounds together and find the picture.`}
   else {stage.append(picBtn(item.target,"big"));q=`How many beats in ${item.target}?`;tip=`Say "${item.target}" and clap each beat together, then tap how many claps.`}
   caption.textContent=q;
@@ -3061,7 +3066,7 @@ function listenCard(item,flash,advance){
 function listenPanel(){
   const games=LPLAN[planKey()]||LPLAN["N-summer"],shown=Object.keys(LGAMES).filter(g=>games.includes(g)||LS().stats[g]);
   return el("section",{class:"panel"},el("h2",{text:"Listening games"}),
-    el("p",{class:"note",text:"Pre-phonics, as in nursery: tuning into sounds, rhyme and beats, then first sounds and robot talk, which lead into reading."}),
+    el("p",{class:"note",text:"Pre-phonics, as in nursery. Tuning into sounds, rhyme and beats, then first sounds and robot talk, which lead into reading."}),
     el("ul",{class:"lstats"},shown.map(g=>{const r=(LS().stats[g]||{r:[]}).r;
       return el("li",{},el("b",{text:LGAMES[g].name}),el("span",{class:"note",text:r.length?`${r.filter(x=>x===1).length} of the last ${r.length} right first time`:"Not tried yet"}),el("p",{class:"note",text:LGAMES[g].desc}))})));
 }
@@ -3093,14 +3098,14 @@ function spellCard(item,flash,advance){
     side.replaceChildren();
     if(stage==="look"){
       T(it.prickly?"A prickly spelling has a bit that does not follow the usual rules. Say the word, look at the highlighted part and say the letters, then cover it."
-        :"Say the word"+(it.sent?"":" and use it in a sentence")+". Look at the highlighted letters and say each letter. Then cover it.");
+        :"Say the word"+(it.sent?"":" and use it in a sentence")+". Look at "+(it.segs.some(x=>x[1])?"the highlighted letters":"the word")+" and say each letter. Then cover it.");
       side.append(el("button",{class:"btn",type:"button",on:{click:()=>{stage="cover";paint()}}},"Cover it"));
     }else if(stage==="cover"){
       T(`Say the word${it.sent?" and read the sentence":" and use it in a sentence"}. ${readerName()} writes it on paper, or says the letters in order, from memory.`);
       side.append(el("button",{class:"btn ghost small",type:"button",on:{click:()=>{stage="look";paint()}}},"Look again"),
         el("button",{class:"btn",type:"button",on:{click:()=>{stage="check";paint()}}},"Check it"));
     }else{
-      T("Check each letter against what ⟦she⟧ wrote, especially the highlighted ones. Then say how it went.");
+      T("Check each letter against what ⟦she⟧ wrote"+(it.segs.some(x=>x[1])?", especially the highlighted ones":"")+". Then say how it went.");
       side.append(el("button",{class:"btn ghost small",type:"button",on:{click:()=>{stage="look";paint()}}},"Look again"));
     }
   };
@@ -3138,7 +3143,7 @@ function cardView(){
     const R=session.results,it=R.filter(x=>x[0].kind!=="a"),al=R.filter(x=>x[0].kind==="a");
     state.log.push({d:today(),t:session.type,n:it.length,up:it.filter(x=>x[1]==="up").length,help:it.filter(x=>x[1]==="reset").length,
       an:al.length,au:al.filter(x=>x[1]==="up").length,s:(tickActive(),bankTime())});
-    state.log=state.log.slice(-500);if(isBuild()){const dr=DR();dr.pending=(dr.pending||0)+1;dr.earned=(dr.earned||0)+1;lastPlaced=null;pickCat=null}else state.hatched=(state.hatched||0)+1;session.moved=checkPace();session.newCans=updateWall()}markDay();save();render()};
+    state.log=state.log.slice(-500);if(isBuild()){const dr=DR(),t=today(),area=session.type==="maths"?"m":"r";if(!dr.got||dr.got.d!==t)dr.got={d:t};if(!dr.got[area]&&(area==="m"?mathsDone():readingDone())){dr.got[area]=1;dr.pending=(dr.pending||0)+1;dr.earned=(dr.earned||0)+1;session.gotPiece=true}lastPlaced=null;pickCat=null}else state.hatched=(state.hatched||0)+1;session.moved=checkPace();session.newCans=updateWall()}markDay();save();render()};
 
   let side=null;
   if(item.kind==="l"){
@@ -3164,12 +3169,12 @@ function cardView(){
     centreGlyph(letters);
     const teach=!state.sounds.gcards[item.v]&&state.sounds.auto[item.v];
     flash.append(el("span",{class:"kind",text:teach?"New sound":"Sound"}),wd,
-      el("p",{class:"tip",text:teach?`⟦She⟧'s ready for this one. Teach it first: "This is ${gOf(item.v)}${EX[item.v]?`, as in ${EX[item.v]}`:""}." Say it together three times, then ask ⟦her-o⟧ to say it on ⟦her⟧ own.${gOf(item.v).length===1?` Keep it a pure sound: ${gOf(item.v)}, not ${gOf(item.v)}uh.`:""} The Little Wandle parent videos show each sound.`
-        :item.v==="le"?"This one is the ending in tickle: a short l sound, not two separate letters."
-        :isSplit(item.v)?`A split digraph: the two letters work together with another letter in between, as in '${EX[item.v]}'.`
+      el("p",{class:"tip",text:teach?`⟦She⟧'s ready for this one. Teach it first: "This is ${gOf(item.v)}${EX[item.v]?`, as in ${EX[item.v]}`:""}." Say it together three times, then ask ⟦her-o⟧ to say it on ⟦her⟧ own.${gOf(item.v).length===1?` Keep it a pure sound, ${gOf(item.v)} and not ${gOf(item.v)}uh.`:""} The Little Wandle parent videos show each sound.`
+        :item.v==="le"?"This one is the ending in tickle, a short l sound and not two separate letters."
+        :isSplit(item.v)?`A split digraph is two letters that work together with another letter in between, as in '${EX[item.v]}'.`
         :item.v.includes(":")?`Here ${gOf(item.v)} makes the sound in '${EX[item.v]}'. Ask for that sound, then any others ⟦she⟧ knows for ${gOf(item.v)}.`
         :EX[item.v]&&item.v.length>1?`Ask ⟦her-o⟧ to say the sound, as in '${EX[item.v]}'. Two or more letters, one sound.`
-        :"Ask ⟦her-o⟧ to say the sound. Keep it short and clean: mmm, not muh; t, not tuh."}));
+        :"Ask ⟦her-o⟧ to say the sound. Keep it short and clean, so mmm and not muh, and t and not tuh."}));
     const go=r=>{schedule(state.sounds.gcards,item.v,r);advance(r)};
     grades=teach?[["g-auto","Got it",()=>go("up")],["g-help","Needs more",()=>go("reset")]]:[["g-auto","Knew it straight away",()=>go("up")],["g-help","Not yet",()=>go("reset")]];n=2;
   }else{
@@ -3192,7 +3197,7 @@ function cardView(){
       el("span",{class:"count",text:`${session.i+1} of ${session.queue.length}`}),
       el("button",{class:"btn ghost small",on:{click:()=>{tickActive();if(bankTime())save();releaseWake();session=null;render()}}},"Stop")),
     flash,
-    el("div",{class:"side"},side,gEl?el("p",{class:"note",text:"For the grown-up: how did it go?"}):null,gEl));
+    el("div",{class:"side"},side,gEl?el("p",{class:"note",text:"For the grown-up, how did it go?"}):null,gEl));
 }
 
 function movedOn(m){
@@ -3212,13 +3217,13 @@ function doneView(){
   if(!session.sfx){session.sfx=true;SFX.done();if(!bd&&!(s.ducks&&s.ducks%10===0)&&!reducedMotion())SFX.hatch()}
   return el("section",{class:"panel done",style:"align-items:center;text-align:center"},
     el("p",{class:"done-title",text:`Well done${name?", "+name:""}!`}),
-    el("p",{class:"muted",text:bd?`${DR().pending>0?"You earned a piece for your duck. ":""}${good} of ${res.length} on ⟦her⟧ own.`:(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),
+    el("p",{class:"muted",text:bd?(session.gotPiece?"Your duck gets a new piece. ":"")+`${good} of ${res.length} on ⟦her⟧ own.`+(!session.gotPiece&&session.type!=="maths"&&readingLeft().length?` Finish ${joinAnd(readingLeft())} and there is a piece for your duck.`:""):(session.wasAsleep?"Your ducklings woke up! ":"")+(s.ducks&&s.ducks%10===0?`Ten ducklings grew up into a duck! ${good} of ${res.length} on ⟦her⟧ own.`:`A new duckling hatched. ${good} of ${res.length} on ⟦her⟧ own.`)}),
     bd?el("div",{style:"width:100%"},DR().pending>0?pickPanel():placedBlock()):el("div",{style:"width:100%"},ducksRow(s.ducks,true)),
     nc.length?el("div",{class:"newcans"},el("p",{class:"moved",text:"New on the I can wall"}),...nc.slice(0,3).map(c=>el("p",{class:"can-line",text:c.text})),nc.length>3?el("p",{class:"muted",text:`and ${nc.length-3} more`}):null,el("p",{class:"muted",text:"Say it together."})):null,
     ...movedOn(session.moved),
-    look.length?el("p",{text:session.type==="tricky"?"Look for these words in tonight's reading book:":`Find these in ${state.sounds.book.title||"⟦her⟧ reading book"}:`}):null,
+    look.length?el("p",{text:session.type==="tricky"?"Look for these words in tonight's reading book":`Find these in ${state.sounds.book.title||"⟦her⟧ reading book"}`}):null,
     look.length?el("div",{class:"chips",style:"justify-content:center"},look.map(w=>el("span",{class:"chip",text:w}))):null,
-    !bookRead()?el("p",{class:"nudge-note big",text:practiceDone()?"Sounds and numbers are done. Now read a book together!":"Now read a book together!"}):null,
+    !bookRead()?el("p",{class:"nudge-note big",text:practiceDone()?doneWhat()+" are done. Now read a book together!":"Now read a book together!"}):null,
     session.type==="maths"?el("p",{class:"muted",text:"Real-life maths for later today"}):null,
     session.type==="maths"?el("p",{class:"mtip",text:mpick(MATHS_TIPS)}):null,
     el("button",{class:"btn",on:{click:()=>{session=null;screen="home";render()}}},"Done"));
@@ -3324,7 +3329,7 @@ function spellingView(){
     el("div",{class:"stat"},el("b",{text:String(keys.filter(k=>sp.cards[k]).length)}),el("span",{text:"Practised so far"}))));
   const list=el("section",{class:"panel"},
     el("p",{class:"muted",text:"Tick each unit once school has taught it. Practice only uses ticked units, so nothing runs ahead of the classroom."}),
-    el("p",{class:"note",text:"This follows Little Wandle Spelling. Autumn 1 reviews Phase 5, Autumn 2 is a bridge to spelling, and Spring and Summer have 14 units. Each unit asks one question, adds a few prickly spellings that break the rules, and gives a pair of words that sound the same."}));
+    el("p",{class:"note",text:"This follows Little Wandle Spelling. Autumn 1 reviews Phase 5 and Autumn 2 is a bridge to spelling. Spring and Summer have 14 units. Each unit asks one question, adds a few prickly spellings that break the rules and gives a pair of words that sound the same."}));
   const halves=[...new Set(SPELL.map(uHalf))];
   halves.forEach(h=>{
     const us=SPELL.filter(u=>uHalf(u)===h),n=us.filter(u=>sp.taught[u.id]).length,allOn=n===us.length;
@@ -3393,7 +3398,7 @@ function trickyView(){
 /* Each new day, or after more than half an hour away, the app opens on the landing page again */
 let shownDay=today(),hiddenAt=0;
 function backToLanding(reason){
-  if(session&&reason!=="newday")return;
+  if(session&&(reason!=="newday"||!session.done))return;
   if(session){releaseWake();session=null}
   tab="practise";screen="landing";shownDay=today();render();
 }
@@ -3403,6 +3408,21 @@ document.addEventListener("visibilitychange",()=>{
   else if(hiddenAt&&Date.now()-hiddenAt>30*60*1000)backToLanding("away");
 });
 setInterval(()=>{if(!document.hidden&&today()!==shownDay)backToLanding("newday")},60*1000);
+/* Long words shrink to fit their box, whatever the screen width or font */
+function fitWords(){
+  document.querySelectorAll(".word,.spword").forEach(w=>{
+    if(w.dataset.fs===undefined)w.dataset.fs=w.style.fontSize||"";
+    w.style.fontSize=w.dataset.fs;
+    const fits=()=>{const k=w.lastElementChild,f=w.firstElementChild;if(!k)return true;const r=w.getBoundingClientRect();if(!r.width)return true;const cs=getComputedStyle(w),pr=parseFloat(cs.paddingRight)||0,pl=parseFloat(cs.paddingLeft)||0;
+      return k.getBoundingClientRect().right<=r.right-pr+1&&f.getBoundingClientRect().left>=r.left+pl-1};
+    let fs=parseFloat(getComputedStyle(w).fontSize),n=0;
+    while(!fits()&&fs>22&&n++<40){fs=Math.floor(fs*.94);w.style.fontSize=fs+"px"}
+  });
+}
+let fitQ=0;
+try{new MutationObserver(()=>{if(fitQ)return;fitQ=requestAnimationFrame(()=>{fitQ=0;fitWords()})}).observe(document.body||document.documentElement,{childList:true,subtree:true})}catch(e){}
+window.addEventListener("resize",()=>fitWords());
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitWords).catch(()=>{});
 render();
 connect();
 </script>

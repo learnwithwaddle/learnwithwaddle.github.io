@@ -772,7 +772,7 @@ body{overflow-x:clip}
 
 <script>
 /* Waddle © 2026 Peter Hicks. All rights reserved. */
-/* ================= Sounds: Reception follows her book sets, then Little Wandle's Phase 3 and Year 1 Phase 5 ================= */
+/* ================= Sounds: Reception follows her book sets, then Phase 3 and Year 1 Phase 5 ================= */
 /* A sound id is the grapheme, or grapheme:sound for an alternative pronunciation (o:oa as in go). Split digraphs are a-e, i-e and so on. */
 const SETS=[
   {stage:"R",phase:"Reception autumn · Phase 2",name:"Group 1",gs:["s","a","t","p"]},
@@ -939,8 +939,8 @@ Y2_TRICKY.forEach(([term,hl,title,note,str])=>GROUPS.push({term,hl,title,note,
 const WORDS={},ORDER=[];
 GROUPS.forEach((g,gi)=>g.words.forEach(([w,parts])=>{WORDS[w]={w,parts,group:gi,term:g.term};ORDER.push(w)}));
 
-/* ================= Year 2 spelling: follows the Little Wandle Spelling units ================= */
-/* Words are written with [ ] round the letters a unit is about. A prickly spelling or a homophone also carries a sentence, with ___ where the word goes. */
+/* ================= Year 2 spelling units ================= */
+/* Words are written with [ ] round the letters a unit is about. A rule-breaker or a homophone also carries a sentence, with ___ where the word goes. */
 const PRICKLY={
   one:["[o]ne","I have ___ sister."],once:["[o]nce","We went there ___."],two:["t[wo]","I have ___ hands."],again:["ag[ai]n","Let's try ___."],
   any:["[a]ny","Do you have ___ pets?"],many:["m[a]ny","There are ___ stars."],who:["[wh]o","___ is at the door?"],whole:["[wh]ole","I ate the ___ cake."],
@@ -951,68 +951,68 @@ const PRICKLY={
   shoe:["sh[oe]","I lost a ___."],Mr:["M[r]","Mister Brown is our teacher. Write it as ___ Brown."],Mrs:["M[rs]","Missus Green is my neighbour. Write it as ___ Green."],Ms:["M[s]","Miss Khan is my aunt. Write it as ___ Khan."],
   thought:["th[ough]t","I ___ it was Tuesday."],through:["thr[ough]","We walked ___ the park."],their:["th[eir]","They took ___ coats."],prove:["pr[o]ve","Can you ___ it?"]
 };
-/* id, half term, week, the question the unit answers, the I can statement, words, prickly spellings, homophone sets */
+/* id, half term, week, the spelling pattern the unit covers, the I can statement, words, rule-breakers, homophone sets */
 const SPELL_RAW=[
- ["p5-1","Autumn 1 · Phase 5 review","Week 1","Which spellings can make the sounds ai, ee, igh and oa?","I can spell the sounds ai, ee, igh and oa in different ways",
+ ["p5-1","Autumn 1 · Phase 5 review","Week 1","Different ways to spell ai, ee, igh and oa","I can spell the sounds ai, ee, igh and oa in different ways",
   "m[a]k[e] r[ai]n pl[ay] [eigh]t gr[ea]t happ[y] s[ea] s[ee] f[ie]ld n[igh]t t[i]m[e] sn[ow] h[o]m[e] b[oa]t","people eye whole",""],
- ["p5-2","Autumn 1 · Phase 5 review","Week 2","Which spellings can make the sounds oo, air, ur and ow?","I can spell the sounds oo, air, ur and ow in different ways",
+ ["p5-2","Autumn 1 · Phase 5 review","Week 2","Different ways to spell oo, air, ur and ow","I can spell the sounds oo, air, ur and ow in different ways",
   "m[oo]n gr[ew] bl[ue] fr[ui]t h[air] sh[are] b[ear] h[er] t[ur]n b[ir]d f[ir]st l[ear]n cl[ou]d c[ow]","through improve move prove shoe two who beautiful their parents",""],
- ["p5-3","Autumn 1 · Phase 5 review","Week 3","Which spellings can make the sounds or, ch and sh?","I can spell the sounds or, ch and sh in different ways",
+ ["p5-3","Autumn 1 · Phase 5 review","Week 3","Different ways to spell or, zh, ch and sh","I can spell the sounds or, ch and sh in different ways",
   "f[or]k s[aw] [au]tumn sn[ore] fl[oor] w[al]k c[augh]t vi[si]on u[su]al ma[tch] pic[ture] pa[ti]ent [ch]ef spe[ci]al","thought sure",""],
- ["p5-4","Autumn 1 · Phase 5 review","Week 4","Which spellings can make the sounds j, s and the short sounds u, e, i, o and oo?","I can spell j, s and the short vowel sounds in different ways",
+ ["p5-4","Autumn 1 · Phase 5 review","Week 4","Different ways to spell j, s and the short vowel sounds","I can spell j, s and the short vowel sounds in different ways",
   "[j]ump [g]iant bri[dge] pa[ss] [c]ity mou[se] whi[st]le [sc]ent y[ou]ng h[ea]d g[y]m wh[a]t c[o]m[e] c[oul]d","once again any many friend busy pretty because laugh",""],
- ["p5-5","Autumn 1 · Phase 5 review","Week 5","How can ie, y, ea and a make more than one sound?","I can spell ie, y, ea and a when they make different sounds",
+ ["p5-5","Autumn 1 · Phase 5 review","Week 5","When ie, y, ea and a make more than one sound","I can spell ie, y, ea and a when they make different sounds",
   "ch[ie]f sh[ie]ld l[ie] funn[y] fl[y] m[y]th m[ea]t br[ea]d br[ea]k p[a]per w[a]ter c[a]t","",""],
- ["b-1","Autumn 2 · Bridge to spelling","Week 1","What do I need to know to think about spelling?","I can listen for every sound in a word to help me spell it",
+ ["b-1","Autumn 2 · Getting ready to spell","Week 1","Hearing every sound in a word before spelling it","I can listen for every sound in a word to help me spell it",
   "splash scratch string thrill shrink stamp branch crunch blanket jumper trumpet yellow","",""],
- ["b-2","Autumn 2 · Bridge to spelling","Week 2","Why do I double letters at the end of words, and in words ending -er?","I can spell words with ff, ll, ss and zz, plus doubled letters before er",
+ ["b-2","Autumn 2 · Getting ready to spell","Week 2","Doubled letters at the end of words and before -er","I can spell words with ff, ll, ss and zz, plus doubled letters before er",
   "cli[ff] stu[ff] be[ll] mi[ss] dre[ss] bu[zz] fi[zz] la[dd]er le[tt]er di[nn]er su[pp]er ha[mm]er ru[bb]er","",""],
- ["b-3","Autumn 2 · Bridge to spelling","Week 3","Why do some words end in k or ck, and in ch or tch?","I can tell when to use ck, k, tch and ch at the end of a word",
+ ["b-3","Autumn 2 · Getting ready to spell","Week 3","Choosing k or ck, and ch or tch, at the end of a word","I can tell when to use ck, k, tch and ch at the end of a word",
   "ba[ck] ne[ck] clo[ck] boo[k] wee[k] par[k] mil[k] ca[tch] swi[tch] ki[tch]en mu[ch] whi[ch] tea[ch] lun[ch]","",""],
- ["b-4","Autumn 2 · Bridge to spelling","Week 4","When do I add -s or -es, and when do I double the last letter before -ing?","I can tell when to add s or es, and when to double the last letter",
+ ["b-4","Autumn 2 · Getting ready to spell","Week 4","Adding -s or -es, and doubling the last letter before -ing","I can tell when to add s or es, and when to double the last letter",
   "dog[s] book[s] box[es] glass[es] wish[es] church[es] bus[es] watch[es] run[n]ing hop[p]ing sit[t]ing shop[p]ing swim[m]ing clap[p]ing","",""],
- ["b-5","Autumn 2 · Bridge to spelling","Week 5","Why do I swap y for i before -ed, and drop the e before -ing?","I can tell when to swap y for i and when to drop the e",
+ ["b-5","Autumn 2 · Getting ready to spell","Week 5","Changing y to i before -ed, and dropping e before -ing","I can tell when to swap y for i and when to drop the e",
   "cr[ied] tr[ied] carr[ied] cop[ied] hurr[ied] worr[ied] tak[ing] mak[ing] rid[ing] hid[ing] writ[ing] giv[ing]","",""],
- ["u1","Spring 1 · Unit 1","Weeks 1 and 2","Why do some words have kn and gn for the sound n, and wr for the sound r?","I can spell words with kn, gn and wr",
+ ["u1","Spring 1 · Unit 1","Weeks 1 and 2","Silent letters in kn, gn and wr","I can spell words with kn, gn and wr",
   "[kn]ee [kn]ot [kn]ife [kn]ow [kn]it [kn]ock [gn]at [gn]aw [gn]ome [wr]ite [wr]ap [wr]ong [wr]ist [wr]ote","one once",
   "[knight|The ___ rode a big horse.][night|The stars come out at ___.]"],
- ["u2","Spring 1 · Unit 2","Weeks 3 and 4","Why do I drop the e when I add -ed, -ing, -er, -est and -y?","I can tell when to drop the e before a suffix",
+ ["u2","Spring 1 · Unit 2","Weeks 3 and 4","Dropping the e before -ed, -ing, -er, -est and -y","I can tell when to drop the e before a suffix",
   "hop[ed] smil[ed] liv[ed] hop[ing] us[ing] bak[ing] nic[er] bak[er] nic[est] brav[est] shin[y] smok[y] nois[y]","two again",
   "[one|I have ___ sister.][won|Our team ___ the game.]"],
- ["u3","Spring 1 · Unit 3","Week 5","Why do some words end ge or dge, and why can the sound j be spelled j or g?","I can spell words with ge, dge and j",
+ ["u3","Spring 1 · Unit 3","Week 5","Spelling the j sound with ge, dge, j or g","I can spell words with ge, dge and j",
   "ba[dge] e[dge] fu[dge] he[dge] ca[ge] hu[ge] pa[ge] cha[nge] lar[ge] [g]iraffe [g]entle [j]elly","any many",
   "[where|___ is my coat?][wear|I will ___ my boots.]"],
- ["u4","Spring 2 · Unit 4","Weeks 1 and 2","How do w and qu change the sounds that a, ar and or make?","I can spell words where w changes the sound that a, ar and or make",
+ ["u4","Spring 2 · Unit 4","Weeks 1 and 2","Words where w or qu changes the sound of a, ar or or","I can spell words where w changes the sound that a, ar and or make",
   "w[a]nt w[a]sp w[a]tch sw[a]n w[a]sh squ[a]sh w[ar] w[ar]m w[ar]n qu[ar]ter w[or]d w[or]k w[or]m w[or]ld","who whole",
   "[our|This is ___ house.][hour|It takes an ___ to get there.]"],
- ["u5","Spring 2 · Unit 5","Week 3","Why do I swap y for i when I add -es?","I can tell why baby becomes babies",
+ ["u5","Spring 2 · Unit 5","Week 3","Changing y to i before -es, as in babies","I can tell why baby becomes babies",
   "bab[ies] fam[ilies] part[ies] stor[ies] pupp[ies] pon[ies] carr[ies] cop[ies] fl[ies] cr[ies] tr[ies] hurr[ies]","eye people",
   "[quite|It is ___ cold today.][quiet|Please be ___ in the library.]"],
- ["u6","Spring 2 · Unit 6","Week 4","Why do some words have the spelling ey for the sound ee?","I can spell words that end in ey",
+ ["u6","Spring 2 · Unit 6","Week 4","Words ending in ey, as in key and monkey","I can spell words that end in ey",
   "k[ey] donk[ey] monk[ey] vall[ey] chimn[ey] troll[ey] turk[ey] jock[ey] mon[ey] hon[ey]","journey friend",
   "[see|I can ___ a bird.][sea|The ___ is very blue.]"],
- ["u7","Spring 2 · Unit 7","Week 5","Why do some words end -le, -el, -al or -il?","I can spell words that end in le, el, al and il",
+ ["u7","Spring 2 · Unit 7","Week 5","Words ending in -le, -el, -al and -il","I can spell words that end in le, el, al and il",
   "tab[le] app[le] litt[le] bott[le] puzz[le] cam[el] tunn[el] tow[el] squirr[el] met[al] ped[al] anim[al] penc[il] foss[il]","move improve",
   "[to|We went ___ the park.][too|It is ___ hot.][two|I have ___ cats.]"],
- ["u8","Summer 1 · Unit 8","Week 1","Why does c make the sound s in some words?","I can tell when c says s",
+ ["u8","Summer 1 · Unit 8","Week 1","When c sounds like s, as in circle and ice","I can tell when c says s",
   "[c]ycle [c]ircle [c]ircus [c]inema [c]ell [c]entre [c]ereal i[c]e mi[c]e fa[c]e ra[c]e pla[c]e dan[c]e fen[c]e","says said",
   "[here|Come ___, please.][hear|I can ___ a bell.]"],
- ["u9","Summer 1 · Unit 9","Week 2","How can I spell the sound zh?","I can spell the sound zh in words like television",
+ ["u9","Summer 1 · Unit 9","Week 2","The zh sound, as in television and treasure","I can spell the sound zh in words like television",
   "televi[si]on deci[si]on divi[si]on conclu[si]on trea[su]re mea[su]re plea[su]re lei[su]re","busy pretty",
   "[be|I want to ___ a vet.][bee|A ___ landed on the flower.]"],
- ["u10","Summer 1 · Unit 10","Weeks 3 and 4","What happens when I add -ment, -ness, -ful, -less and -ly to a word?","I can add ment, ness, ful, less and ly to a word",
+ ["u10","Summer 1 · Unit 10","Weeks 3 and 4","Adding -ment, -ness, -ful, -less and -ly","I can add ment, ness, ful, less and ly to a word",
   "enjoy[ment] state[ment] sad[ness] kind[ness] dark[ness] care[ful] help[ful] thank[ful] care[less] hope[less] sad[ly] quick[ly] slow[ly] gent[ly]","parents because",
   "[bear|The ___ ate the honey.][bare|Her feet were ___.]"],
- ["u11","Summer 1 · Unit 11","Week 5","How can I show missing letters in a word?","I can use an apostrophe to show missing letters",
+ ["u11","Summer 1 · Unit 11","Week 5","Apostrophes for missing letters, as in can't","I can use an apostrophe to show missing letters",
   "can[']t didn[']t don[']t isn[']t wasn[']t couldn[']t I[']m I[']ll it[']s let[']s we[']ve they[']re she[']s","beautiful laugh",
   "[there|Put it over ___.][their|The children took ___ coats.][they're|___ going to the park.]"],
- ["u12","Summer 2 · Unit 12","Weeks 1 and 2","Why do some longer words have ti for the sound sh?","I can spell words that end in tion",
+ ["u12","Summer 2 · Unit 12","Weeks 1 and 2","Spelling the sh sound with ti, as in station","I can spell words that end in tion",
   "sta[ti]on mo[ti]on lo[ti]on po[ti]on frac[ti]on ac[ti]on sec[ti]on na[ti]on direc[ti]on addi[ti]on","sure sugar shoe",
   "[sun|The ___ is bright today.][son|He is her ___.]"],
- ["u13","Summer 2 · Unit 13","Week 3","How do I use the apostrophe to show who owns something?","I can use an apostrophe to show who owns something",
+ ["u13","Summer 2 · Unit 13","Week 3","Apostrophes to show who owns something","I can use an apostrophe to show who owns something",
   "girl['s] dog['s] cat['s] Tom['s] teacher['s] baby['s] mum['s] boy['s] bird['s]","Mr Mrs Ms",
   "[whole|I ate the ___ cake.][hole|The rabbit dug a ___.]"],
- ["u14","Summer 2 · Unit 14","Weeks 4 and 5","When do I swap, drop or double?","I can tell when to swap, drop or double a letter",
+ ["u14","Summer 2 · Unit 14","Weeks 4 and 5","Putting the suffix rules together","I can tell when to swap, drop or double a letter",
   "dr[ied] happ[ier] happ[iest] funn[ier] wid[er] wid[est] smil[ing] hop[p]ed big[g]er big[g]est run[n]er sad[d]est shop[p]ed","thought through",
   "[blue|The sky is ___.][blew|The wind ___ my hat off.]"]
 ];
@@ -1614,7 +1614,7 @@ function gateView(){
 let readingTopic="sounds";
 function nurseryListenView(){
   const p=el("section",{class:"panel"},el("h2",{text:"Sounds start in Reception"}),
-    el("p",{text:"In nursery, reading means listening games with no letters. Little Wandle's phonics begins in the first weeks of Reception, so there are no sounds or tricky words to tick yet. When ⟦she⟧ starts Reception, change the school year in Settings and choose where school has got to."}));
+    el("p",{text:"In nursery, reading means listening games with no letters. Phonics at school begins in the first weeks of Reception, so there are no sounds or tricky words to tick yet. When ⟦she⟧ starts Reception, change the school year in Settings and choose where school has got to."}));
   return el("div",{class:"stack"},p,listenPanel());
 }
 function readingView(){
@@ -2155,7 +2155,7 @@ function setupView(){
     (phonField=el("div",{class:"field"},el("label",{for:"setup-set",text:"Latest sounds taught at school"}),sel,
       el("p",{class:"note",text:"Every sound up to and including this set is ticked, plus the tricky words from earlier terms. The reading record or the school's phonics letter will say where they are. You can fine-tune both on the Sounds and words tab in Grown-ups."})),phonField.hidden=d.year==="N"||d.year==="Y2",phonField),
     (spellField=el("div",{class:"field"},el("label",{for:"setup-unit",text:"Latest spelling taught at school"}),selU,
-      el("p",{class:"note",text:"Every unit up to and including this one is ticked, and all of the Reception and Year 1 sounds and tricky words too. The school's spelling letter or the Little Wandle Spelling plan will say where they are. You can fine-tune this on the Spelling tab in Grown-ups."})),spellField.hidden=d.year!=="Y2",spellField),
+      el("p",{class:"note",text:"Every unit up to and including this one is ticked, and all of the Reception and Year 1 sounds and tricky words too. The school's spelling letter or plan will say where they are. You can fine-tune this on the Spelling tab in Grown-ups."})),spellField.hidden=d.year!=="Y2",spellField),
     segRow("Colour","su-pal",[["pink","Pink",true],["blue","Blue",true],["green","Green",true]],"palette",()=>document.documentElement.setAttribute("data-palette",d.palette)),
     tip?el("p",{class:"tipbox",text:tip}):null,
     el("p",{class:"note",text:"Your child's details are stored on this device and are never sent anywhere else."}),
@@ -2817,7 +2817,7 @@ const PHASES=[
   ["Phase 3 · Reception, spring term","More two- and three-letter sounds, such as ai, ee, oo, igh and ear, and longer tricky words like ‘was’ and ‘said’."],
   ["Phase 4 · Reception, summer term","No new sounds. Instead, longer words with consonants side by side, such as ‘frog’, ‘jump’ and ‘sandwich’."],
   ["Phase 5 · Year 1","New spellings for sounds ⟦she⟧ knows (‘ay’ in ‘play’, ‘a-e’ in ‘shake’), then other sounds for letters ⟦she⟧ knows (the ‘o’ in ‘go’, the ‘ow’ in ‘snow’). The Phonics Screening Check comes in June, and a last block of spellings follows it."],
-  ["Spelling · Year 2","Autumn 1 reviews Phase 5, with one set of sounds a week. Autumn 2 is a bridge to spelling, which teaches ⟦her-o⟧ to think about spelling, with doubled letters, k and ck, ch and tch, plus the endings -s, -es, -ed and -ing. Spring and Summer have 14 units, each asking one question about why a word is spelled the way it is, with a few ‘prickly’ spellings that break the rules and pairs of words that sound the same."]
+  ["Spelling · Year 2","Autumn 1 reviews Phase 5, with one set of sounds a week. Autumn 2 gets ⟦her-o⟧ ready to spell, with doubled letters, k and ck, ch and tch, plus the endings -s, -es, -ed and -ing. Spring and Summer have 14 units, each covering one spelling pattern, with a few rule-breakers that don't follow the usual rules and pairs of words that sound the same."]
 ];
 const FIT=[
   ["Listening games (nursery)","For a nursery child, reading practice is five picture games with no letters, namely animal sounds, rhyme time, clapping the beats, first sounds and robot talk. They follow the nursery year, with robot talk (oral blending) arriving in the summer as the step into phonics."],
@@ -2825,7 +2825,7 @@ const FIT=[
   ["Warm-up sounds","Each phonics lesson at school opens by revisiting sounds ⟦she⟧ already knows. The warm-up does the same at home, mixing this week's sounds with earlier ones so none of them fade."],
   ["Words with sound buttons","⟦She⟧ taps each sound, says it and then runs ⟦her⟧ finger along the arrow to blend the sounds into a word. This is the core reading skill phonics builds."],
   ["⟦Her⟧ own pace","With ⟦her⟧ own pace switched on, the school's sequence is the floor, never the ceiling. The next sounds unlock, in the school's order, once ⟦her⟧ newest sounds are read straight away after a gap of two days or more, 90% of everything earlier is still fluent after four days or more, nothing has slipped and ⟦she⟧ has read three words with the new sounds on ⟦her⟧ own. New sounds arrive with a 'New sound' card that shows you how to introduce them. The Progress page shows each condition and how close ⟦she⟧ is."],
-  ["Spelling in Year 2","The Spelling tab follows Little Wandle Spelling unit by unit. Each card uses look, say, cover, write and check. ⟦She⟧ looks at the word, you cover it and ⟦she⟧ writes it on paper before checking. Pairs of words that sound the same, such as bear and bare, are a choice for ⟦her-o⟧ to make from a sentence. Anything ⟦she⟧ gets right comes back after a few days, and anything ⟦she⟧ finds hard comes back tomorrow."],
+  ["Spelling in Year 2","The Spelling tab works through the Year 2 spelling units in order. Each card uses look, say, cover, write and check. ⟦She⟧ looks at the word, you cover it and ⟦she⟧ writes it on paper before checking. Pairs of words that sound the same, such as bear and bare, are a choice for ⟦her-o⟧ to make from a sentence. Anything ⟦she⟧ gets right comes back after a few days, and anything ⟦she⟧ finds hard comes back tomorrow."],
   ["Year 1 spellings","In Year 1 the Sounds and words tab lists each new spelling with an example word, because one letter can make more than one sound. A split digraph such as a-e is shown with matching curved buttons under the a and the e."],
   ["Alien words","Made-up words, like the ones in the Year 1 check. ⟦She⟧ can't know them by sight, so reading one shows ⟦she⟧ is decoding rather than remembering."],
   ["Tricky words","The common words school teaches as tricky. The card shows which part breaks the rules ⟦she⟧ knows, so ⟦she⟧ sounds out the rest and learns only the odd bit."],
@@ -2938,7 +2938,7 @@ function guideView(){
     el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
     el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 finishing the day's reading gives one piece for a duck and finishing numbers gives another, so there are at most two a day. ⟦She⟧ chooses each piece, starting with the body and head and ending with extras such as a hat or a skateboard. A duck has ten pieces, so it takes about five days of practice. Finished ducks join a flock and the ducks start again each school year."}),
     el("p",{text:"The I can wall is separate from the rewards. A statement such as ‘I can read the words the, to and no’ appears only once practice has gone well on two different days, so it is something true that you can say aloud. The wall stays when your child moves up a year."}),
-    el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}),
+    el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics, Little Wandle Spelling for Year 2 spelling and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}),
     el("p",{class:"note",text:"© 2026 Peter Hicks. All rights reserved."}));
   return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());
 }
@@ -2947,15 +2947,15 @@ function readingGuide(){
   left.append(
     el("h2",{text:"What phonics is"}),
     el("p",{text:"English is written with 26 letters but spoken with about 44 sounds. Phonics teaches children which letters write which sounds, so that when they meet a new word they can work it out for themselves instead of guessing from the pictures or memorising the word's shape."}),
-    el("p",{text:"⟦Her⟧ school uses systematic synthetic phonics, taught through a programme called Little Wandle Letters and Sounds Revised, which is on the Department for Education's list of approved phonics programmes. Sounds arrive in a fixed order, a few each week, and each daily lesson revisits old sounds, teaches a new one, practises it and then uses it to read."}),
+    el("p",{text:"⟦Her⟧ school uses systematic synthetic phonics, taught through one of the programmes on the Department for Education's list of approved phonics programmes. Sounds arrive in a fixed order, a few each week, and each daily lesson revisits old sounds, teaches a new one, practises it and then uses it to read."}),
     el("h2",{text:"How nursery, Reception, Year 1 and Year 2 unfold"}),
     el("ol",{class:"phases"},PHASES.map(([t,d],i)=>{const here=i===(isNursery()?0:isY2()?5:({"R-autumn":1,"R-spring":2,"R-summer":3}[planKey()]??4));return el("li",{class:here?"here":""},
       el("div",{},el("b",{text:t}),here?el("span",{class:"here-tag",text:"⟦She⟧ is here"}):null,el("p",{text:d})))})),
     el("h2",{text:"How this app fits in"}),
     el("dl",{class:"fit"},FIT.flatMap(([t,d])=>[el("dt",{text:t}),el("dd",{text:d})])),
-    el("p",{text:"Some schools send home books from another scheme, such as Oxford Reading Tree, which orders a few sounds differently from Little Wandle. A book may then use a sound ⟦she⟧ hasn't been taught yet. When that happens, read the word to ⟦her-o⟧ and carry on."}),
+    el("p",{text:"Some schools send home books from another scheme, such as Oxford Reading Tree, which orders a few sounds differently from the order Waddle uses. A book may then use a sound ⟦she⟧ hasn't been taught yet. When that happens, read the word to ⟦her-o⟧ and carry on."}),
     el("h2",{text:"What the app leaves to you and school"}),
-    el("p",{text:"It plays no sounds, because computer voices add ‘uh’ to letter sounds and would undo what school teaches. The Little Wandle videos show exactly how each sound is said, and they are worth watching once per set."},
+    el("p",{text:"It plays no sounds, because computer voices add ‘uh’ to letter sounds and would undo what school teaches. Most phonics programmes have parent videos showing exactly how each sound is said, and they are worth watching once per set. If ⟦her⟧ school uses Little Wandle, theirs are here."},
       " ",el("a",{href:"https://www.littlewandle.org.uk/resources/for-parents/",target:"_blank",rel:"noopener",text:"Little Wandle for parents"})),
     el("p",{text:"It isn't a test. Its records are there to show you where to spend the few minutes you have. Before Year 2 it doesn't cover writing, and in Year 2 ⟦she⟧ writes each spelling on paper while you check it."}),
     el("h2",{text:"Helping at home"}),
@@ -3162,14 +3162,14 @@ function spellCard(item,flash,advance){
   let stage="look";
   const body=el("div",{class:"spbody"}),tip=el("p",{class:"tip"}),side=el("div",{class:"row",style:"justify-content:center"});
   const T=t=>{tip.textContent=G(t)};
-  const kindEl=el("span",{class:"kind",text:it.prickly?"Prickly spelling":"Spelling"});
+  const kindEl=el("span",{class:"kind",text:it.prickly?"Rule-breaker":"Spelling"});
   const paint=()=>{
     flash.dataset.stage=stage;
     body.replaceChildren(spellWordEl(it,stage==="cover"));
     if(it.sent)body.append(spellSentence(it.sent,it.w,stage!=="cover"));
     side.replaceChildren();
     if(stage==="look"){
-      T(it.prickly?"A prickly spelling has a bit that does not follow the usual rules. Say the word, look at the highlighted part and say the letters, then cover it."
+      T(it.prickly?"A rule-breaker has a bit that does not follow the usual rules. Say the word, look at the highlighted part and say the letters, then cover it."
         :"Say the word"+(it.sent?"":" and use it in a sentence")+". Look at "+(it.segs.some(x=>x[1])?"the highlighted letters":"the word")+" and say each letter. Then cover it.");
       side.append(el("button",{class:"btn",type:"button",on:{click:()=>{stage="cover";paint()}}},"Cover it"));
     }else if(stage==="cover"){
@@ -3241,7 +3241,7 @@ function cardView(){
     centreGlyph(letters);
     const teach=!state.sounds.gcards[item.v]&&state.sounds.auto[item.v];
     flash.append(el("span",{class:"kind",text:teach?"New sound":"Sound"}),wd,
-      el("p",{class:"tip",text:teach?`⟦She⟧'s ready for this one. Teach it first: "This is ${gOf(item.v)}${EX[item.v]?`, as in ${EX[item.v]}`:""}." Say it together three times, then ask ⟦her-o⟧ to say it on ⟦her⟧ own.${gOf(item.v).length===1?` Keep it a pure sound, ${gOf(item.v)} and not ${gOf(item.v)}uh.`:""} The Little Wandle parent videos show each sound.`
+      el("p",{class:"tip",text:teach?`⟦She⟧'s ready for this one. Teach it first by saying "This is ${gOf(item.v)}${EX[item.v]?`, as in ${EX[item.v]}`:""}." Say it together three times, then ask ⟦her-o⟧ to say it on ⟦her⟧ own.${gOf(item.v).length===1?` Keep it a pure sound, ${gOf(item.v)} and not ${gOf(item.v)}uh.`:""} Your school's phonics videos for parents show each sound.`
         :item.v==="le"?"This one is the ending in tickle, a short l sound and not two separate letters."
         :isSplit(item.v)?`A split digraph is two letters that work together with another letter in between, as in '${EX[item.v]}'.`
         :item.v.includes(":")?`Here ${gOf(item.v)} makes the sound in '${EX[item.v]}'. Ask for that sound, then any others ⟦she⟧ knows for ${gOf(item.v)}.`
@@ -3389,7 +3389,7 @@ function fillSpellSelect(sel,pick){
   let half=null,grp=null;
   SPELL.forEach((u,i)=>{const h=uHalf(u);
     if(h!==half){half=h;grp=el("optgroup",{label:u.half.includes("Unit")?h:u.half});sel.append(grp)}
-    grp.append(el("option",{value:String(i),text:`${uLabel(u).replace(/^Phase 5 review · /,"").replace(/^Bridge to spelling · /,"")} · ${u.q.length>46?u.q.slice(0,44)+"…":u.q}`}))});
+    grp.append(el("option",{value:String(i),text:`${uLabel(u).replace(/^Phase 5 review · /,"").replace(/^Getting ready to spell · /,"")} · ${u.q.length>46?u.q.slice(0,44)+"…":u.q}`}))});
   sel.value=String(pick);
 }
 function spellingView(){
@@ -3401,7 +3401,7 @@ function spellingView(){
     el("div",{class:"stat"},el("b",{text:String(keys.filter(k=>sp.cards[k]).length)}),el("span",{text:"Practised so far"}))));
   const list=el("section",{class:"panel"},
     el("p",{class:"muted",text:"Tick each unit once school has taught it. Practice only uses ticked units, so nothing runs ahead of the classroom."}),
-    el("p",{class:"note",text:"This follows Little Wandle Spelling. Autumn 1 reviews Phase 5 and Autumn 2 is a bridge to spelling. Spring and Summer have 14 units. Each unit asks one question, adds a few prickly spellings that break the rules and gives a pair of words that sound the same."}));
+    el("p",{class:"note",text:"Autumn 1 reviews Phase 5 and Autumn 2 gets ⟦her-o⟧ ready to spell. Spring and Summer have 14 units. Each unit covers one spelling pattern, adds a few rule-breakers and gives a pair of words that sound the same."}));
   const halves=[...new Set(SPELL.map(uHalf))];
   halves.forEach(h=>{
     const us=SPELL.filter(u=>uHalf(u)===h),n=us.filter(u=>sp.taught[u.id]).length,allOn=n===us.length;
@@ -3416,7 +3416,7 @@ function spellingView(){
         el("label",{class:"switch",for:"su-"+u.id},cb,el("span",{class:"ulabel"},el("b",{text:uLabel(u)}),sp.auto[u.id]&&sp.taught[u.id]?el("span",{class:"auto",title:"Unlocked by the app when ⟦she⟧ was ready",text:" ★"}):null)),
         el("p",{class:"note",text:u.q}),
         el("div",{class:"chips uwords"},u.items.map(it=>it.kind==="sh"?el("span",{class:"chip homo",title:"Words that sound the same",text:it.set.map(x=>x.w).join(" / ")})
-          :el("span",{class:"chip"+(it.prickly?" prickly":""),title:it.prickly?"Prickly spelling":""},it.segs.map(([t,h])=>h?el("mark",{text:t}):t)))),
+          :el("span",{class:"chip"+(it.prickly?" prickly":""),title:it.prickly?"Rule-breaker":""},it.segs.map(([t,h])=>h?el("mark",{text:t}):t)))),
         units.includes(u)?el("p",{class:"note",text:`${ok} of ${ks.length} spelt right after a gap`}):null));
     });
     list.append(d);

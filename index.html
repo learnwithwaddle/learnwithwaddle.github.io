@@ -1628,12 +1628,12 @@ function logView(){
   return el("div",{class:"stack"},p);
 }
 function grownView(){
-  const tabs=[["progress","Progress"],["reading",isNursery()?"Listening":isY2()?"Spelling and words":"Sounds and words"],["maths","Numbers"],["log","Reading log"],["guide","How it works"],["settings","Settings"]];
+  const tabs=[["progress","Progress"],["reading",isNursery()?"Listening":isY2()?"Spelling and words":"Sounds and words"],["maths","Numbers"],["log","Reading log"],["guide","How it works"],["settings","Settings"]].concat(feedbackOn()?[["feedback","Send feedback"]]:[]);
   if(sub==="sounds"||sub==="tricky"||sub==="spelling"){readingTopic=sub;sub="reading"}
   const bar=el("div",{class:"subtabs",role:"tablist"},
     tabs.map(([k,l])=>el("button",{role:"tab","aria-selected":String(sub===k),on:{click:()=>{sub=k;render()}}},l)),
     el("button",{class:"linkbtn lockbtn",on:{click:()=>{unlockedUntil=0;tab="practise";render()}}},"Lock"));
-  const body=sub==="progress"?progressView():sub==="reading"?readingView():sub==="log"?logView():sub==="guide"?guideView():sub==="maths"?mathsSettingsView():sub==="settings"?settingsPanel():progressView();
+  const body=sub==="progress"?progressView():sub==="reading"?readingView():sub==="log"?logView():sub==="guide"?guideView():sub==="maths"?mathsSettingsView():sub==="settings"?settingsPanel():sub==="feedback"&&feedbackOn()?el("div",{class:"stack"},feedbackPanel()):progressView();
   const childbar=el("div",{class:"childbar"},
     el("div",{class:"seg","aria-label":"Child"},children().map(({id,st})=>el("button",{type:"button","aria-pressed":String(id===family.active),style:`--cc:${childCol(st.palette)}`,on:{click:()=>{switchChild(id);render()}}},(st.name||"").trim()||"New child"))),
     el("button",{class:"linkbtn",type:"button",on:{click:addChild}},"+ Add a child"));
@@ -1988,7 +1988,7 @@ function feedbackPanel(){
       el("p",{class:"note",text:sent?"Your feedback has been sent.":"You're offline, so it will be sent once you're back online."}),
       el("div",{class:"row"},el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceWith(feedbackPanel())}},"Send more")));
   }}},"Send feedback");
-  box.append(el("h2",{text:"Send feedback"}),
+  box.append(el("h2",{text:"Help improve Waddle"}),
     el("p",{class:"note",text:"Waddle is in beta, so every comment helps. Please don't include your child's full name."}),
     el("div",{class:"field"},el("label",{for:"fb-good",text:"What's working well?"}),good),
     el("div",{class:"field"},el("label",{for:"fb-bad",text:"What isn't working, or is confusing?"}),bad),
@@ -2202,7 +2202,7 @@ const childCol=p=>(CHILD_COL[p]||CHILD_COL.pink)[isDark()?1:0];
 const childLight=p=>(CHILD_COL[p]||CHILD_COL.pink)[1];
 let landingPick=null;
 const landSit=()=>el("p",{class:"land-sit",text:"Grown-ups, please sit with me."});
-const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),feedbackOn()?"If you find a bug, use Send feedback in Grown-ups, under Settings. ":"If you find a bug, please let me know. ",
+const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),feedbackOn()?"If you find a bug, use Send feedback in Grown-ups. ":"If you find a bug, please let me know. ",
   installDue()?"On iPhone, add Waddle to your Home Screen to keep progress safe. Grown-ups explains how.":"Progress is saved only on this device and is never sent anywhere.");
 function landingView(){
   const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and numbers practice, from nursery to Year 2"}));
@@ -3043,7 +3043,6 @@ function settingsPanel(){
         el("p",{class:"note",text:"A few soft notes for a right answer, a finished practice and a hatching duckling. This setting belongs to this device."})),
       dataPanel(),
       backupPanel(),
-      feedbackPanel(),
       el("section",{class:"panel"},el("h2",{text:"Progress"}),el("p",{class:"note",text:"Clearing history keeps ⟦her⟧ ticked sounds, tricky words, book list and settings."}),confirmBox)));
 }
 

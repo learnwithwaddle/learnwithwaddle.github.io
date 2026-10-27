@@ -292,6 +292,7 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 .lockbtn{margin-left:auto}
 .linkbtn.due::after{content:"";display:inline-block;width:8px;height:8px;margin-left:6px;border-radius:50%;background:var(--accent);vertical-align:middle}
 .panel.remind{border-color:var(--accent)}
+.panel.install ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .gate{box-sizing:border-box;max-width:460px;width:100%;margin:0 auto;align-items:center;text-align:center}
 .gate-form{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
 .gate-q{font:600 30px var(--font-head)}
@@ -343,7 +344,6 @@ details.panel summary{cursor:pointer;font:600 17px var(--font-head)}
 /* Guide */
 .guide{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
 .prose{display:flex;flex-direction:column;gap:12px}
-.prose p,.prose li,.prose dd{max-width:64ch}
 .prose h2{margin-top:6px}
 .prose a{color:var(--accent);font-weight:700}
 .phases{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
@@ -771,6 +771,7 @@ body{overflow-x:clip}
 <svg class="art art-thistle" viewBox="0 0 170 215"><g class="hb-sway"><g transform="translate(152.0 204.0) rotate(-168.0) scale(0.9 0.9)"><path class="th-leaf" d="M0 0 Q6.0 -14.2 24.0 -15.0 Q24.4 -7.3 27.0 -6.0 Q32.2 -19.0 48.0 -20.0 Q48.5 -9.8 51.0 -8.0 Q55.8 -16.1 70.0 -17.0 Q70.5 -7.7 73.0 -6.0 Q76.8 -9.5 88.0 -10.0 Q96.0 -5.0 100.0 0.0 Q88.1 5.4 86.0 9.0 Q73.2 8.5 69.0 5.0 Q66.5 11.6 66.0 16.0 Q51.8 15.2 47.0 7.0 Q44.5 13.6 44.0 18.0 Q28.2 17.1 23.0 5.0 Q20.4 9.8 20.0 13.0 Q5.0 12.3 0.0 0.0Z" style="stroke-width:2.0"/><path class="th-vein" d="M4 0 Q50 0.0 92 0.0" style="stroke-width:1.6"/><path class="th-spine" d="M24.0 -15.0 l5.0 -4.0M48.0 -20.0 l5.0 -4.0M70.0 -17.0 l5.0 -4.0M88.0 -10.0 l5.0 -4.0M20.0 13.0 l5.0 4.0M44.0 18.0 l5.0 4.0M66.0 16.0 l5.0 4.0M86.0 9.0 l5.0 4.0" style="stroke-width:1.6"/></g><g transform="translate(150.0 206.0) rotate(-134.0) scale(0.7 -0.7)"><path class="th-leaf" d="M0 0 Q6.0 -14.2 24.0 -15.0 Q24.4 -7.3 27.0 -6.0 Q32.2 -19.0 48.0 -20.0 Q48.5 -9.8 51.0 -8.0 Q55.8 -16.1 70.0 -17.0 Q70.5 -7.7 73.0 -6.0 Q76.8 -9.5 88.0 -10.0 Q96.0 -5.0 100.0 0.0 Q88.1 5.4 86.0 9.0 Q73.2 8.5 69.0 5.0 Q66.5 11.6 66.0 16.0 Q51.8 15.2 47.0 7.0 Q44.5 13.6 44.0 18.0 Q28.2 17.1 23.0 5.0 Q20.4 9.8 20.0 13.0 Q5.0 12.3 0.0 0.0Z" style="stroke-width:2.4"/><path class="th-vein" d="M4 0 Q50 0.0 92 0.0" style="stroke-width:1.9"/><path class="th-spine" d="M24.0 -15.0 l5.0 -4.0M48.0 -20.0 l5.0 -4.0M70.0 -17.0 l5.0 -4.0M88.0 -10.0 l5.0 -4.0M20.0 13.0 l5.0 4.0M44.0 18.0 l5.0 4.0M66.0 16.0 l5.0 4.0M86.0 9.0 l5.0 4.0" style="stroke-width:1.9"/></g><path class="hb-stem-o" d="M150.0 214.0 Q130.0 190.0 84.0 138.0"/><path class="hb-stem" d="M150.0 214.0 Q130.0 190.0 84.0 138.0"/><path class="hb-stem-o" d="M150.0 214.0 Q158.0 140.0 132.0 70.0"/><path class="hb-stem" d="M150.0 214.0 Q158.0 140.0 132.0 70.0"/><path class="hb-stem-o thin" d="M150.0 214.0 Q148.0 170.0 112.0 106.0"/><path class="hb-stem thin" d="M150.0 214.0 Q148.0 170.0 112.0 106.0"/><g transform="translate(84.0 138.0) rotate(-28.0) scale(0.95)"><path class="th-floret-o" d="M0 -10 L-24.3 -16.0"/><path class="th-floret-o" d="M0 -10 L-26.3 -22.2"/><path class="th-floret-o" d="M0 -10 L-20.3 -24.6"/><path class="th-floret-o" d="M0 -10 L-19.9 -31.1"/><path class="th-floret-o" d="M0 -10 L-13.5 -31.1"/><path class="th-floret-o" d="M0 -10 L-10.7 -36.9"/><path class="th-floret-o" d="M0 -10 L-4.7 -34.6"/><path class="th-floret-o" d="M0 -10 L0.0 -39.0"/><path class="th-floret-o" d="M0 -10 L4.7 -34.6"/><path class="th-floret-o" d="M0 -10 L10.7 -36.9"/><path class="th-floret-o" d="M0 -10 L13.5 -31.1"/><path class="th-floret-o" d="M0 -10 L19.9 -31.1"/><path class="th-floret-o" d="M0 -10 L20.3 -24.6"/><path class="th-floret-o" d="M0 -10 L26.3 -22.2"/><path class="th-floret-o" d="M0 -10 L24.3 -16.0"/><path class="th-floret" d="M0 -10 L-24.3 -16.0"/><path class="th-floret alt" d="M0 -10 L-26.3 -22.2"/><path class="th-floret" d="M0 -10 L-20.3 -24.6"/><path class="th-floret" d="M0 -10 L-19.9 -31.1"/><path class="th-floret alt" d="M0 -10 L-13.5 -31.1"/><path class="th-floret" d="M0 -10 L-10.7 -36.9"/><path class="th-floret" d="M0 -10 L-4.7 -34.6"/><path class="th-floret alt" d="M0 -10 L0.0 -39.0"/><path class="th-floret" d="M0 -10 L4.7 -34.6"/><path class="th-floret" d="M0 -10 L10.7 -36.9"/><path class="th-floret alt" d="M0 -10 L13.5 -31.1"/><path class="th-floret" d="M0 -10 L19.9 -31.1"/><path class="th-floret" d="M0 -10 L20.3 -24.6"/><path class="th-floret alt" d="M0 -10 L26.3 -22.2"/><path class="th-floret" d="M0 -10 L24.3 -16.0"/><path class="th-head" d="M-13 -8 C-16 4 -10 16 0 17 C10 16 16 4 13 -8 C6 -12 -6 -12 -13 -8Z"/><path class="th-scale" d="M-11 -2 Q-6 2 -1 -2 Q4 2 9 -2 M-12 6 Q-7 10 -2 6 Q3 10 8 6 Q11 8 12 6 M-8 13 Q-3 16 2 13 Q6 15 8 12"/><path class="th-spine" d="M-12 -2 l-7 -3 M12 -2 l7 -3 M-11 8 l-7 1 M11 8 l7 1 M-6 15 l-4 5 M6 15 l4 5"/></g><g transform="translate(132.0 70.0) rotate(-8.0) scale(1.1)"><path class="th-floret-o" d="M0 -10 L-24.3 -16.0"/><path class="th-floret-o" d="M0 -10 L-26.3 -22.2"/><path class="th-floret-o" d="M0 -10 L-20.3 -24.6"/><path class="th-floret-o" d="M0 -10 L-19.9 -31.1"/><path class="th-floret-o" d="M0 -10 L-13.5 -31.1"/><path class="th-floret-o" d="M0 -10 L-10.7 -36.9"/><path class="th-floret-o" d="M0 -10 L-4.7 -34.6"/><path class="th-floret-o" d="M0 -10 L0.0 -39.0"/><path class="th-floret-o" d="M0 -10 L4.7 -34.6"/><path class="th-floret-o" d="M0 -10 L10.7 -36.9"/><path class="th-floret-o" d="M0 -10 L13.5 -31.1"/><path class="th-floret-o" d="M0 -10 L19.9 -31.1"/><path class="th-floret-o" d="M0 -10 L20.3 -24.6"/><path class="th-floret-o" d="M0 -10 L26.3 -22.2"/><path class="th-floret-o" d="M0 -10 L24.3 -16.0"/><path class="th-floret" d="M0 -10 L-24.3 -16.0"/><path class="th-floret alt" d="M0 -10 L-26.3 -22.2"/><path class="th-floret" d="M0 -10 L-20.3 -24.6"/><path class="th-floret" d="M0 -10 L-19.9 -31.1"/><path class="th-floret alt" d="M0 -10 L-13.5 -31.1"/><path class="th-floret" d="M0 -10 L-10.7 -36.9"/><path class="th-floret" d="M0 -10 L-4.7 -34.6"/><path class="th-floret alt" d="M0 -10 L0.0 -39.0"/><path class="th-floret" d="M0 -10 L4.7 -34.6"/><path class="th-floret" d="M0 -10 L10.7 -36.9"/><path class="th-floret alt" d="M0 -10 L13.5 -31.1"/><path class="th-floret" d="M0 -10 L19.9 -31.1"/><path class="th-floret" d="M0 -10 L20.3 -24.6"/><path class="th-floret alt" d="M0 -10 L26.3 -22.2"/><path class="th-floret" d="M0 -10 L24.3 -16.0"/><path class="th-head" d="M-13 -8 C-16 4 -10 16 0 17 C10 16 16 4 13 -8 C6 -12 -6 -12 -13 -8Z"/><path class="th-scale" d="M-11 -2 Q-6 2 -1 -2 Q4 2 9 -2 M-12 6 Q-7 10 -2 6 Q3 10 8 6 Q11 8 12 6 M-8 13 Q-3 16 2 13 Q6 15 8 12"/><path class="th-spine" d="M-12 -2 l-7 -3 M12 -2 l7 -3 M-11 8 l-7 1 M11 8 l7 1 M-6 15 l-4 5 M6 15 l4 5"/></g><g transform="translate(112.0 106.0) rotate(-18.0) scale(0.7)"><path class="th-floret-o" d="M-4 -12 L0 -20 M0 -12 L0 -21 M4 -12 L0 -20"/><path class="th-floret" d="M-4 -12 L0 -20 M0 -12 L0 -21 M4 -12 L0 -20"/><path class="th-head" d="M-13 -8 C-16 4 -10 16 0 17 C10 16 16 4 13 -8 C6 -12 -6 -12 -13 -8Z"/><path class="th-scale" d="M-11 -2 Q-6 2 -1 -2 Q4 2 9 -2 M-12 6 Q-7 10 -2 6 Q3 10 8 6 Q11 8 12 6 M-8 13 Q-3 16 2 13 Q6 15 8 12"/><path class="th-spine" d="M-12 -2 l-7 -3 M12 -2 l7 -3 M-11 8 l-7 1 M11 8 l7 1 M-6 15 l-4 5 M6 15 l4 5"/></g></g></svg></div>
 
 <script>
+/* Waddle © 2026 Peter Hicks. All rights reserved. */
 /* ================= Sounds: Reception follows her book sets, then Little Wandle's Phase 3 and Year 1 Phase 5 ================= */
 /* A sound id is the grapheme, or grapheme:sound for an alternative pronunciation (o:oa as in go). Split digraphs are a-e, i-e and so on. */
 const SETS=[
@@ -1064,7 +1065,7 @@ function loadFamily(o){
     const order=(Array.isArray(o.order)?o.order:Object.keys(o.children)).filter(k=>o.children[k]&&o.children[k].v===1);
     if(!order.length)return null;
     order.forEach(k=>o.children[k]=migrate(o.children[k]));
-    return {v:2,active:o.children[o.active]?o.active:order[0],order,children:Object.fromEntries(order.map(k=>[k,o.children[k]])),updated:o.updated||0,lastBackup:o.lastBackup||null,snoozed:o.snoozed||null};
+    return {v:2,active:o.children[o.active]?o.active:order[0],order,children:Object.fromEntries(order.map(k=>[k,o.children[k]])),updated:o.updated||0,lastBackup:o.lastBackup||null,snoozed:o.snoozed||null,installDone:!!o.installDone,installSnooze:o.installSnooze||null};
   }
   if(o.v===1)return wrapFamily(migrate(o));
   return null;
@@ -1636,7 +1637,7 @@ function grownView(){
   const childbar=el("div",{class:"childbar"},
     el("div",{class:"seg","aria-label":"Child"},children().map(({id,st})=>el("button",{type:"button","aria-pressed":String(id===family.active),style:`--cc:${childCol(st.palette)}`,on:{click:()=>{switchChild(id);render()}}},(st.name||"").trim()||"New child"))),
     el("button",{class:"linkbtn",type:"button",on:{click:addChild}},"+ Add a child"));
-  return el("div",{class:"stack"},childbar,bar,backupDue()?backupReminder():null,body);
+  return el("div",{class:"stack"},childbar,bar,installDue()?installCard():backupDue()?backupReminder():null,body);
 }
 const DUCK_SVG=(mama,grown)=>{const c=mama?' m':grown?' gr':'';return '<svg viewBox="0 0 40 36" aria-hidden="true">'+
   '<path class="d-feet" d="M18 32 L14 36 L21 36 Z M27 32 L23 36 L30 36 Z"/>'+
@@ -1908,6 +1909,31 @@ const SFX={
 };
 const reducedMotion=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
 
+/* ================= iPhone and iPad: Safari clears a site's data after seven days unopened, but keeps Home Screen apps ================= */
+const isIOS=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const isStandalone=()=>{try{return navigator.standalone===true||(!!window.matchMedia&&matchMedia("(display-mode: standalone)").matches)}catch(e){return false}};
+const inFrame=()=>{try{return window.top!==window.self}catch(e){return true}};
+function installDue(){
+  if(window.claude||!isIOS()||isStandalone()||inFrame()||family.installDone)return false;
+  return !(family.installSnooze&&family.installSnooze>addDays(today(),-7));
+}
+function installCard(){
+  const msg=el("p",{class:"note","aria-live":"polite"});
+  const has=children().some(k=>(k.st.days||[]).length||(k.st.log||[]).length);
+  return el("section",{class:"panel remind install"},el("h2",{text:"Add Waddle to your Home Screen"}),
+    el("p",{text:"On iPhone and iPad, Safari clears a website's saved progress if it isn't opened for seven days, so a week away could lose it. Opened from its own Home Screen icon, Waddle keeps progress safe."}),
+    el("ol",{},
+      el("li",{text:"Tap the Share button in Safari. On newer iPhones it is inside the ⋯ menu."}),
+      el("li",{text:"Choose Add to Home Screen. You may need to tap More or scroll to find it."}),
+      el("li",{text:"Tap Add, and from then on open Waddle from its icon."})),
+    has?el("p",{class:"note",text:"Progress saved here doesn't move to the icon by itself. Save a backup first, then open Waddle from the icon and choose Restore a backup."}):null,
+    msg,
+    el("div",{class:"row"},
+      has?el("button",{class:"btn small",type:"button",on:{click:()=>saveBackup(msg)}},"Save a backup"):null,
+      el("button",{class:"btn ghost small",type:"button",on:{click:()=>{family.installDone=true;persist();render()}}},"I've added it"),
+      el("button",{class:"btn ghost small",type:"button",on:{click:()=>{family.installSnooze=today();persist();render()}}},"Not now")));
+}
+
 /* ================= Backup reminder: a gentle nudge after seven days ================= */
 function backupBase(){
   const last=family.lastBackup||state.lastBackup;if(last)return last;
@@ -1925,6 +1951,50 @@ function backupReminder(){
     el("div",{class:"row"},
       el("button",{class:"btn small",type:"button",on:{click:async()=>{await saveBackup(msg);if(family.lastBackup===today())box.replaceChildren(el("h2",{text:"Backup saved"}),el("p",{class:"note",text:msg.textContent}))}}},"Save a backup"),
       el("button",{class:"btn ghost small",type:"button",on:{click:()=>{family.snoozed=today();persist();render()}}},"Remind me tomorrow")));
+  return box;
+}
+
+/* ================= Feedback: posts to the Waddle Feedback Google Form. Only what the grown-up types, plus the school year if ticked ================= */
+const FB_FORM="https://docs.google.com/forms/d/e/1FAIpQLSezBqTEE8Bd7UDRKXjYGHUAx0R15eX13U5PI58EJNWGgPgjEA/formResponse";
+const FB_KEYS={good:"entry.1330857130",bad:"entry.176501535",year:"entry.517470976",email:"entry.982938494"};
+const FB_QKEY="waddle-feedback-queue";
+const feedbackOn=()=>!window.claude&&!inFrame();
+const fbQueue=()=>{try{return JSON.parse(localStorage.getItem(FB_QKEY)||"[]")}catch(e){return []}};
+const fbSetQueue=q=>{try{q.length?localStorage.setItem(FB_QKEY,JSON.stringify(q)):localStorage.removeItem(FB_QKEY)}catch(e){}};
+async function fbPost(f){
+  const body=new URLSearchParams();Object.keys(FB_KEYS).forEach(k=>{if(f[k])body.append(FB_KEYS[k],f[k])});
+  await fetch(FB_FORM,{method:"POST",mode:"no-cors",body});
+}
+async function flushFeedback(){
+  if(!feedbackOn()||navigator.onLine===false)return;
+  const q=fbQueue();if(!q.length)return;
+  const left=[];for(const f of q){try{await fbPost(f)}catch(e){left.push(f)}}
+  fbSetQueue(left);
+}
+function feedbackPanel(){
+  if(!feedbackOn())return null;
+  const good=el("textarea",{id:"fb-good",rows:"3"}),bad=el("textarea",{id:"fb-bad",rows:"3"}),email=el("input",{id:"fb-email",type:"email",autocomplete:"email"});
+  const yr=el("input",{type:"checkbox",id:"fb-year"});yr.checked=true;
+  const msg=el("p",{class:"note","aria-live":"polite"});
+  const box=el("section",{class:"panel feedback"});
+  const send=el("button",{class:"btn small",type:"button",on:{click:async()=>{
+    const f={good:good.value.trim(),bad:bad.value.trim(),email:email.value.trim(),year:yr.checked?yearName():""};
+    if(!f.good&&!f.bad){msg.textContent="Write something in one of the first two boxes first.";return}
+    send.disabled=true;msg.textContent="Sending…";
+    let sent=false;
+    if(navigator.onLine!==false){try{await fbPost(f);sent=true}catch(e){}}
+    if(!sent)fbSetQueue(fbQueue().concat([f]));
+    box.replaceChildren(el("h2",{text:"Thank you"}),
+      el("p",{class:"note",text:sent?"Your feedback has been sent.":"You're offline, so it will be sent once you're back online."}),
+      el("div",{class:"row"},el("button",{class:"btn ghost small",type:"button",on:{click:()=>box.replaceWith(feedbackPanel())}},"Send more")));
+  }}},"Send feedback");
+  box.append(el("h2",{text:"Send feedback"}),
+    el("p",{class:"note",text:"Waddle is in beta, so every comment helps. Please don't include your child's full name."}),
+    el("div",{class:"field"},el("label",{for:"fb-good",text:"What's working well?"}),good),
+    el("div",{class:"field"},el("label",{for:"fb-bad",text:"What isn't working, or is confusing?"}),bad),
+    el("div",{class:"field"},el("label",{for:"fb-email",text:"Email, if you'd like a reply"}),email),
+    el("label",{class:"switch",for:"fb-year"},yr,`Include ⟦her⟧ school year (${yearName()})`),
+    el("div",{class:"row"},send),msg);
   return box;
 }
 
@@ -2096,7 +2166,7 @@ function setupView(){
 }
 
 const wallLink=()=>Object.keys(state.wall||{}).length?el("button",{class:"linkbtn grown-inline wall-inline",type:"button",on:{click:()=>{screen="wall";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>I can'}):null;
-const grownLink=()=>el("button",{class:"linkbtn grown-inline"+(backupDue()?" due":""),type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
+const grownLink=()=>el("button",{class:"linkbtn grown-inline"+(backupDue()||installDue()?" due":""),type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
 /* School book: the child ticks it on the home screen and sees this week fill up */
 const BOOK_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path class="bk-c" d="M5 3.5h12.5a1.5 1.5 0 0 1 1.5 1.5v15.5H7A2 2 0 0 1 5 18.5Z"/><path class="bk-p" d="M5 18.5A2 2 0 0 1 7 16.5h12"/><path class="bk-m" d="M13 3.5v6l2-1.5 2 1.5v-6"/></svg>';
 function toggleRead(){
@@ -2132,12 +2202,12 @@ const childCol=p=>(CHILD_COL[p]||CHILD_COL.pink)[isDark()?1:0];
 const childLight=p=>(CHILD_COL[p]||CHILD_COL.pink)[1];
 let landingPick=null;
 const landSit=()=>el("p",{class:"land-sit",text:"Grown-ups, please sit with me."});
-const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),"If you find a bug, please let me know. ",
-  "Progress is saved only on this device and is never sent anywhere.");
+const landFoot=()=>el("p",{class:"land-foot"},el("b",{text:"Waddle is in beta. "}),feedbackOn()?"If you find a bug, use Send feedback in Grown-ups, under Settings. ":"If you find a bug, please let me know. ",
+  installDue()?"On iPhone, add Waddle to your Home Screen to keep progress safe. Grown-ups explains how.":"Progress is saved only on this device and is never sent anywhere.");
 function landingView(){
   const brand=el("div",{class:"land-brand"},el("span",{class:"land-name-brand",text:"Waddle"}),el("span",{class:"land-tag",text:"Parent-led daily reading and numbers practice, from nursery to Year 2"}));
   const lock=el("button",{class:"linkbtn grown-link",type:"button",on:{click:()=>{tab="grown";render()}},html:'<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="2" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Grown-ups'});
-  if(backupDue()){lock.classList.add("due");lock.title="A backup is due"}
+  if(installDue()){lock.classList.add("due");lock.title="Add Waddle to your Home Screen"}else if(backupDue()){lock.classList.add("due");lock.title="A backup is due"}
   const ks=children().filter(k=>k.st.setupDone);
   if(ks.length>1){
     /* One screen, two taps: choose a name (the others fade), then Let's practise */
@@ -2868,7 +2938,8 @@ function guideView(){
     el("p",{text:"It supports the reading of physical books and never replaces it. Every session ends by pointing you to a book to read together, because the sounds and words practised here are only useful once a child meets them on a real page."}),
     el("p",{text:"The rewards are small on purpose. In Nursery and Reception each finished practice hatches a duckling. In Year 1 and Year 2 finishing the day's reading gives one piece for a duck and finishing numbers gives another, so there are at most two a day. ⟦She⟧ chooses each piece, starting with the body and head and ending with extras such as a hat or a skateboard. A duck has ten pieces, so it takes about five days of practice. Finished ducks join a flock and the ducks start again each school year."}),
     el("p",{text:"The I can wall is separate from the rewards. A statement such as ‘I can read the words the, to and no’ appears only once practice has gone well on two different days, so it is something true that you can say aloud. The wall stays when your child moves up a year."}),
-    el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}));
+    el("p",{class:"note",text:"Waddle follows the approach and sequence of Little Wandle Letters and Sounds Revised for phonics and the NCETM Mastering Number programme for maths, so practice matches what many schools teach. It is an independent project and is not affiliated with or endorsed by Little Wandle, the NCETM or any school."}),
+    el("p",{class:"note",text:"© 2026 Peter Hicks. All rights reserved."}));
   return el("div",{class:"stack"},intro,bar,guideTopic==="maths"?mathsGuide():readingGuide());
 }
 function readingGuide(){
@@ -2909,7 +2980,7 @@ function readingGuide(){
 function dataPanel(){
   const b=(t,rest)=>el("p",{class:"note"},el("b",{text:t}),rest);
   return el("section",{class:"panel"},el("h2",{text:"Your data"}),
-    ...([b("Progress is saved only on this device."," Nothing about your child leaves it. Safari can clear saved data for a website that hasn't been opened for seven days, and an app added to the home screen is protected from that."),
+    ...([b("Progress is saved only on this device."," Nothing about your child leaves it, unless you choose to include ⟦her⟧ school year when sending feedback. Safari can clear saved data for a website that hasn't been opened for seven days, and an app added to the home screen is protected from that."),
       b("Add it to the home screen."," On an iPhone, open the link in Safari, tap Share, then tap Add to Home Screen. On a laptop, bookmark the page. Once it has been opened with a signal, it works without one."),
       b("Each device keeps its own progress."," If two parents use separate devices, they won't see each other's sessions. Backup moves progress from one device to another, and it is worth doing now and then in case a device is lost.")]));
 }
@@ -2972,6 +3043,7 @@ function settingsPanel(){
         el("p",{class:"note",text:"A few soft notes for a right answer, a finished practice and a hatching duckling. This setting belongs to this device."})),
       dataPanel(),
       backupPanel(),
+      feedbackPanel(),
       el("section",{class:"panel"},el("h2",{text:"Progress"}),el("p",{class:"note",text:"Clearing history keeps ⟦her⟧ ticked sounds, tricky words, book list and settings."}),confirmBox)));
 }
 
@@ -3425,6 +3497,7 @@ window.addEventListener("resize",()=>fitWords());
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitWords).catch(()=>{});
 render();
 connect();
+flushFeedback();window.addEventListener("online",()=>flushFeedback());
 </script>
 
 </body>
